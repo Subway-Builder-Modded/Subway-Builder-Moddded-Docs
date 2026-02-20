@@ -2,7 +2,7 @@ module.exports = {
   title: 'Subway Builder Modded',
   tagline: 'Custom Maps & Mods Documentation',
   url: 'https://subwaybuildermodded.com',
-  baseUrl: '/docs/intro/',
+  baseUrl: '/',
   onBrokenLinks: 'ignore',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
