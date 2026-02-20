@@ -1,16 +1,15 @@
 module.exports = {
   docs: [
-    'intro',
-    /*{
-      type: 'category',
-      label: 'Mods',
-      items: ['mods/installing', 'mods/list'],
-    },
     {
       type: 'category',
       label: 'Maps',
-      items: ['maps/downloading', 'maps/list'],
+      items: ['maps/map-directory'],
     },
-    'faq',*/
+    {
+      type: 'category',
+      label: 'Guides',
+      items: ['guides/map-installation-guide', 'guides/legacy-map-installation-guide', 'guides/map-porting-guide'],
+    },
+    //'faq',
   ],
 };

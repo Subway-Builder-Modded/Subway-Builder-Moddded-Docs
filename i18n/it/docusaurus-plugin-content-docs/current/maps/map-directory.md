@@ -1,0 +1,274 @@
+---
+id: map-directory
+title: Map Directory
+---
+
+Welcome to the complete list of Subway Builder maps! This list has (almost) every custom map made for Subway Builder. If you know of a map that is not on this list or see any issues, please [open an issue](https://github.com/kaicardenas0618/Subway-Builder-Map-Directory/issues) and I will look at it as soon as time allows. Thank you!
+
+# Installation
+The installation process is different depending on how and when the map was made my the modder. For maps that use [Kronifer's Map Manager](https://github.com/Kronifer/subwaybuilder-patcher/releases) (🟢), they all use the same, streamlined process, which can be found at the [installation guide](https://github.com/kaicardenas0618/Subway-Builder-Map-Directory/wiki/Installation-Guide). For maps that use the `serve` method (🟡), use the [legacy installation guide](https://github.com/kaicardenas0618/Subway-Builder-Map-Directory/wiki/Installation-Guide-%E2%80%90-Legacy), as the process is a bit different and differs from map to map. For maps that have not yet been updated to v1.0.0 (🔴), you have to manually port them to use the new modding API. You can find a tutorial on how to do that at the [porting guide](https://github.com/kaicardenas0618/Subway-Builder-Map-Directory/wiki/Porting-Guide).
+
+ - [Installation Guide](https://github.com/kaicardenas0618/Subway-Builder-Map-Directory/wiki/Installation-Guide) (v1.0.0 + [Kronifer's Map Manager](https://github.com/Kronifer/subwaybuilder-patcher/releases))
+ - [Legacy Installation Guide](https://github.com/kaicardenas0618/Subway-Builder-Map-Directory/wiki/Installation-Guide-%E2%80%90-Legacy) (v1.0.0)
+ - [Porting Guide](https://github.com/kaicardenas0618/Subway-Builder-Map-Directory/wiki/Porting-Guide) (pre-v1.0.0)
+
+> [!NOTE]  
+> Any map that references "v1.0.0" will work on any newer versions of the game. Pre-v1.0.0 maps will not work on 1.0.0 (unless you convert them following the guide) and post-v1.0.0 maps will not work on any game version before 1.0.0. You can check what version of the game you are on by going to settings and scrolling all the way down (it will be in the bottom-left corner).
+
+# Maps
+**Key:**\
+🔵 Included in the base game, no setup required\
+🟢 Ready to play, follow [installation guide](https://github.com/kaicardenas0618/Subway-Builder-Map-Directory/wiki/Installation-Guide)\
+🟡 Needs to be ported to the Map Manager, follow the [legacy installation guide](https://github.com/kaicardenas0618/Subway-Builder-Map-Directory/wiki/Installation-Guide-%E2%80%90-Legacy)\
+🔴 Needs to be ported to v1.0.0, follow the [porting guide](https://github.com/kaicardenas0618/Subway-Builder-Map-Directory/wiki/Porting-Guide)
+
+### United States
+ - **New York City** 🔵
+   - Population: 9.7M
+ - **Dallas** 🔵
+   - Population: 7.5M
+ - **Chicago** 🔵
+   - Population: 6.9M
+ - **San Francisco** 🔵
+   - Population: 6.8M
+ - **Washington** 🔵
+   - Population: 5.4M
+ - **Phoenix** 🔵
+   - Population: 4.8M
+ - **Houston** 🔵
+   - Population: 4.7M
+ - **Atlanta** 🔵
+   - Population: 4.4M
+ - **Miami** 🔵
+   - Population: 4.2M
+ - **Seattle** 🔵
+   - Population: 3.9M
+ - **Philadelphia** 🔵
+   - Population: 3.8M
+ - **Denver** 🔵
+   - Population: 3.6M
+ - **Detroit** 🔵
+   - Population: 3.5M
+ - **San Diego** 🔵
+   - Population: 3.3M
+ - **Minneapolis** 🔵
+   - Population: 3.2M
+ - **Boston** 🔵
+   - Population: 2.9M
+ - **Austin** 🔵
+   - Population: 2.4M
+ - **Portland** 🔵
+   - Population: 2.2M
+ - **St. Louis** 🔵
+   - Population: 2.2M
+ - **Salt Lake City** 🔵
+   - Population: 2.0M
+ - **Indianapolis** 🔵
+   - Population: 1.9M
+ - **Columbus** 🔵
+   - Population: 1.8M
+ - **Cleveland** 🔵
+   - Population: 1.8M
+ - **Cincinnati** 🔵
+   - Population: 1.6M
+ - **Milwaukee** 🔵
+   - Population: 1.6M
+ - **Baltimore** 🔵
+   - Population: 1.6M
+ - **[Baltimore-DC Corridor (rslurry)](https://drive.google.com/file/d/1qnLX1_uSC1l4yhBUJ8cyB7XqRPb7EdQY/view?usp=sharing)** 🟢
+   - Population: 1.6M
+ - **[Baltimore - Expanded (rslurry)](https://drive.google.com/file/d/1XDRMG-FvedE8qj0mtnlC1dmJcUDLMtSt/view?usp=sharing)** 🟢
+   - Population: 972K
+ - **Pittsburgh** 🔵
+   - Population: 1.6M
+ - **[Raleigh (muffintime)](https://github.com/kaicardenas0618/Subway-Builder-Map-Directory/blob/main/maps/raleigh.zip)** 🟢
+   - Population: 1.5M
+ - **Charlotte** 🔵
+   - Population: 1.5M
+ - **[Orlando (rslurry)](https://drive.google.com/file/d/151i0-i91kkzQyWs85NSRcfmkY8tInkTt/view?usp=sharing)** 🟢
+   - Population: 1.1M
+ - **[Tampa (rslurry)](https://drive.google.com/file/d/1SJ6oTTTnhzli3CyNkXycbdcLs3uKTACr/view?usp=sharing)** 🟢
+   - Population: 1.0M
+ - **Honolulu** 🔵
+   - Population: 900K
+ - **[Madison (muffintime)](https://github.com/kaicardenas0618/Subway-Builder-Map-Directory/blob/main/maps/madison.zip)** 🟢
+   - Population: 808K
+ - **[Memphis (rslurry)](https://drive.google.com/file/d/1wXUHCCA8og-I4OwMfQ-5lZbGgrdbexwC/view?usp=sharing)** 🟢
+   - Population: 789K
+ - **[San Antonio (rslurry)](https://drive.google.com/file/d/1vPmzWyPF3s5MzfKdSqsCKQ-e5-wAlwsJ/view?usp=sharing)** 🟢
+   - Population: 616K
+ - **[Irvine (rslurry)](https://drive.google.com/file/d/1gfEz8MmvXlPwzqU97kX8XEeGyan2gAhV/view?usp=sharing)** 🟢
+   - Population: 384K
+ - **[Boise (muffintime)](https://github.com/kaicardenas0618/Subway-Builder-Map-Directory/blob/main/maps/boise.zip)** 🟢
+   - Population: 330K
+ - **[Knoxville (rslurry)](https://drive.google.com/file/d/1F1cH4L4k6skrED_ts0C-AB-0ENHaScVb/view?usp=sharing)** 🟢
+   - Population: 323K
+ - **[Richmond (rslurry)](https://drive.google.com/file/d/1aBLopRHm9I2YQxpE0oM2d4T-cagtnyxu/view?usp=sharing)** 🟢
+   - Population: 314K
+ - **[Rochester (rslurry)](https://drive.google.com/file/d/10UtzKDtaxDxvz8sdetzx_ANcGgGl1s09/view?usp=sharing)** 🟢
+   - Population: 270K
+ - **[Norfolk (muffintime)](https://www.mediafire.com/file/6v8mmzupzebl1a7/Norfolk_1.0-mod_manager_install.zip/file)** 🟢
+   - Population: 238K
+ - **[Fort Myers (muffintime)](https://github.com/kaicardenas0618/Subway-Builder-Map-Directory/blob/main/maps/fort-myers.zip)** 🟡
+   - Population: 230K
+ - **[Fargo (muffintime)](https://www.mediafire.com/file/sq7c2zp1d29qcn5/metro-maker4.zip/file)** 🟡
+   - Population: 91K
+ - **[Cheyenne (muffintime)](https://github.com/kaicardenas0618/Subway-Builder-Map-Directory/blob/main/maps/cheyenne.zip)** 🟡
+   - Population: 53K
+ - **[Bismarck (muffintime)](https://github.com/kaicardenas0618/Subway-Builder-Map-Directory/blob/main/maps/bismarck.zip)** 🟡
+   - Population: 51K
+
+### Canada
+ - **[Toronto (expedtadam, devenperez)](https://github.com/devenperez/subway-builder-canadian-maps)** 🟡
+   - Population: 6.2M
+ - **[Montreal (expedtadam, devenperez)](https://github.com/devenperez/subway-builder-canadian-maps)** 🟡
+   - Population: 4.3M
+ - **[Vancouver (expedtadam, devenperez)](https://github.com/devenperez/subway-builder-canadian-maps)** 🟡
+   - Population: 2.6M
+ - **[Vancouver (Valdotorium)](https://github.com/Valdotorium/Subwaybuilder-Maps)** 🟡
+   - Population: 2.6M
+   - Demand data quality: Bad, Building Data: Good
+ - **[Ottawa (expedtadam, devenperez)](https://github.com/devenperez/subway-builder-canadian-maps)** 🟡
+   - Population: 1.5M
+ - **[Calgary (expedtadam, devenperez)](https://github.com/devenperez/subway-builder-canadian-maps)** 🟡
+   - Population: 1.5M
+ - **[Edmonton (expedtadam, devenperez)](https://github.com/devenperez/subway-builder-canadian-maps)** 🟡
+   - Population: 1.4M
+ - **[Quebec City (expedtadam, devenperez)](https://github.com/devenperez/subway-builder-canadian-maps)** 🟡
+   - Population: 839K
+ - **[Winnipeg (expedtadam, devenperez)](https://github.com/devenperez/subway-builder-canadian-maps)** 🟡
+   - Population: 783K
+
+### England
+ - **London** 🔵
+   - Population: 9.2M
+ - **Birmingham** 🔵
+   - Population: 2.4M
+ - **Manchester** 🔵
+   - Population: 2.1M
+ - **Liverpool** 🔵
+   - Population: 1.5M
+ - **Newcastle** 🔵
+   - Population: 1.1M
+
+### France
+ - **[Paris (flopinou)](https://github.com/flopinou/FrancePack)** 🟡
+   - Population: 4.0M
+ - **[Marseille (flopinou)](https://github.com/flopinou/FrancePack)** 🟡
+   - Population: 1.7M
+ - **[Lyon (flopinou)](https://github.com/flopinou/FrancePack)** 🟡
+   - Population: 1.5M
+ - **[Lille (flopinou)](https://github.com/flopinou/FrancePack)** 🟡
+   - Population: 1.2M
+ - **[Toulouse (flopinou)](https://github.com/flopinou/FrancePack)** 🟡
+   - Population: 800K
+ - **[Rennes (flopinou)](https://github.com/flopinou/FrancePack)** 🟡
+   - Population: 360K
+
+### Italy
+ - **[Rome (Max02)](https://drive.google.com/drive/folders/1KZAUy6pP4q98Qcqs__dlK2KHWHrGg2Xb)** 🟡
+   - Population: 2.8M
+ - **[Milan (Max02)](https://drive.google.com/drive/folders/1KZAUy6pP4q98Qcqs__dlK2KHWHrGg2Xb)** 🟡
+   - Population: 2.0M
+ - **[Turin (Max02)](https://drive.google.com/drive/folders/1KZAUy6pP4q98Qcqs__dlK2KHWHrGg2Xb)** 🟡
+   - Population: 1.2M
+ - **[Naples (Max02)](https://drive.google.com/drive/folders/1KZAUy6pP4q98Qcqs__dlK2KHWHrGg2Xb)** 🟡
+   - Population: 967K
+ - **[Catania (Max02)](https://drive.google.com/drive/folders/1KZAUy6pP4q98Qcqs__dlK2KHWHrGg2Xb)** 🟡
+   - Population: 718K
+ - **[Palermo (Max02)](https://drive.google.com/drive/folders/1KZAUy6pP4q98Qcqs__dlK2KHWHrGg2Xb)** 🟡
+   - Population: 704K
+ - **[Florence (Max02)](https://drive.google.com/drive/folders/1KZAUy6pP4q98Qcqs__dlK2KHWHrGg2Xb)** 🟡
+   - Population: 643K
+ - **[Bologna (Max02)](https://drive.google.com/drive/folders/1KZAUy6pP4q98Qcqs__dlK2KHWHrGg2Xb)** 🟡
+   - Population: 605K
+ - **[Genoa (Max02)](https://drive.google.com/drive/folders/1KZAUy6pP4q98Qcqs__dlK2KHWHrGg2Xb)** 🟡
+   - Population: 580K
+ - **[Modena (Max02)](https://drive.google.com/drive/folders/1KZAUy6pP4q98Qcqs__dlK2KHWHrGg2Xb)** 🟡
+   - Population: 553K
+ - **[Venice (Max02)](https://drive.google.com/drive/folders/1KZAUy6pP4q98Qcqs__dlK2KHWHrGg2Xb)** 🟡
+   - Population: 550K
+ - **[Verona (Max02)](https://drive.google.com/drive/folders/1KZAUy6pP4q98Qcqs__dlK2KHWHrGg2Xb)** 🟡
+   - Population: 530K
+ - **[Bari (Max02)](https://drive.google.com/drive/folders/1KZAUy6pP4q98Qcqs__dlK2KHWHrGg2Xb)** 🟡
+   - Population: 510K
+ - **[Padua (Max02)](https://drive.google.com/drive/folders/1KZAUy6pP4q98Qcqs__dlK2KHWHrGg2Xb)** 🟡
+   - Population: 440K
+ - **[Cagliari (Max02)](https://drive.google.com/drive/folders/1KZAUy6pP4q98Qcqs__dlK2KHWHrGg2Xb)** 🟡
+   - Population: 440K
+
+### Germany
+ - **[Berlin (Valdotorium)](https://github.com/Valdotorium/Subwaybuilder-Maps)** 🟡
+   - Population: 3.7M
+   - Demand data quality: Good, Building Data: Good
+ - **[Berlin (Pitti)](https://github.com/ppiittii/SubwayBuilder_DE-Maps)** 🟢
+   - Population: 3.7M
+ - **[Munich (Pitti)](https://github.com/ppiittii/SubwayBuilder_DE-Maps)** 🟢
+   - Population: 1.6M
+ - **[Cologne (Pitti)](https://github.com/ppiittii/SubwayBuilder_DE-Maps)** 🟢
+   - Population: 1.0M
+ - **[Frankfurt (Pitti)](https://github.com/ppiittii/SubwayBuilder_DE-Maps)** 🟢
+   - Population: 756K
+
+### Netherlands
+ - **[Rotterdam (Lawrencelot)](https://drive.google.com/file/d/14CikyYX3gC6wdPEEpvPKYm6mWScntK8A/view?usp=sharing)** 🟢
+   - Population: 1.5M
+
+### Poland
+ - **[Warsaw (Valdotorium)](https://github.com/Valdotorium/Subwaybuilder-Maps)** 🟡
+   - Population: 1.9M
+   - Demand data quality: OK, Building Data: Good
+
+### Denmark
+ - **[Copenhagen (mhmoeller)](https://github.com/mhmoeller/SubwayBuilder-CPH)** 🟡
+   - Population: 2.2M
+
+### Norway
+ - **[Trondheim (Valdotorium)](https://github.com/Valdotorium/Subwaybuilder-Maps)** 🟡
+   - Population: 300K
+   - Demand data quality: Good, Building Data: Good
+
+### Greece
+ - **[Athens (Valdotorium)](https://github.com/Valdotorium/Subwaybuilder-Maps)** 🟡
+   - Population: 3.2M
+   - Demand data quality: OK, Building Data: OK
+
+### India
+ - **[Bengaluru (Valdotorium)](https://github.com/Valdotorium/Subwaybuilder-Maps)** 🟡
+   - Population: 18M
+   - Demand data quality: Good, Building Data: OK
+
+### Japan
+ - **[Sapporo (Valdotorium)](https://github.com/Valdotorium/Subwaybuilder-Maps)** 🟡
+   - Population: 1.8M
+   - Demand data quality: Varies, Building Data: Good
+ - **[Fukuoka (Valdotorium)](https://github.com/Valdotorium/Subwaybuilder-Maps)** 🟡
+   - Population: 1.6M
+   - Demand data quality: Very Good, Building Data: Good
+
+### Singapore
+ - **[Singapore (Valdotorium)](https://github.com/Valdotorium/Subwaybuilder-Maps)** 🟡
+   - Population: 6.0M
+   - Demand data quality: Good, Building Data: Good
+
+### Australia
+ - **[Melbourne (expedtadam)](https://drive.google.com/drive/folders/18fpT9ASi3kMIK0lYjOzAbb-IM_RPZ6cz)** 🔴
+   - Population: 5.2M
+ - **[Sydney (expedtadam)](https://drive.google.com/drive/folders/18fpT9ASi3kMIK0lYjOzAbb-IM_RPZ6cz)** 🔴
+   - Population: 5.1M
+ - **[Brisbane (expedtadam)](https://drive.google.com/drive/folders/18fpT9ASi3kMIK0lYjOzAbb-IM_RPZ6cz)** 🔴
+   - Population: 2.7M
+ - **[Perth (expedtadam)](https://drive.google.com/drive/folders/18fpT9ASi3kMIK0lYjOzAbb-IM_RPZ6cz)** 🔴
+   - Population: 2.4M
+ - **[Adelaide (expedtadam)](https://drive.google.com/drive/folders/18fpT9ASi3kMIK0lYjOzAbb-IM_RPZ6cz)** 🔴
+   - Population: 1.4M
+ - **[Canberra (expedtadam)](https://drive.google.com/drive/folders/18fpT9ASi3kMIK0lYjOzAbb-IM_RPZ6cz)** 🔴
+   - Population: 511K
+
+### New Zealand
+ - **[Auckland (expedtadam)](https://drive.google.com/drive/folders/18fpT9ASi3kMIK0lYjOzAbb-IM_RPZ6cz)** 🔴
+   - Population: 1.6M
+ - **[Wellington (expedtadam)](https://drive.google.com/drive/folders/18fpT9ASi3kMIK0lYjOzAbb-IM_RPZ6cz)** 🔴
+   - Population: 428K
+ - **[Christchurch (expedtadam)](https://drive.google.com/drive/folders/18fpT9ASi3kMIK0lYjOzAbb-IM_RPZ6cz)** 🔴
+   - Population: 408K

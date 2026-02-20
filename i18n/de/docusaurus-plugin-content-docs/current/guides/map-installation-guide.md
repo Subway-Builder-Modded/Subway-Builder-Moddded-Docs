@@ -1,0 +1,34 @@
+---
+id: map-installation-guide
+title: Map Installation Guide
+---
+
+[Kronifer's Map Manager](https://github.com/Kronifer/subwaybuilder-patcher/releases) is the easiest and most streamlined way to download and install custom cities into Subway Builder. All you need is a provided ZIP file and the Map Manager iself, and then you're good to go.
+
+### Step 1 - Installing the Map Manager
+
+Download the latest release of the Map Manager at https://github.com/Kronifer/subwaybuilder-patcher/releases. To download, click on the version that corresponds to your operating system.
+
+<img width="1000" alt="image" src="https://github.com/user-attachments/assets/4bc7b27d-9868-475f-9a4a-5ce447a77036" />
+
+> [!NOTE]
+> For Windows, you want the `.exe` file. For Linux, you want the `.zip` file. For MacOS, use the `arm64.dmg` file if your Mac has an Apple Silicon Chip (e.g. M1, M2, M3, etc.) and the `x64.dmg` file if your Mac has an Intel chip. As a rule of thumb, Macs newer then around 2021 tend to have Apple Silicon Chips and older models tend to have Intel chips, but double-check as there are exceptions.
+
+After that, install the app as you normally would any other app. Once the installer is finished, launch the app and run through the setup process. At this point it is safe to delete the ZIP, the installer, and any other files that you may have downloaded.
+
+### Step 2 - Adding the Map
+
+To install a map, simply click on the `ADD A MAP` button and import the ZIP file that you downloaded containing your map. Once that is finished, you should see the map name, the creator, and the version appear on the screen.
+
+<img width="1200" alt="image" src="https://github.com/user-attachments/assets/c258cf39-c211-4677-8ac1-0828a97d5c61" />
+
+Once you have imported all of the maps you'd like to add to the game, click on the `GENERATE MOD` button. This automatically adds the maps into Subway Builder and registers the Map Manager as a mod in your game.\
+
+If you'd like to add another map after already generating the mod, relaunch the Map Manager and import all maps you'd like in your game (including ones that are already in your game). Click `GENERATE MOD` and the Map Manager will automatically add the maps into Subway Builder. If you do not re-add the old maps, they will be removed from your game.
+
+### Step 3 - Launching Subway Builder
+
+Once you have added all of your maps and generated the mod, you can launch the game using `START GAME`. This is how you will launch the game from now on. In-game, your maps will appear under the `CUSTOM` tab, and they are ready to be played!
+
+> [!IMPORTANT]  
+> Due to the way the game currently works, you must launch the game via the Map Manager every time you want to play a custom map. If you do not launch the game using the Map Manager, buildings and water will not appear ingame.

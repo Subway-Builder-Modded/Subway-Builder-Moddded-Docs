@@ -1,11 +1,10 @@
-// docusaurus.config.js
 module.exports = {
-  title: 'Subway Builder Modded Docs',
-  tagline: 'All your mods and maps in one place',
+  title: 'Subway Builder Mod Wiki',
+  tagline: 'A complete directory and guide for all Subway Builder maps and mods',
   url: 'https://subwaybuildermodded.com',
   baseUrl: '/',
   favicon: 'favicon.ico',
-  organizationName: 'Subway-Builder-Modded', // GitHub org/user
+  organizationName: 'Subway-Builder-Modded',
   projectName: 'Subway-Builder-Modded-Docs',
   deploymentBranch: 'gh-pages',
   onBrokenLinks: 'throw',
@@ -27,12 +26,15 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl:
-            'https://github.com/Subway-Builder-Modded/Subway-Builder-Modded-Docs/edit/main/',
           routeBasePath: 'docs',
-          showLastUpdateTime: true,
+          showLastUpdateTime: false,
         },
-        blog: false,
+        blog: {
+          path: 'blog',            // folder where your blog posts live
+          routeBasePath: 'blog',   // URL route: /blog
+          showReadingTime: true,   // optional: show reading time on posts
+          blogSidebarCount: 'ALL', // show all posts in sidebar
+        },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -41,21 +43,26 @@ module.exports = {
   ],
   themeConfig: {
     navbar: {
-      title: 'Subway Builder Docs',
+      title: 'Subway Builder Mod Wiki',
       logo: {
         alt: 'Subway Builder Logo',
         src: 'logo.png',
       },
       items: [
-        {
+        /*{
           type: 'doc',
-          docId: 'intro',
+          docId: 'intro', // Leads to Intro
           position: 'left',
-          label: 'Docs',
-        },
+          label: 'Wiki',
+        },*/
         {
           href: 'https://github.com/Subway-Builder-Modded/Subway-Builder-Modded-Docs',
           label: 'GitHub',
+          position: 'right',
+        },
+        {
+          href: 'https://discord.gg/jrNQpbytUQ',
+          label: 'discord',
           position: 'right',
         },
         {
@@ -66,7 +73,7 @@ module.exports = {
     },
     footer: {
       style: 'dark',
-      links: [
+      /*links: [
         {
           title: 'Docs',
           items: [
@@ -85,11 +92,11 @@ module.exports = {
             },
           ],
         },
-      ],
+      ],*/
       copyright: `Copyright © ${new Date().getFullYear()} Subway Builder Modded`,
     },
     colorMode: {
-      defaultMode: 'light',
+      defaultMode: 'dark',
       disableSwitch: false,
     },
   },

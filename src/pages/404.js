@@ -11,7 +11,7 @@ export default function NotFound() {
           Oops! The page you are looking for does not exist.
         </p>
         <p>
-          Go back to <Link to="/">Home</Link> or check out the <Link to="/docs/intro">Documentation</Link>.
+          Go back to <Link to="/">Home</Link> or check out the Documentation.
         </p>
       </main>
     </Layout>
