@@ -28,6 +28,7 @@ module.exports = {
           routeBasePath: 'wiki',
           sidebarPath: require.resolve('./sidebars.js'),
           showLastUpdateTime: false,
+          admonitions: true,
         },
         blog: false,
         theme: {

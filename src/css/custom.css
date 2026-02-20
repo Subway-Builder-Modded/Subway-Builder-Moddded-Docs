@@ -96,3 +96,23 @@ code, pre {
   vertical-align: text-bottom;
   margin-right: 5px;
 }
+
+/* === Admonitions === */
+.admonition {
+  border-left: 4px solid currentColor;
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  border-radius: 4px;
+}
+
+.admonition-note, .alert--note {
+  border-left-color: #1F6FEB;
+  background-color: #DCEEFB;
+  color: #1F6FEB;
+}
+
+[data-theme='dark'] .admonition-note,
+[data-theme='dark'] .alert--note {
+  background-color: #0D1F3C;
+  color: #DCEEFB;
+}
