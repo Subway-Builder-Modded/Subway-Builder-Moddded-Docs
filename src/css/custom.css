@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 
 :root {
-  --ifm-font-family-base: 'Roboto', sans-serif;
+  --ifm-font-family-base: 'Ubuntu', sans-serif;
   --ifm-font-family-monospace: 'Fira Code', monospace;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   font-weight: 500;
 }
 
@@ -32,13 +32,13 @@ code, pre {
 }
 
 .navbar__brand {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   font-weight: 700;
   font-size: 1.3rem;
 }
 
 .navbar__item a {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   font-weight: 500;
   color: var(--ifm-navbar-link-color);
 }
@@ -62,7 +62,7 @@ code, pre {
 }
 
 .footer {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   font-weight: 500;
   font-size: 0.9rem;
 }
@@ -78,6 +78,21 @@ code, pre {
 
 .wiki-icon path {
   fill: var(--wiki-icon-color);
+  vertical-align: text-bottom;
+  margin-right: 5px;
+}
+
+/* === Updates Icon === */
+:root {
+  --updates-icon-color: #242526;
+}
+
+[data-theme='dark'] {
+  --updates-icon-color: #E3E3E3;
+}
+
+.updates-icon path {
+  fill: var(--updates-icon-color);
   vertical-align: text-bottom;
   margin-right: 5px;
 }
