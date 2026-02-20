@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+:root {
+  --ifm-font-family-base: 'Roboto', sans-serif;
+  --ifm-font-family-monospace: 'Fira Code', monospace;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+}
+
+code, pre {
+  font-family: 'Fira Code', monospace;
+}
+
+/* === Navbar / Header === */
+:root {
+  --ifm-navbar-background-color: #242526;   /* bg color */
+  --ifm-navbar-link-color: #E3E3E3;         /* links */
+  --ifm-navbar-link-hover-color: #3578E5;   /* hover links */
+  --ifm-navbar-height: 60px;
+  --ifm-navbar-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.navbar__brand {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: #ffffff;
+}
+
+.navbar__item a {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  color: var(--ifm-navbar-link-color);
+}
+.navbar__item a:hover {
+  color: var(--ifm-navbar-link-hover-color);
+}
+
+/* === Footer === */
+:root {
+  --ifm-footer-background-color: #242526;  /* bg color */
+  --ifm-footer-color: #E3E3E3;             /* text color */
+  --ifm-footer-link-color: #E3E3E3;        /* links */
+  --ifm-footer-link-hover-color: #3578E5;  /* hover links */
+}
+
+.footer {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 0.9rem;
+}

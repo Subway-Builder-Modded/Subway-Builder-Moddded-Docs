@@ -1,5 +1,6 @@
 module.exports = {
   docs: [
+    'home',
     {
       type: 'category',
       label: 'Maps',
@@ -10,6 +11,5 @@ module.exports = {
       label: 'Guides',
       items: ['guides/map-installation-guide', 'guides/legacy-map-installation-guide', 'guides/map-porting-guide'],
     },
-    //'faq',
   ],
 };

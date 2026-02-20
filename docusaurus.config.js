@@ -29,12 +29,7 @@ module.exports = {
           routeBasePath: 'docs',
           showLastUpdateTime: false,
         },
-        blog: {
-          path: 'blog',            // folder where your blog posts live
-          routeBasePath: 'blog',   // URL route: /blog
-          showReadingTime: true,   // optional: show reading time on posts
-          blogSidebarCount: 'ALL', // show all posts in sidebar
-        },
+        blog: false,
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -49,21 +44,35 @@ module.exports = {
         src: 'logo.png',
       },
       items: [
-        /*{
+        {
           type: 'doc',
-          docId: 'intro', // Leads to Intro
+          docId: 'home',
           position: 'left',
-          label: 'Wiki',
-        },*/
+          html: `
+            <img src="/assets/wiki.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;" /> 
+            Wiki
+          `,
+        },
         {
           href: 'https://github.com/Subway-Builder-Modded/Subway-Builder-Modded-Docs',
-          label: 'GitHub',
           position: 'right',
+          html: `
+            <img src="/assets/github.svg" width="24" height="24" style="vertical-align: middle; margin-right: 4px;" />
+          `,
         },
         {
           href: 'https://discord.gg/jrNQpbytUQ',
-          label: 'discord',
           position: 'right',
+          html: `
+            <img src="/assets/discord.svg" width="24" height="24" style="vertical-align: middle; margin-right: 4px;" />
+          `,
+        },
+        {
+          href: 'https://subwaybuilder.com',
+          position: 'right',
+          html: `
+            <img src="/assets/subway-builder.svg" width="20" height="20" style="vertical-align: middle; margin-right: 4px;" />
+          `,
         },
         {
           type: 'localeDropdown',
@@ -72,7 +81,6 @@ module.exports = {
       ],
     },
     footer: {
-      style: 'dark',
       /*links: [
         {
           title: 'Docs',
@@ -93,7 +101,7 @@ module.exports = {
           ],
         },
       ],*/
-      copyright: `Copyright © ${new Date().getFullYear()} Subway Builder Modded`,
+      copyright: `© Subway Builder Mod Wiki ${new Date().getFullYear()}`,
     },
     colorMode: {
       defaultMode: 'dark',
