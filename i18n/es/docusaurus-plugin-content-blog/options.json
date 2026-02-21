@@ -1,14 +1,14 @@
 {
   "title": {
-    "message": "Updates",
-    "description": "The title for the blog used in SEO"
+    "message": "Actualizaciones",
+    "description": "Actualizaciones"
   },
   "description": {
-    "message": "Changlogs and release notes for the Subway Builder Mod Wiki website.",
-    "description": "The description for the blog used in SEO"
+    "message": "Registros de cambios y notas de versión para el sitio web de la Wiki del Mod de Subway Builder.",
+    "description": "Registros de cambios y notas de versión para el sitio web de la Wiki del Mod de Subway Builder."
   },
   "sidebar.title": {
-    "message": "Updates",
-    "description": "The label for the left sidebar"
+    "message": "Actualizaciones",
+    "description": "Actualizaciones"
   }
 }

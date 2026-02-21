@@ -63,6 +63,11 @@ module.exports = {
     ],
   ],
   themeConfig: {
+    docs: {
+      sidebar: {
+        hideable: true,
+      },
+    },
     tableOfContents: {
       minHeadingLevel: 2,
       maxHeadingLevel: 5,

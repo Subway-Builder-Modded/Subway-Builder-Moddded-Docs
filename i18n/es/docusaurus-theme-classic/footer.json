@@ -1,14 +1,14 @@
 {
   "link.title.Pages": {
     "message": "Páginas",
-    "description": "Páginas"
+    "description": "The title of the footer links column with title=Pages in the footer"
   },
   "link.title.Other Links": {
     "message": "Otros enlaces",
-    "description": "Otros enlaces"
+    "description": "The title of the footer links column with title=Other Links in the footer"
   },
   "copyright": {
     "message": "© Wiki del Mod de Subway Builder 2026",
-    "description": "Derechos de autor"
+    "description": "The footer copyright"
   }
 }

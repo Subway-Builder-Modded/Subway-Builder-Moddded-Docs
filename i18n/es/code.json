@@ -43,14 +43,6 @@
     "message": "Ver Todas las Etiquetas",
     "description": "The label of the link targeting the tag list page"
   },
-  "theme.docs.breadcrumbs.navAriaLabel": {
-    "message": "Rastro de navegación",
-    "description": "The ARIA label for the breadcrumbs"
-  },
-  "theme.docs.DocCard.categoryDescription.plurals": {
-    "message": "1 artículo|{count} artículos",
-    "description": "The default description for a category card in the generated index about how many items this category includes"
-  },
   "theme.colorToggle.ariaLabel.mode.system": {
     "message": "system mode",
     "description": "The name for the system color mode"
@@ -66,6 +58,14 @@
   "theme.colorToggle.ariaLabel": {
     "message": "Cambiar entre modo oscuro y claro (actualmente {mode})",
     "description": "The ARIA label for the color mode toggle"
+  },
+  "theme.docs.breadcrumbs.navAriaLabel": {
+    "message": "Rastro de navegación",
+    "description": "The ARIA label for the breadcrumbs"
+  },
+  "theme.docs.DocCard.categoryDescription.plurals": {
+    "message": "1 artículo|{count} artículos",
+    "description": "The default description for a category card in the generated index about how many items this category includes"
   },
   "theme.docs.paginator.navAriaLabel": {
     "message": "Página del documento",
@@ -186,6 +186,10 @@
     "message": "Principal",
     "description": "The ARIA label for the main navigation"
   },
+  "theme.navbar.mobileLanguageDropdown.label": {
+    "message": "Idiomas",
+    "description": "The label for the mobile language switcher dropdown"
+  },
   "theme.NotFound.p1": {
     "message": "No pudimos encontrar lo que buscaba.",
     "description": "The first paragraph of the 404 page"
@@ -193,10 +197,6 @@
   "theme.NotFound.p2": {
     "message": "Comuníquese con el dueño del sitio que le proporcionó la URL original y hágale saber que su vínculo está roto.",
     "description": "The 2nd paragraph of the 404 page"
-  },
-  "theme.navbar.mobileLanguageDropdown.label": {
-    "message": "Idiomas",
-    "description": "The label for the mobile language switcher dropdown"
   },
   "theme.TOCCollapsible.toggleButtonLabel": {
     "message": "En esta página",
@@ -214,26 +214,6 @@
     "message": "Lectura de un minuto|{readingTime} min de lectura",
     "description": "Pluralized label for \"{readingTime} min read\". Use as much plural forms (separated by \"|\") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
   },
-  "theme.docs.breadcrumbs.home": {
-    "message": "Página de Inicio",
-    "description": "The ARIA label for the home page in the breadcrumbs"
-  },
-  "theme.CodeBlock.wordWrapToggle": {
-    "message": "Alternar ajuste de palabras",
-    "description": "The title attribute for toggle word wrapping button of code block lines"
-  },
-  "theme.docs.sidebar.navAriaLabel": {
-    "message": "Barra lateral de Documentos",
-    "description": "The ARIA label for the sidebar navigation"
-  },
-  "theme.docs.sidebar.collapseButtonTitle": {
-    "message": "Colapsar barra lateral",
-    "description": "The title attribute for collapse button of doc sidebar"
-  },
-  "theme.docs.sidebar.collapseButtonAriaLabel": {
-    "message": "Colapsar barra lateral",
-    "description": "The title attribute for collapse button of doc sidebar"
-  },
   "theme.CodeBlock.copy": {
     "message": "Copiar",
     "description": "The copy button label on code blocks"
@@ -245,6 +225,26 @@
   "theme.CodeBlock.copyButtonAriaLabel": {
     "message": "Copiar código",
     "description": "The ARIA label for copy code blocks button"
+  },
+  "theme.CodeBlock.wordWrapToggle": {
+    "message": "Alternar ajuste de palabras",
+    "description": "The title attribute for toggle word wrapping button of code block lines"
+  },
+  "theme.docs.breadcrumbs.home": {
+    "message": "Página de Inicio",
+    "description": "The ARIA label for the home page in the breadcrumbs"
+  },
+  "theme.docs.sidebar.collapseButtonTitle": {
+    "message": "Colapsar barra lateral",
+    "description": "The title attribute for collapse button of doc sidebar"
+  },
+  "theme.docs.sidebar.collapseButtonAriaLabel": {
+    "message": "Colapsar barra lateral",
+    "description": "The title attribute for collapse button of doc sidebar"
+  },
+  "theme.docs.sidebar.navAriaLabel": {
+    "message": "Barra lateral de Documentos",
+    "description": "The ARIA label for the sidebar navigation"
   },
   "theme.docs.sidebar.closeSidebarButtonAriaLabel": {
     "message": "Cerrar barra de lateral",

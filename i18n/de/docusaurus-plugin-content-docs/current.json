@@ -1,14 +1,14 @@
 {
   "version.label": {
-    "message": "Next",
-    "description": "The label for version current"
+    "message": "Weiter",
+    "description": "Weiter"
   },
   "sidebar.docs.category.Maps": {
-    "message": "Maps",
-    "description": "The label for category 'Maps' in sidebar 'docs'"
+    "message": "Karten",
+    "description": "Karten"
   },
   "sidebar.docs.category.Guides": {
-    "message": "Guides",
-    "description": "The label for category 'Guides' in sidebar 'docs'"
+    "message": "Anleitungen",
+    "description": "Anleitungen"
   }
 }
