@@ -58,8 +58,8 @@ export default function Home() {
 
   return (
     <Layout
-      title={translate({ id: 'homepage.title', message: 'Home' })}
       description={translate({ id: 'homepage.description', message: 'Subway Builder Mods, Maps, and Installation Guides' })}
+      image="/logo.png"
     >
       <main className={styles.hero}>
         {/* Carousel */}

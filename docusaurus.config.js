@@ -63,6 +63,12 @@ module.exports = {
     ],
   ],
   themeConfig: {
+    metadata: [
+      { name: 'description', content: 'A complete hub for Subway Builder maps, mods, and guides' },
+      { name: 'og:image', content: '/logo.png' },
+      { name: 'twitter:image', content: '/logo.png' },
+      
+    ],
     docs: {
       sidebar: {
         hideable: true,
