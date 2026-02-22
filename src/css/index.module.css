@@ -1,181 +1,195 @@
+/* === Hero === */
 .hero {
-  min-height: 100vh;
-  padding: 0 2rem;
+  padding: 5rem 1rem;
   text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
+  border-bottom: 1px solid var(--ifm-toc-border-color);
+  background-color: var(--ifm-background-surface-color);
 }
 
-.carousel {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  z-index: 0;
-}
-
-.slideImage {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(0.75);
-  opacity: 0;
-  transition: transform 1s ease-in-out, opacity 0.8s ease-in-out;
-  z-index: 0;
-}
-
-html[data-theme='light'] .slideImage {
-  filter: brightness(0.85);
-}
-
-.slideImage.active {
-  opacity: 1;
-  transform: translateX(0);
-  z-index: 1;
-}
-
-.container {
-  position: relative;
-  z-index: 2;
-  max-width: 800px;
+.heroInner {
+  max-width: 720px;
   margin: 0 auto;
 }
 
-.title {
+.heroTitle {
   font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
   margin-bottom: 1.5rem;
-  color: white;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.7);
 }
 
-.subtitle {
+.heroSubtitle {
   font-size: 1.25rem;
-  margin-bottom: 2.5rem;
-  opacity: 0.95;
-  color: white;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+  color: var(--ifm-color-emphasis-600);
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.7;
 }
 
-html[data-theme='light'] .title {
-  color: black;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+/* === Main === */
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
 }
 
-html[data-theme='light'] .subtitle {
-  color: #111;
-  text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+/* === Sections === */
+.section {
+  margin-bottom: 6rem;
 }
 
-.buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
+.sectionLast {
+  margin-bottom: 3rem;
 }
 
-.button {
-  padding: 0.9rem 2rem;
-  font-size: 1rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: 0.2s ease;
-  backdrop-filter: blur(4px);
-}
-
-.primary {
-  background-color: rgba(0, 0, 0, 0.6);
-  border: 2px solid var(--ifm-color-primary);
-  color: white;
-}
-
-.primary:hover {
-  background-color: var(--ifm-color-primary);
-  color: black;
-}
-
-html[data-theme='light'] .primary {
-  background-color: rgba(255, 255, 255, 0.6);
-  color: black;
-  border: 2px solid var(--ifm-color-primary);
-}
-
-html[data-theme='light'] .primary:hover {
-  background-color: var(--ifm-color-primary);
-  color: white;
-}
-
-.controls {
-  position: absolute;
-  bottom: 5rem;
-  left: 50%;
-  transform: translateX(-50%);
+.sectionHeader {
   display: flex;
   align-items: center;
   gap: 1rem;
-  z-index: 2;
-  pointer-events: auto;
+  margin-bottom: 2.5rem;
 }
 
-.arrowButton {
-  background-color: rgba(0,0,0,0.6);
-  border: 2px solid var(--ifm-color-primary);
-  color: white;
-  padding: 0.4rem 0.8rem;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-
-html[data-theme='light'] .arrowButton {
-  background-color: rgba(255, 255, 255, 0.6);
-  color: black;
-  border: 2px solid var(--ifm-color-primary);
-}
-
-.arrowButton:hover {
-  background-color: var(--ifm-color-primary);
-  color: white;
-}
-
-.dots {
+.badge {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.4rem;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.25rem;
 }
 
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.6);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: inline-block;
+.badgeMaps {
+  background-color: #10b981;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
 }
 
-.dot:hover {
-  background: rgba(255,255,255,0.9);
+.badgeGuides {
+  background-color: #3b82f6;
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
 }
 
-.activeDot {
-  background: var(--ifm-color-primary);
+.sectionTitle {
+  font-size: 1.875rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin: 0;
 }
 
-.cornerLogo {
-  position: absolute;
-  bottom: 5rem;
-  right: 1rem;
-  width: 120px;
-  height: auto;
-  z-index: 3;
-  pointer-events: none;
+/* === Divider === */
+.divider {
+  border: none;
+  border-top: 1px solid var(--ifm-toc-border-color);
+  margin-bottom: 6rem;
+}
+
+/* === Card Grid === */
+.cardGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .cardGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .heroTitle {
+    font-size: 2.25rem;
+  }
+}
+
+/* === Cards === */
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.75rem;
+  border: 1px solid var(--ifm-toc-border-color);
+  overflow: hidden;
+  background: var(--ifm-background-surface-color);
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme='dark'] .card:hover {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.cardImage {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #000;
+  border-bottom: 1px solid var(--ifm-toc-border-color);
+}
+
+.cardImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover .cardImage img {
+  opacity: 1;
+}
+
+.cardBody {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.cardText {
+  color: var(--ifm-color-emphasis-600);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.cardLink {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.cardLink:hover {
+  text-decoration: none;
+}
+
+.linkMaps {
+  color: #10b981;
+}
+
+.linkMaps:hover {
+  color: #059669;
+}
+
+.linkGuides {
+  color: #3b82f6;
+}
+
+.linkGuides:hover {
+  color: #2563eb;
+}
+
+.arrow {
+  margin-left: 0.4rem;
+  font-size: 0.9rem;
 }
