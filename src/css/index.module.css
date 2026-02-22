@@ -96,6 +96,7 @@ html[data-theme='light'] .subtitle {
 
 .primary:hover {
   background-color: var(--ifm-color-primary);
+  color: black;
 }
 
 html[data-theme='light'] .primary {
