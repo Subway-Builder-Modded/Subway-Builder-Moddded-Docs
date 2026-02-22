@@ -9,7 +9,7 @@ module.exports = {
     {
       type: 'category',
       label: 'Guides',
-      items: ['guides/map-installation-guide', 'guides/legacy-map-installation-guide', 'guides/map-porting-guide'],
+      items: ['guides/map-installation-guide', 'guides/legacy-map-installation-guide'],
     },
   ],
 };
