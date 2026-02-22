@@ -1,57 +1,43 @@
 .hero {
   min-height: 100vh;
-  padding: 6rem 2rem;
+  padding: 0 2rem;
   text-align: center;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   position: relative;
   overflow: hidden;
 }
 
-/* LIGHT IMAGE LAYER */
-.hero::before,
-.hero::after {
-  content: '';
+/* Carousel wrapper */
+.carousel {
   position: absolute;
   inset: 0;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  transition: opacity 400ms ease-in-out;
+  overflow: hidden;
   z-index: 0;
 }
 
-/* Light mode image */
-.hero::before {
-  background-image: url('/images/home-light.png');
-  opacity: 1;
-}
-
-/* Dark mode image */
-.hero::after {
-  background-image: url('/images/home-dark.png');
-  opacity: 0;
-}
-
-/* When dark mode is active */
-html[data-theme='dark'] .hero::before {
-  opacity: 0;
-}
-
-html[data-theme='dark'] .hero::after {
-  opacity: 1;
-}
-
-/* Dark overlay for readability */
-.hero::after,
-.hero::before {
+/* Slide images */
+.slideImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   filter: brightness(0.75);
+  opacity: 0;
+  transition: transform 1s ease-in-out, opacity 0.8s ease-in-out;
+  z-index: 0;
 }
 
-/* Content above images */
+.slideImage.active {
+  opacity: 1;
+  transform: translateX(0);
+  z-index: 1;
+}
+
+/* Content overlay */
 .container {
   position: relative;
   z-index: 2;
@@ -63,6 +49,7 @@ html[data-theme='dark'] .hero::after {
   font-size: 3rem;
   margin-bottom: 1.5rem;
   color: white;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.7);
 }
 
 .subtitle {
@@ -70,6 +57,7 @@ html[data-theme='dark'] .hero::after {
   margin-bottom: 2.5rem;
   opacity: 0.95;
   color: white;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.7);
 }
 
 .buttons {
@@ -97,4 +85,59 @@ html[data-theme='dark'] .hero::after {
 
 .primary:hover {
   background-color: var(--ifm-color-primary);
+}
+
+/* Controls at bottom */
+.controls {
+  position: absolute;
+  bottom: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  z-index: 2;
+  pointer-events: auto;
+}
+
+/* Arrow buttons styled like primary buttons */
+.arrowButton {
+  background-color: rgba(0,0,0,0.6);
+  border: 2px solid var(--ifm-color-primary);
+  color: white;
+  padding: 0.4rem 0.8rem; /* smaller padding */
+  border-radius: 8px;
+  font-size: 0.9rem; /* slightly smaller text */
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.arrowButton:hover {
+  background-color: var(--ifm-color-primary);
+}
+
+/* Dots */
+.dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.6);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.dot:hover {
+  background: rgba(255,255,255,0.9);
+}
+
+.activeDot {
+  background: var(--ifm-color-primary);
 }
