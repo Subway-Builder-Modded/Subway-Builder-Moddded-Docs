@@ -1,18 +1,18 @@
 {
   "title": {
     "message": "Subway Builder Mod Wiki",
-    "description": "Subway Builder Mod Wiki"
+    "description": "The title in the navbar"
   },
   "logo.alt": {
     "message": "Subway Builder Logo",
-    "description": "Subway Builder Logo"
+    "description": "The alt text of navbar logo"
   },
   "item.label.Wiki": {
     "message": "Wiki",
-    "description": "Wiki"
+    "description": "Navbar item with label Wiki"
   },
   "item.label.Updates": {
     "message": "Aktualisierungen",
-    "description": "Aktualisierungen"
+    "description": "Navbar item with label Updates"
   }
 }

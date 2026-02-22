@@ -1,40 +1,34 @@
 ---
 id: map-installation-guide
-title: Guía de instalación de mapas
+title: Guía de Instalación de Mapas
 ---
 
-[Map Manager de Kronifer](https://github.com/Kronifer/subwaybuilder-patcher/releases) es la forma más fácil y eficiente de descargar e instalar ciudades personalizadas en Subway Builder. Todo lo que necesitas es un archivo ZIP proporcionado y el propio Map Manager, y estarás listo para empezar.
+[Kronifer's Map Manager](https://github.com/Kronifer/subwaybuilder-patcher/releases) es la forma más fácil y optimizada de descargar e instalar ciudades personalizadas en Subway Builder. Solo necesitas un archivo ZIP proporcionado y el propio Map Manager, y estarás listo para comenzar.
 
 ### Paso 1 - Instalar el Map Manager
 
-Descarga la última versión del Map Manager en https://github.com/Kronifer/subwaybuilder-patcher/releases. Para descargarla, haz clic en la versión que corresponda a tu sistema operativo.
-
-<img width="1000" alt="image" src="https://github.com/user-attachments/assets/4bc7b27d-9868-475f-9a4a-5ce447a77036" />
+Descarga la última versión del Map Manager en https://github.com/Kronifer/subwaybuilder-patcher/releases. Para descargar, haz clic en la versión que corresponda a tu sistema operativo.
 
 :::note
-En Windows, necesitas el archivo `.exe`. En Linux, necesitas el archivo `.zip`. En MacOS, usa el archivo `arm64.dmg` si tu Mac tiene un chip Apple Silicon (por ejemplo, M1, M2, M3, etc.) y el archivo `x64.dmg` si tu Mac tiene un chip Intel. Como regla general, los Macs posteriores a aproximadamente 2021 suelen tener chips Apple Silicon y los modelos anteriores suelen tener chips Intel, pero verifícalo ya que hay excepciones.
+En Windows, necesitas el archivo `.exe`. En Linux, necesitas el archivo `.zip`. En MacOS, usa el archivo `arm64.dmg` si tu Mac tiene un chip Apple Silicon (por ejemplo, M1, M2, M3, etc.) y el archivo `x64.dmg` si tu Mac tiene un chip Intel. Como regla general, los Mac posteriores a aproximadamente 2021 suelen tener chips Apple Silicon y los modelos más antiguos suelen tener chips Intel, pero verifica, ya que hay excepciones.
 :::
 
 :::note
-En MacOS, es probable que el instalador .dmg esté en cuarentena. Para ejecutar el instalador, abre una terminal en la carpeta donde descargaste el instalador y luego ejecuta `xattr -d com.apple.quarantine {INSTALLER_FILENAME}`. Por ejemplo, al descargar la versión 0.2.7 para un Mac ARM, deberías ejecutar `xattr -d com.apple.quarantine Subway.Builder.Map.Manager-0.2.7-arm64.dmg`.
+En MacOS, es probable que el instalador .dmg esté en cuarentena. Para ejecutar el instalador, abre una terminal en la carpeta donde lo descargaste y ejecuta `xattr -d com.apple.quarantine {INSTALLER_FILENAME}`. Por ejemplo, al descargar la versión 0.2.7 para un Mac ARM, ejecutarías `xattr -d com.apple.quarantine Subway.Builder.Map.Manager-0.2.7-arm64.dmg`.
+
+Además, la carpeta Library que contiene la carpeta metro-maker4 puede estar oculta por defecto. Para solucionarlo, abre Finder y la carpeta Home, luego selecciona View -> Show View Options -> Show Library Folder.
 :::
 
-Después de eso, instala la aplicación como lo harías con cualquier otra aplicación. Una vez finalizada la instalación, abre la aplicación y completa el proceso de configuración. En este punto, es seguro eliminar el archivo ZIP, el instalador y cualquier otro archivo que hayas descargado.
+Después de eso, instala la aplicación como lo harías con cualquier otra. Una vez que el instalador termine, inicia la aplicación y sigue el proceso de configuración, seleccionando la ubicación del ejecutable del juego y tu carpeta `metro-maker4`. En este punto es seguro eliminar el ZIP, el instalador y cualquier otro archivo descargado.
 
-### Paso 2 - Añadir el mapa
+### Paso 2 - Añadir el Mapa
 
 Para instalar un mapa, simplemente haz clic en el botón `ADD A MAP` e importa el archivo ZIP que descargaste que contiene tu mapa. Una vez finalizado, deberías ver el nombre del mapa, el creador y la versión en la pantalla.
 
-<img width="1200" alt="image" src="https://github.com/user-attachments/assets/c258cf39-c211-4677-8ac1-0828a97d5c61" />
-
-Una vez que hayas importado todos los mapas que deseas añadir al juego, haz clic en el botón `GENERATE MOD`. Esto añadirá automáticamente los mapas a Subway Builder y registrará el Map Manager como un mod en tu juego.\
-
-Si deseas añadir otro mapa después de haber generado el mod, vuelve a abrir el Map Manager e importa todos los mapas que quieras en tu juego (incluidos los que ya están en tu juego). Haz clic en `GENERATE MOD` y el Map Manager añadirá automáticamente los mapas a Subway Builder. Si no vuelves a añadir los mapas antiguos, se eliminarán de tu juego.
-
 ### Paso 3 - Iniciar Subway Builder
 
-Una vez que hayas añadido todos tus mapas y generado el mod, puedes iniciar el juego usando `START GAME`. Así es como deberás iniciar el juego a partir de ahora. Dentro del juego, tus mapas aparecerán en la pestaña `CUSTOM`, ¡y estarán listos para jugar!
+Una vez que hayas añadido todos tus mapas, puedes iniciar el juego usando `START GAME`. Así es como deberás iniciar el juego a partir de ahora. En el juego, tus mapas aparecerán en la pestaña `CUSTOM` y estarán listos para jugar.
 
 :::important
-Debido a la forma en que funciona actualmente el juego, debes iniciar el juego a través del Map Manager cada vez que quieras jugar un mapa personalizado. Si no inicias el juego usando el Map Manager, los edificios y el agua no aparecerán en el juego.
+Debido a la forma en que funciona el juego actualmente, debes iniciar el juego mediante el Map Manager cada vez que quieras jugar un mapa personalizado. Si no lo haces, los edificios y el agua no aparecerán en el juego.
 :::

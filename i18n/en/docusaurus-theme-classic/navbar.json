@@ -4,7 +4,7 @@
     "description": "The title in the navbar"
   },
   "logo.alt": {
-    "message": "Logo de Subway Builder",
+    "message": "Subway Builder Logo",
     "description": "The alt text of navbar logo"
   },
   "item.label.Wiki": {
@@ -12,7 +12,7 @@
     "description": "Navbar item with label Wiki"
   },
   "item.label.Updates": {
-    "message": "Actualizaciones",
+    "message": "Updates",
     "description": "Navbar item with label Updates"
   }
 }

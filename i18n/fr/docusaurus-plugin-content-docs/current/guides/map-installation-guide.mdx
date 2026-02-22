@@ -3,38 +3,32 @@ id: map-installation-guide
 title: Guide d'installation des cartes
 ---
 
-[Map Manager de Kronifer](https://github.com/Kronifer/subwaybuilder-patcher/releases) est la méthode la plus simple et la plus efficace pour télécharger et installer des villes personnalisées dans Subway Builder. Tout ce dont vous avez besoin est un fichier ZIP fourni et du Map Manager lui-même, et vous êtes prêt à commencer.
+[Kronifer's Map Manager](https://github.com/Kronifer/subwaybuilder-patcher/releases) est le moyen le plus simple et le plus efficace de télécharger et d’installer des villes personnalisées dans Subway Builder. Tout ce dont vous avez besoin est un fichier ZIP fourni ainsi que le Map Manager lui-même.
 
-### Étape 1 - Installation du Map Manager
+### Étape 1 - Installer le Map Manager
 
-Téléchargez la dernière version du Map Manager à l’adresse https://github.com/Kronifer/subwaybuilder-patcher/releases. Pour télécharger, cliquez sur la version correspondant à votre système d’exploitation.
-
-<img width="1000" alt="image" src="https://github.com/user-attachments/assets/4bc7b27d-9868-475f-9a4a-5ce447a77036" />
+Téléchargez la dernière version du Map Manager sur https://github.com/Kronifer/subwaybuilder-patcher/releases. Cliquez sur la version correspondant à votre système d’exploitation.
 
 :::note
-Sous Windows, vous avez besoin du fichier `.exe`. Sous Linux, vous avez besoin du fichier `.zip`. Sous MacOS, utilisez le fichier `arm64.dmg` si votre Mac possède une puce Apple Silicon (par exemple M1, M2, M3, etc.) et le fichier `x64.dmg` si votre Mac possède une puce Intel. En règle générale, les Macs plus récents que 2021 environ disposent de puces Apple Silicon et les modèles plus anciens disposent de puces Intel, mais vérifiez car il existe des exceptions.
+Sous Windows, utilisez le fichier `.exe`. Sous Linux, utilisez le fichier `.zip`. Sous MacOS, utilisez le fichier `arm64.dmg` si votre Mac possède une puce Apple Silicon (M1, M2, M3, etc.) et le fichier `x64.dmg` s’il possède une puce Intel. En règle générale, les Mac après 2021 utilisent Apple Silicon, mais vérifiez car il existe des exceptions.
 :::
 
 :::note
-Sous MacOS, l’installateur .dmg sera probablement mis en quarantaine. Pour exécuter l’installateur, ouvrez un terminal dans le dossier où vous avez téléchargé l’installateur, puis exécutez `xattr -d com.apple.quarantine {INSTALLER_FILENAME}`. Par exemple, lors du téléchargement de la version 0.2.7 pour un Mac ARM, vous devrez exécuter `xattr -d com.apple.quarantine Subway.Builder.Map.Manager-0.2.7-arm64.dmg`.
+Sous MacOS, le fichier .dmg peut être mis en quarantaine. Pour l’exécuter, ouvrez un terminal dans le dossier de téléchargement et exécutez `xattr -d com.apple.quarantine {INSTALLER_FILENAME}`. Par exemple : `xattr -d com.apple.quarantine Subway.Builder.Map.Manager-0.2.7-arm64.dmg`.
+
+Le dossier Library contenant le dossier metro-maker4 peut être masqué par défaut. Ouvrez Finder → dossier Home → View → Show View Options → Show Library Folder.
 :::
 
-Ensuite, installez l’application comme n’importe quelle autre application. Une fois l’installation terminée, lancez l’application et suivez le processus de configuration. À ce stade, vous pouvez supprimer le fichier ZIP, l’installateur et tous les autres fichiers téléchargés.
+Installez ensuite l’application normalement. Après l’installation, lancez l’application et configurez-la en sélectionnant l’exécutable du jeu et le dossier `metro-maker4`.
 
 ### Étape 2 - Ajouter la carte
 
-Pour installer une carte, cliquez simplement sur le bouton `ADD A MAP` et importez le fichier ZIP que vous avez téléchargé contenant votre carte. Une fois terminé, vous devriez voir apparaître le nom de la carte, le créateur et la version à l’écran.
-
-<img width="1200" alt="image" src="https://github.com/user-attachments/assets/c258cf39-c211-4677-8ac1-0828a97d5c61" />
-
-Une fois que vous avez importé toutes les cartes que vous souhaitez ajouter au jeu, cliquez sur le bouton `GENERATE MOD`. Cela ajoute automatiquement les cartes à Subway Builder et enregistre le Map Manager comme mod dans votre jeu.\
-
-Si vous souhaitez ajouter une autre carte après avoir déjà généré le mod, relancez le Map Manager et importez toutes les cartes que vous souhaitez dans votre jeu (y compris celles déjà présentes). Cliquez sur `GENERATE MOD` et le Map Manager ajoutera automatiquement les cartes à Subway Builder. Si vous ne réajoutez pas les anciennes cartes, elles seront supprimées de votre jeu.
+Cliquez sur `ADD A MAP` et importez le fichier ZIP téléchargé. Le nom de la carte, le créateur et la version apparaîtront à l’écran.
 
 ### Étape 3 - Lancer Subway Builder
 
-Une fois que vous avez ajouté toutes vos cartes et généré le mod, vous pouvez lancer le jeu en utilisant `START GAME`. C’est ainsi que vous devrez désormais lancer le jeu. En jeu, vos cartes apparaîtront dans l’onglet `CUSTOM` et seront prêtes à être jouées !
+Après avoir ajouté toutes vos cartes, lancez le jeu avec `START GAME`. Les cartes apparaîtront dans l’onglet `CUSTOM`.
 
 :::important
-En raison du fonctionnement actuel du jeu, vous devez lancer le jeu via le Map Manager chaque fois que vous souhaitez jouer à une carte personnalisée. Si vous ne lancez pas le jeu à l’aide du Map Manager, les bâtiments et l’eau n’apparaîtront pas en jeu.
+Vous devez lancer le jeu via le Map Manager à chaque fois pour que les bâtiments et l’eau apparaissent correctement.
 :::

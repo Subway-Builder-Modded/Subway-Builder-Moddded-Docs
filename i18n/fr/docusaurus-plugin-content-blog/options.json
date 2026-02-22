@@ -1,14 +1,14 @@
 {
   "title": {
     "message": "Mises à jour",
-    "description": "Mises à jour"
+    "description": "The title for the blog used in SEO"
   },
   "description": {
     "message": "Journaux des modifications et notes de version pour le site web du Wiki du Mod Subway Builder.",
-    "description": "Journaux des modifications et notes de version pour le site web du Wiki du Mod Subway Builder."
+    "description": "The description for the blog used in SEO"
   },
   "sidebar.title": {
     "message": "Mises à jour",
-    "description": "Mises à jour"
+    "description": "The label for the left sidebar"
   }
 }

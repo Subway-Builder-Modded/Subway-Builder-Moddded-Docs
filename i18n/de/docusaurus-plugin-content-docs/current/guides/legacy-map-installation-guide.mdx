@@ -3,22 +3,26 @@ id: legacy-map-installation-guide
 title: Installationsanleitung für Karten (Legacy)
 ---
 
-Bevor der Map Manager entwickelt wurde, wurde die Methode `serve` verwendet. Sie war komplexer und unterschied sich von Karte zu Karte, aber wir können die benötigten Dateien leicht extrahieren und die Karte in den Map Manager portieren.
+Bevor der Map Manager entwickelt wurde, wurde die Methode `serve` verwendet. Sie war komplexer und unterschied sich von Karte zu Karte, aber wir können die benötigten Dateien problemlos extrahieren und die Karte in den Map Manager portieren.
 
 ### Schritt 1 - Installation des Map Managers
-Lade die neueste Version des Map Managers unter https://github.com/Kronifer/subwaybuilder-patcher/releases herunter. Klicke zum Herunterladen auf die Version, die deinem Betriebssystem entspricht.
+Lade die neueste Version des Map Managers unter https://github.com/Kronifer/subwaybuilder-patcher/releases herunter. Klicke dazu auf die Version, die deinem Betriebssystem entspricht.
 
 <img width="1000" alt="image" src="https://github.com/user-attachments/assets/4bc7b27d-9868-475f-9a4a-5ce447a77036" />
 
 :::note
-Für Windows benötigst du die `.exe`-Datei. Für Linux die `.zip`-Datei. Für MacOS verwende die Datei `arm64.dmg`, wenn dein Mac einen Apple Silicon Chip (z. B. M1, M2, M3 usw.) besitzt, und die Datei `x64.dmg`, wenn dein Mac einen Intel-Chip hat. Als Faustregel gilt: Macs ab etwa 2021 besitzen meist Apple Silicon Chips, ältere Modelle meist Intel-Chips – überprüfe dies jedoch, da es Ausnahmen gibt.
+Für Windows benötigst du die `.exe`-Datei. Für Linux die `.zip`-Datei. Für MacOS verwende die Datei `arm64.dmg`, wenn dein Mac einen Apple-Silicon-Chip (z. B. M1, M2, M3 usw.) besitzt, und die Datei `x64.dmg`, wenn dein Mac einen Intel-Chip hat. Als Faustregel gilt: Macs ab etwa 2021 besitzen in der Regel Apple-Silicon-Chips, ältere Modelle meist Intel-Chips – überprüfe dies jedoch, da es Ausnahmen gibt.
 :::
 
 :::note
-Unter MacOS wird der `.dmg`-Installer wahrscheinlich unter Quarantäne gestellt. Um ihn auszuführen, öffne ein Terminal im Ordner, in den du die Datei heruntergeladen hast, und führe `xattr -d com.apple.quarantine {INSTALLER_FILENAME}` aus. Wenn du beispielsweise Version 0.2.7 für einen ARM-Mac heruntergeladen hast, führe `xattr -d com.apple.quarantine Subway.Builder.Map.Manager-0.2.7-arm64.dmg` aus.
+Unter MacOS wird das `.dmg`-Installationsprogramm wahrscheinlich unter Quarantäne gestellt. Um es auszuführen, öffne ein Terminal im Ordner, in den du die Datei heruntergeladen hast, und führe `xattr -d com.apple.quarantine {INSTALLER_FILENAME}` aus. Wenn du beispielsweise Version 0.2.7 für einen ARM-Mac herunterlädst, würdest du `xattr -d com.apple.quarantine Subway.Builder.Map.Manager-0.2.7-arm64.dmg` ausführen.
+
+Zusätzlich kann der Library-Ordner, der den Ordner metro-maker4 enthält, standardmäßig ausgeblendet sein. Um dies zu ändern, öffne den Finder und gehe in deinen Home-Ordner. Wähle anschließend View -> Show View Options -> Show Library Folder. 
 :::
 
-Installiere die App anschließend wie jede andere Anwendung. Sobald die Installation abgeschlossen ist, starte die App und durchlaufe den Einrichtungsprozess. Danach kannst du die ZIP-Datei, den Installer und alle weiteren heruntergeladenen Dateien löschen.
+Installiere danach die App wie jede andere Anwendung. Sobald die Installation abgeschlossen ist, starte die App und durchlaufe den Einrichtungsprozess, indem du den Speicherort der Spiel-Executable sowie deinen `metro-maker4`-Ordner auswählst. Anschließend kannst du die ZIP-Datei, das Installationsprogramm und alle anderen heruntergeladenen Dateien löschen.
+
+<img width="1200" alt="image" src="https://private-user-images.githubusercontent.com/19807509/553076498-ea9604c2-bc93-4cb4-939c-73d957b22f2a.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzE3Mzg4NzcsIm5iZiI6MTc3MTczODU3NywicGF0aCI6Ii8xOTgwNzUwOS81NTMwNzY0OTgtZWE5NjA0YzItYmM5My00Y2I0LTkzOWMtNzNkOTU3YjIyZjJhLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjAyMjIlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYwMjIyVDA1MzYxN1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTBiZWY2OTk4M2UxMWQxMTk5ZjJkZGZhY2RmOGFkMzRkNjFlM2M1ZmZjMWI5ZDk1YzlmYWM3NmFkMTg5NTZmZmQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.FPcEPbOlAyqlZYh49DK22UItzW7fMtvY_-HJcKj1dl8" />
 
 ### Schritt 2 - Dateien extrahieren
 Nun müssen wir die benötigten Dateien aus der heruntergeladenen Karte extrahieren. Insgesamt benötigen wir 6 Dateien:
@@ -29,20 +33,20 @@ Nun müssen wir die benötigten Dateien aus der heruntergeladenen Karte extrahie
  - `runways_taxiways.geojson`
  - `config.json`
 
-Die erste Datei ist einfach zu finden. Suche in der heruntergeladenen Karte nach der Datei XXX.pmtiles. Sie befindet sich irgendwo im Verzeichnis, entweder im Hauptordner oder in einem Unterordner. Erstelle zunächst einen temporären Arbeitsordner für unsere 6 Dateien.
+Die erste Datei ist einfach. Suche in der heruntergeladenen Karte nach der Datei XXX.pmtiles. Sie befindet sich irgendwo im Verzeichnis, entweder im Hauptordner oder in einem Unterordner. Erstelle zunächst einen temporären Arbeitsordner, in dem wir unsere 6 Dateien speichern.
 
-Die nächsten 4 Dateien erfordern etwas mehr Aufwand. Du solltest sie relativ leicht finden, allerdings liegen sie komprimiert vor (sie enden auf `.gz`). Diese müssen wir als Archiv entpacken.
+Die nächsten 4 Dateien erfordern etwas mehr Arbeit. Du solltest sie relativ leicht finden können, allerdings liegen sie alle in komprimierter Form vor (sie enden auf `.gz`). Daher müssen wir sie als Archiv entpacken.
 
 :::tip
-Unter Windows und Linux kannst du [7-Zip](https://www.7-zip.org/download.html) verwenden, um das `.gz`-Archiv zu entpacken. MacOS unterstützt das Entpacken von gzip-Archiven nativ – du kannst einfach darauf klicken.
+Unter Windows und Linux kannst du [7-Zip](https://www.7-zip.org/download.html) verwenden, um das `.gz`-Archiv zu entpacken. MacOS unterstützt das Entpacken von gzip-Archiven nativ – du kannst also einfach darauf klicken, um sie zu extrahieren.
 :::
 
-Im Archiv sollte sich jeweils eine einzelne Datei befinden. Im Archiv `demand_data.json.gz` findest du beispielsweise `demand_data.json`, und dasselbe gilt für die anderen 3 Archive. Extrahiere alle 4 Dateien und lege sie in deinen temporären Arbeitsordner. Manche Karten enthalten doppelte Datendateien im Verzeichnis. Es spielt keine Rolle, welche du auswählst – sie sind identisch.
+Im Inneren solltest du jeweils eine einzelne Datei sehen. Wenn du das Archiv `demand_data.json.gz` öffnest, solltest du darin `demand_data.json` finden – das Gleiche gilt für die anderen 3 Archive. Extrahiere alle 4 Dateien und lege sie in deinen temporären Arbeitsordner. Manche Karten enthalten doppelte Datendateien im Verzeichnis. Es spielt keine Rolle, welche du auswählst, da sie identisch sind.
 
 Die letzte benötigte Datei ist `config.json`. Diese ist am schwierigsten. Erstelle zunächst eine neue Datei mit dem Namen `config.json`.
 
 :::tip
-Stelle sicher, dass es sich um eine `.json`-Datei handelt. Falls die Dateiendung nicht als `JSON File` angezeigt wird, suche online, wie du Dateiendungen in deinem Betriebssystem anzeigen lassen kannst.
+Stelle sicher, dass es sich um eine `.json`-Datei handelt. Suche gegebenenfalls online, wie du Dateinamenerweiterungen in deinem Betriebssystem aktivierst, falls der Dateityp nicht als `JSON File` angezeigt wird.
 :::
 
 Füge in `config.json` folgende Vorlage ein:
@@ -63,8 +67,7 @@ Füge in `config.json` folgende Vorlage ein:
 }
 ```
 
-
-Diese Daten müssen wir an unsere Karte anpassen. Im Verzeichnis deiner Karte sollte sich eine `.js`-Datei befinden, meist `index.js`. In dieser Datei findest du etwas, das unserer Vorlage sehr ähnlich sieht.
+Nun müssen wir diese Daten an unsere Karte anpassen. Im Verzeichnis deiner Karte sollte sich eine `.js`-Datei befinden, meist `index.js`. In dieser Datei findest du etwas, das unserer Vorlage sehr ähnlich sieht.
 
 <img width="1097" height="402" alt="image" src="https://github.com/user-attachments/assets/b25a1577-badf-4adf-a414-d76003c3a26d" />
 
@@ -74,39 +77,35 @@ Diese Daten müssen wir an unsere Karte anpassen. Im Verzeichnis deiner Karte so
 Falls dein Verzeichnis mehrere `.js`-Dateien enthält, überprüfe alle. Eine davon enthält die benötigten Daten.
 :::
 
-Aus dieser Datei erhalten wir:
+Aus dieser Datei können wir folgende Werte entnehmen:
  - `name`
  - `code`
  - `description`
  - `population`
- - `initialViewState` (und alle dazugehörigen Werte)
+ - `intialViewState` (und alle dazugehörigen Parameter)
 
 :::note
-Falls deine Daten kein `initialViewState` enthalten, kannst du 12 oder 13 für `zoom` und 0 für `bearing` verwenden. Für `latitude` und `longitude` kannst du eine beliebige Zahl innerhalb deines bbox-Koordinatenbereichs wählen (`latitude` entspricht der **2.** und **4.** Zahl, `longitude` der **1.** und **3.**). Im oben gezeigten Toronto-Beispiel könnten wir 44.0 und -79.0 für `latitude` bzw. `longitude` verwenden.
+Falls deine Daten kein `initialViewState` enthalten, kannst du 12 oder 13 für `zoom` und 0 für `bearing` verwenden. Für `latitude` und `longitude` kannst du beliebige Werte innerhalb des Koordinatenbereichs deiner bbox wählen (die `latitude` entspricht der **2.** und **4.** Zahl, die `longitude` der **1.** und **3.**). Im oben gezeigten Toronto-Beispiel könnten wir beispielsweise 44.0 und -79.0 für `latitude` bzw. `longitude` verwenden.
 :::
 
-Die letzten beiden benötigten Werte, `creator` und `version`, findest du in `manifest.json`, das jedes Projekt enthält. Sobald du alle Informationen für deine config.json gesammelt hast, stelle sicher, dass du alle 6 Dateien besitzt. Danach kannst du mit dem nächsten Schritt fortfahren.
+Die letzten beiden benötigten Werte, `creator` und `version`, findest du in der Datei `manifest.json`, die jedes Projekt enthält. Sobald du alle benötigten Informationen für deine `config.json` hast, stelle sicher, dass du alle 6 Dateien beisammen hast. Danach kannst du mit dem nächsten Schritt fortfahren.
 
 :::important
-Auch wenn es nicht zwingend erforderlich ist: Wenn du diese portierte Karte teilen möchtest, gib bitte den `creator` an. So erhalten die ursprünglichen Ersteller die verdiente Anerkennung für ihre Karten.
+Auch wenn es nicht verpflichtend ist: Wenn du diese portierte Karte weiterverbreiten möchtest, gib bitte den `creator` an. So wird sichergestellt, dass die ursprünglichen Ersteller weiterhin Anerkennung für ihre Karten erhalten.
 :::
 
 ### Schritt 3 - Dateien zippen
-Nun, da wir alle 6 Dateien haben, müssen wir sie in eine `.zip`-Datei packen. Das geht unter Windows oder Linux nativ oder mit [7-Zip](https://www.7-zip.org/download.html), unter MacOS mit `Komprimieren`. Sobald du die `.zip`-Datei erstellt hast, ist das Portieren der Mod praktisch abgeschlossen – du musst sie nur noch ins Spiel importieren.
+Nachdem wir nun alle 6 Dateien haben, müssen wir sie in eine `.zip`-Datei packen. Dies kann unter Windows oder Linux nativ oder mit [7-Zip](https://www.7-zip.org/download.html) erfolgen, unter MacOS durch Auswahl von `Compress`. Sobald du eine `.zip`-Datei erstellt hast, ist das Portieren des Mods im Grunde abgeschlossen. Es bleibt nur noch, ihn ins Spiel zu importieren, um ihn zu spielen.
 
-### Schritt 4 - Karte hinzufügen
+### Schritt 4 - Die Karte hinzufügen
 
-Um eine Karte zu installieren, klicke einfach auf die Schaltfläche `ADD A MAP` und importiere die ZIP-Datei mit deiner Karte. Danach sollten Kartenname, Ersteller und Version auf dem Bildschirm angezeigt werden.
+Um eine Karte zu installieren, klicke einfach auf die Schaltfläche `ADD A MAP` und importiere die ZIP-Datei, die deine Karte enthält. Nach Abschluss solltest du den Kartennamen, den Ersteller und die Version auf dem Bildschirm sehen.
 
-<img width="1200" alt="image" src="https://github.com/user-attachments/assets/c258cf39-c211-4677-8ac1-0828a97d5c61" />
-
-Sobald du alle gewünschten Karten importiert hast, klicke auf `GENERATE MOD`. Dadurch werden die Karten automatisch zu Subway Builder hinzugefügt und der Map Manager als Mod im Spiel registriert.\
-
-Wenn du nach dem Generieren der Mod eine weitere Karte hinzufügen möchtest, starte den Map Manager erneut und importiere alle Karten, die im Spiel vorhanden sein sollen (auch die bereits hinzugefügten). Klicke auf `GENERATE MOD` und der Map Manager fügt die Karten automatisch hinzu. Wenn du die alten Karten nicht erneut hinzufügst, werden sie aus dem Spiel entfernt.
+<img width="1200" alt="image" src="https://private-user-images.githubusercontent.com/19807509/553076477-c08ebbab-5ce3-41d5-b713-b8050d2a51bf.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzE3MzkxNDYsIm5iZiI6MTc3MTczODg0NiwicGF0aCI6Ii8xOTgwNzUwOS81NTMwNzY0NzctYzA4ZWJiYWItNWNlMy00MWQ1LWI3MTMtYjgwNTBkMmE1MWJmLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjAyMjIlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYwMjIyVDA1NDA0NlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPThkYTFlZWEzYjNiNDQ2ZTA0MTAzMjZhZDU0MzEzZGNhNTBjNDk3NGU5MGM5NzNkNzc4ZDI0YTc4NjI5MzRhYmImWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.yke8u4Iom4X8-FMtvOCsY89LSCadBdZ9MKoL7TraC14" />
 
 ### Schritt 5 - Subway Builder starten
 
-Nachdem du alle Karten hinzugefügt und die Mod generiert hast, kannst du das Spiel mit `START GAME` starten. So wirst du das Spiel künftig starten. Im Spiel erscheinen deine Karten im Reiter `CUSTOM` und sind spielbereit!
+Sobald du alle deine Karten hinzugefügt hast, kannst du das Spiel mit `START GAME` starten. Auf diese Weise wirst du das Spiel künftig starten. Im Spiel erscheinen deine Karten unter dem Tab `CUSTOM` und sind spielbereit!
 
 :::important
 Aufgrund der aktuellen Funktionsweise des Spiels musst du das Spiel jedes Mal über den Map Manager starten, wenn du eine benutzerdefinierte Karte spielen möchtest. Wenn du das Spiel nicht über den Map Manager startest, werden Gebäude und Wasser im Spiel nicht angezeigt.

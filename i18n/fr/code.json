@@ -1,4 +1,22 @@
 {
+  "homepage.title": {
+    "message": "Accueil"
+  },
+  "homepage.description": {
+    "message": "Mods, cartes et guides d'installation de Subway Builder"
+  },
+  "homepage.heading": {
+    "message": "Wiki Moddé de Subway Builder"
+  },
+  "homepage.subtitle": {
+    "message": "Le hub complet pour les cartes, mods et guides de Subway Builder. Découvrez des cartes personnalisées, enrichissez votre jeu avec du contenu créé par la communauté et apprenez à tout installer étape par étape."
+  },
+  "homepage.button.maps": {
+    "message": "Parcourir les Cartes"
+  },
+  "homepage.button.installation": {
+    "message": "Guide d'Installation"
+  },
   "theme.ErrorPageContent.title": {
     "message": "Cette page a planté.",
     "description": "The title of the fallback page when the page crashed"

@@ -1,58 +1,62 @@
 ---
 id: legacy-map-installation-guide
-title: Guide d'installation des cartes (Legacy)
+title: Guide d’installation des cartes (Legacy)
 ---
 
 Avant le développement du Map Manager, la méthode `serve` était utilisée. Elle était plus complexe et variait d’une carte à l’autre, mais nous pouvons facilement extraire les fichiers nécessaires et porter la carte vers le Map Manager.
 
-### Étape 1 - Installation du Map Manager
-Téléchargez la dernière version du Map Manager à l’adresse https://github.com/Kronifer/subwaybuilder-patcher/releases. Pour télécharger, cliquez sur la version correspondant à votre système d’exploitation.
+### Étape 1 - Installer le Map Manager
+Téléchargez la dernière version du Map Manager à l’adresse suivante : https://github.com/Kronifer/subwaybuilder-patcher/releases. Pour télécharger, cliquez sur la version correspondant à votre système d’exploitation.
 
 <img width="1000" alt="image" src="https://github.com/user-attachments/assets/4bc7b27d-9868-475f-9a4a-5ce447a77036" />
 
 :::note
-Sous Windows, vous avez besoin du fichier `.exe`. Sous Linux, vous avez besoin du fichier `.zip`. Sous MacOS, utilisez le fichier `arm64.dmg` si votre Mac possède une puce Apple Silicon (par exemple M1, M2, M3, etc.) et le fichier `x64.dmg` si votre Mac possède une puce Intel. En règle générale, les Macs plus récents que 2021 environ disposent de puces Apple Silicon et les modèles plus anciens disposent de puces Intel, mais vérifiez car il existe des exceptions.
+Pour Windows, choisissez le fichier `.exe`. Pour Linux, choisissez le fichier `.zip`. Pour MacOS, utilisez le fichier `arm64.dmg` si votre Mac possède une puce Apple Silicon (par exemple M1, M2, M3, etc.) et le fichier `x64.dmg` si votre Mac possède une puce Intel. En règle générale, les Mac sortis après environ 2021 disposent d’une puce Apple Silicon et les modèles plus anciens utilisent des puces Intel, mais vérifiez car il existe des exceptions.
 :::
 
 :::note
-Sous MacOS, l’installateur .dmg sera probablement mis en quarantaine. Pour l’exécuter, ouvrez un terminal dans le dossier où vous avez téléchargé l’installateur, puis exécutez `xattr -d com.apple.quarantine {INSTALLER_FILENAME}`. Par exemple, lors du téléchargement de la version 0.2.7 pour un Mac ARM, vous devrez exécuter `xattr -d com.apple.quarantine Subway.Builder.Map.Manager-0.2.7-arm64.dmg`.
+Sur MacOS, le programme d’installation `.dmg` sera probablement mis en quarantaine. Pour l’exécuter, ouvrez un terminal dans le dossier où vous avez téléchargé l’installateur, puis exécutez `xattr -d com.apple.quarantine {INSTALLER_FILENAME}`. Par exemple, en téléchargeant la version 0.2.7 pour un Mac ARM, vous exécuterez `xattr -d com.apple.quarantine Subway.Builder.Map.Manager-0.2.7-arm64.dmg`.
+
+De plus, le dossier Library contenant le dossier metro-maker4 peut être masqué par défaut. Pour résoudre ce problème, ouvrez Finder et accédez au dossier Home, puis sélectionnez View -> Show View Options -> Show Library Folder. 
 :::
 
-Ensuite, installez l’application comme n’importe quelle autre application. Une fois l’installation terminée, lancez l’application et suivez le processus de configuration. À ce stade, vous pouvez supprimer le fichier ZIP, l’installateur et tous les autres fichiers téléchargés.
+Ensuite, installez l’application comme vous le feriez pour n’importe quelle autre application. Une fois l’installation terminée, lancez l’application et suivez le processus de configuration en sélectionnant l’emplacement de l’exécutable du jeu ainsi que votre dossier `metro-maker4`. À ce stade, vous pouvez supprimer le fichier ZIP, l’installateur et tout autre fichier téléchargé.
 
-### Étape 2 - Extraction des fichiers
+<img width="1200" alt="image" src="https://private-user-images.githubusercontent.com/19807509/553076498-ea9604c2-bc93-4cb4-939c-73d957b22f2a.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzE3Mzg4NzcsIm5iZiI6MTc3MTczODU3NywicGF0aCI6Ii8xOTgwNzUwOS81NTMwNzY0OTgtZWE5NjA0YzItYmM5My00Y2I0LTkzOWMtNzNkOTU3YjIyZjJhLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjAyMjIlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYwMjIyVDA1MzYxN1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTBiZWY2OTk4M2UxMWQxMTk5ZjJkZGZhY2RmOGFkMzRkNjFlM2M1ZmZjMWI5ZDk1YzlmYWM3NmFkMTg5NTZmZmQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.FPcEPbOlAyqlZYh49DK22UItzW7fMtvY_-HJcKj1dl8" />
+
+### Étape 2 - Extraire les fichiers
 Nous devons maintenant extraire les fichiers nécessaires à partir de la carte que vous avez téléchargée. Nous aurons besoin de 6 fichiers au total :
- - `XXX.pmtiles` (`XXX` est le code de votre ville ; par exemple `MIA` pour Miami)
+ - `XXX.pmtiles` (`XXX` est votre code de ville ; par exemple `MIA` pour Miami)
  - `demand_data.json`
  - `buildings_index.json`
  - `roads.geojson`
  - `runways_taxiways.geojson`
  - `config.json`
 
-Le premier est simple. Dans la carte que vous avez téléchargée, recherchez le fichier XXX.pmtiles. Il se trouve quelque part dans le répertoire, soit à la racine soit dans un dossier. Pour l’instant, créez un dossier de travail temporaire afin d’y stocker nos 6 fichiers.
+Le premier est simple. Dans la carte que vous avez téléchargée, recherchez le fichier XXX.pmtiles. Il se trouve quelque part dans le répertoire, soit à la racine, soit dans un dossier. Pour le moment, créez un dossier de travail temporaire afin d’y stocker nos 6 fichiers.
 
-Les 4 suivants demandent un peu plus de travail. Vous devriez pouvoir les trouver relativement facilement, mais ils sont tous sous forme compressée (ils se terminent par `.gz`). Pour cela, nous devrons les extraire comme une archive.
+Les 4 suivants demandent un peu plus de travail. Vous devriez pouvoir les trouver assez facilement, cependant ils sont tous sous forme compressée (ils se terminent par `.gz`). Pour cela, nous devons les extraire comme une archive.
 
 :::tip
 Sous Windows et Linux, vous pouvez utiliser [7-Zip](https://www.7-zip.org/download.html) pour extraire l’archive `.gz`. MacOS prend en charge nativement la décompression des archives gzip, ce qui signifie que vous pouvez simplement cliquer dessus pour l’extraire.
 :::
 
-À l’intérieur, vous devriez voir un seul fichier. Si vous êtes dans l’archive `demand_data.json.gz`, vous devriez voir `demand_data.json` à l’intérieur, et il en va de même pour les 3 autres archives. Extrayez ces 4 fichiers et placez-les dans notre dossier de travail temporaire. Certaines cartes contiennent des fichiers de données en double dans leur répertoire. Peu importe lequel vous choisissez, car ils sont identiques.
+À l’intérieur, vous devriez voir un seul fichier. Si vous ouvrez l’archive `demand_data.json.gz`, vous devriez voir `demand_data.json` à l’intérieur, et il en va de même pour les 3 autres archives. Extrayez ces 4 fichiers et placez-les dans votre dossier de travail temporaire. Certaines cartes contiennent des fichiers de données en double dans leur répertoire. Peu importe lequel vous choisissez, ils sont identiques.
 
-Le dernier fichier dont nous avons besoin est `config.json`. C’est le plus difficile. Pour cela, nous avons besoin de plusieurs éléments. Tout d’abord, créez un nouveau fichier et nommez-le `config.json`.
+Le dernier fichier dont nous avons besoin est `config.json`. C’est le plus difficile. Pour cela, nous avons besoin de quelques éléments. Tout d’abord, créez un nouveau fichier et nommez-le `config.json`.
 
 :::tip
-Assurez-vous qu’il s’agit bien d’un fichier `.json`. Recherchez comment activer les extensions de noms de fichiers sur votre système d’exploitation si le type de fichier n’indique pas `JSON File`.
+Assurez-vous qu’il s’agit bien d’un fichier `.json`. Recherchez comment afficher les extensions de fichiers sur votre système d’exploitation si le type de fichier n’indique pas `JSON File`.
 :::
 
 À l’intérieur de `config.json`, collez ce modèle :
 ```
 {
-   "name": "Boise",
-   "code": "BOI",
-   "description": "Build a rapid transit network for one of America`s fastest growing cities.",
-   "population": 329866,
-   "initialViewState": {
+  "name": "Boise",
+  "code": "BOI",
+  "description": "Build a rapid transit network for one of America`s fastest growing cities.",
+  "population": 329866,
+  "initialViewState": {
     "zoom": 13,
     "latitude": 43.617499,
     "longitude": -116.245394,
@@ -62,7 +66,6 @@ Assurez-vous qu’il s’agit bien d’un fichier `.json`. Recherchez comment ac
   "version": "2.1.0"
 }
 ```
-
 
 Nous devons modifier ces données afin qu’elles correspondent à notre carte. Dans le répertoire de votre carte, il devrait y avoir un fichier `.js`, le plus souvent `index.js`. À l’intérieur de ce fichier, vous verrez quelque chose de très similaire à notre modèle.
 
@@ -79,35 +82,31 @@ Si votre répertoire contient plusieurs fichiers `.js`, vérifiez-les tous. L’
  - `code`
  - `description`
  - `population`
- - `intialViewState` (et tous ses arguments)
+ - `intialViewState` (et tous ses paramètres)
 
 :::note
-Si vos données n’incluent pas `initialViewState`, vous pouvez mettre 12 ou 13 pour `zoom` et 0 pour `bearing`. Pour `latitude` et `longitude`, vous pouvez choisir n’importe quelle valeur dans votre plage de coordonnées bbox (la `latitude` correspond aux **2e** et **4e** nombres et la `longitude` correspond aux **1er** et **3e**). Dans l’exemple de Toronto ci-dessus, nous pourrions utiliser 44.0 et -79.0 pour `latitude` et `longitude` respectivement.
+Si vos données n’incluent pas `initialViewState`, vous pouvez utiliser 12 ou 13 pour `zoom` et 0 pour `bearing`. Pour `latitude` et `longitude`, vous pouvez choisir n’importe quelle valeur dans la plage de coordonnées de votre bbox (la `latitude` correspond aux **2e** et **4e** nombres et la `longitude` correspond aux **1er** et **3e**). Dans l’exemple de Toronto montré ci-dessus, nous pourrions utiliser 44.0 et -79.0 pour `latitude` et `longitude` respectivement.
 :::
 
-Les 2 derniers éléments dont nous avons besoin, `creator` et `version`, se trouvent dans `manifest.json`, que chaque projet possède. Une fois que vous avez tout ce dont vous avez besoin pour votre config.json, assurez-vous d’avoir les 6 fichiers. Ensuite, vous êtes prêt à passer à l’étape suivante.
+Les deux derniers éléments nécessaires, `creator` et `version`, se trouvent dans `manifest.json`, que chaque projet possède. Une fois que vous avez tout ce qu’il faut pour votre `config.json`, assurez-vous d’avoir les 6 fichiers. Après cela, vous êtes prêt à passer à l’étape suivante.
 
 :::important
-Bien que ce ne soit pas obligatoire, si vous prévoyez de partager cette carte portée, veuillez inclure le `creator`. Cela garantit que les créateurs originaux reçoivent toujours le crédit pour les cartes qu’ils ont réalisées.
+Bien que cela ne soit pas obligatoire, si vous prévoyez de partager cette carte portée, veuillez inclure le `creator`. Cela garantit que les créateurs originaux reçoivent toujours le crédit pour les cartes qu’ils ont réalisées.
 :::
 
-### Étape 3 - Compression des fichiers
-Maintenant que nous avons les 6 fichiers, nous devons les regrouper dans un fichier `.zip`. Cela peut facilement être fait sous Windows ou Linux nativement ou en utilisant [7-Zip](https://www.7-zip.org/download.html), ou sous MacOS en sélectionnant `Compress`. Une fois que vous avez un fichier `.zip`, vous avez essentiellement terminé le portage du mod et il ne vous reste plus qu’à l’importer dans le jeu pour y jouer.
+### Étape 3 - Compresser les fichiers
+Maintenant que nous avons les 6 fichiers, nous devons les regrouper dans une archive `.zip`. Cela peut être fait facilement sous Windows ou Linux nativement ou à l’aide de [7-Zip](https://www.7-zip.org/download.html), ou sous MacOS en sélectionnant `Compress`. Une fois que vous avez un fichier `.zip`, vous avez pratiquement terminé le portage du mod ; il ne reste plus qu’à l’importer dans le jeu pour y jouer.
 
 ### Étape 4 - Ajouter la carte
 
-Pour installer une carte, cliquez simplement sur le bouton `ADD A MAP` et importez le fichier ZIP contenant votre carte. Une fois terminé, vous devriez voir apparaître le nom de la carte, le créateur et la version à l’écran.
+Pour installer une carte, cliquez simplement sur le bouton `ADD A MAP` et importez le fichier ZIP que vous avez téléchargé contenant votre carte. Une fois terminé, vous devriez voir apparaître à l’écran le nom de la carte, le créateur et la version.
 
-<img width="1200" alt="image" src="https://github.com/user-attachments/assets/c258cf39-c211-4677-8ac1-0828a97d5c61" />
-
-Une fois que vous avez importé toutes les cartes que vous souhaitez ajouter au jeu, cliquez sur le bouton `GENERATE MOD`. Cela ajoute automatiquement les cartes à Subway Builder et enregistre le Map Manager comme mod dans votre jeu.\
-
-Si vous souhaitez ajouter une autre carte après avoir déjà généré le mod, relancez le Map Manager et importez toutes les cartes que vous souhaitez dans votre jeu (y compris celles déjà présentes). Cliquez sur `GENERATE MOD` et le Map Manager ajoutera automatiquement les cartes à Subway Builder. Si vous ne réajoutez pas les anciennes cartes, elles seront supprimées de votre jeu.
+<img width="1200" alt="image" src="https://private-user-images.githubusercontent.com/19807509/553076477-c08ebbab-5ce3-41d5-b713-b8050d2a51bf.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzE3MzkxNDYsIm5iZiI6MTc3MTczODg0NiwicGF0aCI6Ii8xOTgwNzUwOS81NTMwNzY0NzctYzA4ZWJiYWItNWNlMy00MWQ1LWI3MTMtYjgwNTBkMmE1MWJmLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjAyMjIlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYwMjIyVDA1NDA0NlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPThkYTFlZWEzYjNiNDQ2ZTA0MTAzMjZhZDU0MzEzZGNhNTBjNDk3NGU5MGM5NzNkNzc4ZDI0YTc4NjI5MzRhYmImWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.yke8u4Iom4X8-FMtvOCsY89LSCadBdZ9MKoL7TraC14" />
 
 ### Étape 5 - Lancer Subway Builder
 
-Une fois que vous avez ajouté toutes vos cartes et généré le mod, vous pouvez lancer le jeu en utilisant `START GAME`. C’est ainsi que vous devrez désormais lancer le jeu. En jeu, vos cartes apparaîtront dans l’onglet `CUSTOM` et seront prêtes à être jouées !
+Une fois toutes vos cartes ajoutées, vous pouvez lancer le jeu en utilisant `START GAME`. C’est ainsi que vous lancerez le jeu désormais. En jeu, vos cartes apparaîtront sous l’onglet `CUSTOM` et seront prêtes à être jouées !
 
 :::important
-En raison du fonctionnement actuel du jeu, vous devez lancer le jeu via le Map Manager chaque fois que vous souhaitez jouer à une carte personnalisée. Si vous ne lancez pas le jeu à l’aide du Map Manager, les bâtiments et l’eau n’apparaîtront pas en jeu.
+En raison du fonctionnement actuel du jeu, vous devez lancer le jeu via le Map Manager chaque fois que vous souhaitez jouer à une carte personnalisée. Si vous ne lancez pas le jeu via le Map Manager, les bâtiments et l’eau n’apparaîtront pas en jeu.
 :::

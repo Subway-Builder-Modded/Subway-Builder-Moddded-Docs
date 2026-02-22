@@ -1,4 +1,22 @@
 {
+  "homepage.title": {
+    "message": "Home"
+  },
+  "homepage.description": {
+    "message": "Mod, mappe e guide di installazione di Subway Builder"
+  },
+  "homepage.heading": {
+    "message": "Wiki Moddato di Subway Builder"
+  },
+  "homepage.subtitle": {
+    "message": "Il centro completo per mappe, mod e guide di Subway Builder. Scopri mappe personalizzate, espandi il gioco con contenuti creati dalla community e impara passo passo come installare tutto."
+  },
+  "homepage.button.maps": {
+    "message": "Sfoglia Mappe"
+  },
+  "homepage.button.installation": {
+    "message": "Guida all'Installazione"
+  },
   "theme.ErrorPageContent.title": {
     "message": "Questa pagina è andata in crash.",
     "description": "The title of the fallback page when the page crashed"
@@ -126,13 +144,13 @@
     "message": "Ultimo aggiornamento{atDate}{byUser}",
     "description": "The sentence used to display when a page has been last updated, and by who"
   },
-  "theme.NotFound.title": {
-    "message": "Pagina non trovata",
-    "description": "The title of the 404 page"
-  },
   "theme.navbar.mobileVersionsDropdown.label": {
     "message": "Versioni",
     "description": "The label for the navbar versions dropdown on mobile view"
+  },
+  "theme.NotFound.title": {
+    "message": "Pagina non trovata",
+    "description": "The title of the 404 page"
   },
   "theme.tags.tagsListLabel": {
     "message": "Etichette:",
@@ -186,6 +204,10 @@
     "message": "Principale",
     "description": "The ARIA label for the main navigation"
   },
+  "theme.navbar.mobileLanguageDropdown.label": {
+    "message": "Linguaggio",
+    "description": "The label for the mobile language switcher dropdown"
+  },
   "theme.NotFound.p1": {
     "message": "Non siamo riusciti a trovare quello che stavi cercando.",
     "description": "The first paragraph of the 404 page"
@@ -193,10 +215,6 @@
   "theme.NotFound.p2": {
     "message": "Contatta il proprietario del sito che ti ha collegato all'URL originale e fagli sapere che il loro collegamento è interrotto.",
     "description": "The 2nd paragraph of the 404 page"
-  },
-  "theme.navbar.mobileLanguageDropdown.label": {
-    "message": "Linguaggio",
-    "description": "The label for the mobile language switcher dropdown"
   },
   "theme.TOCCollapsible.toggleButtonLabel": {
     "message": "Su questa pagina",

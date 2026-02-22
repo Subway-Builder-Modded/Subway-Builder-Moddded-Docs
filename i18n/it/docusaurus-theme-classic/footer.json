@@ -1,22 +1,22 @@
 {
   "link.title.Pages": {
     "message": "Pagine",
-    "description": "Pagine"
+    "description": "The title of the footer links column with title=Pages in the footer"
   },
   "link.title.Other Links": {
     "message": "Altri collegamenti",
-    "description": "Altri collegamenti"
+    "description": "The title of the footer links column with title=Other Links in the footer"
   },
   "link.item.label.Wiki": {
     "message": "Wiki",
-    "description": "Wiki"
+    "description": "The label of footer link with label=Wiki linking to /wiki/home"
   },
   "link.item.label.Updates": {
     "message": "Aggiornamenti",
-    "description": "Aggiornamenti"
+    "description": "The label of footer link with label=Updates linking to /updates"
   },
   "copyright": {
     "message": "© Wiki della Mod Subway Builder 2026",
-    "description": "Copyright"
+    "description": "The footer copyright"
   }
 }

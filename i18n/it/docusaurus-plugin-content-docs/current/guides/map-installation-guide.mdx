@@ -3,38 +3,31 @@ id: map-installation-guide
 title: Guida all'installazione delle mappe
 ---
 
-[Map Manager di Kronifer](https://github.com/Kronifer/subwaybuilder-patcher/releases) è il modo più semplice e immediato per scaricare e installare città personalizzate in Subway Builder. Tutto ciò di cui hai bisogno è un file ZIP fornito e il Map Manager stesso, e sarai pronto per iniziare.
+[Kronifer's Map Manager](https://github.com/Kronifer/subwaybuilder-patcher/releases) è il modo più semplice e veloce per scaricare e installare città personalizzate in Subway Builder.
 
-### Passo 1 - Installazione del Map Manager
+### Passaggio 1 - Installare il Map Manager
 
-Scarica l’ultima versione del Map Manager da https://github.com/Kronifer/subwaybuilder-patcher/releases. Per scaricarla, clicca sulla versione corrispondente al tuo sistema operativo.
-
-<img width="1000" alt="image" src="https://github.com/user-attachments/assets/4bc7b27d-9868-475f-9a4a-5ce447a77036" />
+Scarica l’ultima versione da https://github.com/Kronifer/subwaybuilder-patcher/releases.
 
 :::note
-Su Windows, ti serve il file `.exe`. Su Linux, ti serve il file `.zip`. Su MacOS, utilizza il file `arm64.dmg` se il tuo Mac ha un chip Apple Silicon (ad esempio M1, M2, M3, ecc.) e il file `x64.dmg` se il tuo Mac ha un chip Intel. Come regola generale, i Mac successivi al 2021 circa tendono ad avere chip Apple Silicon e i modelli più vecchi tendono ad avere chip Intel, ma verifica perché esistono eccezioni.
+Su Windows usa `.exe`, su Linux `.zip`, su MacOS `arm64.dmg` (Apple Silicon) o `x64.dmg` (Intel).
 :::
 
 :::note
-Su MacOS, l’installer .dmg sarà probabilmente messo in quarantena. Per eseguire l’installer, apri un terminale nella cartella in cui hai scaricato l’installer, quindi esegui `xattr -d com.apple.quarantine {INSTALLER_FILENAME}`. Ad esempio, scaricando la versione 0.2.7 per un Mac ARM, dovresti eseguire `xattr -d com.apple.quarantine Subway.Builder.Map.Manager-0.2.7-arm64.dmg`.
+Su MacOS il file .dmg potrebbe essere in quarantena. Esegui:
+`xattr -d com.apple.quarantine {INSTALLER_FILENAME}`
 :::
 
-Successivamente, installa l’app come faresti con qualsiasi altra applicazione. Una volta completata l’installazione, avvia l’app e segui il processo di configurazione. A questo punto è sicuro eliminare il file ZIP, l’installer e qualsiasi altro file scaricato.
+Installa normalmente e configura selezionando l’eseguibile del gioco e la cartella `metro-maker4`.
 
-### Passo 2 - Aggiungere la mappa
+### Passaggio 2 - Aggiungere la mappa
 
-Per installare una mappa, clicca semplicemente sul pulsante `ADD A MAP` e importa il file ZIP che hai scaricato contenente la tua mappa. Una volta completato, dovresti vedere il nome della mappa, il creatore e la versione sullo schermo.
+Clicca su `ADD A MAP` e importa il file ZIP.
 
-<img width="1200" alt="image" src="https://github.com/user-attachments/assets/c258cf39-c211-4677-8ac1-0828a97d5c61" />
+### Passaggio 3 - Avviare Subway Builder
 
-Una volta importate tutte le mappe che desideri aggiungere al gioco, clicca sul pulsante `GENERATE MOD`. Questo aggiungerà automaticamente le mappe a Subway Builder e registrerà il Map Manager come mod nel tuo gioco.\
-
-Se desideri aggiungere un’altra mappa dopo aver già generato il mod, riavvia il Map Manager e importa tutte le mappe che desideri nel gioco (incluse quelle già presenti). Clicca su `GENERATE MOD` e il Map Manager aggiungerà automaticamente le mappe a Subway Builder. Se non riaggiungi le vecchie mappe, verranno rimosse dal gioco.
-
-### Passo 3 - Avviare Subway Builder
-
-Una volta aggiunte tutte le mappe e generato il mod, puoi avviare il gioco usando `START GAME`. D’ora in poi dovrai avviare il gioco in questo modo. In gioco, le tue mappe appariranno nella scheda `CUSTOM` e saranno pronte per essere giocate!
+Usa `START GAME` per avviare il gioco. Le mappe appariranno nella scheda `CUSTOM`.
 
 :::important
-A causa del funzionamento attuale del gioco, devi avviare il gioco tramite il Map Manager ogni volta che vuoi giocare a una mappa personalizzata. Se non avvii il gioco usando il Map Manager, edifici e acqua non appariranno nel gioco.
+Devi sempre avviare il gioco tramite il Map Manager per far apparire correttamente edifici e acqua.
 :::
