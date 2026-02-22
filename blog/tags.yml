@@ -3,6 +3,6 @@ releases:
   permalink: '/releases'
   description: 'Changelogs and release notes for the Subway Builder Mod Wiki website.'
 map-manager:
-  label: 'Map manager'
+  label: 'Map Manager'
   permalink: '/map-manager'
   description: 'Updates and release notes for the Subway Builder Map Manager.'
