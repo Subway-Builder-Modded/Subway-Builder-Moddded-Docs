@@ -14,20 +14,11 @@ module.exports = {
   },
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'da', 'no', 'sv'],
+    locales: ['en'],
     localeConfigs: {
       en: {
         label: 'English',
         htmlLang: 'en-GB',
-      },
-      da: {
-        label: 'Dansk',
-      },
-      no: {
-        label: 'Norsk',
-      },
-      sv: {
-        label: 'Svenska',
       },
     },
   },
