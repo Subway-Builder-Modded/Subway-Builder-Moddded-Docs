@@ -51,12 +51,27 @@ module.exports = {
   ],
   plugins: [
     [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'modding-docs',
+        path: 'modding-docs',
+        routeBasePath: 'modding-docs',
+        sidebarPath: require.resolve('./sidebarsModdingDocs.js'),
+        showLastUpdateTime: false,
+        admonitions: true,
+      },
+    ],
+    [
       '@docusaurus/plugin-client-redirects',
       {
         redirects: [
           {
             from: ['/wiki'],
             to: '/wiki/home',
+          },
+          {
+            from: ['/modding-docs'],
+            to: '/modding-docs/getting-started',
           },
         ],
       },
@@ -90,6 +105,13 @@ module.exports = {
           docId: 'home',
           position: 'left',
           label: 'Wiki',
+        },
+        {
+          type: 'doc',
+          docId: 'getting-started',
+          docsPluginId: 'modding-docs',
+          position: 'left',
+          label: 'Modding Docs',
         },
         {
           to: 'updates',
@@ -133,6 +155,10 @@ module.exports = {
               to: '/wiki/home',
             },
             {
+              label: 'Modding Docs',
+              to: '/modding-docs/getting-started',
+            },
+            {
               label: 'Updates',
               to: '/updates',
             },
@@ -168,7 +194,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `© Subway Builder Mod Wiki ${new Date().getFullYear()} · Not an official Subway Builder website`,
+      copyright: `© Subway Builder Mod Wiki ${new Date().getFullYear()}. Not affiliated with Subway Builder or Redistricter, LLC. All content is community-created and shared under appropriate licenses.`,
     },
     colorMode: {
       defaultMode: 'dark',

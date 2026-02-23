@@ -1,13 +1,11 @@
 ---
 id: react-components
-title: React components
+title: React Components
 ---
-
-# React components
 
 Subway Builder mods can render custom UI using React. The game provides React at runtime — your mod doesn't need to bundle it.
 
-## How the React shim works
+## How the React Shim Works
 
 The template includes a React shim at `src/types/react.ts` that pulls React from the game's API:
 
@@ -25,7 +23,7 @@ import { useState, useEffect } from 'react';
 
 This just works — the import gets redirected to the shim at build time, and at runtime it uses the game's React instance.
 
-## Using game UI components
+## Using Game UI Components
 
 The game exposes a set of styled UI components. Access them from the API:
 
@@ -37,7 +35,7 @@ const { Button, Card, CardHeader, CardTitle, CardContent } =
   api.utils.components as Record<string, React.ComponentType<any>>;
 ```
 
-### Available components
+### Available Components
 
 | Component | Description |
 |---|---|
@@ -60,7 +58,7 @@ const { Button, Card, CardHeader, CardTitle, CardContent } =
 | `SubwayButton` | Game-styled button |
 | `MainMenuButton` | Main menu style button |
 
-### Button example
+### Button Example
 
 ```tsx
 const { Button } = api.utils.components as Record<string, React.ComponentType<any>>;
@@ -78,7 +76,7 @@ function MyPanel() {
 }
 ```
 
-### Card example
+### Card Example
 
 ```tsx
 const { Card, CardHeader, CardTitle, CardContent } =
@@ -101,7 +99,7 @@ function StatsCard() {
 }
 ```
 
-## Using Lucide icons
+## Using Lucide Icons
 
 The game provides ~5000 [Lucide](https://lucide.dev/) icons. Access them by PascalCase name:
 
@@ -165,7 +163,7 @@ function RidershipChart() {
 }
 ```
 
-### Available chart components
+### Available Chart Components
 
 | Component | Use for |
 |---|---|
@@ -181,7 +179,7 @@ function RidershipChart() {
 | `Tooltip` | Hover tooltips |
 | `Legend` | Chart legend |
 
-## Styling with Tailwind
+## Styling With Tailwind
 
 The game uses Tailwind CSS. You can use Tailwind utility classes directly in your components:
 
@@ -206,7 +204,7 @@ Useful theme-aware classes:
 - `border` — themed border
 - `rounded-lg` / `rounded-md` — border radius
 
-## Floating panel tips
+## Floating Panel Tips
 
 When rendering into a floating panel (`addFloatingPanel`), the panel provides its own container — you don't need to wrap your component in a `Card`:
 
@@ -229,7 +227,7 @@ api.ui.addFloatingPanel({
 });
 ```
 
-## Registering custom components at placements
+## Registering Custom Components at Placements
 
 For more advanced UI, you can register a React component directly at a UI placement:
 

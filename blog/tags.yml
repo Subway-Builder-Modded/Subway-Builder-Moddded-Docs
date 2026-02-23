@@ -1,8 +1,12 @@
 releases:
   label: 'Releases'
   permalink: '/releases'
-  description: 'Changelogs and release notes for the Subway Builder Mod Wiki website.'
+  description: 'Changelogs and release notes for the various tools related to Subway Builder modding.'
 map-manager:
   label: 'Map Manager'
   permalink: '/map-manager'
   description: 'Updates and release notes for the Subway Builder Map Manager.'
+mod-template:
+  label: 'Mod Template'
+  permalink: '/mod-template'
+  description: 'Updates and release notes for the Subway Builder Mod Template.'

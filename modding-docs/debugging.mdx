@@ -3,11 +3,9 @@ id: debugging
 title: Debugging
 ---
 
-# Debugging
-
 Tips for debugging your mods during development.
 
-## Hot reload
+## Hot Reload
 
 The fastest way to test changes is hot reloading. After rebuilding your mod:
 
@@ -20,7 +18,7 @@ If you're using `pnpm dev`, Vite automatically rebuilds on file save, so you jus
 Hot reload clears most mod state, but some things persist (like already-built tracks and stations). If your mod gets into a weird state, restarting the game fully is the safest reset.
 :::
 
-## Console logging
+## Console Logging
 
 Use `console.log` with a tag prefix to identify your mod's output:
 
@@ -31,13 +29,13 @@ console.warn(`${TAG} Something unexpected`, someData);
 console.error(`${TAG} Failed to load`, error);
 ```
 
-### Viewing logs
+### Viewing Logs
 
 **In-game**: Open the developer console with **Ctrl+Shift+I** (Windows/Linux) or **Cmd+Option+I** (Mac).
 
 **With `pnpm dev`**: Logs are printed to your terminal and saved to `debug/latest.log`. The game launcher enables Electron logging automatically.
 
-## Error handling
+## Error Handling
 
 Wrap your initialization in try/catch to avoid crashing the game:
 
@@ -68,7 +66,7 @@ api.hooks.onDayChange((day) => {
 });
 ```
 
-## Game error hooks
+## Game Error Hooks
 
 The API provides hooks for catching game-level warnings and errors:
 
@@ -82,7 +80,7 @@ api.hooks.onError((error) => {
 });
 ```
 
-## Type checking
+## Type Checking
 
 Run TypeScript's type checker to catch errors before building:
 
@@ -92,34 +90,34 @@ pnpm typecheck
 
 This runs `tsc --noEmit` and reports any type errors without producing output files. It's a good practice to run this before testing in-game.
 
-## Common issues
+## Common Issues
 
-### "SubwayBuilderAPI not found"
+### "SubwayBuilderAPI Not Found"
 
 Your mod script ran before the game initialized the API. This shouldn't happen with the template's structure, but if it does:
 - Make sure `main` in `manifest.json` is `"index.js"`
 - Make sure you're checking `if (!api)` before using the API
 
-### UI not showing up
+### UI Not Showing Up
 
 - Check that you're registering UI inside `onMapReady` — the UI system isn't ready before the map loads
 - Verify your component doesn't throw during render (check console for React errors)
 - Make sure the `id` you're using is unique — duplicate IDs silently fail
 
-### Changes not appearing after reload
+### Changes Not Appearing After Reload
 
 - Verify Vite rebuilt successfully (check terminal for build errors)
 - Make sure the symlink is still intact (`pnpm dev:link`)
 - Try a full game restart if hot reload isn't picking up changes
 
-### React hooks errors ("Invalid hook call")
+### React Hooks Errors ("Invalid Hook Call")
 
 This usually means there are multiple React instances. Make sure:
 - You're importing from `'react'` (not installing react as a dependency)
 - The Vite alias in `vite.config.ts` is correctly pointing to `src/types/react.ts`
 - You haven't accidentally installed `react` in `node_modules`
 
-### Windows symlink permission error
+### Windows Symlink Permission Error
 
 On Windows, creating symlinks may require Administrator privileges. Either:
 - Run your terminal as Administrator

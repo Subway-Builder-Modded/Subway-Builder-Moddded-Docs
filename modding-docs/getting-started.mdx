@@ -1,9 +1,7 @@
 ---
 id: getting-started
-title: Getting started
+title: Getting Started
 ---
-
-# Getting started
 
 This guide walks you through setting up your first Subway Builder mod using the community TypeScript template.
 
@@ -18,14 +16,14 @@ You'll also need:
 - A code editor (we recommend [VS Code](https://code.visualstudio.com/))
   :::
 
-## 1. Clone the template
+## Step 1 - Clone the Template
 
 ```bash
 git clone https://github.com/Subway-Builder-Modded/SubwayBuilderTemplateMod.git my-mod
 cd my-mod
 ```
 
-## 2. Install dependencies
+## Step 2 - Install Dependencies
 
 ```bash
 pnpm install
@@ -33,7 +31,7 @@ pnpm install
 
 This installs the build toolchain (Vite/Rolldown, TypeScript, etc.). The game's APIs are accessed at runtime — there's no SDK package to install.
 
-## 3. Configure your mod
+## Step 3 - Configure Your Mod
 
 Edit `manifest.json` with your mod's identity:
 
@@ -50,7 +48,7 @@ Edit `manifest.json` with your mod's identity:
 
 The `id` should be a unique reverse-domain identifier. The `main` field should always be `"index.js"` — that's what the build outputs.
 
-## 4. Build
+## Step 4 - Build
 
 ```bash
 pnpm build
@@ -58,7 +56,7 @@ pnpm build
 
 This compiles your TypeScript + React code into a single `dist/index.js` file, and copies `manifest.json` into `dist/`.
 
-## 5. Link to the game
+## Step 5 - Link to the Game
 
 ```bash
 pnpm dev:link
@@ -78,7 +76,7 @@ The symlink means every time you rebuild, the game sees your latest code without
 On Windows, you may need to run your terminal as Administrator for the symlink to work.
 :::
 
-## 6. Enable your mod
+## Step 6 - Enable Your Mod
 
 1. Launch Subway Builder
 2. Go to **Settings > Mods**
@@ -87,7 +85,7 @@ On Windows, you may need to run your terminal as Administrator for the symlink t
 
 You should see your mod's log messages in the game's developer console.
 
-## 7. Development workflow
+## Step 7 - Development Workflow
 
 For active development, use the `dev` command which watches for file changes and launches the game with logging:
 
@@ -102,7 +100,7 @@ This runs two processes simultaneously:
 
 After making changes, reload mods in-game with **Ctrl+Shift+R** (or **Cmd+Shift+R** on Mac) to see your updates without restarting the game.
 
-## 8. Unlink when done
+## Step - 8 Unlink When Done
 
 To remove the symlink:
 
@@ -110,7 +108,7 @@ To remove the symlink:
 pnpm dev:unlink
 ```
 
-## Available scripts
+## Available Scripts
 
 | Command           | Description                           |
 | ----------------- | ------------------------------------- |

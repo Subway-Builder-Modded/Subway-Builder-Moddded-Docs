@@ -1,9 +1,7 @@
 ---
 id: common-patterns
-title: Common patterns
+title: Common Patterns
 ---
-
-# Common patterns
 
 Practical recipes for the things you'll do most often when writing mods.
 
@@ -25,7 +23,7 @@ if (!api) {
 }
 ```
 
-## Initializing a mod
+## Initializing a Mod
 
 Most mods should initialize inside `onMapReady`, which fires when a city is loaded and the map is ready. Use a guard to prevent double initialization:
 
@@ -45,9 +43,9 @@ api.hooks.onMapReady((map) => {
 `onMapReady` can fire multiple times (e.g., when switching cities). The `initialized` guard ensures your UI and hooks are only set up once.
 :::
 
-## Adding UI panels
+## Adding UI Panels
 
-### Floating panel
+## Floating Panel
 
 The most common way to add a mod UI. Creates a draggable panel accessible from the toolbar:
 
@@ -60,7 +58,7 @@ api.ui.addFloatingPanel({
 });
 ```
 
-### Toolbar button
+## Toolbar Button
 
 Add a button to the main in-game toolbar:
 
@@ -75,7 +73,7 @@ api.ui.addToolbarButton({
 });
 ```
 
-### Escape menu button
+## Escape Menu Button
 
 Add a button to the in-game escape/pause menu:
 
@@ -89,7 +87,7 @@ api.ui.addButton('escape-menu', {
 });
 ```
 
-### Settings menu controls
+## Settings Menu Controls
 
 Add toggles, sliders, and selects to the settings panel:
 
@@ -116,7 +114,7 @@ api.ui.addSlider('settings-menu', {
 });
 ```
 
-## UI placements
+## UI Placements
 
 The `placement` argument controls where UI elements appear:
 
@@ -141,7 +139,7 @@ api.ui.showNotification('Tip: try building underground.', 'info');
 api.ui.showNotification('Running low on funds!', 'warning');
 ```
 
-## Reading game state
+## Reading Game State
 
 All game state is read-only and accessed through `api.gameState`:
 
@@ -166,7 +164,7 @@ const modeChoice = api.gameState.getModeChoiceStats();
 const lineMetrics = api.gameState.getLineMetrics();
 ```
 
-### Station data
+## Station Data
 
 Each station has coordinates, track IDs, and nearby station info:
 
@@ -180,7 +178,7 @@ for (const station of stations) {
 }
 ```
 
-### Ridership data
+## Ridership Data
 
 ```ts
 // Overall stats
@@ -195,7 +193,7 @@ console.log(`${stationData.total} riders at this station`);
 const routeData = api.gameState.getRouteRidership('route-uuid-here');
 ```
 
-## Reacting to events
+## Reacting to Events
 
 Register callbacks for game events using `api.hooks`:
 
@@ -228,7 +226,7 @@ api.hooks.onGameSaved((saveName) => {
 });
 ```
 
-### All available hooks
+## All Available Hooks
 
 | Hook | Callback arguments |
 |---|---|
@@ -255,7 +253,7 @@ api.hooks.onGameSaved((saveName) => {
 | `onError` | `error: string` |
 | `onGameEnd` | (none) |
 
-## Modifying game actions
+## Modifying Game Actions
 
 Use `api.actions` to change game state:
 
@@ -273,7 +271,7 @@ api.actions.setSpeed('fast');  // 'slow' | 'normal' | 'fast' | 'ultrafast'
 api.actions.setTicketPrice(5);
 ```
 
-## Modifying game constants
+## Modifying Game Constants
 
 Tweak the game's rules:
 
@@ -291,7 +289,7 @@ api.modifyConstants({
 Call `modifyConstants()` early — ideally before `onMapReady`. Constants affect the entire game session.
 :::
 
-## Building tracks programmatically
+## Building Tracks Programmatically
 
 Use `api.build` to place and construct tracks via code:
 
@@ -315,7 +313,7 @@ if (result.success) {
 }
 ```
 
-### Creating routes and adding trains
+## Creating Routes and Adding Trains
 
 ```ts
 // Create a new route
@@ -334,7 +332,7 @@ if (route.success && route.route) {
 }
 ```
 
-## Persistent storage
+## Persistent Storage
 
 Save mod data between sessions (desktop app only):
 

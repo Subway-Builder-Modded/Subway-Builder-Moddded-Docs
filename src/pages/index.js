@@ -46,7 +46,7 @@ function HoverCard({ to, className, children }) {
 
 const MAPS = [
   {
-    title: "Map directory",
+    title: "Map Directory",
     titleId: "homepage.maps.directory.title",
     desc: "Browse community-made cities from around the world, including custom maps for the US, Canada, Europe, Asia, and more.",
     descId: "homepage.maps.directory.description",
@@ -57,7 +57,7 @@ const MAPS = [
     linkId: "homepage.maps.directory.link",
   },
   {
-    title: "Installing maps",
+    title: "Installing Maps",
     titleId: "homepage.maps.install.title",
     desc: "Add custom cities to your game using Kronifer's Map Manager. Follow our step-by-step guide to download and install.",
     descId: "homepage.maps.install.description",
@@ -68,7 +68,7 @@ const MAPS = [
     linkId: "homepage.maps.install.link",
   },
   {
-    title: "Legacy installation",
+    title: "Legacy Installation",
     titleId: "homepage.maps.legacy.title",
     desc: "Some older maps use the serve method. Learn how to extract and port these maps for the modern installer.",
     descId: "homepage.maps.legacy.description",
@@ -79,7 +79,7 @@ const MAPS = [
     linkId: "homepage.maps.legacy.link",
   },
   {
-    title: "Updates & changelogs",
+    title: "Updates & Changelogs",
     titleId: "homepage.maps.updates.title",
     desc: "Stay up to date with the latest Map Manager releases, new map additions, and wiki changes.",
     descId: "homepage.maps.updates.description",
@@ -150,7 +150,7 @@ export default function Home() {
               <span className={styles.headerLine} />
             </div>
 
-            <HoverCard to="/wiki/modding/getting-started" className={styles.moddingCard}>
+            <HoverCard to="/modding-docs/getting-started" className={styles.moddingCard}>
               <div className={styles.cardImg}>
                 <ThemedImage
                   lightSrc="/images/home-light-regions-sankey.png"
@@ -161,7 +161,7 @@ export default function Home() {
               <div className={styles.moddingBody}>
                 <h3 className={styles.moddingTitle}>
                   <Translate id="homepage.modding.card.title">
-                    Modding documentation
+                    Modding Documentation
                   </Translate>
                 </h3>
                 <p className={styles.moddingDesc}>
