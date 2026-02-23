@@ -6,5 +6,10 @@ module.exports = {
       label: 'Maps',
       items: ['maps/map-directory', 'maps/map-installation-guide', 'maps/legacy-map-installation-guide'],
     },
+    {
+      type: 'category',
+      label: 'Contributing',
+      items: ['contributing/translating'],
+    },
   ],
 };

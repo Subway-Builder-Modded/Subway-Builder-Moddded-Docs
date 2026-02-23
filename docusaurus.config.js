@@ -14,11 +14,47 @@ module.exports = {
   },
   i18n: {
     defaultLocale: 'en',
-    locales: ['en'],
+    locales: ['en', 'es', 'ca', 'fr', 'de', 'it', 'da', 'sv', 'nb', 'zh'],
     localeConfigs: {
       en: {
         label: 'English',
         htmlLang: 'en-GB',
+      },
+      es: {
+        label: 'Español',
+        htmlLang: 'es-ES',
+      },
+      ca: {
+        label: 'Català',
+        htmlLang: 'ca-ES',
+      },
+      fr: {
+        label: 'Français',
+        htmlLang: 'fr-FR',
+      },
+      de: {
+        label: 'Deutsch',
+        htmlLang: 'de-DE',
+      },
+      it: {
+        label: 'Italiano',
+        htmlLang: 'it-IT',
+      },
+      da: {
+        label: 'Dansk',
+        htmlLang: 'da-DK',
+      },
+      sv: {
+        label: 'Svenska',
+        htmlLang: 'sv-SE',
+      },
+      nb: {
+        label: 'Norsk bokmål',
+        htmlLang: 'nb-NO',
+      },
+      zh: {
+        label: '中文 (简体)',
+        htmlLang: 'zh-CN',
       },
     },
   },
@@ -28,7 +64,7 @@ module.exports = {
       {
         docs: {
           routeBasePath: 'wiki',
-          sidebarPath: require.resolve('./sidebars.js'),
+          sidebarPath: require.resolve('./sidebars/wiki.js'),
           showLastUpdateTime: false,
           admonitions: true,
         },
@@ -55,7 +91,7 @@ module.exports = {
         id: 'modding-docs',
         path: 'modding-docs',
         routeBasePath: 'modding-docs',
-        sidebarPath: require.resolve('./sidebarsModdingDocs.js'),
+        sidebarPath: require.resolve('./sidebars/modding-docs.js'),
         showLastUpdateTime: false,
         admonitions: true,
       },
