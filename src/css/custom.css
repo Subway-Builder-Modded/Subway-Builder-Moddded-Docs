@@ -48,56 +48,94 @@ code, pre {
 
 /* === Footer === */
 :root {
-  --ifm-footer-background-color: #E3E3E3;  /* bg color */
-  --ifm-footer-color: #242526;             /* text color */
-  --ifm-footer-link-color: #242526;        /* links */
-  --ifm-footer-link-hover-color: #3578E5;  /* hover links */
+  --ifm-footer-background-color: #E3E3E3;
+  --ifm-footer-color: #242526;
+  --ifm-footer-link-color: #242526;
+  --ifm-footer-link-hover-color: #3578E5;
 }
 
 [data-theme='dark'] {
-  --ifm-footer-background-color: #242526;  /* bg color */
-  --ifm-footer-color: #E3E3E3;             /* text color */
-  --ifm-footer-link-color: #E3E3E3;        /* links */
-  --ifm-footer-link-hover-color: #3578E5;  /* hover links */
+  --ifm-footer-background-color: #242526;
+  --ifm-footer-color: #E3E3E3;
+  --ifm-footer-link-color: #E3E3E3;
+  --ifm-footer-link-hover-color: #3578E5;
+}
+
+/* === Footer === */
+:root {
+  --ifm-footer-background-color: #E3E3E3;
+  --ifm-footer-color: #242526;
+  --ifm-footer-link-color: #242526;
+  --ifm-footer-link-hover-color: #3578E5;
+}
+
+[data-theme='dark'] {
+  --ifm-footer-background-color: #242526;
+  --ifm-footer-color: #E3E3E3;
+  --ifm-footer-link-color: #E3E3E3;
+  --ifm-footer-link-hover-color: #3578E5;
+}
+
+/* === Footer === */
+:root {
+  --ifm-footer-background-color: #E3E3E3;
+  --ifm-footer-color: #242526;
+  --ifm-footer-link-color: #242526;
+  --ifm-footer-link-hover-color: #3578E5;
+}
+
+[data-theme='dark'] {
+  --ifm-footer-background-color: #242526;
+  --ifm-footer-color: #E3E3E3;
+  --ifm-footer-link-color: #E3E3E3;
+  --ifm-footer-link-hover-color: #3578E5;
 }
 
 .footer {
   font-weight: 500;
   font-size: 0.9rem;
   font-family: 'Ubuntu', sans-serif;
-  position: relative;
   background-color: var(--ifm-footer-background-color);
   color: var(--ifm-footer-color);
   padding: 2rem 1rem;
 }
 
 .footer__inner {
-  display: flex !important;
-  justify-content: space-between;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
 }
 
 .footer__links {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
   width: 100%;
-  gap: 45rem;
 }
 
-.footer__links .footer__col:first-child {
+.footer__col:first-child {
+  justify-self: start;
   text-align: left;
-  margin-left: 2rem;
 }
 
-.footer__links .footer__col:last-child {
+.footer__col:last-child {
+  justify-self: end;
   text-align: right;
-  margin-right: 2rem;
 }
 
-.wiki-icon,
-.footer-links,
-.updates-icon {
+@media (max-width: 768px) {
+  .footer__links {
+    grid-template-columns: 1fr;
+    row-gap: 1.5rem;
+  }
+
+  .footer__col {
+    justify-self: start !important;
+    text-align: left !important;
+  }
+}
+
+.footer-links {
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -105,32 +143,9 @@ code, pre {
   transition: color 0.2s ease;
 }
 
-.wiki-icon:hover,
-.wiki-icon:focus,
 .footer-links:hover,
-.footer-links:focus,
-.updates-icon:hover,
-.updates-icon:focus {
+.footer-links:focus {
   color: var(--ifm-navbar-link-hover-color);
-}
-
-/* === Wiki Icon === */
-:root {
-  --wiki-icon-color: #242526;
-}
-
-[data-theme='dark'] {
-  --wiki-icon-color: #E3E3E3;
-}
-
-
-/* === Updates Icon === */
-:root {
-  --updates-icon-color: #242526;
-}
-
-[data-theme='dark'] {
-  --updates-icon-color: #E3E3E3;
 }
 
 /* === Footer Links === */

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "@theme/Layout";
 import Link from "@docusaurus/Link";
-import Translate, { translate } from "@docusaurus/Translate";
+import { translate } from "@docusaurus/Translate";
 import styles from "../css/index.module.css";
 
 function useTheme() {
@@ -35,7 +35,9 @@ function HoverCard({ to, className, children }) {
   return (
     <Link
       to={to}
-      className={`${styles.card} ${className || ""} ${hovered ? styles.cardHovered : ""}`}
+      className={`${styles.card} ${className || ""} ${
+        hovered ? styles.cardHovered : ""
+      }`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -44,54 +46,79 @@ function HoverCard({ to, className, children }) {
   );
 }
 
+// Pre-translate all cards to avoid dynamic <Translate>
 const MAPS = [
   {
-    titleId: "homepage.maps.directory.title",
-    descId: "homepage.maps.directory.description",
-    linkId: "homepage.maps.directory.link",
-    titleDefault: "Map Directory",
-    descDefault:
-      "Browse community-made cities from around the world, including custom maps for the US, Canada, Europe, Asia, and more.",
-    linkDefault: "Browse All Maps",
+    title: translate({
+      id: "homepage.maps.directory.title",
+      message: "Map Directory",
+    }),
+    description: translate({
+      id: "homepage.maps.directory.description",
+      message:
+        "Browse community-made cities from around the world, including custom maps for the US, Canada, Europe, Asia, and more.",
+    }),
+    linkText: translate({
+      id: "homepage.maps.directory.link",
+      message: "Browse All Maps",
+    }),
     lightImg: "/images/home-light-regions-table.png",
     darkImg: "/images/home-dark-regions-table.png",
     href: "/wiki/maps/map-directory",
     color: "#0039A6",
   },
   {
-    titleId: "homepage.maps.install.title",
-    descId: "homepage.maps.install.description",
-    linkId: "homepage.maps.install.link",
-    titleDefault: "Installing Maps",
-    descDefault:
-      "Add custom cities to your game using Kronifer's Map Manager. Follow our step-by-step guide to download and install.",
-    linkDefault: "View Installation Guide",
+    title: translate({
+      id: "homepage.maps.install.title",
+      message: "Installing Maps",
+    }),
+    description: translate({
+      id: "homepage.maps.install.description",
+      message:
+        "Add custom cities to your game using Kronifer's Map Manager. Follow our step-by-step guide to download and install.",
+    }),
+    linkText: translate({
+      id: "homepage.maps.install.link",
+      message: "View Installation Guide",
+    }),
     lightImg: "/images/home-light-stations.png",
     darkImg: "/images/home-dark-stations.png",
     href: "/wiki/maps/map-installation-guide",
     color: "#FF6319",
   },
   {
-    titleId: "homepage.maps.legacy.title",
-    descId: "homepage.maps.legacy.description",
-    linkId: "homepage.maps.legacy.link",
-    titleDefault: "Legacy Installation",
-    descDefault:
-      "Some older maps use the serve method. Learn how to extract and port these maps for the modern installer.",
-    linkDefault: "Legacy Guide",
+    title: translate({
+      id: "homepage.maps.legacy.title",
+      message: "Legacy Installation",
+    }),
+    description: translate({
+      id: "homepage.maps.legacy.description",
+      message:
+        "Some older maps use the serve method. Learn how to extract and port these maps for the modern installer.",
+    }),
+    linkText: translate({
+      id: "homepage.maps.legacy.link",
+      message: "Legacy Guide",
+    }),
     lightImg: "/images/home-light-trains.png",
     darkImg: "/images/home-dark-trains.png",
     href: "/wiki/maps/legacy-map-installation-guide",
     color: "#752F82",
   },
   {
-    titleId: "homepage.maps.updates.title",
-    descId: "homepage.maps.updates.description",
-    linkId: "homepage.maps.updates.link",
-    titleDefault: "Updates & Changelogs",
-    descDefault:
-      "Stay up to date with the latest Map Manager releases, new map additions, and wiki changes.",
-    linkDefault: "View Updates",
+    title: translate({
+      id: "homepage.maps.updates.title",
+      message: "Updates & Changelogs",
+    }),
+    description: translate({
+      id: "homepage.maps.updates.description",
+      message:
+        "Stay up to date with the latest Map Manager releases, new map additions, and wiki changes.",
+    }),
+    linkText: translate({
+      id: "homepage.maps.updates.link",
+      message: "View Updates",
+    }),
     lightImg: "/images/home-light-transit.png",
     darkImg: "/images/home-dark-transit.png",
     href: "/updates",
@@ -110,54 +137,53 @@ export default function Home() {
     >
       <div className={styles.page}>
         <div className={styles.content}>
+          {/* Maps Section */}
           <section className={styles.mapsSection}>
             <div className={styles.sectionHeader}>
               <Badge letter="M" className={styles.badgeMaps} />
               <h2 className={styles.sectionLabel}>
-                <Translate id="homepage.maps.title">Custom Maps</Translate>
+                {translate({ id: "homepage.maps.title", message: "Custom Maps" })}
               </h2>
               <span className={styles.headerLine} />
             </div>
             <div className={styles.mapsGrid}>
-              {MAPS.map((card) => (
-                <HoverCard key={card.titleId} to={card.href}>
+              {MAPS.map((card, index) => (
+                <HoverCard key={index} to={card.href}>
                   <div className={styles.cardImg}>
-                    <ThemedImage lightSrc={card.lightImg} darkSrc={card.darkImg} alt={card.titleDefault} />
+                    <ThemedImage
+                      lightSrc={card.lightImg}
+                      darkSrc={card.darkImg}
+                      alt={card.title}
+                    />
                   </div>
                   <div className={styles.moddingBody}>
-                    <h3 className={styles.moddingTitle}>
-                      <Translate id={card.titleId} description={card.titleDefault}>
-                        {card.titleDefault}
-                      </Translate>
-                    </h3>
-                    <p className={styles.moddingDesc}>
-                      <Translate id={card.descId} description={card.descDefault}>
-                        {card.descDefault}
-                      </Translate>
-                    </p>
+                    <h3 className={styles.moddingTitle}>{card.title}</h3>
+                    <p className={styles.moddingDesc}>{card.description}</p>
                     <span
                       className={styles.cardLinkMods}
                       style={{ color: card.color }}
                     >
-                      <Translate id={card.linkId} description={card.linkDefault}>
-                        {card.linkDefault}
-                      </Translate>{" "}
-                      {"\u2192"}
+                      {card.linkText} {"\u2192"}
                     </span>
                   </div>
                 </HoverCard>
               ))}
             </div>
           </section>
+
+          {/* Modding Section */}
           <section className={styles.moddingSection}>
             <div className={styles.sectionHeader}>
               <Badge letter="G" className={styles.badgeMods} />
               <h2 className={styles.sectionLabel}>
-                <Translate id="homepage.modding.title">Game Modding</Translate>
+                {translate({ id: "homepage.modding.title", message: "Game Modding" })}
               </h2>
               <span className={styles.headerLine} />
             </div>
-            <HoverCard to="/modding-docs/getting-started" className={styles.moddingCard}>
+            <HoverCard
+              to="/modding-docs/getting-started"
+              className={styles.moddingCard}
+            >
               <div className={styles.cardImg}>
                 <ThemedImage
                   lightSrc="/images/home-light-regions-sankey.png"
@@ -167,24 +193,34 @@ export default function Home() {
               </div>
               <div className={styles.moddingBody}>
                 <h3 className={styles.moddingTitle}>
-                  <Translate id="homepage.modding.card.title">Modding Documentation</Translate>
+                  {translate({
+                    id: "homepage.modding.card.title",
+                    message: "Modding Documentation",
+                  })}
                 </h3>
                 <p className={styles.moddingDesc}>
-                  <Translate id="homepage.modding.card.description">
-                    Build your own mods with the Subway Builder Modding API. Get Started with the TypeScript template, add custom UI panels, react to game events, build tracks programmatically, and more.
-                  </Translate>
+                  {translate({
+                    id: "homepage.modding.card.description",
+                    message:
+                      "Build your own mods with the Subway Builder Modding API. Get Started with the TypeScript template, add custom UI panels, react to game events, build tracks programmatically, and more.",
+                  })}
                 </p>
                 <span
                   className={styles.cardLinkMods}
                   style={{ color: "#00933C" }}
                 >
-                  <Translate id="homepage.modding.card.link">Get Started</Translate>
+                  {translate({
+                    id: "homepage.modding.card.link",
+                    message: "Get Started",
+                  })}{" "}
                   {"\u2192"}
                 </span>
               </div>
             </HoverCard>
           </section>
         </div>
+
+        {/* Footer Bars */}
         <footer className={styles.footerBars}>
           <span className={styles.bar} style={{ background: "#0039A6" }} />
           <span className={styles.bar} style={{ background: "#FF6319" }} />

@@ -14,11 +14,20 @@ module.exports = {
   },
   i18n: {
     defaultLocale: 'en',
-    locales: ['en'],
+    locales: ['en', 'da', 'no', 'sv'],
     localeConfigs: {
       en: {
         label: 'English',
         htmlLang: 'en-GB',
+      },
+      da: {
+        label: 'Dansk',
+      },
+      no: {
+        label: 'Norsk',
+      },
+      sv: {
+        label: 'Svenska',
       },
     },
   },
@@ -118,6 +127,11 @@ module.exports = {
           label: 'Updates',
         },
         {
+          to: 'credits',
+          position: 'left',
+          label: 'Credits',
+        },
+        {
           href: 'https://github.com/Subway-Builder-Modded/Subway-Builder-Modded-Docs',
           position: 'right',
           html: `
@@ -160,6 +174,10 @@ module.exports = {
             {
               label: 'Updates',
               to: '/updates',
+            },
+            {
+              label: 'Credits',
+              to: '/credits',
             },
           ],
         },
