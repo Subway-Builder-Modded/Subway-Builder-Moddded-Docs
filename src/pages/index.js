@@ -19,8 +19,77 @@ function useTheme() {
 
 function ThemedImage({ lightSrc, darkSrc, alt }) {
   const isDark = useTheme();
-  return <img src={isDark ? darkSrc : lightSrc} alt={alt} />;
+  return <img src={isDark ? darkSrc : lightSrc} alt={alt} loading="lazy" />;
 }
+
+function Badge({ letter, className }) {
+  return (
+    <span aria-hidden="true" className={`${styles.badge} ${className}`}>
+      {letter}
+    </span>
+  );
+}
+
+function HoverCard({ to, className, children }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <Link
+      to={to}
+      className={`${styles.card} ${className || ""} ${hovered ? styles.cardHovered : ""}`}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {children}
+    </Link>
+  );
+}
+
+const MAPS = [
+  {
+    title: "Map directory",
+    titleId: "homepage.maps.directory.title",
+    desc: "Browse community-made cities from around the world, including custom maps for the US, Canada, Europe, Asia, and more.",
+    descId: "homepage.maps.directory.description",
+    lightImg: "/images/home-light-regions-table.png",
+    darkImg: "/images/home-dark-regions-table.png",
+    href: "/wiki/maps/map-directory",
+    link: "Browse all maps",
+    linkId: "homepage.maps.directory.link",
+  },
+  {
+    title: "Installing maps",
+    titleId: "homepage.maps.install.title",
+    desc: "Add custom cities to your game using Kronifer's Map Manager. Follow our step-by-step guide to download and install.",
+    descId: "homepage.maps.install.description",
+    lightImg: "/images/home-light-stations.png",
+    darkImg: "/images/home-dark-stations.png",
+    href: "/wiki/maps/map-installation-guide",
+    link: "View installation guide",
+    linkId: "homepage.maps.install.link",
+  },
+  {
+    title: "Legacy installation",
+    titleId: "homepage.maps.legacy.title",
+    desc: "Some older maps use the serve method. Learn how to extract and port these maps for the modern installer.",
+    descId: "homepage.maps.legacy.description",
+    lightImg: "/images/home-light-trains.png",
+    darkImg: "/images/home-dark-trains.png",
+    href: "/wiki/maps/legacy-map-installation-guide",
+    link: "Legacy guide",
+    linkId: "homepage.maps.legacy.link",
+  },
+  {
+    title: "Updates & changelogs",
+    titleId: "homepage.maps.updates.title",
+    desc: "Stay up to date with the latest Map Manager releases, new map additions, and wiki changes.",
+    descId: "homepage.maps.updates.description",
+    lightImg: "/images/home-light-transit.png",
+    darkImg: "/images/home-dark-transit.png",
+    href: "/updates",
+    link: "View updates",
+    linkId: "homepage.maps.updates.link",
+  },
+];
 
 export default function Home() {
   return (
@@ -31,174 +100,94 @@ export default function Home() {
       })}
       image="/logo.png"
     >
-      <header className={styles.hero}>
-        <div className={styles.heroInner}>
-          <h1 className={styles.heroTitle}>
-            <Translate id="homepage.heading">
-              Subway Builder Modding Wiki
-            </Translate>
-          </h1>
-          <p className={styles.heroSubtitle}>
-            <Translate id="homepage.subtitle">
-              The complete hub for community-made Subway Builder maps, installation guides, and modding resources.
-            </Translate>
-          </p>
+      <div className={styles.page}>
+        {/* Content grid */}
+        <div className={styles.content}>
+          {/* Left: Custom Maps */}
+          <section className={styles.mapsSection}>
+            <div className={styles.sectionHeader}>
+              <Badge letter="M" className={styles.badgeMaps} />
+              <h2 className={styles.sectionLabel}>
+                <Translate id="homepage.maps.title">Custom maps</Translate>
+              </h2>
+              <span className={styles.headerLine} />
+            </div>
+
+            <div className={styles.mapsGrid}>
+              {MAPS.map((card) => (
+                <HoverCard key={card.titleId} to={card.href}>
+                  <div className={styles.cardImg}>
+                    <ThemedImage
+                      lightSrc={card.lightImg}
+                      darkSrc={card.darkImg}
+                      alt={card.title}
+                    />
+                  </div>
+                  <div className={styles.cardBody}>
+                    <h3 className={styles.cardTitle}>
+                      <Translate id={card.titleId}>{card.title}</Translate>
+                    </h3>
+                    <p className={styles.cardDesc}>
+                      <Translate id={card.descId}>{card.desc}</Translate>
+                    </p>
+                    <span className={styles.cardLinkMaps}>
+                      <Translate id={card.linkId}>{card.link}</Translate>
+                      {" \u2192"}
+                    </span>
+                  </div>
+                </HoverCard>
+              ))}
+            </div>
+          </section>
+
+          {/* Right: Game Modding */}
+          <section className={styles.moddingSection}>
+            <div className={styles.sectionHeader}>
+              <Badge letter="G" className={styles.badgeMods} />
+              <h2 className={styles.sectionLabel}>
+                <Translate id="homepage.modding.title">Game modding</Translate>
+              </h2>
+              <span className={styles.headerLine} />
+            </div>
+
+            <HoverCard to="/wiki/modding/getting-started" className={styles.moddingCard}>
+              <div className={styles.cardImg}>
+                <ThemedImage
+                  lightSrc="/images/home-light-regions-sankey.png"
+                  darkSrc="/images/home-dark-regions-sankey.png"
+                  alt="Subway Builder modding"
+                />
+              </div>
+              <div className={styles.moddingBody}>
+                <h3 className={styles.moddingTitle}>
+                  <Translate id="homepage.modding.card.title">
+                    Modding documentation
+                  </Translate>
+                </h3>
+                <p className={styles.moddingDesc}>
+                  <Translate id="homepage.modding.card.description">
+                    Build your own mods with the Subway Builder Modding API. Get started with the TypeScript template, add custom UI panels, react to game events, build tracks programmatically, and more.
+                  </Translate>
+                </p>
+                <span className={styles.cardLinkMods}>
+                  <Translate id="homepage.modding.card.link">
+                    Get started
+                  </Translate>
+                  {" \u2192"}
+                </span>
+              </div>
+            </HoverCard>
+          </section>
         </div>
-      </header>
 
-      <main className={styles.main}>
-        {/* Custom Maps */}
-        <section className={styles.section}>
-          <div className={styles.sectionHeader}>
-            <div className={`${styles.badge} ${styles.badgeMaps}`}>M</div>
-            <h2 className={styles.sectionTitle}>
-              <Translate id="homepage.maps.title">Custom maps</Translate>
-            </h2>
-          </div>
-
-          <div className={styles.cardGrid}>
-            <div className={styles.card}>
-              <div className={styles.cardImage}>
-                <ThemedImage
-                  lightSrc="/images/home-light-regions-table.png"
-                  darkSrc="/images/home-dark-regions-table.png"
-                  alt="Map directory"
-                />
-              </div>
-              <div className={styles.cardBody}>
-                <h3 className={styles.cardTitle}>
-                  <Translate id="homepage.maps.directory.title">
-                    Map directory
-                  </Translate>
-                </h3>
-                <p className={styles.cardText}>
-                  <Translate id="homepage.maps.directory.description">
-                    Browse the complete directory of community-made cities from around the world, including custom maps for the US, Canada, Europe, Asia, and more.
-                  </Translate>
-                </p>
-                <Link
-                  className={`${styles.cardLink} ${styles.linkMaps}`}
-                  to="/wiki/maps/map-directory"
-                >
-                  <Translate id="homepage.maps.directory.link">
-                    Browse all maps
-                  </Translate>
-                  <span className={styles.arrow}>{"\u2192"}</span>
-                </Link>
-              </div>
-            </div>
-
-            <div className={styles.card}>
-              <div className={styles.cardImage}>
-                <ThemedImage
-                  lightSrc="/images/home-light-stations.png"
-                  darkSrc="/images/home-dark-stations.png"
-                  alt="Subway Builder gameplay"
-                />
-              </div>
-              <div className={styles.cardBody}>
-                <h3 className={styles.cardTitle}>
-                  <Translate id="homepage.maps.install.title">
-                    Installing maps
-                  </Translate>
-                </h3>
-                <p className={styles.cardText}>
-                  <Translate id="homepage.maps.install.description">
-                    Add custom cities to your game using Kronifer's Map Manager. Follow our step-by-step guide to download, install, and play community maps.
-                  </Translate>
-                </p>
-                <Link
-                  className={`${styles.cardLink} ${styles.linkMaps}`}
-                  to="/wiki/maps/map-installation-guide"
-                >
-                  <Translate id="homepage.maps.install.link">
-                    View installation guide
-                  </Translate>
-                  <span className={styles.arrow}>{"\u2192"}</span>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <hr className={styles.divider} />
-
-        {/* Guides & Resources */}
-        <section className={styles.sectionLast}>
-          <div className={styles.sectionHeader}>
-            <div className={`${styles.badge} ${styles.badgeGuides}`}>G</div>
-            <h2 className={styles.sectionTitle}>
-              <Translate id="homepage.guides.title">
-                Guides & resources
-              </Translate>
-            </h2>
-          </div>
-
-          <div className={styles.cardGrid}>
-            <div className={styles.card}>
-              <div className={styles.cardImage}>
-                <ThemedImage
-                  lightSrc="/images/home-light-trains.png"
-                  darkSrc="/images/home-dark-trains.png"
-                  alt="Legacy map installation"
-                />
-              </div>
-              <div className={styles.cardBody}>
-                <h3 className={styles.cardTitle}>
-                  <Translate id="homepage.guides.legacy.title">
-                    Legacy installation
-                  </Translate>
-                </h3>
-                <p className={styles.cardText}>
-                  <Translate id="homepage.guides.legacy.description">
-                    Some older maps use the serve method instead of the Map Manager. Learn how to extract and port these maps so they work with the modern installer.
-                  </Translate>
-                </p>
-                <Link
-                  className={`${styles.cardLink} ${styles.linkGuides}`}
-                  to="/wiki/maps/legacy-map-installation-guide"
-                >
-                  <Translate id="homepage.guides.legacy.link">
-                    Legacy guide
-                  </Translate>
-                  <span className={styles.arrow}>{"\u2192"}</span>
-                </Link>
-              </div>
-            </div>
-
-            <div className={styles.card}>
-              <div className={styles.cardImage}>
-                <ThemedImage
-                  lightSrc="/images/home-light-transit.png"
-                  darkSrc="/images/home-dark-transit.png"
-                  alt="Updates and changelogs"
-                />
-              </div>
-              <div className={styles.cardBody}>
-                <h3 className={styles.cardTitle}>
-                  <Translate id="homepage.guides.updates.title">
-                    Updates & changelogs
-                  </Translate>
-                </h3>
-                <p className={styles.cardText}>
-                  <Translate id="homepage.guides.updates.description">
-                    Stay up to date with the latest Map Manager releases, new map additions, and wiki changes.
-                  </Translate>
-                </p>
-                <Link
-                  className={`${styles.cardLink} ${styles.linkGuides}`}
-                  to="/updates"
-                >
-                  <Translate id="homepage.guides.updates.link">
-                    View updates
-                  </Translate>
-                  <span className={styles.arrow}>{"\u2192"}</span>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
+        {/* Footer bar */}
+        <footer className={styles.footerBars}>
+          <span className={styles.bar} style={{ background: "#0039A6" }} />
+          <span className={styles.bar} style={{ background: "#FF6319" }} />
+          <span className={styles.bar} style={{ background: "#00933C" }} />
+          <span className={styles.bar} style={{ background: "#FCCC0A" }} />
+        </footer>
+      </div>
     </Layout>
   );
 }
