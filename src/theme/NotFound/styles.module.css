@@ -1,0 +1,95 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  text-align: center;
+  position: relative;
+}
+
+.trainWrapper {
+  position: absolute;
+  top: 10%;
+  width: 100%;
+  z-index: 0;
+  opacity: 0.15;
+  color: #333333; /* light mode train */
+}
+
+@media (prefers-color-scheme: dark) {
+  .trainWrapper {
+    color: #555; /* darker in dark mode */
+    opacity: 0.25;
+  }
+}
+
+.train {
+  width: 500px;
+  max-width: 90%;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+}
+
+.bullets {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.bullet {
+  width: 100px;
+  height: auto;
+  transition: transform 0.3s ease, fill 0.3s ease;
+  cursor: pointer;
+}
+
+/* Hover colors for each number */
+.bullet.first4:hover circle {
+  fill: #1E4B95; /* Moscow 4 */
+}
+.bullet.zero:hover circle {
+  fill: #FFD500; /* London Circle Line */
+}
+.bullet.second4:hover circle {
+  fill: #FF8000; /* Tokyo Ginza 4 */
+}
+
+/* Scale effect for all bullets */
+.bullet:hover {
+  transform: scale(1.1);
+}
+
+/* Light mode (default) */
+.button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  margin-top: 1rem;
+  background-color: black;      /* light mode base */
+  color: white;                 /* light mode text */
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.button:hover {
+  background-color: #ddd;       /* light mode hover */
+  color: black;
+}
+
+/* Dark mode */
+[data-theme="dark"] .button {
+  background-color: white;      /* dark mode base */
+  color: black;                 /* dark mode text */
+}
+
+[data-theme="dark"] .button:hover {
+  background-color: #333;       /* dark mode hover */
+  color: white;
+}

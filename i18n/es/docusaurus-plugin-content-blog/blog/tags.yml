@@ -1,9 +1,0 @@
-releases-es:
-  label: 'Lanzamientos'
-  permalink: '/releases'
-  description: 'Registros de cambios y notas de la versión para el sitio web de Subway Builder Mod Wiki.'
-map-manager-es:
-  label: 'Administrador de mapas'
-  permalink: '/map-manager'
-  description: 'Actualizaciones y notas de la versión para el Administrador de Mapas de Subway Builder.'
-  

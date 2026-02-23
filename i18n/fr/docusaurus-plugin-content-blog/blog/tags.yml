@@ -1,8 +1,0 @@
-releases-fr:
-  label: 'Versions'
-  permalink: '/releases'
-  description: 'Journaux des modifications et notes de version pour le site Subway Builder Mod Wiki.'
-map-manager-fr:
-  label: 'Gestionnaire de cartes'
-  permalink: '/map-manager'
-  description: 'Mises à jour et notes de version pour le Gestionnaire de cartes Subway Builder.'

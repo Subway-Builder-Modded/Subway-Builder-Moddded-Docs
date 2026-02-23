@@ -1,21 +1,57 @@
 {
-  "homepage.title": {
-    "message": "Startseite"
+  "homepage.maps.directory.title": {
+    "message": "Map Directory"
+  },
+  "homepage.maps.directory.description": {
+    "message": "Browse community-made cities from around the world, including custom maps for the US, Canada, Europe, Asia, and more."
+  },
+  "homepage.maps.directory.link": {
+    "message": "Browse All Maps"
+  },
+  "homepage.maps.install.title": {
+    "message": "Installing Maps"
+  },
+  "homepage.maps.install.description": {
+    "message": "Add custom cities to your game using Kronifer's Map Manager. Follow our step-by-step guide to download and install."
+  },
+  "homepage.maps.install.link": {
+    "message": "View Installation Guide"
+  },
+  "homepage.maps.legacy.title": {
+    "message": "Legacy Installation"
+  },
+  "homepage.maps.legacy.description": {
+    "message": "Some older maps use the serve method. Learn how to extract and port these maps for the modern installer."
+  },
+  "homepage.maps.legacy.link": {
+    "message": "Legacy Guide"
+  },
+  "homepage.maps.updates.title": {
+    "message": "Updates & Changelogs"
+  },
+  "homepage.maps.updates.description": {
+    "message": "Stay up to date with the latest Map Manager releases, new map additions, and wiki changes."
+  },
+  "homepage.maps.updates.link": {
+    "message": "View Updates"
   },
   "homepage.description": {
-    "message": "Subway Builder Mods, Karten und Installationsanleitungen"
+    "message": "Subway Builder Mods, Maps, and Installation Guides"
   },
-  "homepage.heading": {
-    "message": "Subway Builder Modded Wiki"
+  "homepage.maps.title": {
+    "message": "Custom Maps"
   },
-  "homepage.subtitle": {
-    "message": "Das zentrale Portal für Subway Builder-Karten, Mods und Anleitungen. Entdecke benutzerdefinierte Karten, erweitere dein Spiel mit Inhalten aus der Community und lerne Schritt für Schritt, wie alles installiert wird."
+  "homepage.modding.title": {
+    "message": "Game modding"
   },
-  "homepage.button.maps": {
-    "message": "Karten Durchsuchen"
+  "homepage.modding.card.title": {
+    "message": "Modding Documentation"
   },
-  "homepage.button.installation": {
-    "message": "Installationsanleitung"
+  "homepage.modding.card.description": {
+    "message": "Build your own mods with the Subway Builder Modding API. Get started with the TypeScript template, add custom UI panels, react to game events, build tracks programmatically, and more."
+  },
+  "homepage.modding.card.link": {
+    "message": "Get started"
   },
   "theme.ErrorPageContent.title": {
     "message": "Die Seite ist abgestürzt.",
@@ -77,13 +113,13 @@
     "message": "Umschalten zwischen dunkler und heller Ansicht (momentan {mode})",
     "description": "The ARIA label for the color mode toggle"
   },
-  "theme.docs.breadcrumbs.navAriaLabel": {
-    "message": "Breadcrumbs",
-    "description": "The ARIA label for the breadcrumbs"
-  },
   "theme.docs.DocCard.categoryDescription.plurals": {
     "message": "1 Eintrag|{count} Einträge",
     "description": "The default description for a category card in the generated index about how many items this category includes"
+  },
+  "theme.docs.breadcrumbs.navAriaLabel": {
+    "message": "Breadcrumbs",
+    "description": "The ARIA label for the breadcrumbs"
   },
   "theme.docs.paginator.navAriaLabel": {
     "message": "Dokumentation Seiten",
@@ -96,14 +132,6 @@
   "theme.docs.paginator.next": {
     "message": "Weiter",
     "description": "The label used to navigate to the next doc"
-  },
-  "theme.docs.tagDocListPageTitle.nDocsTagged": {
-    "message": "Ein doc getaggt|{count} docs getaggt",
-    "description": "Pluralized label for \"{count} docs tagged\". Use as much plural forms (separated by \"|\") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
-  },
-  "theme.docs.tagDocListPageTitle": {
-    "message": "{nDocsTagged} mit \"{tagName}\"",
-    "description": "The title of the page for a docs tag"
   },
   "theme.docs.versionBadge.label": {
     "message": "Version: {versionLabel}"
@@ -123,6 +151,14 @@
   "theme.docs.versions.latestVersionLinkLabel": {
     "message": "letzte Version",
     "description": "The label used for the latest version suggestion link label"
+  },
+  "theme.docs.tagDocListPageTitle.nDocsTagged": {
+    "message": "Ein doc getaggt|{count} docs getaggt",
+    "description": "Pluralized label for \"{count} docs tagged\". Use as much plural forms (separated by \"|\") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
+  },
+  "theme.docs.tagDocListPageTitle": {
+    "message": "{nDocsTagged} mit \"{tagName}\"",
+    "description": "The title of the page for a docs tag"
   },
   "theme.common.editThisPage": {
     "message": "Diese Seite bearbeiten",
@@ -156,6 +192,10 @@
     "message": "Tags:",
     "description": "The label alongside a tag list"
   },
+  "theme.AnnouncementBar.closeButtonAriaLabel": {
+    "message": "Schließen",
+    "description": "The ARIA label for close button of announcement bar"
+  },
   "theme.admonition.caution": {
     "message": "vorsicht",
     "description": "The default label used for the Caution admonition (:::caution)"
@@ -179,10 +219,6 @@
   "theme.admonition.warning": {
     "message": "warnung",
     "description": "The default label used for the Warning admonition (:::warning)"
-  },
-  "theme.AnnouncementBar.closeButtonAriaLabel": {
-    "message": "Schließen",
-    "description": "The ARIA label for close button of announcement bar"
   },
   "theme.blog.sidebar.navAriaLabel": {
     "message": "Navigation der letzten Beiträge im Blog",

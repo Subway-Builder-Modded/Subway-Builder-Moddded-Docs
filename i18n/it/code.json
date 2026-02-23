@@ -1,21 +1,57 @@
 {
-  "homepage.title": {
-    "message": "Home"
+  "homepage.maps.directory.title": {
+    "message": "Map Directory"
+  },
+  "homepage.maps.directory.description": {
+    "message": "Browse community-made cities from around the world, including custom maps for the US, Canada, Europe, Asia, and more."
+  },
+  "homepage.maps.directory.link": {
+    "message": "Browse All Maps"
+  },
+  "homepage.maps.install.title": {
+    "message": "Installing Maps"
+  },
+  "homepage.maps.install.description": {
+    "message": "Add custom cities to your game using Kronifer's Map Manager. Follow our step-by-step guide to download and install."
+  },
+  "homepage.maps.install.link": {
+    "message": "View Installation Guide"
+  },
+  "homepage.maps.legacy.title": {
+    "message": "Legacy Installation"
+  },
+  "homepage.maps.legacy.description": {
+    "message": "Some older maps use the serve method. Learn how to extract and port these maps for the modern installer."
+  },
+  "homepage.maps.legacy.link": {
+    "message": "Legacy Guide"
+  },
+  "homepage.maps.updates.title": {
+    "message": "Updates & Changelogs"
+  },
+  "homepage.maps.updates.description": {
+    "message": "Stay up to date with the latest Map Manager releases, new map additions, and wiki changes."
+  },
+  "homepage.maps.updates.link": {
+    "message": "View Updates"
   },
   "homepage.description": {
-    "message": "Mod, mappe e guide di installazione di Subway Builder"
+    "message": "Subway Builder Mods, Maps, and Installation Guides"
   },
-  "homepage.heading": {
-    "message": "Wiki Moddato di Subway Builder"
+  "homepage.maps.title": {
+    "message": "Custom Maps"
   },
-  "homepage.subtitle": {
-    "message": "Il centro completo per mappe, mod e guide di Subway Builder. Scopri mappe personalizzate, espandi il gioco con contenuti creati dalla community e impara passo passo come installare tutto."
+  "homepage.modding.title": {
+    "message": "Game modding"
   },
-  "homepage.button.maps": {
-    "message": "Sfoglia Mappe"
+  "homepage.modding.card.title": {
+    "message": "Modding Documentation"
   },
-  "homepage.button.installation": {
-    "message": "Guida all'Installazione"
+  "homepage.modding.card.description": {
+    "message": "Build your own mods with the Subway Builder Modding API. Get started with the TypeScript template, add custom UI panels, react to game events, build tracks programmatically, and more."
+  },
+  "homepage.modding.card.link": {
+    "message": "Get started"
   },
   "theme.ErrorPageContent.title": {
     "message": "Questa pagina è andata in crash.",

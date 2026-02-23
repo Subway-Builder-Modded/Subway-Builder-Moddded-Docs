@@ -46,48 +46,76 @@ function HoverCard({ to, className, children }) {
 
 const MAPS = [
   {
-    title: "Map Directory",
-    titleId: "homepage.maps.directory.title",
-    desc: "Browse community-made cities from around the world, including custom maps for the US, Canada, Europe, Asia, and more.",
-    descId: "homepage.maps.directory.description",
+    title: translate({
+      id: "homepage.maps.directory.title",
+      message: "Map Directory",
+    }),
+    desc: translate({
+      id: "homepage.maps.directory.description",
+      message:
+        "Browse community-made cities from around the world, including custom maps for the US, Canada, Europe, Asia, and more.",
+    }),
+    link: translate({
+      id: "homepage.maps.directory.link",
+      message: "Browse All Maps",
+    }),
     lightImg: "/images/home-light-regions-table.png",
     darkImg: "/images/home-dark-regions-table.png",
     href: "/wiki/maps/map-directory",
-    link: "Browse all maps",
-    linkId: "homepage.maps.directory.link",
   },
   {
-    title: "Installing Maps",
-    titleId: "homepage.maps.install.title",
-    desc: "Add custom cities to your game using Kronifer's Map Manager. Follow our step-by-step guide to download and install.",
-    descId: "homepage.maps.install.description",
+    title: translate({
+      id: "homepage.maps.install.title",
+      message: "Installing Maps",
+    }),
+    desc: translate({
+      id: "homepage.maps.install.description",
+      message:
+        "Add custom cities to your game using Kronifer's Map Manager. Follow our step-by-step guide to download and install.",
+    }),
+    link: translate({
+      id: "homepage.maps.install.link",
+      message: "View Installation Guide",
+    }),
     lightImg: "/images/home-light-stations.png",
     darkImg: "/images/home-dark-stations.png",
     href: "/wiki/maps/map-installation-guide",
-    link: "View installation guide",
-    linkId: "homepage.maps.install.link",
   },
   {
-    title: "Legacy Installation",
-    titleId: "homepage.maps.legacy.title",
-    desc: "Some older maps use the serve method. Learn how to extract and port these maps for the modern installer.",
-    descId: "homepage.maps.legacy.description",
+    title: translate({
+      id: "homepage.maps.legacy.title",
+      message: "Legacy Installation",
+    }),
+    desc: translate({
+      id: "homepage.maps.legacy.description",
+      message:
+        "Some older maps use the serve method. Learn how to extract and port these maps for the modern installer.",
+    }),
+    link: translate({
+      id: "homepage.maps.legacy.link",
+      message: "Legacy Guide",
+    }),
     lightImg: "/images/home-light-trains.png",
     darkImg: "/images/home-dark-trains.png",
     href: "/wiki/maps/legacy-map-installation-guide",
-    link: "Legacy guide",
-    linkId: "homepage.maps.legacy.link",
   },
   {
-    title: "Updates & Changelogs",
-    titleId: "homepage.maps.updates.title",
-    desc: "Stay up to date with the latest Map Manager releases, new map additions, and wiki changes.",
-    descId: "homepage.maps.updates.description",
+    title: translate({
+      id: "homepage.maps.updates.title",
+      message: "Updates & Changelogs",
+    }),
+    desc: translate({
+      id: "homepage.maps.updates.description",
+      message:
+        "Stay up to date with the latest Map Manager releases, new map additions, and wiki changes.",
+    }),
+    link: translate({
+      id: "homepage.maps.updates.link",
+      message: "View Updates",
+    }),
     lightImg: "/images/home-light-transit.png",
     darkImg: "/images/home-dark-transit.png",
     href: "/updates",
-    link: "View updates",
-    linkId: "homepage.maps.updates.link",
   },
 ];
 
@@ -108,7 +136,7 @@ export default function Home() {
             <div className={styles.sectionHeader}>
               <Badge letter="M" className={styles.badgeMaps} />
               <h2 className={styles.sectionLabel}>
-                <Translate id="homepage.maps.title">Custom maps</Translate>
+                <Translate id="homepage.maps.title">Custom Maps</Translate>
               </h2>
               <span className={styles.headerLine} />
             </div>
@@ -124,16 +152,9 @@ export default function Home() {
                     />
                   </div>
                   <div className={styles.cardBody}>
-                    <h3 className={styles.cardTitle}>
-                      <Translate id={card.titleId}>{card.title}</Translate>
-                    </h3>
-                    <p className={styles.cardDesc}>
-                      <Translate id={card.descId}>{card.desc}</Translate>
-                    </p>
-                    <span className={styles.cardLinkMaps}>
-                      <Translate id={card.linkId}>{card.link}</Translate>
-                      {" \u2192"}
-                    </span>
+                    <h3>{card.title}</h3>
+                    <p>{card.desc}</p>
+                    <span>{card.link}</span>
                   </div>
                 </HoverCard>
               ))}

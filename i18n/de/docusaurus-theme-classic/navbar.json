@@ -11,8 +11,12 @@
     "message": "Wiki",
     "description": "Navbar item with label Wiki"
   },
+  "item.label.Modding Docs": {
+    "message": "Modding Docs",
+    "description": "Navbar item with label Modding Docs"
+  },
   "item.label.Updates": {
-    "message": "Aktualisierungen",
+    "message": "Updates",
     "description": "Navbar item with label Updates"
   }
 }
