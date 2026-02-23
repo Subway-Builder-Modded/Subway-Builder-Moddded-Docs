@@ -81,8 +81,11 @@
   color: #fff;
 }
 
-.badgeMaps { background: #ff6319; }
-.badgeMods { background: #00933c; }
+.badgeMaps {
+  background: #000000;
+  color: #ffffff;
+}
+.badgeMods { background: #FF6319; }
 
 .mapsSection,
 .moddingSection {

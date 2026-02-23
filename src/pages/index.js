@@ -46,7 +46,6 @@ function HoverCard({ to, className, children }) {
   );
 }
 
-// Pre-translate all cards to avoid dynamic <Translate>
 const MAPS = [
   {
     title: translate({
@@ -140,9 +139,9 @@ export default function Home() {
           {/* Maps Section */}
           <section className={styles.mapsSection}>
             <div className={styles.sectionHeader}>
-              <Badge letter="M" className={styles.badgeMaps} />
+              <Badge letter="P" className={styles.badgeMaps} />
               <h2 className={styles.sectionLabel}>
-                {translate({ id: "homepage.maps.title", message: "Custom Maps" })}
+                {translate({ id: "homepage.maps.title", message: "Subway Builder Players" })}
               </h2>
               <span className={styles.headerLine} />
             </div>
@@ -174,9 +173,9 @@ export default function Home() {
           {/* Modding Section */}
           <section className={styles.moddingSection}>
             <div className={styles.sectionHeader}>
-              <Badge letter="G" className={styles.badgeMods} />
+              <Badge letter="D" className={styles.badgeMods} />
               <h2 className={styles.sectionLabel}>
-                {translate({ id: "homepage.modding.title", message: "Game Modding" })}
+                {translate({ id: "homepage.modding.title", message: "Mod Developers" })}
               </h2>
               <span className={styles.headerLine} />
             </div>
