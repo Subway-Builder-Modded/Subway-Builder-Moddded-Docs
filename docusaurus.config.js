@@ -168,7 +168,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `© Subway Builder Mod Wiki ${new Date().getFullYear()}`,
+      copyright: `© Subway Builder Mod Wiki ${new Date().getFullYear()}. Not affiliated with Subway Builder or Redistricter, LLC. All content is community-created and shared under appropriate licenses.`,
     },
     colorMode: {
       defaultMode: 'dark',
