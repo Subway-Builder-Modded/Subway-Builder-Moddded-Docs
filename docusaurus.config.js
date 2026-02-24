@@ -18,7 +18,7 @@ module.exports = {
     localeConfigs: {
       en: {
         label: 'English',
-        htmlLang: 'en-GB',
+        htmlLang: 'en-US',
       },
       /*es: {
         label: 'Español',
