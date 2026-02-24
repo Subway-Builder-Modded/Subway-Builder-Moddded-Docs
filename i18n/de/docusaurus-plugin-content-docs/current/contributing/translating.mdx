@@ -1,49 +1,49 @@
 ---
 id: translating
-title: Translating
+title: Übersetzen
 ---
 
-This guide covers how to contribute translations to the Subway Builder Modded Wiki. Translators are responsible for ensuring their contributions are accurate, clear, and consistent with the original content. All contributions must follow proper grammar, maintain formatting, and be submitted via Pull Request (PR) for review.
+Dieser Leitfaden erklärt, wie Du zur Übersetzung des Subway Builder Modded Wikis beitragen kannst. Übersetzer sind dafür verantwortlich, dass ihr Beitrag präsize, klar und übereinstimmend mit dem Original bleibt. Alle Beiträge müssen sich an die richtige Grammatik halten, die Formatierung beibehalten und via Pull Request (PR) zur Überprüfung eingereicht werden.
 
-## Table of Contents {#table-of-contents}
-1. [Contributing to an Existing Language](#contributing-to-an-existing-language)
-2. [Contributing a New Language](#contributing-a-new-language)
-3. [MDX & i18n Guide for Translators](#mdx-and-i18n-guide-for-translators)
-4. [Language-Specific Notes](#language-specific-notes)
-5. [Important Notes](#important-notes)
-6. [Updating Translations](#updating-translations)
+## Inhalt {#table-of-contents}
+1. [Zu einer bestehenden Sprache beitragen](#contributing-to-an-existing-language)
+2. [Eine neue Sprache anlegen](#contributing-a-new-language)
+3. [MDX & i18n Leitfaden für Übersetzer](#mdx-and-i18n-guide-for-translators)
+4. [Sprachspezifische Anmerkungen](#language-specific-notes)
+5. [Wichtige Anmerkungen](#important-notes)
+6. [Aktualisieren von Übersetzungen](#updating-translations)
 
 ---
 
-:::important
-Throughout this guide, `YOUR_LOCALE_CODE` will refer to the language you are working on. For example, for Spanish, it would be `es`. For English, it would be `en`. For a full list, look [here](https://www.w3schools.com/tags/ref_language_codes.asp). For countries that have multiple regional dialects (like Chinese having `zh-CN` and `zh-TW`), you should use that as `YOUR_LOCALE_CODE`
+:::Wichtig
+In diesem Leitfaden bezieht sich DEIN_LOCALE_CODE auf die Sprache, die Du bearbeitest. Beispielsweise wäre das `de` für Deutsch, oder `en` für Englisch. Eine Liste mit allen Codes gibt es [hier](https://www.w3schools.com/tags/ref_language_codes.asp).
 :::
-## Contributing to an Existing Language {#contributing-to-an-existing-language}
+## Zu einer bestehenden Sprache beitragen {#contributing-to-an-existing-language}
 
-If you want to contribute translations to a language that already exists in the project:
+Wenn Du zu einer Übersetzung beitragen willst, die in diesem Projekt schon existiert:
 
-**1.** Navigate to the folder corresponding to your language in `i18n/YOUR_LOCALE_CODE`. For example, Spanish translations are located in `i18n/es`.
-**2.** You are responsible for all files in this folder, including but not limited to:
+**1**. Navigiere zum entsprechenden Ordner Deiner Sprache in `i18n/YOUR_LOCALE_CODE`. Beispielsweise befinden sich die deutschen Übersetzungen in `i18n/de-DE`.
+**2**. Du bist verantwortlich für alle Dateien in dem Ordner, einschließlich aber nicht nur:
  - `code.json`
  - `tags.yml`
- - Any other `.json` or `.yml` files
-**3.** Ensure that all text is properly translated while keeping the formatting intact (headings, lists, code blocks, notes, tips, admonitions, and images).
-**4.** Do **not** attempt to translate the content from `/blogs`; these cannot be translated due to limitations in the framework. However, in the `docusaurus-plugin-content-blog` directory, there may be an `options.json`. This should be translated.
-**5.** PR Requirements:
- - Any PR that anyone merges with the `needs-translating` tag must be translated into your language.  
- - Translation PRs must begin with the prefix `[Translation - YOUR_LOCALE_CODE]`.
-**6.** Submit your changes via Pull Request. A wiki maintainer will review your submission before merging.
+ - Sämtliche andere `.json` oder `.yml` Dateien
+**3**. Stelle sicher, dass jeder Text richtig übersetzt wird und die Formatierung dabei intakt bleibt. (Überschriften, Listen, Codeblöcke, Anmerkungen, Tips, Warnungen und Bilder).
+**4.** Übersetze **keine Inhalte** aus `/blogs`. Das ist aufgrund von Einschränkungen im Framework nicht möglich. Die `options.json` im `docusaurus-plugin-content-blog` Verzeichnis sollte jedoch übersetzt werden.
+5. PR Anforderungen:
+ - Jede PR, die jemand mit dem Tag `needs-translating` zusammenlegt, muss in Deine Sprache übersetzt werden. 
+ - Übersetzungs-PRs müssen mit dem Prefix `[Translation - DEIN_LOCALE_CODE]` beginnen.  
+6. Reiche deine Änderunge via Pull Request ein. Ein Wikiinstandhalter wird deine Einreichung vor der Übernahme überprüfen.
 
 ---
 
-## Contributing a New Language {#contributing-a-new-language}
+## Eine neue Sprache anlegen {#contributing-a-new-language}
 
-If you want to add a completely new language:
+Wenn Du eine komplett neue Sprache hinzufügen möchtest:
 
-### Step 1 - Set Up Your Locale {#set-up-your-locale}
+### Schritt 1 - Richte Dein Locale ein {#set-up-your-locale}
 
-**1.** Open `docusaurus.config.js`.
-**2.** Add your language to the `localeConfigs` section. Example for Italian:
+**1.** Öffne `docusaurus.config.js`.
+**2.** Füge Deine Spache im Abschnitt `localeConfigs` hinzu. Beispiel für Italienisch:
 ```js
 locales: ['en', 'es', 'fr', 'it'],
 localeConfigs: {
@@ -67,7 +67,7 @@ localeConfigs: {
 ```
 
 :::important
-If you are using a regional dialect of a language that already exists (like Chinese having `zh-CN` and `zh-TW`), you should use that instead of a 2 letter code, like `fr`. Example:
+Wenn Du einen regionalen Dialekt einer bereits vorhandenen Sprache benutzt (wie bei Chinesisch mit `zh-CN` und `zh-TW`), nutze lieber diese Bezeichnungen anstelle eines Codes aus zwei Buchstaben wie `fr`. Beispiel:
 ```js
 locales: ['en', 'es', 'zh-CN', 'zh-TW'],
 localeConfigs: {
@@ -91,149 +91,145 @@ localeConfigs: {
 ```
 :::
 
-**3.** Save the file.
+**3.** Datei speichern.
 
-### Step 2 - Generate Translation Folders {#generate-translation-folders}
+### Schritt 2 - Erstelle Ordner für die Übersetzung {#generate-translation-folders}
 
-Run the following command to generate a new translation scaffold:
+Führe den folgenden Befehl aus um die Struktur zu erzeugen:
 ```bash
-npx docusaurus write-translations --locale YOUR_LOCALE_CODE
+npx docusaurus write-translations --locale DEIN_LOCALE_CODE
 ```
 
 
-### Step 3 - Organize Your Translation Workspace {#organize-your-translation-workspace}
+### Schritt 3 - Organisiere deinen Arbeitsplatz {#organize-your-translation-workspace}
 
-**1.** Inside `docusaurus-plugin-content-docs` and `docusaurus-plugin-content-modding-docs`, create a folder called `current`.
-**2.** Copy all files from `docs/` and `modding-docs/` into their respective `current`.
-**3.** Begin translating these files. Maintain the original formatting, including:
- - Headings
- - Lists
- - Code blocks
- - Notes (`:::note`)
+**1.** In `docusaurus-plugin-content-docs` und `docusaurus-plugin-content-modding-docs`erstellst Du den Ordner `current`.
+**2.** Kopiere alle Dateien aus `docs/` und `modding-docs/` in `current`.
+**3.** Starte mit dem Übersetzen dieser Dateien. Behalte die ursprüngliche Formatierung bei, einschließlich:
+ - Überschriften
+ - Listen
+ - Codeblöcke
+ - Anmerkungen (`:::note`)
  - Tips (`:::tip`)
- - Important warnings (`:::important`)
- - Images and captions
-**4.** Translate all other files in the directory, such as `code.json` and `tags.yml`.
-**5.** Remember that links, page IDs, names, and image references **should not be translated**.
+ - Wichtige Warnungen (`:::important`)
+ - Bilder und Bildbeschreibungen
+**4.** Übersetze alle anderen Dateien im Verzeichnis, wie `code.json` und `tags.yml`.
+**5.** Denk daran, dass Links, Seiten-IDs, Namen und Bildverweise **nicht übersetzt werden dürfen**. 
 
-### Step 4 - Submit Your PR {#submit-your-pr}
+### Schritt 4 - Reiche deine PR ein {#submit-your-pr}
 
- - Once all files are translated, submit a Pull Request.  
- - A wiki maintainer will review your translation before it is merged.  
- - Keep in mind that your contribution is **responsible for everything** in your language’s folder.  
- - Ensure all translations are accurate, consistent, and maintain the original formatting.  
- - PRs for translations must start with `[Translation - YOUR_LOCALE_CODE]`.  
+ - Wenn alle Dateien übersetzt sind, starte eine Pull Request.  
+ - Ein Wikiinstandhalter wird deine Übersetzung vor der Übernahme prüfen.
+ - Denk daran, dass Du für **alles** im Ordner Deiner Sprache verantwortlich bist.
+ - Stell sicher, dass alle Übersetzungen präsize, klar und übereinstimmend mit dem Original bleiben.
+ - PRs für Übersetzungen müssen mit `[Translation - YOUR_LOCALE_CODE]` starten.  
 
 ---
 
-## MDX & i18n Guide for Translators {#mdx-and-i18n-guide-for-translators}
+## MDX & i18n Leitfaden für Übersetzer {#mdx-and-i18n-guide-for-translators}
 
-Docusaurus uses `i18n` to manage translations, and our wiki uses MDX for enhanced formatting. Translators must understand both.
+Docusaurus nutzt `i18n` um Übersetzungen zu verwalten und unser Wiki nutzt MDX für die Formatierung. Übersetzer müssen beides verstehen und beherrschen.
 
-### Key Responsibilities {#key-responsibilities}
+### Hauptverantwortlichkeiten {#key-responsibilities}
 
- - Translate all textual content in your language folder, including `code.json`, `tags.yml`, `.mdx` files, and any metadata.
- - Maintain all MDX formatting:
-   - Page header (`id` and `title`) must remain unchanged except for translated titles.
-   - Lists, headings, code blocks, and blockquotes must remain consistent.
-   - Admonitions (notes, tips, important warnings):
-```md
+ - Übersetze sämtliche Textinhalte in Deinem Sprachordner, einschließlich `code.json`, `tags.yml`, `.mdx` Dateien und alle Metadaten.
+ - Behalte sämtliche MDX Fortmatierung bei:
+   - Seiten Header (`id` und `title`) müssen unverändert bleiben, außer für übersetzte Titel.
+   - Listen, Überschriften, Codeblöcke und Blockzitate müssen konsequent bleiben.
+   - Hinweise (Anmerkungen, Tips, wichtige Warnungen):
+```
 :::note
-This is a note. You may translate the text inside.
+Dies ist eine Anmerkung. Du kannst den Text darin übersetzen.
 :::
 ```
 
-   - Images and captions: do not translate filenames or captions that reference proper names.
- - Page IDs, links, and file references must **not** be translated.
- - Follow proper grammar and spelling for your language.
- - All headings should be static. This means if you want to have `### Responsibilities`, it should instead be `### Responsibilities {#responsibilities}` (case sensitive). The actual heading names should be translated. The static anchors should not.
+   - Bilder und Bildbeschreibungen: Übersetze keine Dateinamen oder Bezeichnugen, die sich auf solche beziehen.
+ - Seiten IDs, Links und Dateiverweise dürfen **nicht** übersetzt werden.
+ - Halte Dich an korrekte Grammatik und Rechtschreibung für Deine Sprache.
+ - Alle Überschriften sollten Statisch sein. Das Bedeutet, dass Du anstelle von `### Responsibilities`lieber `### Responsibilities {#responsibilities}` (Auf Groß-/Kleinschreibung achten) benutzen solltest. Die Namen der Überschriften können übersetzt werden, der statische Anker nicht.
 
-### MDX Example {#mdx-example}
+### MDX Beispiel {#mdx-example}
 ```md
 ---
 id: example-page
-title: Example Page
+title: Beispielseite
 ---
 
-## Heading {#heading}
+## Überschrift {#heading}
 
-Text content here.
+Textinhalte hier.
 
 :::tip
-This is a tip for the user.
+Hier steht ein Tip für den Leser.
 :::
 ```
 
- - All text inside MDX content can be translated, including admonitions, lists, and paragraphs.  
- - Do **not** translate anything inside code blocks, filenames, links, or IDs.  
- - All city and country names should be translated to match their variant in the language.  
+ - Sämtliche Texte in MDX-Inhalten können übersetzt werden, einschließlich Hinweise, Listen und Absätze. 
+ - Übersetze **nichts** innerhalb von Codeblöcken, Dateinamen, Links oder IDs.
 
 ---
 
-## Language-Specific Notes {#language-specific-notes}
+## Sprachspezifische Anmerkungen {#language-specific-notes}
 
-Here are details for the currently supported languages:
+Hier sind die Anforderungen für alle derzeit unterstützten Sprachen:
 
- - **Spanish (es-ES)**  
-   - Use standard European Spanish spelling and grammar.  
-   - Avoid mixing Latin American expressions.  
-   - Ensure accents and special characters (ñ, á, é, í, ó, ú) are correct.
+ - **Spanisch (es-ES)**  
+   - Nutze standardeuropäische Rechtschreibung und Grammatik.
+   - Vermeide lateinamerikanische Ausdrücke.
+   - Stelle sicher, dass Akzente und Sonderzeichen (ñ, á, é, í, ó, ú) richtig sind.
 
- - **Catalan (ca-ES)**  
-   - Use standard Catalan spelling and grammar.  
-   - Maintain proper accents and diacritics (à, ç, é, è, í, ï, ó, ò, ú, ü).  
-   - Avoid mixing Spanish expressions; keep phrasing natural for Catalan readers.
+ - **Katalanisch (ca-ES)**  
+   - Nutze Standardkatalanische Rechtschreibung und Grammatik.
+   - Behalte richtige Akzente und diakritische Zeichen bei (à, ç, é, è, í, ï, ó, ò, ú, ü).  
+   - Vermeide das Vermischen mit spanischen Ausdrücken, behalte den Satzbau natürlich für katalanische Leser.
 
- - **French (fr-FR)**  
-   - Use formal French; avoid overly casual phrasing.  
-   - Pay attention to gendered words and agreement.
+ - **Französisch (fr-FR)**  
+   - Nutze formelle Sprache, vermeide zu umgangssprachliche Ausdrücke.
+   - Beachte geschlechtsspezifische Wörter und Übereinstimmung.
 
- - **German (de-DE)**  
-   - Use standard High German (Hochdeutsch).  
-   - Maintain capitalization of nouns.  
-   - Compound words must be properly connected.
+ - **Deutsch (de-DE)**  
+   - Nutze Hochdeutsch.
+   - Behalte die Großschreibung von Nomen bei.
+   - Komposita müssen korrekt verbunden werden.
 
  - **Italian (it-IT)**  
-   - Use standard Italian spelling.  
-   - Maintain proper use of accents.  
-   - Use formal tone consistently.
+   - Nutze standarditalienische Rechtschreibung.
+   - Behalte den korrekten Nutzen von Akzenten bei.
+   - Bleib bei konsequent formeller Sprache.
 
- - **Danish (da-DK)**  
-   - Use standard Danish grammar and spelling.  
-   - Be careful with special characters (æ, ø, å).
+ - **Dänisch (da-DK)**  
+   - Nutze standarddänische Rechtschreibung und Grammatik.
+   - Beachte Sonderzeichen (æ, ø, å).
 
- - **Swedish (sv-SE)**  
-   - Use standard Swedish; watch out for compound words.  
-   - Maintain proper accents and letters (å, ä, ö).
+ - **Schwedisch (sv-SE)**  
+   - Nutze normales Schwedisch, achte auf Komposita.
+   - Achte auf richtige Akzente und Sonderzeichen (å, ä, ö).
 
- - **Norwegian (nb-NO)**  
-   - Use Bokmål (not Nynorsk) unless otherwise specified.  
-   - Keep special characters correct (æ, ø, å).
+ - **Norwegisch (nb-NO)**  
+   - Nutze Bokmål (not Nynorsk), ausser explizit anders verlangt.  
+   - Achte auf korrekte Sonderzeichen (æ, ø, å).
 
  - **Mandarin (zh-CN)**  
-   - Use Simplified Chinese.  
-   - Ensure punctuation matches Mainland Chinese conventions.
-
- - **Traditional Chinese (zh-TW)**  
-   - Use Traditional Chinese characters.  
-   - Follow Taiwanese terminology and conventions where applicable.  
-   - Ensure punctuation follows Traditional Chinese standards.
+   - Nutze vereinfachtes Chinesisch.
+   - Stelle sicher, dass Zeichensetzung den chinesischen Vorgaben entspricht.
 
 ---
 
-## Important Notes {#important-notes}
+## Wichtige Anmerkungen {#important-notes}
 
- - **Pull Requests Required:** All translations must be submitted via PR and reviewed by a wiki maintainer.
- - **PR Naming:** Translation PRs must start with `[Translation - YOUR_LOCALE_CODE]`.
- - **Needs-Translating Tag:** Any PR merged with the `needs-translating` tag needs translating by contributors.
- - **Formatting Matters:** Maintain code blocks, notes, headings, lists, and image references exactly as in the original files.
+ - **Pull Requests notwendig:** Alle Übersetzungen müssen via PR eingereicht und durch einen Wikiinstandhalter überprüft werden.
+ - **PR Benennung:** Übersetzungs-PRs müssen mit `[Translation - DEIN_LOCALE_CODE]` beginnen.  
+ - **Needs-Translating Tag:** Sämtliche PR mit dem `needs-translating` Tag müssen von Mithelfern übersetzt werden.
+ - **Formatierung ist wichtig:** Behalte Codeblöcke, Anmerkungen, Überschriften, Listen und Bildreferenzen genau wie in den Originaldateien bei.
+ - **Verantwortung:** Übersetzer sind verantwortlich für die korrekte und vollständige Übersetzung ihres Sprachordners.
+ - **Einschränkungen von Updates:** Automatische Updates von Docusaurus können nicht übersetzt werden. Fokussiere Dich auf die manuelle Übersetzung der Inhalte.
 
 ---
 
-## Updating Translations {#updating-translations}
+## Aktualisieren und Übersetzungen {#updating-translations}
 
-**1.** Pull the latest changes from the main branch.
-**2.** Review any new or updated files in `docs/` and `modding-docs/`.
-**3.** Translate any new content in your language folder.
-**4.** Submit updates via PR using the `[Translation - YOUR_LOCALE_CODE]` prefix.
-**5.** Repeat the review process with a wiki maintainer before merging.
+**1.** Synchronisiere die neuesten Änderungen aus dem Hauptverzeichnis (`main brach`).
+**2.** Überprüfe neue oder überarbeitete Dateien in `docs/` und `modding-docs/`.
+**3.** Übersetze neue Inhalte in deinem Sprachordner.
+**4.** Reiche Updates via PR ein und benutze den `[Translation - DEIN_LOCALE_CODE]` Präfix.
+**5.** Wiederhole den Prüfprozess mit einem Wikiinstandhalter vor der Übernahme.

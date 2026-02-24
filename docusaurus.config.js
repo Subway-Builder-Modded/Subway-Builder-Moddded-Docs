@@ -14,13 +14,13 @@ module.exports = {
   },
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'es', 'ca', 'fr', 'de', 'it', 'da', 'sv', 'nb', 'zh'],
+    locales: ['en', 'de'],
     localeConfigs: {
       en: {
         label: 'English',
         htmlLang: 'en-GB',
       },
-      es: {
+      /*es: {
         label: 'Español',
         htmlLang: 'es-ES',
       },
@@ -31,11 +31,11 @@ module.exports = {
       fr: {
         label: 'Français',
         htmlLang: 'fr-FR',
-      },
+      }, */
       de: {
         label: 'Deutsch',
         htmlLang: 'de-DE',
-      },
+      }, /*
       it: {
         label: 'Italiano',
         htmlLang: 'it-IT',
@@ -52,10 +52,14 @@ module.exports = {
         label: 'Norsk bokmål',
         htmlLang: 'nb-NO',
       },
-      zh: {
+      zh-CN: {
         label: '中文 (简体)',
         htmlLang: 'zh-CN',
       },
+      zh-TW: {
+        label: '中文 (繁體)',
+        htmlLang: 'zh-TW',
+      },*/
     },
   },
   presets: [
