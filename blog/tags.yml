@@ -6,6 +6,10 @@ map-manager:
   label: 'Map Manager'
   permalink: '/map-manager'
   description: 'Updates and release notes for the Subway Builder Map Manager.'
+mod-manager:
+  label: 'Mod Manager'
+  permalink: '/mod-manager'
+  description: 'Updates and release notes for the Subway Builder Mod Manager.'
 mod-template:
   label: 'Mod Template'
   permalink: '/mod-template'
