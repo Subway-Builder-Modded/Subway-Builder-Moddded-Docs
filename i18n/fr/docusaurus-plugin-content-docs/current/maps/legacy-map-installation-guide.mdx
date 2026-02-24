@@ -6,6 +6,7 @@ title: Map Installation Guide (Legacy)
 Before the Map Manager was developed, the `serve` method was used. It was more complex and differed from map to map, but we can easily extract the files we need and port the map to the Map Manager.
 
 ## Step 1 - Installing the Map Manager {#installing-the-map-manager}
+
 Download the latest release of the Map Manager at https://github.com/Kronifer/subwaybuilder-patcher/releases. To download, click on the version that corresponds to your operating system.
 
 <img width="1000" alt="image" src="/images/map-manager-download.png" />
@@ -14,10 +15,10 @@ Download the latest release of the Map Manager at https://github.com/Kronifer/su
 For Windows, you want the `.exe` file. For Linux, you want the `.zip` file. For MacOS, use the `arm64.dmg` file if your Mac has an Apple Silicon Chip (e.g. M1, M2, M3, etc.) and the `x64.dmg` file if your Mac has an Intel chip. As a rule of thumb, Macs newer then around 2021 tend to have Apple Silicon Chips and older models tend to have Intel chips, but double-check as there are exceptions.
 :::
 
-:::note
+:::warning
 On MacOS, the .dmg installer is likely to be quarantined. To run the installer, open a terminal in the folder where you've downloaded the installer to, then run `xattr -d com.apple.quarantine {INSTALLER_FILENAME}`. For example, when downloading version 0.2.7 for an ARM Mac, you would run `xattr -d com.apple.quarantine Subway.Builder.Map.Manager-0.2.7-arm64.dmg`.
 
-In addition, the Library folder containing the metro-maker4 folder may be hidden by default. To solve this, open Finder and open the Home folder, then select View -> Show View Options -> Show Library Folder. 
+In addition, the Library folder containing the metro-maker4 folder may be hidden by default. To solve this, open Finder and open the Home folder, then select View -> Show View Options -> Show Library Folder.
 :::
 
 After that, install the app as you normally would any other app. Once the installer is finished, launch the app and run through the setup process, selecting your game executable location and your `metro-maker4` folder. At this point it is safe to delete the ZIP, the installer, and any other files that you may have downloaded.
@@ -25,13 +26,15 @@ After that, install the app as you normally would any other app. Once the instal
 <img width="1200" alt="image" src="/images/map-manager-welcome.png" />
 
 ## Step 2 - Extracting the Files {#extracting-the-files}
+
 Now, we need to extract the files we need from the map that you downloaded. We will need 6 files in total:
- - `XXX.pmtiles` (`XXX` is your city code; e.g. `MIA` for Miami)
- - `demand_data.json`
- - `buildings_index.json`
- - `roads.geojson`
- - `runways_taxiways.geojson`
- - `config.json`
+
+- `XXX.pmtiles` (`XXX` is your city code; e.g. `MIA` for Miami)
+- `demand_data.json`
+- `buildings_index.json`
+- `roads.geojson`
+- `runways_taxiways.geojson`
+- `config.json`
 
 The first one is easy. In the map that you downloaded, search for the XXX.pmtiles file. It's somewhere in the directory, either in the root or inside of a folder. For now, create a temporary working folder so that we can store our 6 files.
 
@@ -50,6 +53,7 @@ Make sure it's a `.json` file. Google how to enable file name extensions on your
 :::
 
 Inside `config.json`, paste this template:
+
 ```
 {
   "name": "Boise",
@@ -78,11 +82,12 @@ If your directory has multiple `.js` files, check all of them. One of them has t
 :::
 
 From this file, we can get:
- - `name`
- - `code`
- - `description`
- - `population`
- - `intialViewState` (and all of its arguments)
+
+- `name`
+- `code`
+- `description`
+- `population`
+- `intialViewState` (and all of its arguments)
 
 :::note
 If your data does not include `initialViewState`, you can put 12 or 13 for `zoom` and 0 for `bearing`. For `latitude` and `longitude`, you can pick any number inside your bbox coordinate range (the `latitude` corresponds to the **2nd** and **4th** numbers and the `longitude` corresponds to the **1st** and the **3rd**.) In the Toronto example shown above, we could use 44.0 and -79.0 for `latitude` and `longitude` respectively.
@@ -95,6 +100,7 @@ While not required, if you plan on sharing this ported map, please include the `
 :::
 
 ## Step 3 - Zipping the Files {#zipping-the-files}
+
 Now that we have all 6 files, we need to package them into a `.zip`. This can easily be done on Windows or Linux natively or using [7-Zip](https://www.7-zip.org/download.html), or on MacOS by selecting `Compress`. Once you have a `.zip` file, you're essentially done porting the mod and the only thing left to do is to import it into the game to play it.
 
 ## Step 4 - Adding the Map {#adding-the-map}
