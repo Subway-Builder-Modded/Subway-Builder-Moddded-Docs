@@ -33,6 +33,10 @@ When you import your maps, they will appear under the "`Custom`" tab in the map 
 
 <img width="500" alt="image" src="/images/map-country-tabs.png" />
 
+:::important
+This currently will not work for United States or United Kingdom maps, as those countries are already categorized under the "`US`" and "`UK`" tabs respectively and are handled differently internally.
+:::
+
 To do this, you can simply add the following field into your `config.json` file:
 ```json
   "country": "en" /* The country code of the country you want your map to be categorized under. For example, "en" for England, "fr" for France, etc. A list of country codes can be found at https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes. */
