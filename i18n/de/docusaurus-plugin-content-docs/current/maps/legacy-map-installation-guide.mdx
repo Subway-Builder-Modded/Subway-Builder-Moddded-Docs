@@ -1,58 +1,58 @@
 ---
 id: legacy-map-installation-guide
-title: Map Installation Guide (Legacy)
+title: Karten-Installationsanleitung (klassisch)
 ---
 
-Before the Map Manager was developed, the `serve` method was used. It was more complex and differed from map to map, but we can easily extract the files we need and port the map to the Map Manager.
+Bevor der Map Manager entwickelt wurde nutzen Karten die `serve` Methode. Das war komplexer und von Karte zu Karte unterschiedlich, aber wir können alle wichtigen Dateien einfach extrahieren und für die Benutzung mit dem Mod Manager umwandeln.
 
-## Step 1 - Installing the Map Manager {#installing-the-map-manager}
+## Schritt 1 - Den Mod Manager installieren {#installing-the-map-manager}
 
-Download the latest release of the Map Manager at https://github.com/Subway-Builder-Modded/subwaybuilder-patcher/releases. To download, click on the version that corresponds to your operating system.
+Lade die aktuelle Version des Map Managers auf https://github.com/Subway-Builder-Modded/subwaybuilder-patcher/releases herunter. Klicke dafür auf die Version, die zu Deinem Betriebssystem passt.
 
 <img width="1000" alt="image" src="/images/map-manager-download.png" />
 
-:::note
-For Windows, you want the `.exe` file. For Linux, you want the `.zip` file. For MacOS, use the `arm64.dmg` file if your Mac has an Apple Silicon Chip (e.g. M1, M2, M3, etc.) and the `x64.dmg` file if your Mac has an Intel chip. As a rule of thumb, Macs newer then around 2021 tend to have Apple Silicon Chips and older models tend to have Intel chips, but double-check as there are exceptions.
+:::warning
+Für Windows benötigst Du die `.exe` Datei. Für Linux nutzt Du die `.zip` Datei. Für MacOS nimmst Du die `arm64.dmg` Datei, wenn Dein Mac einen Apple Silicon Prozessor hat (z.B. M1, M2, M3, etc.) und die `x64.dmg` Datei, wenn dein Mac einen Intel Prozessor hat. Als Faustregel: Macs nach ca. 2021 benutzen Apple Silicon, ältere benutzen Intel Prozessoren. Überprüfe trotzdem Dein Gerät, da es einige Ausnahmen gibt.
 :::
 
 :::warning
-On MacOS, the .dmg installer is likely to be quarantined. To run the installer, open a terminal in the folder where you've downloaded the installer to, then run `xattr -d com.apple.quarantine {INSTALLER_FILENAME}`. For example, when downloading version 0.2.7 for an ARM Mac, you would run `xattr -d com.apple.quarantine Subway.Builder.Map.Manager-0.2.7-arm64.dmg`.
+Auf MacOS wird der .dmg Installer wahrscheinlich in die Quarantäne versetzt. Um den Installer auszuführen öffne ein Terminal in dem Ordner, in dem der Installer liegt, und führe den Befehl `xattr -d com.apple.quarantine {INSTALLER_DATEINAME}` aus. Beispiel: Wenn Du Version 0.2.7 für einen ARM Mac heruntergeladen hast, lautet Dein Befehl `xattr -d com.apple.quarantine Subway.Builder.Map.Manager-0.2.7-arm64.dmg`.
 
-In addition, the Library folder containing the metro-maker4 folder may be hidden by default. To solve this, open Finder and open the Home folder, then select View -> Show View Options -> Show Library Folder.
+Außerdem kann der Library-Order, der den metro-maker4 Ordner beinhaltet, standardmäßig versteckt sein. Öffne dann den Benutzerordner im Finder und wähle Darstellung -> Darstellungsoptionen -> Library-Ordner einblenden.
 :::
 
-After that, install the app as you normally would any other app. Once the installer is finished, launch the app and run through the setup process, selecting your game executable location and your `metro-maker4` folder. At this point it is safe to delete the ZIP, the installer, and any other files that you may have downloaded.
+Danach installierst Du den Manager wie jedes andere Programm. Sobald der Installer fertig ist, öffne den Map Manager und schließe die Einrichtung ab, indem du den Installationsordner des Spiels und den `metro-maker4` Ordner auswählst. Danach kannst du ZIP, Installer und sämtliche andere Dateien, die Du heruntergeladen hast, löschen.
 
 <img width="1200" alt="image" src="/images/map-manager-welcome.png" />
 
-## Step 2 - Extracting the Files {#extracting-the-files}
+## Schritt 2 - Die Dateien extrahieren {#extracting-the-files}
 
-Now, we need to extract the files we need from the map that you downloaded. We will need 6 files in total:
+Jetzt müssen wir die benötigten Dateien aus der Karte extrahieren, die Du heruntergeladen hast. Wir werden insgesamt sechs Dateien benötigen:
 
-- `XXX.pmtiles` (`XXX` is your city code; e.g. `MIA` for Miami)
-- `demand_data.json`
-- `buildings_index.json`
-- `roads.geojson`
-- `runways_taxiways.geojson`
-- `config.json`
+ - `XXX.pmtiles` (`XXX` ist der Städtecode; z.B. `MIA` für Miami)
+ - `demand_data.json`
+ - `buildings_index.json`
+ - `roads.geojson`
+ - `runways_taxiways.geojson`
+ - `config.json`
 
-The first one is easy. In the map that you downloaded, search for the XXX.pmtiles file. It's somewhere in the directory, either in the root or inside of a folder. For now, create a temporary working folder so that we can store our 6 files.
+Die erste ist einfach. In der Map, die Du heruntergeladen hast, such einfach nach der XXX.pmtiles Datei. Sie liegt irgendwo im Verzeichnis, entweder direkt in der obersten Ebene oder in einem der Ordner. Erstelle fürs Erste einen temporären Arbeitsordner, in dem Du die Dateien zwischenspeichern kannst.
 
-The next 4 require a little more work. You should be able to find all of the files relatively easily, however they are all in their compressed forms (they end in `.gz`). For this, we will need to extract them as an archive.
-
-:::tip
-On Windows and Linux, you can use [7-Zip](https://www.7-zip.org/download.html) to extract the `.gz` archive. MacOS natively supports unzipping gzip compressed archives, meaning you can just click on it to extract it.
-:::
-
-Inside, you should see a single file. If you are in the `demand_data.json.gz` archive, you should see `demand_data.json` inside, and the same goes for the other 3 archives. Extract all 4 of these files and place them in our temporary working folder. Some maps have duplicate data files throughout their directory. It doesn't matter which one you choose, as they're all the same.
-
-The last file that we need is `config.json`. This one is the most difficult. For this, we need a few things. Firstly, create a new file and call it `config.json`.
+Die nächsten vier benötigen etwas mehr Arbeit. Du solltest sie alle relativ schnell finden können, allerdings liegen Sie nur komprimiert vor (mit der Dateiendung `.gz`). Du musst sie also als Archiv entpacken.
 
 :::tip
-Make sure it's a `.json` file. Google how to enable file name extensions on your operating system if the file type doesn't say `JSON File`.
+Auf Windows und Linux kannst du [7-Zip](https://www.7-zip.org/download.html) zum Extrahieren von `.gz` Archiven benutzen. MacOS unterstützt nativ das entpacken von gzip-Archiven, Du kannst sie also mit einem Rechtsklick extrahieren.
 :::
 
-Inside `config.json`, paste this template:
+Darin solltest du eine einzige Datei finden. Im `demand_data.json.gz` Archiv liegt `demand_data.json` genauso jeweils für die anderen drei Archive. Extrahiere alle vier dieser Dateien in den temporären Arbeitsordner. In machen Archiven können Duplikate liegen. Es ist egal, welche Du nimmst, da alle gleich sind.
+
+Die letzte Datei die wir brauchen ist die `config.json`. Diese ist am kompliziertesten. Wir benötigen dafür ein paar Dinge. Als erstes erstellst Du eine neue Datei und nennst sie `config.json`.
+
+:::tip
+Stell sicher, dass es sich um eine `.json` Datei handelt. Wenn auf deinem Betriebssystem die Dateiendungen nicht angezeigt werden, kannst Du mit einer schnellen Google-Suche herausfinden, wie du sie aktivierst. Der Dateityp muss als `JSON Datei` angezeigt werden.
+:::
+
+In die `config.json`kopierst Du diese Vorlage:
 
 ```
 {
@@ -71,48 +71,48 @@ Inside `config.json`, paste this template:
 }
 ```
 
-We need to edit this data so that it matches our map. In the directory of your map, there should be a `.js` file, most commonly `index.js`. Inside that file, you will see something that looks very similar to our template.
+Wir müssen jetzt diese Daten so anpassen, dass sie zur Karte passen. Im Verzeichnis der heruntergeladenen Karte sollte eine`.js` Datei liegen, meistens `index.js`. In dieser Datei findest Du etwas sehr ähnliches zu unserer Vorlage.
 
 <img width="1097" alt="image" src="/images/city-data.png" />
 
-> This is inside of the `index.js` file of the Canadian Cities Map Pack.
+> Das ist der Inhalt der `index.js` Datei aus dem Canadian Cities Map Pack.
 
 :::tip
-If your directory has multiple `.js` files, check all of them. One of them has the data that you need.
+Wenn Dein Verzeichnis mehrere `.js` Dateien beinhaltet, überprüfe alle. Eine davon hat die Daten, die wir brauchen.
 :::
 
-From this file, we can get:
+Aus dieser Datei bekommen wir:
 
-- `name`
-- `code`
-- `description`
-- `population`
-- `intialViewState` (and all of its arguments)
+ - `name`
+ - `code`
+ - `description`
+ - `population`
+ - `intialViewState` (und die dazugehörigen Argumente)
 
 :::note
-If your data does not include `initialViewState`, you can put 12 or 13 for `zoom` and 0 for `bearing`. For `latitude` and `longitude`, you can pick any number inside your bbox coordinate range (the `latitude` corresponds to the **2nd** and **4th** numbers and the `longitude` corresponds to the **1st** and the **3rd**.) In the Toronto example shown above, we could use 44.0 and -79.0 for `latitude` and `longitude` respectively.
+Wenn Deine Datei kein `initialViewState` enthält, kannst Du einfach 12 oder 13 für `zoom` und 0 für `bearing` einsetzen. Für `latitude` und `longitude` kannst Du eine Nummer wählen, die sich innerhalb der bbox Koordinaten befindet ( `latitude` korrespondiert zur **2nd** und **4th** Zahl und `longitude` korrespondiert zur **1st** und **3rd**.) Im Toronto Beispiel, das oben gezeigt wird, könnten wir 44.0 und -79.0 für `latitude` und `longitude` wählen.
 :::
 
-The last 2 things that we need, the `creator` and `version`, can both be found in `manifest.json`, which every project has. Once you get everything that you need for your config.json, ensure you have all 6 files. After that, you're ready to move on to the next step.
+Die letzten beiden Dinge die wir brauchen sind `creator` und `version` die Du beide in `manifest.json` finden kannst, das jedes Projekt enthält. Wenn Du alles für deine config.json zusammen hast stelle sicher, dass Du alle sechs Dateien hast. Dann kannst Du mit dem nächsten Schritt fortfahren.
 
 :::important
-While not required, if you plan on sharing this ported map, please include the `creator`. This ensures that the original creators still get credit for the maps that they made.
+Auch wenn es nicht verpflichtend ist, gib bitte den `creator` an, wenn Du die portierte Karte veröffentlichen willst. So wird sichergestellt, dass die ursprünglichen Autoren Anerkennung für ihre Karten erhalten. 
 :::
 
-## Step 3 - Zipping the Files {#zipping-the-files}
+## Schritt 3 - Die Dateien verpacken {#zipping-the-files}
 
-Now that we have all 6 files, we need to package them into a `.zip`. This can easily be done on Windows or Linux natively or using [7-Zip](https://www.7-zip.org/download.html), or on MacOS by selecting `Compress`. Once you have a `.zip` file, you're essentially done porting the mod and the only thing left to do is to import it into the game to play it.
+Jetzt wo wir alle sechs Dateien beisammen haben, müssen wir sie in einer `.zip` verpacken. Das kann auf Windows und Linux ganz einfach nativ oder mit [7-Zip](https://www.7-zip.org/download.html) geschehen, auf MacOS durch auswählen von `Komprimieren`. Wenn Du die `.zip` Datei hast, bist Du mit dem Umwandeln der Karte fertig und musst sie nur noch ins Spiel importieren.
 
-## Step 4 - Adding the Map {#adding-the-map}
+## Schritt 4 - Die Karte hinzufügen {#adding-the-map}
 
-To install a map, simply click on the `ADD A MAP` button and import the ZIP file that you downloaded containing your map. Once that is finished, you should see the map name, the creator, and the version appear on the screen.
+Um eine Karte zu installieren klickst Du einfach auf den `ADD A MAP` Button und importierst die ZIP-Datei, welche die Karte beinhaltet. Wenn der Import abgeschlossen ist kannst Du den Namen der Karte, des Erstellers und die Verision in der Liste sehen.
 
 <img width="1200" alt="image" src="/images/map-manager-home.png" />
 
-## Step 5 - Launching Subway Builder {#launching-subway-builder}
+## Schritt 5 - Subway Builder starten {#launching-subway-builder}
 
-Once you have added all of your maps, you can launch the game using `START GAME`. This is how you will launch the game from now on. In-game, your maps will appear under the `CUSTOM` tab, and they are ready to be played!
+Wenn Du alle Deine Karten hinzugefügt hast kannst Du das Spiel über `START GAME` starten. So wirst Du ab jetzt immer das Spiel starten. In den Einstellungen des Spiels erscheinen Deine Karten unter dem `CUSTOM` Tab und können sofort bespielt werden!
 
 :::important
-Due to the way the game currently works, you must launch the game via the Map Manager every time you want to play a custom map. If you do not launch the game using the Map Manager, buildings and water will not appear ingame.
+Aufgrund der Art, wie das Spiel aktuell funktioniet, musst Du es jedes mal über den Map Manager starten, wenn Du eine von Deinen benutzerdefinierten Karten spielen willst. Wenn Du das nicht tust werden Dir Gebäude und Gewässer im Spiel nicht angezeigt.
 :::

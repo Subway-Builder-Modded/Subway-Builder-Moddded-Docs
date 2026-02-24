@@ -14,11 +14,11 @@ module.exports = {
   },
   i18n: {
     defaultLocale: 'en',
-    locales: ['en'],
+    locales: ['en', 'de'],
     localeConfigs: {
       en: {
         label: 'English',
-        htmlLang: 'en-GB',
+        htmlLang: 'en-US',
       },
       /*es: {
         label: 'Español',
@@ -31,11 +31,11 @@ module.exports = {
       fr: {
         label: 'Français',
         htmlLang: 'fr-FR',
-      },
+      }, */
       de: {
         label: 'Deutsch',
         htmlLang: 'de-DE',
-      },
+      }, /*
       it: {
         label: 'Italiano',
         htmlLang: 'it-IT',
