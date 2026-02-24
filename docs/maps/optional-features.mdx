@@ -6,6 +6,7 @@ title: Optional Features
 This guide covers optional features for [Kronifer's Map Manager](https://github.com/Kronifer/subwaybuilder-patcher/releases) that can be added by map makers. These optional features are mostly visual/UI-related and have no effect on gameplay.
 
 ## Thumbnail {#thumbnail}
+
 The thumbnail of a map is the image that is displayed when a player tries to make a new map.
 
 <img width="300" alt="image" src="/images/create-thumbnail.png" />
@@ -18,6 +19,7 @@ The thumbnail is optional, however if you do not set it, it will appear blank.
 :::
 
 ### Method 1 - Config File {#config-file}
+
 To create a custom thumbnail using the `config.json` file, you can simply add the following field into the file:
 ```json
   "thumbnailBbox": [minLon /*West*/, minLat /*South*/, maxLon /*East*/, maxLat /*North*/]
@@ -26,9 +28,11 @@ To create a custom thumbnail using the `config.json` file, you can simply add th
 This will automatically generate a vanilla-styled thumbnail for your map based on the bounding box you inputted.
 
 ### Method 2 - Custom Image {#custom-image}
+
 To create a custom thumbnail using an image, you can add a `XXX.svg` (`XXX` is your city code). Simply place it with the other data files within the ZIP and the Map Manager will automatically use it as the thumbnail for your map. The image must be in SVG format.
 
 ## Custom Country Tab {#custom-country-tab}
+
 When you import your maps, they will appear under the "`Custom`" tab in the map creation screen. We can create a custom tab if we have a map for a different country. This will allow us to set it to appear under that country's tab, as do vanilla maps.
 
 <img width="500" alt="image" src="/images/map-country-tabs.png" />
