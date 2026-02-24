@@ -87,21 +87,21 @@ const MAPS = [
   },
   {
     title: translate({
-      id: "homepage.maps.legacy.title",
-      message: "Legacy Installation",
+      id: "homepage.maps.creating.title",
+      message: "Making Custom Maps",
     }),
     description: translate({
-      id: "homepage.maps.legacy.description",
+      id: "homepage.maps.creating.description",
       message:
-        "Some older maps use the serve method. Learn how to extract and port these maps for the modern installer.",
+        "Learn how to create your own custom maps for Subway Builder using the Subway Builder Modded map creation tools.",
     }),
     linkText: translate({
-      id: "homepage.maps.legacy.link",
-      message: "Legacy Guide",
+      id: "homepage.maps.creating.link",
+      message: "Making Custom Maps",
     }),
     lightImg: "/images/home-light-trains.png",
     darkImg: "/images/home-dark-trains.png",
-    href: "/wiki/maps/legacy-map-installation-guide",
+    href: "/wiki/maps/making-custom-maps",
     color: "#752F82",
   },
   {
