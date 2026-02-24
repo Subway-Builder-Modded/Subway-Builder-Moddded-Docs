@@ -48,14 +48,14 @@ const CONTRIBUTORS = {
   ],
   translators: [
     {
-      name: translate({ id: "credits.translators.mhmoeller.name", message: "mhmoeller" }),
-      role: translate({ id: "credits.translators.mhmoeller.role", message: "Translator" }),
+      name: translate({ id: "credits.translators.ppiittii.name", message: "ppiittii" }),
+      role: translate({ id: "credits.translators.ppiittii.role", message: "Translator" }),
       description: translate({
-        id: "credits.translators.mhmoeller.description",
+        id: "credits.translators.ppiittii.description",
         message:
-          "Maintains the Danish, Swedish, and Norwegian website translations.",
+          "Maintains the German website translations.",
       }),
-      link: "https://github.com/mhmoeller",
+      link: "https://github.com/ppiittii",
     },
   ],
   gameDevs: [
