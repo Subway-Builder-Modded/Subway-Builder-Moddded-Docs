@@ -35,15 +35,6 @@
   "credits.maintainers.kronifer.description": {
     "message": "Leitender Entwickler und Instandhalter des Map Managers und Instandhalter des Wikis."
   },
-  "credits.translators.mhmoeller.name": {
-    "message": "mhmoeller"
-  },
-  "credits.translators.mhmoeller.role": {
-    "message": "Übersetzer"
-  },
-  "credits.translators.mhmoeller.description": {
-    "message": "Zuständig für dänische, schwedische und norwegische Übersetzung der Website."
-  },
   "credits.gamedevs.colinmiller.name": {
     "message": "Colin Miller"
   },
@@ -145,15 +136,6 @@
   },
   "homepage.maps.install.link": {
     "message": "Installationsanleitung ansehen"
-  },
-  "homepage.maps.legacy.title": {
-    "message": "Klassische Installation"
-  },
-  "homepage.maps.legacy.description": {
-    "message": "Einige ältere Karten nutzen die 'serve' Methode. Hier lernst Du, wie Du sie extrahierst und für den modernen Installer portierst."
-  },
-  "homepage.maps.legacy.link": {
-    "message": "Klassische Anleitung"
   },
   "homepage.maps.updates.title": {
     "message": "Updates & Changelogs"
@@ -508,5 +490,23 @@
   "theme.tags.tagsPageTitle": {
     "message": "Tags",
     "description": "The title of the tag list page"
+  },
+  "credits.translators.ppiittii.name": {
+    "message": "ppiittii"
+  },
+  "credits.translators.ppiittii.role": {
+    "message": "Übersetzer"
+  },
+  "credits.translators.ppiittii.description": {
+    "message": "Pflegt die deutschen Website-Übersetzungen."
+  },
+  "homepage.maps.creating.title": {
+    "message": "Eigene Karten erstellen"
+  },
+  "homepage.maps.creating.description": {
+    "message": "Erfahre, wie du deine eigenen benutzerdefinierten Karten für Subway Builder mit den Kartenerstellungstools von Subway Builder Modded erstellst."
+  },
+  "homepage.maps.creating.link": {
+    "message": "Eigene Karten erstellen"
   }
 }

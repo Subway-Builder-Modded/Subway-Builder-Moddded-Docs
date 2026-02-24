@@ -1,30 +1,30 @@
 {
   "link.title.Pages": {
-    "message": "Pages",
-    "description": "The title of the footer links column with title=Pages in the footer"
+    "message": "Seiten",
+    "description": "Der Titel der Footer-Linkspalte mit title=Pages im Footer"
   },
   "link.title.Other Links": {
-    "message": "Other Links",
-    "description": "The title of the footer links column with title=Other Links in the footer"
+    "message": "Weitere Links",
+    "description": "Der Titel der Footer-Linkspalte mit title=Other Links im Footer"
   },
   "link.item.label.Wiki": {
     "message": "Wiki",
-    "description": "The label of footer link with label=Wiki linking to /wiki/home"
+    "description": "Die Bezeichnung des Footer-Links mit label=Wiki, der auf /wiki/home verweist"
   },
   "link.item.label.Modding Docs": {
-    "message": "Modding Docs",
-    "description": "The label of footer link with label=Modding Docs linking to /modding-docs/getting-started"
+    "message": "Modding-Dokumentation",
+    "description": "Die Bezeichnung des Footer-Links mit label=Modding Docs, der auf /modding-docs/getting-started verweist"
   },
   "link.item.label.Updates": {
     "message": "Updates",
-    "description": "The label of footer link with label=Updates linking to /updates"
+    "description": "Die Bezeichnung des Footer-Links mit label=Updates, der auf /updates verweist"
   },
   "link.item.label.Credits": {
-    "message": "Credits",
-    "description": "The label of footer link with label=Credits linking to /credits"
+    "message": "Mitwirkende",
+    "description": "Die Bezeichnung des Footer-Links mit label=Credits, der auf /credits verweist"
   },
   "copyright": {
-    "message": "© Subway Builder Mod Wiki 2026. Not affiliated with Subway Builder or Redistricter, LLC. All content is community-created and shared under appropriate licenses.",
-    "description": "The footer copyright"
+    "message": "© Subway Builder Mod Wiki 2026. Nicht verbunden mit Subway Builder oder Redistricter, LLC. Alle Inhalte wurden von der Community erstellt und unter entsprechenden Lizenzen veröffentlicht.",
+    "description": "Das Copyright im Footer"
   }
 }
