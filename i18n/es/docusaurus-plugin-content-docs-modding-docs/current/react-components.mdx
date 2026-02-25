@@ -3,7 +3,8 @@ id: react-components
 title: Componentes de React
 ---
 
-Los mods de Subway Builder pueden renderizar UI personalizada usando React. El juego proporciona React en tiempo de ejecución — tu mod no necesita incluirlo en el bundle.
+Los mods de Subway Builder pueden renderizar UI personalizada usando React. El juego proporciona
+React en tiempo de ejecución — tu mod no necesita incluirlo en el bundle.
 
 ## Cómo funciona el React Shim {#how-the-react-shim-works}
 
@@ -15,13 +16,15 @@ export default React;
 export const { useState, useEffect, useCallback, useMemo, useRef } = React;
 ```
 
-Vite está configurado para redirigir todos los imports de `react` a este shim, así que puedes escribir React estándar:
+Vite está configurado para redirigir todos los imports de `react` a este shim, así que puedes
+escribir React estándar:
 
 ```tsx
 import { useState, useEffect } from 'react';
 ```
 
-Esto simplemente funciona — el import se redirige al shim en tiempo de compilación y, en tiempo de ejecución, utiliza la instancia de React del juego.
+Esto simplemente funciona — el import se redirige al shim en tiempo de compilación y, en tiempo de
+ejecución, utiliza la instancia de React del juego.
 
 ## Uso de Componentes de UI del Juego {#using-game-ui-components}
 
@@ -31,32 +34,34 @@ El juego expone un conjunto de componentes de UI con estilos. Accede a ellos des
 const api = window.SubwayBuilderAPI;
 
 // Haz cast a any ya que los componentes funcionan en tiempo de ejecución pero no tienen tipos estrictos para sus props
-const { Button, Card, CardHeader, CardTitle, CardContent } =
-  api.utils.components as Record<string, React.ComponentType<any>>;
+const { Button, Card, CardHeader, CardTitle, CardContent } = api.utils.components as Record<
+  string,
+  React.ComponentType<any>
+>;
 ```
 
 ### Componentes Disponibles {#available-components}
 
-| Componente | Descripción |
-|---|---|
-| `Button` | Botón estándar con soporte de variantes |
-| `Card` | Tarjeta contenedora |
-| `CardHeader` | Sección de encabezado de la tarjeta |
-| `CardTitle` | Texto del título de la tarjeta |
-| `CardContent` | Contenido principal de la tarjeta |
-| `CardDescription` | Texto descriptivo de la tarjeta |
-| `Switch` | Interruptor de activación |
-| `Slider` | Control deslizante de rango |
-| `Label` | Etiqueta de formulario |
-| `Input` | Campo de texto |
-| `Badge` | Insignia de estado |
-| `Progress` | Barra de progreso |
-| `Tooltip` | Contenedor de tooltip |
-| `TooltipProvider` | Proveedor de contexto para tooltips |
-| `TooltipTrigger` | Elemento activador del tooltip |
-| `TooltipContent` | Contenido emergente del tooltip |
-| `SubwayButton` | Botón con estilo del juego |
-| `MainMenuButton` | Botón con estilo del menú principal |
+| Componente        | Descripción                             |
+| ----------------- | --------------------------------------- |
+| `Button`          | Botón estándar con soporte de variantes |
+| `Card`            | Tarjeta contenedora                     |
+| `CardHeader`      | Sección de encabezado de la tarjeta     |
+| `CardTitle`       | Texto del título de la tarjeta          |
+| `CardContent`     | Contenido principal de la tarjeta       |
+| `CardDescription` | Texto descriptivo de la tarjeta         |
+| `Switch`          | Interruptor de activación               |
+| `Slider`          | Control deslizante de rango             |
+| `Label`           | Etiqueta de formulario                  |
+| `Input`           | Campo de texto                          |
+| `Badge`           | Insignia de estado                      |
+| `Progress`        | Barra de progreso                       |
+| `Tooltip`         | Contenedor de tooltip                   |
+| `TooltipProvider` | Proveedor de contexto para tooltips     |
+| `TooltipTrigger`  | Elemento activador del tooltip          |
+| `TooltipContent`  | Contenido emergente del tooltip         |
+| `SubwayButton`    | Botón con estilo del juego              |
+| `MainMenuButton`  | Botón con estilo del menú principal     |
 
 ### Ejemplo de Button {#button-example}
 
@@ -79,8 +84,10 @@ function MyPanel() {
 ### Ejemplo de Card {#card-example}
 
 ```tsx
-const { Card, CardHeader, CardTitle, CardContent } =
-  api.utils.components as Record<string, React.ComponentType<any>>;
+const { Card, CardHeader, CardTitle, CardContent } = api.utils.components as Record<
+  string,
+  React.ComponentType<any>
+>;
 
 function StatsCard() {
   const stats = api.gameState.getRidershipStats();
@@ -101,7 +108,8 @@ function StatsCard() {
 
 ## Uso de Iconos Lucide {#using-lucide-icons}
 
-El juego proporciona ~5000 iconos de [Lucide](https://lucide.dev/). Accede a ellos por su nombre en PascalCase:
+El juego proporciona ~5000 iconos de [Lucide](https://lucide.dev/). Accede a ellos por su nombre en
+PascalCase:
 
 ```tsx
 const icons = api.utils.icons;
@@ -120,14 +128,17 @@ function MyPanel() {
 }
 ```
 
-Iconos comunes que podrías usar: `Train`, `MapPin`, `Settings`, `DollarSign`, `BarChart`, `Route`, `Building`, `Layers`, `Clock`, `Play`, `Pause`, `Zap`, `Plus`, `Minus`, `Search`, `Filter`, `Download`, `Save`.
+Iconos comunes que podrías usar: `Train`, `MapPin`, `Settings`, `DollarSign`, `BarChart`, `Route`,
+`Building`, `Layers`, `Clock`, `Play`, `Pause`, `Zap`, `Plus`, `Minus`, `Search`, `Filter`,
+`Download`, `Save`.
 
-Para nombres de iconos usados en `addFloatingPanel`, `addToolbarButton`, etc., utiliza directamente el nombre en PascalCase como string:
+Para nombres de iconos usados en `addFloatingPanel`, `addToolbarButton`, etc., utiliza directamente
+el nombre en PascalCase como string:
 
 ```ts
 api.ui.addFloatingPanel({
   id: 'my-panel',
-  icon: 'Train',      // Nombre como string, no el componente
+  icon: 'Train', // Nombre como string, no el componente
   title: 'Mi Panel',
   render: MyPanel,
 });
@@ -135,7 +146,8 @@ api.ui.addFloatingPanel({
 
 ## Uso de Recharts {#using-recharts}
 
-El juego incluye [Recharts](https://recharts.org/) para visualización de datos. Todos los componentes estándar están disponibles:
+El juego incluye [Recharts](https://recharts.org/) para visualización de datos. Todos los
+componentes estándar están disponibles:
 
 ```tsx
 const { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } =
@@ -144,7 +156,7 @@ const { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip
 function RidershipChart() {
   const metrics = api.gameState.getLineMetrics();
 
-  const data = metrics.map(m => ({
+  const data = metrics.map((m) => ({
     name: m.name,
     riders: m.ridersPerHour,
   }));
@@ -165,23 +177,24 @@ function RidershipChart() {
 
 ### Componentes de Gráficos Disponibles {#available-chart-components}
 
-| Componente | Uso |
-|---|---|
-| `ResponsiveContainer` | Contenedor con tamaño automático (úsalo alrededor de cada gráfico) |
-| `BarChart`, `Bar` | Gráficos de barras |
-| `LineChart`, `Line` | Gráficos de líneas |
-| `AreaChart`, `Area` | Gráficos de área |
-| `PieChart`, `Pie`, `Cell` | Gráficos de pastel/dona |
-| `RadarChart`, `Radar` | Gráficos radar |
-| `ComposedChart` | Tipos de gráficos combinados |
-| `XAxis`, `YAxis` | Ejes |
-| `CartesianGrid` | Líneas de cuadrícula |
-| `Tooltip` | Tooltips al pasar el cursor |
-| `Legend` | Leyenda del gráfico |
+| Componente                | Uso                                                                |
+| ------------------------- | ------------------------------------------------------------------ |
+| `ResponsiveContainer`     | Contenedor con tamaño automático (úsalo alrededor de cada gráfico) |
+| `BarChart`, `Bar`         | Gráficos de barras                                                 |
+| `LineChart`, `Line`       | Gráficos de líneas                                                 |
+| `AreaChart`, `Area`       | Gráficos de área                                                   |
+| `PieChart`, `Pie`, `Cell` | Gráficos de pastel/dona                                            |
+| `RadarChart`, `Radar`     | Gráficos radar                                                     |
+| `ComposedChart`           | Tipos de gráficos combinados                                       |
+| `XAxis`, `YAxis`          | Ejes                                                               |
+| `CartesianGrid`           | Líneas de cuadrícula                                               |
+| `Tooltip`                 | Tooltips al pasar el cursor                                        |
+| `Legend`                  | Leyenda del gráfico                                                |
 
 ## Estilos con Tailwind {#styling-with-tailwind}
 
-El juego utiliza Tailwind CSS. Puedes usar clases utilitarias de Tailwind directamente en tus componentes:
+El juego utiliza Tailwind CSS. Puedes usar clases utilitarias de Tailwind directamente en tus
+componentes:
 
 ```tsx
 function MyPanel() {
@@ -199,6 +212,7 @@ function MyPanel() {
 ```
 
 Clases útiles adaptadas al tema:
+
 - `text-muted-foreground` — color de texto atenuado
 - `bg-card` — fondo de tarjeta
 - `border` — borde con estilo del tema
@@ -206,7 +220,8 @@ Clases útiles adaptadas al tema:
 
 ## Consejos para Floating Panels {#floating-panel-tips}
 
-Al renderizar dentro de un floating panel (`addFloatingPanel`), el panel proporciona su propio contenedor — no necesitas envolver tu componente en una `Card`:
+Al renderizar dentro de un floating panel (`addFloatingPanel`), el panel proporciona su propio
+contenedor — no necesitas envolver tu componente en una `Card`:
 
 ```tsx
 // Correcto — el panel proporciona el contenedor
@@ -229,7 +244,8 @@ api.ui.addFloatingPanel({
 
 ## Registrar Componentes Personalizados en Ubicaciones {#registering-custom-components-at-placements}
 
-Para una UI más avanzada, puedes registrar un componente de React directamente en una ubicación de la interfaz:
+Para una UI más avanzada, puedes registrar un componente de React directamente en una ubicación de
+la interfaz:
 
 ```tsx
 function MySettingsSection() {

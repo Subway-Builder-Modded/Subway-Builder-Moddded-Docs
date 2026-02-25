@@ -23,10 +23,10 @@ if (!api) {
 }
 ```
 
-
 ## Inicializar un Mod {#initializing-a-mod}
 
-La mayoría de los mods deben inicializarse dentro de `onMapReady`, que se ejecuta cuando se carga una ciudad y el mapa está listo. Usa una protección para evitar una inicialización doble:
+La mayoría de los mods deben inicializarse dentro de `onMapReady`, que se ejecuta cuando se carga
+una ciudad y el mapa está listo. Usa una protección para evitar una inicialización doble:
 
 ```ts
 let initialized = false;
@@ -41,21 +41,25 @@ api.hooks.onMapReady((map) => {
 ```
 
 :::note
-`onMapReady` puede ejecutarse varias veces (por ejemplo, al cambiar de ciudad). La protección `initialized` asegura que tu UI y hooks se configuren solo una vez.
+
+`onMapReady` puede ejecutarse varias veces (por ejemplo, al cambiar de ciudad). La
+protección `initialized` asegura que tu UI y hooks se configuren solo una vez.
+
 :::
 
 ## Agregar Paneles de UI {#adding-ui-panels}
 
 ### Panel Flotante {#floating-panel}
 
-La forma más común de agregar una UI de mod. Crea un panel arrastrable accesible desde la barra de herramientas:
+La forma más común de agregar una UI de mod. Crea un panel arrastrable accesible desde la barra de
+herramientas:
 
 ```ts
 api.ui.addFloatingPanel({
   id: 'my-panel',
   title: 'Mi Panel',
-  icon: 'Settings',      // Nombre del ícono Lucide (PascalCase)
-  render: MyComponent,    // Un componente de React
+  icon: 'Settings', // Nombre del ícono Lucide (PascalCase)
+  render: MyComponent, // Un componente de React
 });
 ```
 
@@ -119,15 +123,15 @@ api.ui.addSlider('settings-menu', {
 
 El argumento `placement` controla dónde aparecen los elementos de UI:
 
-| Placement | Dónde aparece |
-|---|---|
-| `'settings-menu'` | Panel de configuración |
-| `'escape-menu'` | Cuerpo del menú de escape/pausa |
+| Placement               | Dónde aparece                      |
+| ----------------------- | ---------------------------------- |
+| `'settings-menu'`       | Panel de configuración             |
+| `'escape-menu'`         | Cuerpo del menú de escape/pausa    |
 | `'escape-menu-buttons'` | Fila de botones del menú de escape |
-| `'main-menu'` | Pantalla del menú principal |
-| `'bottom-bar'` | Área de la barra inferior |
-| `'top-bar'` | Área de la barra superior |
-| `'debug-panel'` | Superposición de depuración |
+| `'main-menu'`           | Pantalla del menú principal        |
+| `'bottom-bar'`          | Área de la barra inferior          |
+| `'top-bar'`             | Área de la barra superior          |
+| `'debug-panel'`         | Superposición de depuración        |
 
 ### Notificaciones {#notifications}
 
@@ -175,7 +179,10 @@ const stations = api.gameState.getStations();
 for (const station of stations) {
   console.log(station.name, station.coords); // [longitud, latitud]
   console.log('Vías:', station.trackIds.length);
-  console.log('Cercanas:', station.nearbyStations.map(n => n.stationId));
+  console.log(
+    'Cercanas:',
+    station.nearbyStations.map((n) => n.stationId),
+  );
 }
 ```
 
@@ -208,7 +215,7 @@ api.hooks.onStationBuilt((station) => {
 api.hooks.onMoneyChanged((balance, change, type, category) => {
   if (type === 'expense' && change > 1000000) {
     api.ui.showNotification('¡Gran compra!', 'info');
-}
+  }
 });
 
 // Reaccionar a cambios de día
@@ -229,30 +236,30 @@ api.hooks.onGameSaved((saveName) => {
 
 ## Todos los Hooks Disponibles {#all-available-hooks}
 
-| Hook | Argumentos del callback |
-|---|---|
-| `onGameInit` | (ninguno) |
-| `onDayChange` | `day: number` |
-| `onCityLoad` | `cityCode: string` |
-| `onMapReady` | `map: MapLibreMap` |
-| `onStationBuilt` | `station: Station` |
-| `onStationDeleted` | `stationId: string` |
-| `onRouteCreated` | `route: Route` |
-| `onRouteDeleted` | `routeId: string, routeBullet: string` |
-| `onTrackBuilt` | `tracks: Track[]` |
-| `onBlueprintPlaced` | `tracks: Track[]` |
-| `onDemandChange` | `popCount: number` |
-| `onTrackChange` | `changeType: 'add' \| 'delete', count: number` |
-| `onTrainSpawned` | `train: Train` |
-| `onTrainDeleted` | `trainId: string, routeId: string` |
-| `onPauseChanged` | `isPaused: boolean` |
-| `onSpeedChanged` | `newSpeed: GameSpeed` |
-| `onMoneyChanged` | `newBalance, change, type, category?` |
-| `onGameSaved` | `saveName: string` |
-| `onGameLoaded` | `saveName: string` |
-| `onWarning` | `message: string` |
-| `onError` | `error: string` |
-| `onGameEnd` | (ninguno) |
+| Hook                | Argumentos del callback                        |
+| ------------------- | ---------------------------------------------- |
+| `onGameInit`        | (ninguno)                                      |
+| `onDayChange`       | `day: number`                                  |
+| `onCityLoad`        | `cityCode: string`                             |
+| `onMapReady`        | `map: MapLibreMap`                             |
+| `onStationBuilt`    | `station: Station`                             |
+| `onStationDeleted`  | `stationId: string`                            |
+| `onRouteCreated`    | `route: Route`                                 |
+| `onRouteDeleted`    | `routeId: string, routeBullet: string`         |
+| `onTrackBuilt`      | `tracks: Track[]`                              |
+| `onBlueprintPlaced` | `tracks: Track[]`                              |
+| `onDemandChange`    | `popCount: number`                             |
+| `onTrackChange`     | `changeType: 'add' \| 'delete', count: number` |
+| `onTrainSpawned`    | `train: Train`                                 |
+| `onTrainDeleted`    | `trainId: string, routeId: string`             |
+| `onPauseChanged`    | `isPaused: boolean`                            |
+| `onSpeedChanged`    | `newSpeed: GameSpeed`                          |
+| `onMoneyChanged`    | `newBalance, change, type, category?`          |
+| `onGameSaved`       | `saveName: string`                             |
+| `onGameLoaded`      | `saveName: string`                             |
+| `onWarning`         | `message: string`                              |
+| `onError`           | `error: string`                                |
+| `onGameEnd`         | (ninguno)                                      |
 
 ## Modificar Acciones del Juego {#modifying-game-actions}
 
@@ -278,16 +285,19 @@ Ajusta las reglas del juego:
 
 ```ts
 api.modifyConstants({
-  STARTING_MONEY: 10000000000,     // 10 mil millones
+  STARTING_MONEY: 10000000000, // 10 mil millones
   DEFAULT_TICKET_COST: 5,
   CONSTRUCTION_COSTS: {
-    TUNNEL: { SINGLE_MULTIPLIER: 0.5 },  // Túneles a mitad de precio
+    TUNNEL: { SINGLE_MULTIPLIER: 0.5 }, // Túneles a mitad de precio
   },
 });
 ```
 
 :::important
-Llama a `modifyConstants()` temprano — idealmente antes de `onMapReady`. Las constantes afectan toda la sesión del juego.
+
+Llama a `modifyConstants()` temprano — idealmente antes de `onMapReady`. Las constantes
+afectan toda la sesión del juego.
+
 :::
 
 ## Construir Vías Programáticamente {#building-tracks-programatically}
@@ -298,9 +308,12 @@ Usa `api.build` para colocar y construir vías mediante código:
 // Colocar vías en plano
 const result = api.build.placeBlueprintTracks([
   {
-    coords: [[-74.006, 40.7128], [-74.009, 40.7150]],  // pares [lng, lat]
+    coords: [
+      [-74.006, 40.7128],
+      [-74.009, 40.715],
+    ], // pares [lng, lat]
     trackType: 'heavy-metro',
-    startElevation: -15,   // subterráneo
+    startElevation: -15, // subterráneo
     endElevation: -15,
   },
 ]);
@@ -310,7 +323,9 @@ if (result.success) {
 
   // Construir los planos (cuesta dinero)
   const buildResult = await api.build.buildBlueprints();
-  console.log(`Se construyeron ${buildResult.builtTrackCount} vías, costo: $${buildResult.totalCost}`);
+  console.log(
+    `Se construyeron ${buildResult.builtTrackCount} vías, costo: $${buildResult.totalCost}`,
+  );
 }
 ```
 
@@ -329,7 +344,7 @@ const route = api.build.createRoute({
 if (route.success && route.route) {
   // Comprar trenes y agregarlos a la ruta
   api.build.buyTrains(4, 'heavy-metro');
-  api.build.addTrainToRoute(route.route.id, 0);  // Agregar en la primera estación
+  api.build.addTrainToRoute(route.route.id, 0); // Agregar en la primera estación
 }
 ```
 
@@ -354,5 +369,8 @@ const keys = await api.storage.keys();
 ```
 
 :::note
-El almacenamiento solo funciona en la aplicación de escritorio (Electron). En la versión del navegador, `set` no hace nada y `get` siempre devuelve el valor predeterminado.
+
+El almacenamiento solo funciona en la aplicación de escritorio (Electron). En la versión del
+navegador, `set` no hace nada y `get` siempre devuelve el valor predeterminado.
+
 :::

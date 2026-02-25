@@ -10,12 +10,17 @@ Tips for debugging your mods during development.
 The fastest way to test changes is hot reloading. After rebuilding your mod:
 
 - Press **Ctrl+Shift+R** (Windows/Linux) or **Cmd+Shift+R** (Mac) in-game
-- This calls `api.reloadMods()` internally, which clears all mod callbacks, UI components, custom layers, and custom train types, then re-executes all mod scripts
+- This calls `api.reloadMods()` internally, which clears all mod callbacks, UI components, custom
+  layers, and custom train types, then re-executes all mod scripts
 
-If you're using `pnpm dev`, Vite automatically rebuilds on file save, so you just need to press the reload shortcut in-game.
+If you're using `pnpm dev`, Vite automatically rebuilds on file save, so you just need to press the
+reload shortcut in-game.
 
 :::note
-Hot reload clears most mod state, but some things persist (like already-built tracks and stations). If your mod gets into a weird state, restarting the game fully is the safest reset.
+
+Hot reload clears most mod state, but some things persist (like already-built tracks and
+stations). If your mod gets into a weird state, restarting the game fully is the safest reset.
+
 :::
 
 ## Console Logging {#console-logging}
@@ -31,9 +36,11 @@ console.error(`${TAG} Failed to load`, error);
 
 ### Viewing Logs {#viewing-logs}
 
-**In-game**: Open the developer console with **Ctrl+Shift+I** (Windows/Linux) or **Cmd+Option+I** (Mac).
+**In-game**: Open the developer console with **Ctrl+Shift+I** (Windows/Linux) or **Cmd+Option+I**
+(Mac).
 
-**With `pnpm dev`**: Logs are printed to your terminal and saved to `debug/latest.log`. The game launcher enables Electron logging automatically.
+**With `pnpm dev`**: Logs are printed to your terminal and saved to `debug/latest.log`. The game
+launcher enables Electron logging automatically.
 
 ## Error Handling {#error-handling}
 
@@ -88,19 +95,23 @@ Run TypeScript's type checker to catch errors before building:
 pnpm typecheck
 ```
 
-This runs `tsc --noEmit` and reports any type errors without producing output files. It's a good practice to run this before testing in-game.
+This runs `tsc --noEmit` and reports any type errors without producing output files. It's a good
+practice to run this before testing in-game.
 
 ## Common Issues {#common-issues}
 
 ### "SubwayBuilderAPI Not Found" {#subwaybuilderapi-not-found}
 
-Your mod script ran before the game initialized the API. This shouldn't happen with the template's structure, but if it does:
+Your mod script ran before the game initialized the API. This shouldn't happen with the template's
+structure, but if it does:
+
 - Make sure `main` in `manifest.json` is `"index.js"`
 - Make sure you're checking `if (!api)` before using the API
 
 ### UI Not Showing Up {#ui-not-showing-up}
 
-- Check that you're registering UI inside `onMapReady` — the UI system isn't ready before the map loads
+- Check that you're registering UI inside `onMapReady` — the UI system isn't ready before the map
+  loads
 - Verify your component doesn't throw during render (check console for React errors)
 - Make sure the `id` you're using is unique — duplicate IDs silently fail
 
@@ -113,6 +124,7 @@ Your mod script ran before the game initialized the API. This shouldn't happen w
 ### React Hooks Errors ("Invalid Hook Call") {#react-hooks-errors}
 
 This usually means there are multiple React instances. Make sure:
+
 - You're importing from `'react'` (not installing react as a dependency)
 - The Vite alias in `vite.config.ts` is correctly pointing to `src/types/react.ts`
 - You haven't accidentally installed `react` in `node_modules`
@@ -120,5 +132,6 @@ This usually means there are multiple React instances. Make sure:
 ### Windows Symlink Permission Error {#windows-symlink-permission-error}
 
 On Windows, creating symlinks may require Administrator privileges. Either:
+
 - Run your terminal as Administrator
 - Enable Developer Mode in Windows Settings (Settings > For Developers > Developer Mode)

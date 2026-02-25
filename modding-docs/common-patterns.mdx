@@ -25,7 +25,8 @@ if (!api) {
 
 ## Initializing a Mod {#initializing-a-mod}
 
-Most mods should initialize inside `onMapReady`, which fires when a city is loaded and the map is ready. Use a guard to prevent double initialization:
+Most mods should initialize inside `onMapReady`, which fires when a city is loaded and the map is
+ready. Use a guard to prevent double initialization:
 
 ```ts
 let initialized = false;
@@ -40,7 +41,10 @@ api.hooks.onMapReady((map) => {
 ```
 
 :::note
-`onMapReady` can fire multiple times (e.g., when switching cities). The `initialized` guard ensures your UI and hooks are only set up once.
+
+`onMapReady` can fire multiple times (e.g., when switching cities). The `initialized` guard
+ensures your UI and hooks are only set up once.
+
 :::
 
 ## Adding UI Panels {#adding-ui-panels}
@@ -53,8 +57,8 @@ The most common way to add a mod UI. Creates a draggable panel accessible from t
 api.ui.addFloatingPanel({
   id: 'my-panel',
   title: 'My Panel',
-  icon: 'Settings',      // Lucide icon name (PascalCase)
-  render: MyComponent,    // A React component
+  icon: 'Settings', // Lucide icon name (PascalCase)
+  render: MyComponent, // A React component
 });
 ```
 
@@ -118,15 +122,15 @@ api.ui.addSlider('settings-menu', {
 
 The `placement` argument controls where UI elements appear:
 
-| Placement | Where it shows up |
-|---|---|
-| `'settings-menu'` | Settings panel |
-| `'escape-menu'` | Escape/pause menu body |
+| Placement               | Where it shows up      |
+| ----------------------- | ---------------------- |
+| `'settings-menu'`       | Settings panel         |
+| `'escape-menu'`         | Escape/pause menu body |
 | `'escape-menu-buttons'` | Escape menu button row |
-| `'main-menu'` | Main menu screen |
-| `'bottom-bar'` | Bottom toolbar area |
-| `'top-bar'` | Top bar area |
-| `'debug-panel'` | Debug overlay |
+| `'main-menu'`           | Main menu screen       |
+| `'bottom-bar'`          | Bottom toolbar area    |
+| `'top-bar'`             | Top bar area           |
+| `'debug-panel'`         | Debug overlay          |
 
 ### Notifications {#notifications}
 
@@ -174,7 +178,10 @@ const stations = api.gameState.getStations();
 for (const station of stations) {
   console.log(station.name, station.coords); // [longitude, latitude]
   console.log('Tracks:', station.trackIds.length);
-  console.log('Nearby:', station.nearbyStations.map(n => n.stationId));
+  console.log(
+    'Nearby:',
+    station.nearbyStations.map((n) => n.stationId),
+  );
 }
 ```
 
@@ -228,30 +235,30 @@ api.hooks.onGameSaved((saveName) => {
 
 ## All Available Hooks {#all-available-hooks}
 
-| Hook | Callback arguments |
-|---|---|
-| `onGameInit` | (none) |
-| `onDayChange` | `day: number` |
-| `onCityLoad` | `cityCode: string` |
-| `onMapReady` | `map: MapLibreMap` |
-| `onStationBuilt` | `station: Station` |
-| `onStationDeleted` | `stationId: string` |
-| `onRouteCreated` | `route: Route` |
-| `onRouteDeleted` | `routeId: string, routeBullet: string` |
-| `onTrackBuilt` | `tracks: Track[]` |
-| `onBlueprintPlaced` | `tracks: Track[]` |
-| `onDemandChange` | `popCount: number` |
-| `onTrackChange` | `changeType: 'add' \| 'delete', count: number` |
-| `onTrainSpawned` | `train: Train` |
-| `onTrainDeleted` | `trainId: string, routeId: string` |
-| `onPauseChanged` | `isPaused: boolean` |
-| `onSpeedChanged` | `newSpeed: GameSpeed` |
-| `onMoneyChanged` | `newBalance, change, type, category?` |
-| `onGameSaved` | `saveName: string` |
-| `onGameLoaded` | `saveName: string` |
-| `onWarning` | `message: string` |
-| `onError` | `error: string` |
-| `onGameEnd` | (none) |
+| Hook                | Callback arguments                             |
+| ------------------- | ---------------------------------------------- |
+| `onGameInit`        | (none)                                         |
+| `onDayChange`       | `day: number`                                  |
+| `onCityLoad`        | `cityCode: string`                             |
+| `onMapReady`        | `map: MapLibreMap`                             |
+| `onStationBuilt`    | `station: Station`                             |
+| `onStationDeleted`  | `stationId: string`                            |
+| `onRouteCreated`    | `route: Route`                                 |
+| `onRouteDeleted`    | `routeId: string, routeBullet: string`         |
+| `onTrackBuilt`      | `tracks: Track[]`                              |
+| `onBlueprintPlaced` | `tracks: Track[]`                              |
+| `onDemandChange`    | `popCount: number`                             |
+| `onTrackChange`     | `changeType: 'add' \| 'delete', count: number` |
+| `onTrainSpawned`    | `train: Train`                                 |
+| `onTrainDeleted`    | `trainId: string, routeId: string`             |
+| `onPauseChanged`    | `isPaused: boolean`                            |
+| `onSpeedChanged`    | `newSpeed: GameSpeed`                          |
+| `onMoneyChanged`    | `newBalance, change, type, category?`          |
+| `onGameSaved`       | `saveName: string`                             |
+| `onGameLoaded`      | `saveName: string`                             |
+| `onWarning`         | `message: string`                              |
+| `onError`           | `error: string`                                |
+| `onGameEnd`         | (none)                                         |
 
 ## Modifying Game Actions {#modifying-game-actions}
 
@@ -265,7 +272,7 @@ api.actions.subtractMoney(500000, 'maintenance');
 
 // Game control
 api.actions.setPause(true);
-api.actions.setSpeed('fast');  // 'slow' | 'normal' | 'fast' | 'ultrafast'
+api.actions.setSpeed('fast'); // 'slow' | 'normal' | 'fast' | 'ultrafast'
 
 // Ticket price
 api.actions.setTicketPrice(5);
@@ -277,16 +284,19 @@ Tweak the game's rules:
 
 ```ts
 api.modifyConstants({
-  STARTING_MONEY: 10000000000,     // 10 billion
+  STARTING_MONEY: 10000000000, // 10 billion
   DEFAULT_TICKET_COST: 5,
   CONSTRUCTION_COSTS: {
-    TUNNEL: { SINGLE_MULTIPLIER: 0.5 },  // Half-price tunnels
+    TUNNEL: { SINGLE_MULTIPLIER: 0.5 }, // Half-price tunnels
   },
 });
 ```
 
 :::important
-Call `modifyConstants()` early — ideally before `onMapReady`. Constants affect the entire game session.
+
+Call `modifyConstants()` early — ideally before `onMapReady`. Constants affect the
+entire game session.
+
 :::
 
 ## Building Tracks Programmatically {#building-tracks-programatically}
@@ -297,9 +307,12 @@ Use `api.build` to place and construct tracks via code:
 // Place blueprint tracks
 const result = api.build.placeBlueprintTracks([
   {
-    coords: [[-74.006, 40.7128], [-74.009, 40.7150]],  // [lng, lat] pairs
+    coords: [
+      [-74.006, 40.7128],
+      [-74.009, 40.715],
+    ], // [lng, lat] pairs
     trackType: 'heavy-metro',
-    startElevation: -15,   // underground
+    startElevation: -15, // underground
     endElevation: -15,
   },
 ]);
@@ -328,7 +341,7 @@ const route = api.build.createRoute({
 if (route.success && route.route) {
   // Buy trains and add them to the route
   api.build.buyTrains(4, 'heavy-metro');
-  api.build.addTrainToRoute(route.route.id, 0);  // Add at first station
+  api.build.addTrainToRoute(route.route.id, 0); // Add at first station
 }
 ```
 
@@ -353,5 +366,8 @@ const keys = await api.storage.keys();
 ```
 
 :::note
-Storage only works in the desktop (Electron) app. In the browser version, `set` does nothing and `get` always returns the default value.
+
+Storage only works in the desktop (Electron) app. In the browser version, `set` does nothing
+and `get` always returns the default value.
+
 :::
