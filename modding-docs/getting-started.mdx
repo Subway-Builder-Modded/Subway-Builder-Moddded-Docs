@@ -3,18 +3,20 @@ id: getting-started
 title: Getting Started
 ---
 
-This guide walks you through setting up your first Subway Builder mod using the community TypeScript template.
+This guide walks you through setting up your first Subway Builder mod using the community TypeScript
+template.
 
-:::note Prerequisites
-Before you start, you should have a basic grasp of **JavaScript** or **TypeScript**. If you've never written JS/TS before, we recommend working through a beginner tutorial first — the modding API is straightforward, but you do need to understand variables, functions, and basic syntax.
+:::note Prerequisites Before you start, you should have a basic grasp of **JavaScript** or
+**TypeScript**. If you've never written JS/TS before, we recommend working through a beginner
+tutorial first — the modding API is straightforward, but you do need to understand variables,
+functions, and basic syntax.
 
 You'll also need:
 
 - [Node.js](https://nodejs.org/) v22 or later
 - [pnpm](https://pnpm.io/) package manager (`npm install -g pnpm`)
 - [Subway Builder](https://subwaybuilder.com) v1.1.0 or later
-- A code editor (we recommend [VS Code](https://code.visualstudio.com/))
-  :::
+- A code editor (we recommend [VS Code](https://code.visualstudio.com/)) :::
 
 ## Step 1 - Clone the Template {#clone-the-template}
 
@@ -29,7 +31,8 @@ cd my-mod
 pnpm install
 ```
 
-This installs the build toolchain (Vite/Rolldown, TypeScript, etc.). The game's APIs are accessed at runtime — there's no SDK package to install.
+This installs the build toolchain (Vite/Rolldown, TypeScript, etc.). The game's APIs are accessed at
+runtime — there's no SDK package to install.
 
 ## Step 3 - Configure Your Mod {#configure-your-mod}
 
@@ -46,7 +49,8 @@ Edit `manifest.json` with your mod's identity:
 }
 ```
 
-The `id` should be a unique reverse-domain identifier. The `main` field should always be `"index.js"` — that's what the build outputs.
+The `id` should be a unique reverse-domain identifier. The `main` field should always be
+`"index.js"` — that's what the build outputs.
 
 ## Step 4 - Build {#build}
 
@@ -54,7 +58,8 @@ The `id` should be a unique reverse-domain identifier. The `main` field should a
 pnpm build
 ```
 
-This compiles your TypeScript + React code into a single `dist/index.js` file, and copies `manifest.json` into `dist/`.
+This compiles your TypeScript + React code into a single `dist/index.js` file, and copies
+`manifest.json` into `dist/`.
 
 ## Step 5 - Link to the Game {#link-to-the-game}
 
@@ -62,7 +67,8 @@ This compiles your TypeScript + React code into a single `dist/index.js` file, a
 pnpm dev:link
 ```
 
-This creates a symlink from `dist/` to the game's mods folder. The mods folder location depends on your OS:
+This creates a symlink from `dist/` to the game's mods folder. The mods folder location depends on
+your OS:
 
 | OS          | Path                                               |
 | ----------- | -------------------------------------------------- |
@@ -72,9 +78,7 @@ This creates a symlink from `dist/` to the game's mods folder. The mods folder l
 
 The symlink means every time you rebuild, the game sees your latest code without you copying files.
 
-:::tip
-On Windows, you may need to run your terminal as Administrator for the symlink to work.
-:::
+:::tip On Windows, you may need to run your terminal as Administrator for the symlink to work. :::
 
 ## Step 6 - Enable Your Mod {#enable-your-mod}
 
@@ -87,7 +91,8 @@ You should see your mod's log messages in the game's developer console.
 
 ## Step 7 - Development Workflow {#development-workflow}
 
-For active development, use the `dev` command which watches for file changes and launches the game with logging:
+For active development, use the `dev` command which watches for file changes and launches the game
+with logging:
 
 ```bash
 pnpm dev
@@ -98,7 +103,8 @@ This runs two processes simultaneously:
 - **Vite watcher** — rebuilds on every file save
 - **Game launcher** — starts Subway Builder with logging to `debug/latest.log`
 
-After making changes, reload mods in-game with **Ctrl+Shift+R** (or **Cmd+Shift+R** on Mac) to see your updates without restarting the game.
+After making changes, reload mods in-game with **Ctrl+Shift+R** (or **Cmd+Shift+R** on Mac) to see
+your updates without restarting the game.
 
 ## Step 8 - Unlink When Done {#unlink-when-done}
 

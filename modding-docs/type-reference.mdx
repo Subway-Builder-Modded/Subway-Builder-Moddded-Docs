@@ -3,7 +3,8 @@ id: type-reference
 title: Type Reference
 ---
 
-The template includes full TypeScript type definitions for the Subway Builder Modding API v1.0.0. Here's how they're organized.
+The template includes full TypeScript type definitions for the Subway Builder Modding API v1.0.0.
+Here's how they're organized.
 
 ## File Structure {#file-structure}
 
@@ -33,9 +34,8 @@ Types are split across multiple `.d.ts` files in `src/types/`, grouped by API na
 | `electron.d.ts`          | `ElectronAPI`, `ElectronAPIExtended`                                                            |
 | `manifest.d.ts`          | `ModManifest`                                                                                   |
 
-:::warning
-The build/storage API types are listed on the official API documentation but are currently unusable at runtime.
-:::
+:::warning The build/storage API types are listed on the official API documentation but are
+currently unusable at runtime. :::
 
 ## How It Works {#how-it-works}
 
@@ -103,35 +103,36 @@ interface Train {
 ```ts
 type Coordinate = [number, number]; // [longitude, latitude]
 type BoundingBox = [number, number, number, number]; // [minLng, minLat, maxLng, maxLat]
-type GameSpeed = 'slow' | 'normal' | 'fast' | 'ultrafast';
-type BuildType = 'blueprint' | 'built';
+type GameSpeed = "slow" | "normal" | "fast" | "ultrafast";
+type BuildType = "blueprint" | "built";
 ```
 
 ### UI Types {#ui-types}
 
 ```ts
 type UIPlacement =
-  | 'settings-menu'
-  | 'escape-menu'
-  | 'escape-menu-buttons'
-  | 'main-menu'
-  | 'bottom-bar'
-  | 'top-bar'
-  | 'debug-panel'
-  | 'menu-items'
-  | 'pause-menu'
-  | 'debug';
+  | "settings-menu"
+  | "escape-menu"
+  | "escape-menu-buttons"
+  | "main-menu"
+  | "bottom-bar"
+  | "top-bar"
+  | "debug-panel"
+  | "menu-items"
+  | "pause-menu"
+  | "debug";
 
-type NotificationType = 'success' | 'error' | 'info' | 'warning';
+type NotificationType = "success" | "error" | "info" | "warning";
 ```
 
 ## Extending Types {#extending-types}
 
-If you need to extend the API types (e.g., adding fields you've discovered at runtime), you can use TypeScript declaration merging in your own `.d.ts` file:
+If you need to extend the API types (e.g., adding fields you've discovered at runtime), you can use
+TypeScript declaration merging in your own `.d.ts` file:
 
 ```ts
 // src/types/my-extensions.d.ts
-declare module './game-state' {
+declare module "./game-state" {
   interface Station {
     myCustomField?: string;
   }
@@ -140,4 +141,5 @@ declare module './game-state' {
 
 ## Official Documentation {#official-documentation}
 
-For the most up-to-date API reference, see the [official Subway Builder modding docs](https://www.subwaybuilder.com/docs/v1.0.0).
+For the most up-to-date API reference, see the
+[official Subway Builder modding docs](https://www.subwaybuilder.com/docs/v1.0.0).
