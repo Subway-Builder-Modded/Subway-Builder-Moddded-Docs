@@ -112,21 +112,23 @@ const UPDATES = [
 ];
 
 function Tag({ tag, isLatest }) {
-  const type = tag === "beta" ? "beta" : "release";
-  const style =
-    type === "release"
-      ? { backgroundColor: "#00933C", color: "#fff" }
-      : { backgroundColor: "#C29324", color: "#fff" };
-
   return (
     <div style={{ display: "flex", gap: "8px" }}>
       {isLatest && (
-        <span className={styles.tag} style={{ backgroundColor: "#D32F2F", color: "#fff" }}>
+        <span
+          className={styles.tag}
+          style={{
+            backgroundColor: "#1335A1",
+            color: "#fff !important",
+          }}
+        >
           LATEST
         </span>
       )}
-      <span className={styles.tag} style={style}>
-        {type.toUpperCase()}
+      <span
+        className={`${styles.tag} ${tag === "beta" ? styles.betaTag : styles.releaseTag}`}
+      >
+        {tag.toUpperCase()}
       </span>
     </div>
   );

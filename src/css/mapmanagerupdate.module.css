@@ -89,6 +89,16 @@
   font-size: clamp(12px, 1vw, 14px);
 }
 
+.updateBox .betaTag {
+  color: #000 !important;
+  background-color: #F5CF46;
+}
+
+.updateBox .releaseTag {
+  color: #fff !important;
+  background-color: #00933C;
+}
+
 .titleBullet {
   background-color: #93683A;
   border-radius: 20px;
