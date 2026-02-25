@@ -357,3 +357,30 @@
   text-decoration: none !important;
   color: inherit !important;
 }
+
+.floatingBack {
+  position: fixed;
+  top: 70px;
+  left: 24px;
+  padding: 8px 12px;
+  background-color: #ddd;
+  color: #000;
+  font-weight: 700;
+  border-radius: 8px;
+  z-index: 9999;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.floatingBack:hover {
+  background-color: #eee;
+}
+
+[data-theme="dark"] .floatingBack {
+  background-color: #333;
+  color: #fff;
+}
+
+[data-theme="dark"] .floatingBack:hover {
+  background-color: #222;
+}

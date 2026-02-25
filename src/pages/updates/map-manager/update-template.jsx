@@ -24,10 +24,12 @@ export default function UpdateTemplate({
       description={`Release notes for ${titleMessage}`}
     >
       <div className={styles.page}>
+
+        <Link to="/updates/map-manager" className={styles.floatingBack}>
+          &larr; Back
+        </Link>
+
         <div className={styles.container}>
-          <Link to="/updates/map-manager" className={styles.backLink}>
-            &larr; Back
-          </Link>
 
           <div className={styles.headerCenter}>
             <div className={styles.titleBullet}>
