@@ -137,19 +137,19 @@ const SECTION_INFO = [
     key: "maintainers",
     title: translate({ id: "credits.section.maintainers", message: "Subway Builder Modded Maintainers" }),
     letter: "M",
-    color: "#FF6319",
+    color: "#93683A",
   },
   {
     key: "translators",
     title: translate({ id: "credits.section.translators", message: "Subway Builder Modded Wiki Translators" }),
     letter: "T",
-    color: "#0039A6",
+    color: "#4EACCD",
   },
   {
     key: "gameDevs",
     title: translate({ id: "credits.section.gamedevs", message: "Subway Builder Game Devs" }),
     letter: "G",
-    color: "#00933C",
+    color: "#80BD55",
   },
 ];
 
