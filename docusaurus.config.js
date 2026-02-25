@@ -69,7 +69,7 @@ module.exports = {
         docs: {
           routeBasePath: 'wiki',
           sidebarPath: require.resolve('./sidebars/wiki.js'),
-          showLastUpdateTime: false,
+          showLastUpdateTime: true,
           admonitions: true,
         },
         theme: {
@@ -86,7 +86,7 @@ module.exports = {
         path: 'modding-docs',
         routeBasePath: 'modding-docs',
         sidebarPath: require.resolve('./sidebars/modding-docs.js'),
-        showLastUpdateTime: false,
+        showLastUpdateTime: true,
         admonitions: true,
       },
     ],

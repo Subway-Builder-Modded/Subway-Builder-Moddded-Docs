@@ -3,30 +3,30 @@ import Layout from "@theme/Layout";
 import { translate } from "@docusaurus/Translate";
 import styles from "../css/updates.module.css";
 
-// Subway bullet colors
 const SUBWAY_BULLETS = {
-  A: "#0039A6",
-  B: "#FF6319",
-  C: "#6CBE45",
-  D: "#FCCC0A",
-  E: "#752F82",
-  F: "#FF6319",
-  G: "#6CBE45",
+  M: "#93683A",
+  T: "#4EACCD",
 };
 
 const UPDATES = [
   {
-    title: "Map Manager v2.3.1",
-    description: "Added new map import/export functionality and fixed minor bugs.",
-    image: "/images/updates/map-manager-placeholder.png",
-    bullet: "A",
+    titleId: "updates.mapManager.title",
+    titleDefault: "Map Manager",
+    descId: "updates.mapManager.desc",
+    descDefault:
+      "Map management tool for Subway Builder that allows you to import custom maps into the game",
+    image: "/images/updates-map-manager.png",
+    bullet: "M",
     link: "/wiki/updates/map-manager-v2-3-1",
   },
   {
-    title: "Mod Template v1.5",
-    description: "Updated TypeScript template with new modding hooks and UI improvements.",
-    image: "/images/updates/mod-template-placeholder.png",
-    bullet: "B",
+    titleId: "updates.templateMod.title",
+    titleDefault: "Template Mod",
+    descId: "updates.templateMod.desc",
+    descDefault:
+      "Documented TypeScript template to create your own mods for Subway Builder",
+    image: "/images/updates-template-mod.png",
+    bullet: "T",
     link: "/wiki/updates/mod-template-v1-5",
   },
 ];
@@ -47,12 +47,20 @@ function UpdateCard({ update }) {
     <a href={update.link} className={styles.card}>
       <div className={styles.cardHeader}>
         <Badge letter={update.bullet} />
-        <h3 className={styles.cardTitle}>{update.title}</h3>
+        <h3 className={styles.cardTitle}>
+          {translate({ id: update.titleId, message: update.titleDefault })}
+        </h3>
       </div>
       <div className={styles.cardImg}>
-        <img src={update.image} alt={update.title} loading="lazy" />
+        <img
+          src={update.image}
+          alt={translate({ id: update.titleId, message: update.titleDefault })}
+          loading="lazy"
+        />
       </div>
-      <p className={styles.cardDesc}>{update.description}</p>
+      <p className={styles.cardDesc}>
+        {translate({ id: update.descId, message: update.descDefault })}
+      </p>
     </a>
   );
 }
@@ -63,7 +71,8 @@ export default function Updates() {
       title={translate({ id: "updates.pageTitle", message: "Updates & Changelogs" })}
       description={translate({
         id: "updates.pageDescription",
-        message: "Stay up to date with the latest tools and updates in Subway Builder Modded.",
+        message:
+          "Stay up to date with the latest tools and updates in Subway Builder Modded.",
       })}
     >
       <div className={styles.page}>
@@ -79,13 +88,19 @@ export default function Updates() {
               })}
             </p>
           </div>
-
           <div className={styles.grid}>
             {UPDATES.map((update, index) => (
               <UpdateCard key={index} update={update} />
             ))}
           </div>
         </div>
+        <footer className={styles.footerBars}>
+          <span className={styles.bar} style={{ background: "#0039A6" }} />
+          <span className={styles.bar} style={{ background: "#FF6319" }} />
+          <span className={styles.bar} style={{ background: "#00933C" }} />
+          <span className={styles.bar} style={{ background: "#FCCC0A" }} />
+          <span className={styles.bar} style={{ background: "#752F82" }} />
+        </footer>
       </div>
     </Layout>
   );

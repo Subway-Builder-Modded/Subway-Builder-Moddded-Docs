@@ -223,6 +223,13 @@ export default function Credits() {
             </section>
           ))}
         </div>
+        <footer className={styles.footerBars}>
+          <span className={styles.bar} style={{ background: "#0039A6" }} />
+          <span className={styles.bar} style={{ background: "#FF6319" }} />
+          <span className={styles.bar} style={{ background: "#00933C" }} />
+          <span className={styles.bar} style={{ background: "#FCCC0A" }} />
+          <span className={styles.bar} style={{ background: "#752F82" }} />
+        </footer>
       </div>
     </Layout>
   );
