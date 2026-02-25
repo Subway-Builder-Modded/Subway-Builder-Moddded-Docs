@@ -8,10 +8,9 @@
     "serve": "docusaurus serve",
     "deploy": "docusaurus deploy",
     "swizzle": "docusaurus swizzle",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "format:md": "prettier \"**/*.{md,mdx}\" --write",
-    "format:md:check": "prettier \"**/*.{md,mdx}\" --check"
+    "lint": "eslint . --fix",
+    "format": "prettier \"**/*.{md,mdx}\" --write",
+    "format:check": "prettier \"**/*.{md,mdx}\" --check"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
