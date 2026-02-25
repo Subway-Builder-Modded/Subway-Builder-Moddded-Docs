@@ -1,0 +1,116 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(10px, 1.8vw, 20px);
+  gap: clamp(12px, 1.2vw, 16px);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.headerCenter {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.pageTitle {
+  font-size: clamp(20px, 3vw, 32px);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.pageSubtitle {
+  font-size: clamp(12px, 1.5vw, 16px);
+  color: var(--home-text-dim, #555);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 1.5vw, 28px);
+}
+
+@media (max-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Card styles */
+.card {
+  background: var(--home-surface, #fff);
+  border: 1px solid var(--home-border, #ccc);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.15s, background 0.15s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  background: var(--home-surface-hover, #f5f5f5);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 1vw, 12px);
+  padding: clamp(12px, 1.5vw, 16px);
+}
+
+.badge {
+  width: clamp(28px, 3vw, 32px);
+  height: clamp(28px, 3vw, 32px);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: clamp(14px, 1.5vw, 18px);
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: clamp(14px, 1.3vw, 18px);
+  font-weight: 700;
+}
+
+.cardImg {
+  overflow: hidden;
+  background: var(--home-img-bg, #eaeaea);
+}
+
+.cardImg img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  opacity: 0.85;
+  transition: opacity 0.15s;
+}
+
+.card:hover .cardImg img {
+  opacity: 1;
+}
+
+.cardDesc {
+  padding: clamp(12px, 1.5vw, 16px);
+  font-size: clamp(12px, 1.2vw, 14px);
+  line-height: 1.5;
+  color: var(--home-text-muted, #666);
+}

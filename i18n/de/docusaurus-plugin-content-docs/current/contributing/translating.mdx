@@ -23,16 +23,19 @@ In diesem Leitfaden bezieht sich DEIN_LOCALE_CODE auf die Sprache, die Du bearbe
 Wenn Du zu einer Übersetzung beitragen willst, die in diesem Projekt schon existiert:
 
 **1**. Navigiere zum entsprechenden Ordner Deiner Sprache in `i18n/YOUR_LOCALE_CODE`. Beispielsweise befinden sich die deutschen Übersetzungen in `i18n/de-DE`.
+
 **2**. Du bist verantwortlich für alle Dateien in dem Ordner, einschließlich aber nicht nur:
  - `code.json`
  - `tags.yml`
  - Sämtliche andere `.json` oder `.yml` Dateien
+
 **3**. Stelle sicher, dass jeder Text richtig übersetzt wird und die Formatierung dabei intakt bleibt. (Überschriften, Listen, Codeblöcke, Anmerkungen, Tips, Warnungen und Bilder).
-**4.** Übersetze **keine Inhalte** aus `/blogs`. Das ist aufgrund von Einschränkungen im Framework nicht möglich. Die `options.json` im `docusaurus-plugin-content-blog` Verzeichnis sollte jedoch übersetzt werden.
-5. PR Anforderungen:
+
+**4**. PR Anforderungen:
  - Jede PR, die jemand mit dem Tag `needs-translating` zusammenlegt, muss in Deine Sprache übersetzt werden. 
  - Übersetzungs-PRs müssen mit dem Prefix `[Translation - DEIN_LOCALE_CODE]` beginnen.  
-6. Reiche deine Änderunge via Pull Request ein. Ein Wikiinstandhalter wird deine Einreichung vor der Übernahme überprüfen.
+
+**5**. Reiche deine Änderunge via Pull Request ein. Ein Wikiinstandhalter wird deine Einreichung vor der Übernahme überprüfen.
 
 ---
 
@@ -43,6 +46,7 @@ Wenn Du eine komplett neue Sprache hinzufügen möchtest:
 ### Schritt 1 - Richte Dein Locale ein {#set-up-your-locale}
 
 **1.** Öffne `docusaurus.config.js`.
+
 **2.** Füge Deine Spache im Abschnitt `localeConfigs` hinzu. Beispiel für Italienisch:
 ```js
 locales: ['en', 'es', 'fr', 'it'],
@@ -104,7 +108,9 @@ npx docusaurus write-translations --locale DEIN_LOCALE_CODE
 ### Schritt 3 - Organisiere deinen Arbeitsplatz {#organize-your-translation-workspace}
 
 **1.** In `docusaurus-plugin-content-docs` und `docusaurus-plugin-content-modding-docs`erstellst Du den Ordner `current`.
+
 **2.** Kopiere alle Dateien aus `docs/` und `modding-docs/` in `current`.
+
 **3.** Starte mit dem Übersetzen dieser Dateien. Behalte die ursprüngliche Formatierung bei, einschließlich:
  - Überschriften
  - Listen
@@ -113,8 +119,11 @@ npx docusaurus write-translations --locale DEIN_LOCALE_CODE
  - Tips (`:::tip`)
  - Wichtige Warnungen (`:::important`)
  - Bilder und Bildbeschreibungen
+
 **4.** Übersetze alle anderen Dateien im Verzeichnis, wie `code.json` und `tags.yml`.
+
 **5.** Denk daran, dass Links, Seiten-IDs, Namen und Bildverweise **nicht übersetzt werden dürfen**. 
+
 
 ### Schritt 4 - Reiche deine PR ein {#submit-your-pr}
 
@@ -229,7 +238,12 @@ Hier sind die Anforderungen für alle derzeit unterstützten Sprachen:
 ## Aktualisieren und Übersetzungen {#updating-translations}
 
 **1.** Synchronisiere die neuesten Änderungen aus dem Hauptverzeichnis (`main brach`).
+
 **2.** Überprüfe neue oder überarbeitete Dateien in `docs/` und `modding-docs/`.
+
 **3.** Übersetze neue Inhalte in deinem Sprachordner.
+
 **4.** Reiche Updates via PR ein und benutze den `[Translation - DEIN_LOCALE_CODE]` Präfix.
+
 **5.** Wiederhole den Prüfprozess mit einem Wikiinstandhalter vor der Übernahme.
+

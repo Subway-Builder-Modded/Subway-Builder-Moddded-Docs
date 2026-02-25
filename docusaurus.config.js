@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'Subway Builder Mod Wiki',
+  title: 'Subway Builder Modded',
   tagline: 'A complete directory and guide for all Subway Builder maps and mods',
   url: 'https://subwaybuildermodded.com',
   baseUrl: '/',
@@ -72,16 +72,6 @@ module.exports = {
           showLastUpdateTime: false,
           admonitions: true,
         },
-        blog: {
-          routeBasePath: 'updates',
-          showReadingTime: false,
-          blogSidebarTitle: 'Updates',
-          blogSidebarCount: 'ALL',
-          blogTitle: 'Updates',
-          blogDescription: 'Changelogs and release notes for the Subway Builder Mod Wiki website.',
-          postsPerPage: 3,
-          onUntruncatedBlogPosts: 'ignore',
-        },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -133,7 +123,7 @@ module.exports = {
       maxHeadingLevel: 5,
     },
     navbar: {
-      title: 'Subway Builder Mod Wiki',
+      title: 'Subway Builder Modded',
       logo: {
         alt: 'Subway Builder Logo',
         src: 'logo.png',
@@ -242,7 +232,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `© Subway Builder Mod Wiki ${new Date().getFullYear()}. Not affiliated with Subway Builder or Redistricter, LLC. All content is community-created and shared under appropriate licenses.`,
+      copyright: `© Subway Builder Modded ${new Date().getFullYear()}. Not affiliated with Subway Builder or Redistricter, LLC. All content is community-created and shared under appropriate licenses.`,
     },
     colorMode: {
       defaultMode: 'dark',

@@ -6,7 +6,7 @@
     "message": "Líder del Proyecto"
   },
   "credits.maintainers.kai.description": {
-    "message": "Mantenedor principal del Mod Wiki. Supervisa la estructura, actualizaciones y precisión del contenido. Mantiene la traducción al español."
+    "message": "Mantenedor principal del Modded Wiki. Supervisa la estructura, actualizaciones y precisión del contenido. Mantiene la traducción al español."
   },
   "credits.maintainers.imb11.name": {
     "message": "IMB11"
@@ -108,10 +108,10 @@
     "message": "Desarrollador de Subway Builder."
   },
   "credits.section.maintainers": {
-    "message": "Mantenedores del Mod Wiki"
+    "message": "Mantenedores de Subway Builder Modded"
   },
   "credits.section.translators": {
-    "message": "Traductores del Mod Wiki"
+    "message": "Traductores de; Subway Builder Modded Wiki"
   },
   "credits.section.gamedevs": {
     "message": "Desarrolladores de Subway Builder"
@@ -120,10 +120,10 @@
     "message": "Créditos"
   },
   "credits.pageDescription": {
-    "message": "El Mod Wiki de Subway Builder es un proyecto impulsado por la comunidad, posible gracias a estos dedicados contribuyentes."
+    "message": "Subway Builder Modded es un proyecto impulsado por la comunidad, posible gracias a estos dedicados contribuyentes."
   },
   "credits.pageSubtitlePart1": {
-    "message": "El Mod Wiki de Subway Builder es un proyecto impulsado por la comunidad"
+    "message": "Subway Builder Modded es un proyecto impulsado por la comunidad"
   },
   "credits.pageSubtitlePart2": {
     "message": "posible gracias a contribuyentes dedicados."
