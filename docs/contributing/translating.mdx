@@ -44,16 +44,12 @@ this folder, including but not limited to:
 **3.** Ensure that all text is properly translated while keeping the formatting intact (headings,
 lists, code blocks, notes, tips, admonitions, and images).
 
-**4.** Do **not** attempt to translate the content from `/blogs`; these cannot be translated due to
-limitations in the framework. However, in the `docusaurus-plugin-content-blog` directory, there may
-be an `options.json`. This should be translated.
-
-**5.** PR Requirements:
+**4.** PR Requirements:
 
 - Any PR that anyone merges with the `needs-translating` tag must be translated into your language.
 - Translation PRs must begin with the prefix `[Translation - YOUR_LOCALE_CODE]`.
 
-**6.** Submit your changes via Pull Request. A wiki maintainer will review your submission before
+**5.** Submit your changes via Pull Request. A wiki maintainer will review your submission before
 merging.
 
 ---
@@ -64,8 +60,9 @@ If you want to add a completely new language:
 
 ### Step 1 - Set Up Your Locale {#set-up-your-locale}
 
-**1.** Open `docusaurus.config.js`. **2.** Add your language to the `localeConfigs` section. Example
-for Italian:
+**1.** Open `docusaurus.config.js`.
+
+**2.** Add your language to the `localeConfigs` section. Example for Italian:
 
 ```js
 locales: ['en', 'es', 'fr', 'it'],

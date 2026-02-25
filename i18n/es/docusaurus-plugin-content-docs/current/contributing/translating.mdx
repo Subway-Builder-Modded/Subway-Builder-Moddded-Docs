@@ -3,10 +3,7 @@ id: translating
 title: Traducción
 ---
 
-Esta guía cubre cómo contribuir con traducciones al Wiki Modificado de Subway Builder. Los
-traductores son responsables de asegurarse de que sus contribuciones sean precisas, claras y
-consistentes con el contenido original. Todas las contribuciones deben seguir la gramática adecuada,
-mantener el formato y enviarse mediante Pull Request (PR) para revisión.
+Esta guía cubre cómo contribuir con traducciones al Subway Builder Modded Wiki. Los traductores son responsables de asegurarse de que sus contribuciones sean precisas, claras y consistentes con el contenido original. Todas las contribuciones deben seguir la gramática adecuada, mantener el formato y enviarse mediante Pull Request (PR) para revisión.
 
 ## Tabla de Contenidos {#table-of-contents}
 
@@ -45,11 +42,7 @@ traducciones al español se encuentran en `i18n/es`.
 **3.** Asegúrate de que todo el texto esté correctamente traducido mientras se mantiene el formato
 original (encabezados, listas, bloques de código, notas, consejos, admoniciones e imágenes).
 
-**4.** **No** intentes traducir el contenido de `/blogs`; estos no pueden ser traducidos debido a
-limitaciones del framework. Sin embargo, en el directorio `docusaurus-plugin-content-blog` puede
-haber un `options.json`. Este sí debe traducirse.
-
-**5.** Requisitos de PR:
+**4.** Requisitos de PR:
 
 - Cualquier PR que se fusione con la etiqueta `needs-translating` debe traducirse a tu idioma.
 - Las PR de traducción deben comenzar con el prefijo `[Translation - YOUR_LOCALE_CODE]`.
@@ -157,24 +150,20 @@ traducirse**.
 - Una vez que todos los archivos estén traducidos, envía un Pull Request.
 - Un mantenedor del wiki revisará tu traducción antes de fusionarla.
 - Ten en cuenta que tu contribución es **responsable de todo** en la carpeta de tu idioma.
-- Asegúrate de que todas las traducciones sean precisas, consistentes y mantengan el formato
-  original.
+- Asegúrate de que todas las traducciones sean precisas, consistentes y mantengan el formato original.
 - Las PR de traducción deben comenzar con `[Translation - YOUR_LOCALE_CODE]`.
 
 ---
 
 ## Guía de MDX e i18n para Traductores {#mdx-and-i18n-guide-for-translators}
 
-Docusaurus usa `i18n` para gestionar traducciones, y nuestro wiki usa MDX para un formato avanzado.
-Los traductores deben comprender ambos.
+Docusaurus usa `i18n` para gestionar traducciones, y nuestro wiki usa MDX para un formato avanzado. Los traductores deben comprender ambos.
 
 ### Responsabilidades Clave {#key-responsibilities}
 
-- Traducir todo el contenido textual en la carpeta de tu idioma, incluyendo `code.json`, `tags.yml`,
-  archivos `.mdx` y cualquier metadato.
+- Traducir todo el contenido textual en la carpeta de tu idioma, incluyendo `code.json`, `tags.yml`, archivos `.mdx` y cualquier metadato.
 - Mantener todo el formato MDX:
-  - El encabezado de la página (`id` y `title`) debe permanecer sin cambios, salvo por los títulos
-    traducidos.
+  - El encabezado de la página (`id` y `title`) debe permanecer sin cambios, salvo por los títulos traducidos.
   - Listas, encabezados, bloques de código y citas deben mantenerse consistentes.
   - Admoniciones (notas, consejos, advertencias importantes):
 
@@ -186,13 +175,10 @@ Esta es una nota. Puedes traducir el texto interno.
 :::
 ```
 
-- Imágenes y subtítulos: no traduzcas nombres de archivo ni subtítulos que hagan referencia a
-  nombres propios.
+- Imágenes y subtítulos: no traduzcas nombres de archivo ni subtítulos que hagan referencia a nombres propios.
 - Los IDs de página, enlaces y referencias de archivos **no deben traducirse**.
 - Sigue la gramática y ortografía adecuadas de tu idioma.
-- Todos los encabezados deben ser estáticos. Esto significa que si quieres tener
-  `### Responsibilities`, debería ser `### Responsabilidades {#responsibilities}` (sensible a
-  mayúsculas). Los nombres reales de los encabezados deben traducirse, los anclajes estáticos no.
+- Todos los encabezados deben ser estáticos. Esto significa que si quieres tener `### Responsibilities`, debería ser `### Responsabilidades {#responsibilities}` (sensible a mayúsculas). Los nombres reales de los encabezados deben traducirse, los anclajes estáticos no.
 
 ### Ejemplo MDX {#mdx-example}
 
@@ -213,11 +199,9 @@ Este es un consejo para el usuario.
 :::
 ```
 
-- Todo el texto dentro del contenido MDX puede traducirse, incluyendo admoniciones, listas y
-  párrafos.
+- Todo el texto dentro del contenido MDX puede traducirse, incluyendo admoniciones, listas y párrafos.
 - **No** traduzcas nada dentro de bloques de código, nombres de archivos, enlaces o IDs.
-- Todos los nombres de ciudades y países deben traducirse para coincidir con la variante en el
-  idioma.
+- Todos los nombres de ciudades y países deben traducirse para coincidir con la variante en el idioma.
 
 ---
 
@@ -274,13 +258,10 @@ Aquí están los detalles para los idiomas actualmente soportados:
 
 ## Notas Importantes {#important-notes}
 
-- **Pull Requests requeridos:** Todas las traducciones deben enviarse mediante PR y revisadas por un
-  mantenedor del wiki.
+- **Pull Requests requeridos:** Todas las traducciones deben enviarse mediante PR y revisadas por un mantenedor del wiki.
 - **Nombre de PR:** Las PR de traducción deben comenzar con `[Translation - YOUR_LOCALE_CODE]`.
-- **Etiqueta Needs-Translating:** Cualquier PR fusionada con la etiqueta `needs-translating`
-  necesita ser traducida por los colaboradores.
-- **Formato Importante:** Mantén los bloques de código, notas, encabezados, listas y referencias de
-  imágenes exactamente como en los archivos originales.
+- **Etiqueta Needs-Translating:** Cualquier PR fusionada con la etiqueta `needs-translating` necesita ser traducida por los colaboradores.
+- **Formato Importante:** Mantén los bloques de código, notas, encabezados, listas y referencias de imágenes exactamente como en los archivos originales.
 
 ---
 
@@ -293,5 +274,4 @@ Aquí están los detalles para los idiomas actualmente soportados:
 **3.** Traduce cualquier contenido nuevo en tu carpeta de idioma.
 
 **4.** Envía actualizaciones mediante PR usando el prefijo `[Translation - YOUR_LOCALE_CODE]`.
-
-**5.** Repite el proceso de revisión con un mantenedor del wiki antes de fusionar.
+.

@@ -24,7 +24,7 @@
     "description": "Die Bezeichnung des Footer-Links mit label=Credits, der auf /credits verweist"
   },
   "copyright": {
-    "message": "© Subway Builder Mod Wiki 2026. Nicht verbunden mit Subway Builder oder Redistricter, LLC. Alle Inhalte wurden von der Community erstellt und unter entsprechenden Lizenzen veröffentlicht.",
+    "message": "© Subway Builder Modded 2026. Nicht verbunden mit Subway Builder oder Redistricter, LLC. Alle Inhalte wurden von der Community erstellt und unter entsprechenden Lizenzen veröffentlicht.",
     "description": "Das Copyright im Footer"
   }
 }

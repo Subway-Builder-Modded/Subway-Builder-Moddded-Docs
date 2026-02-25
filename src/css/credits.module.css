@@ -133,3 +133,19 @@
     grid-template-columns: 1fr;
   }
 }
+
+.footerBars {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  padding-top: clamp(8px, 1.2vw, 14px);
+  border-top: 1px solid var(--home-border, #ccc);
+}
+
+.bar {
+  width: clamp(18px, 2.5vw, 28px);
+  height: 5px;
+  border-radius: 3px;
+}

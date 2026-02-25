@@ -19,9 +19,11 @@ beibehalten und via Pull Request (PR) zur Überprüfung eingereicht werden.
 
 ---
 
-:::Wichtig In diesem Leitfaden bezieht sich DEIN_LOCALE_CODE auf die Sprache, die Du bearbeitest.
-Beispielsweise wäre das `de` für Deutsch, oder `en` für Englisch. Eine Liste mit allen Codes gibt es
-[hier](https://www.w3schools.com/tags/ref_language_codes.asp). :::
+:::important
+
+In diesem Leitfaden bezieht sich DEIN_LOCALE_CODE auf die Sprache, die Du bearbeitest. Beispielsweise wäre das `de` für Deutsch, oder `en` für Englisch. Eine Liste mit allen Codes gibt es [hier](https://www.w3schools.com/tags/ref_language_codes.asp).
+
+:::
 
 ## Zu einer bestehenden Sprache beitragen {#contributing-to-an-existing-language}
 
@@ -39,17 +41,13 @@ befinden sich die deutschen Übersetzungen in `i18n/de-DE`.
 **3**. Stelle sicher, dass jeder Text richtig übersetzt wird und die Formatierung dabei intakt
 bleibt. (Überschriften, Listen, Codeblöcke, Anmerkungen, Tips, Warnungen und Bilder).
 
-**4.** Übersetze **keine Inhalte** aus `/blogs`. Das ist aufgrund von Einschränkungen im Framework
-nicht möglich. Die `options.json` im `docusaurus-plugin-content-blog` Verzeichnis sollte jedoch
-übersetzt werden.
-
-**5**. PR Anforderungen:
+**4**. PR Anforderungen:
 
 - Jede PR, die jemand mit dem Tag `needs-translating` zusammenlegt, muss in Deine Sprache übersetzt
   werden.
 - Übersetzungs-PRs müssen mit dem Prefix `[Translation - DEIN_LOCALE_CODE]` beginnen.
 
-**6**. Reiche deine Änderunge via Pull Request ein. Ein Wikiinstandhalter wird deine Einreichung vor
+**5**. Reiche deine Änderunge via Pull Request ein. Ein Wikiinstandhalter wird deine Einreichung vor
 der Übernahme überprüfen.
 
 ---
@@ -60,8 +58,9 @@ Wenn Du eine komplett neue Sprache hinzufügen möchtest:
 
 ### Schritt 1 - Richte Dein Locale ein {#set-up-your-locale}
 
-**1.** Öffne `docusaurus.config.js`. **2.** Füge Deine Spache im Abschnitt `localeConfigs` hinzu.
-Beispiel für Italienisch:
+**1.** Öffne `docusaurus.config.js`.
+
+**2.** Füge Deine Spache im Abschnitt `localeConfigs` hinzu. Beispiel für Italienisch:
 
 ```js
 locales: ['en', 'es', 'fr', 'it'],
