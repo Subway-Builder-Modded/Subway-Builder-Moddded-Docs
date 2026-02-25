@@ -1,12 +1,12 @@
 module.exports = {
   printWidth: 100,
-  proseWrap: "always",
+  proseWrap: "preserve",
   trailingComma: "all",
   overrides: [
     {
       files: ["*.md", "*.mdx"],
       options: {
-        proseWrap: "always",
+        proseWrap: "preserve",
       },
     },
   ],

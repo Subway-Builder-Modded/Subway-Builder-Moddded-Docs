@@ -12,12 +12,17 @@ We will generate realistic demand data using
 [rslurry's Demand Data Generator](https://github.com/rslurry/subwaybuilder-US-demand-data) and then
 properly format our working directory to prepare it for the Map Manager.
 
-:::danger The Demand Data Generator **ONLY** works for US cities. If you are making a non-US city,
+<!-- prettier-ignore -->
+:::danger
+The Demand Data Generator **ONLY** works for US cities. If you are making a non-US city,
 you will need to find a way to generate and format the data correctly so that it works in Subway
 Builder. That will not be covered in this wiki, as it differs from country to country and is a
-complex task. This is because data is not always readily available for every country. :::
+complex task. This is because data is not always readily available for every country.
+:::
 
-:::info prerequisites Before you begin, there are a few things that you should familiarize yourself
+<!-- prettier-ignore -->
+:::info
+prerequisites Before you begin, there are a few things that you should familiarize yourself
 with. We will be using these tools and resources throughout the guide.
 
 - [Git](https://git.org)
@@ -25,7 +30,8 @@ with. We will be using these tools and resources throughout the guide.
 - Knowledge of your operating system's terminal
 - Understanding of
   [JavaScript and JavaScript syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide)
-- **For Windows:** [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) :::
+- **For Windows:** [WSL](https://learn.microsoft.com/en-us/windows/wsl/install)
+  :::
 
 ## Step 1 - Installing the Map Patcher {#installing-the-map-pacher}
 
@@ -62,6 +68,7 @@ This is where we will enter our fields to generate our data.
   codes, but another code may be used so long as it doesn't clash with another city's IATA or ICAO
   code.
 
+<!-- prettier-ignore -->
 :::danger If your city code clashes with a vanilla city's code, your map may not load in th Map
 Manager. You can check a list of existing vanilla city codes in
 `metro-maker4/cities/latest-cities.yml`. :::
@@ -69,9 +76,11 @@ Manager. You can check a list of existing vanilla city codes in
 - "Name": The name of your city. This is what will show up in the Map Manager and in game when you
   load your map.
 - "Description": A short description of your city. This will appear in game.
-- "Population": The population of your city. :::note If you are using Google, make sure to note that
+- "Population": The population of your city. :::note
+  If you are using Google, make sure to note that
   the population number should only include people who are employed in the region, not the total
-  population. :::
+  population.
+  :::
 - "BBox": the coordinates of the bounding box for your city. This should be in the format
   `[minLon, minLat, maxLon, maxLat]`.
 - "Initial View State": the initial view state that all players will see when they load your map.
@@ -92,18 +101,24 @@ data is finished generating, you can find the output at
 where `XXX` is your city code. We will need this file later. In It is now safe to close out of the
 patcher.
 
-:::danger Do not run through the rest of the patcher setup. This is a legacy patcher and is no
+<!-- prettier-ignore -->
+:::danger
+Do not run through the rest of the patcher setup. This is a legacy patcher and is no
 longer a supported method of modifying your game. We are only using this GUI to make it easier to
-generate our data. :::
+generate our data.
+:::
 
 ## Step 3 - Generating Demand Data {#generating-demand-data}
 
 <Tabs>
 <TabItem value="windows" label="Windows" default>
 
-:::important From this point on, anything done in the "terminal" will be done via WSL. The Demand
+<!-- prettier-ignore -->
+:::important
+From this point on, anything done in the "terminal" will be done via WSL. The Demand
 Data Generator does **not** support windows, so we will need to use WSL to use the Linux version.
-Any files downloaded from this point on unless otherwise specified should be the Linux version. :::
+Any files downloaded from this point on unless otherwise specified should be the Linux version.
+:::
 
 Head to https://github.com/rslurry/subwaybuilder-US-demand-data/releases and download the latest
 release that corresponds to your operating system. Create a temporary working directory to store our
@@ -242,13 +257,19 @@ Once you set that up, run:
 ./<YOUR_BINARY_FILE>.bin <YOUR_CITY>.json
 ```
 
-:::important You may need to include a `MAX_WORKERS` parameter in your config file to prevent the
+<!-- prettier-ignore -->
+:::important
+You may need to include a `MAX_WORKERS` parameter in your config file to prevent the
 program from using too many resources. If you encounter issues with the script crashing, set
 `MAX_WORKERS` to a lower number. The higher the number, the faster the script will run, but it will
-use more resources. :::
+use more resources.
+:::
 
-:::note This can take anywhere from an hour to a few days depending on your computer's specs, the
-size of the map, and the `MAX_WORKERS` value set in the config. :::
+<!-- prettier-ignore -->
+:::note
+This can take anywhere from an hour to a few days depending on your computer's specs, the
+size of the map, and the `MAX_WORKERS` value set in the config.
+:::
 
 This process will yield a `demand_data.json` in `demand_data/<YOUR_CITY>/`. This is the final data
 file we need to finish making your map.
@@ -394,13 +415,19 @@ Once you set that up, run:
 ./<YOUR_BINARY_FILE>.bin <YOUR_CITY>.json
 ```
 
-:::important You may need to include a `MAX_WORKERS` parameter in your config file to prevent the
+<!-- prettier-ignore -->
+:::important
+You may need to include a `MAX_WORKERS` parameter in your config file to prevent the
 program from using too many resources. If you encounter issues with the script crashing, set
 `MAX_WORKERS` to a lower number. The higher the number, the faster the script will run, but it will
-use more resources. :::
+use more resources.
+:::
 
-:::note This can take anywhere from an hour to a few days depending on your computer's specs, the
-size of the map, and the `MAX_WORKERS` value set in the config. :::
+<!-- prettier-ignore -->
+:::note
+This can take anywhere from an hour to a few days depending on your computer's specs, the
+size of the map, and the `MAX_WORKERS` value set in the config.
+:::
 
 This process will yield a `demand_data.json` in `demand_data/<YOUR_CITY>/`. This is the final data
 file we need to finish making your map.
@@ -546,13 +573,19 @@ Once you set that up, run:
 ./<YOUR_BINARY_FILE>.bin <YOUR_CITY>.json
 ```
 
-:::important You may need to include a `MAX_WORKERS` parameter in your config file to prevent the
+<!-- prettier-ignore -->
+:::important
+You may need to include a `MAX_WORKERS` parameter in your config file to prevent the
 program from using too many resources. If you encounter issues with the script crashing, set
 `MAX_WORKERS` to a lower number. The higher the number, the faster the script will run, but it will
-use more resources. :::
+use more resources.
+:::
 
-:::note This can take anywhere from an hour to a few days depending on your computer's specs, the
-size of the map, and the `MAX_WORKERS` value set in the config. :::
+<!-- prettier-ignore -->
+:::note
+This can take anywhere from an hour to a few days depending on your computer's specs, the
+size of the map, and the `MAX_WORKERS` value set in the config.
+:::
 
 This process will yield a `demand_data.json` in `demand_data/<YOUR_CITY>/`. This is the final data
 file we need to finish making your map.
@@ -591,14 +624,20 @@ configuration for the Map Manager. Inside, you can place this template:
 }
 ```
 
-:::tip For more optional features that can be included in `config.json`, check the
-[optional features page](/wiki/maps/optional-features). :::
+<!-- prettier-ignore -->
+:::tip
+For more optional features that can be included in `config.json`, check the
+[optional features page](/wiki/maps/optional-features).
+:::
 
 Edit this to suit your needs. Note that `creator` and `version` can be any arbitrary values.
 
-:::warning The `name`, `code`, `description`, `population`, and `initialViewState` should all match
+<!-- prettier-ignore -->
+:::warning
+The `name`, `code`, `description`, `population`, and `initialViewState` should all match
 **exactly** what you put in the map patcher. If you do not copy them exactly, this could cause
-problems for players down the line. :::
+problems for players down the line.
+:::
 
 ## Step 5 - Packaging the Map {#packaging-the-map}
 
@@ -622,7 +661,9 @@ This will let us create a ZIP file from the command line. Run the following comm
 zip MAP_NAME.zip demand_data.json buildings_index.json roads.geojson runways_taxiways.geojson XXX.pmtiles config.json
 ```
 
-:::danger If you'd like, you can manually make the ZIP however you want. **However, ensure that your
+<!-- prettier-ignore -->
+:::danger
+If you'd like, you can manually make the ZIP however you want. **However, ensure that your
 files are in the root of the ZIP, not nested inside of a subfolder.** The correct format should be:
 
 ```
@@ -666,7 +707,9 @@ accordingly):
 zip MAP_NAME.zip demand_data.json buildings_index.json roads.geojson runways_taxiways.geojson XXX.pmtiles config.json
 ```
 
-:::danger If you'd like, you can manually make the ZIP any way you'd like. **However, ensure that
+<!-- prettier-ignore -->
+:::danger
+If you'd like, you can manually make the ZIP any way you'd like. **However, ensure that
 your files are in the root of the ZIP, not nested inside of a subfolder.** The correct format should
 be:
 
@@ -717,7 +760,9 @@ This will let us create a ZIP file from the command line. Run the following comm
 zip MAP_NAME.zip demand_data.json buildings_index.json roads.geojson runways_taxiways.geojson XXX.pmtiles config.json
 ```
 
-:::danger If you'd like, you can manually make the ZIP any way you'd like. **However, ensure that
+<!-- prettier-ignore -->
+:::danger
+If you'd like, you can manually make the ZIP any way you'd like. **However, ensure that
 your files are in the root of the ZIP, not nested inside of a subfolder.** The correct format should
 be:
 
@@ -763,9 +808,12 @@ of the data, whether it's very good, good, OK, acceptable, or bad.
 To share your file, upload it to a file sharing service like Google Drive or Mediafire. Copy the
 share link (make sure it's visible/public).
 
-:::note Since GitHub has file size limits, it is not recommended to upload map to GitHub. You can
+<!-- prettier-ignore -->
+:::note
+Since GitHub has file size limits, it is not recommended to upload map to GitHub. You can
 use GitHub safely if your map's ZIP file is under 100 MB. It is strongly encouraged **not** to use
-GitHub LFS. :::
+GitHub LFS.
+:::
 
 On the wiki's
 [issues page](https://github.com/Subway-Builder-Modded/Subway-Builder-Modded-Docs/issues), you can
