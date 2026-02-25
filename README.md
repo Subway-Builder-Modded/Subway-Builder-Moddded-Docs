@@ -43,6 +43,10 @@ pnpm run format:check
 pnpm run format
 ```
 
+:warning: Please make sure that there are spaces around the admonitions start and end directives
+(see Docusaurus
+[docs](https://docusaurus.io/docs/markdown-features/admonitions#usage-with-prettier))
+
 Deploy and theme customization
 
 ```bash

@@ -40,9 +40,9 @@ api.hooks.onMapReady((map) => {
 });
 ```
 
-:::note `onMapReady`
+:::note
 
-can fire multiple times (e.g., when switching cities). The `initialized` guard
+`onMapReady` can fire multiple times (e.g., when switching cities). The `initialized` guard
 ensures your UI and hooks are only set up once.
 
 :::
@@ -292,9 +292,9 @@ api.modifyConstants({
 });
 ```
 
-:::important Call
+:::important
 
-`modifyConstants()` early — ideally before `onMapReady`. Constants affect the
+Call `modifyConstants()` early — ideally before `onMapReady`. Constants affect the
 entire game session.
 
 :::
@@ -365,9 +365,9 @@ await api.storage.delete("highScore");
 const keys = await api.storage.keys();
 ```
 
-:::note Storage
+:::note
 
-only works in the desktop (Electron) app. In the browser version, `set` does nothing
+Storage only works in the desktop (Electron) app. In the browser version, `set` does nothing
 and `get` always returns the default value.
 
 :::

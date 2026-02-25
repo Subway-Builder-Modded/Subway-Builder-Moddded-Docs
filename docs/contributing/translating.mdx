@@ -19,10 +19,10 @@ Pull Request (PR) for review.
 
 ---
 
-:::important Throughout
+:::important
 
-this guide, `YOUR_LOCALE_CODE` will refer to the language you are working
-on. For example, for Spanish, it would be `es`. For English, it would be `en`. For a full list, look
+Throughout this guide, `YOUR_LOCALE_CODE` will refer to the language you are working on. For
+example, for Spanish, it would be `es`. For English, it would be `en`. For a full list, look
 [here](https://www.w3schools.com/tags/ref_language_codes.asp). For countries that have multiple
 regional dialects (like Chinese having `zh-CN` and `zh-TW`), you should use that as
 `YOUR_LOCALE_CODE`
@@ -39,14 +39,22 @@ this folder, including but not limited to:
 
 - `code.json`
 - `tags.yml`
-- Any other `.json` or `.yml` files **3.** Ensure that all text is properly translated while keeping
-  the formatting intact (headings, lists, code blocks, notes, tips, admonitions, and images). **4.**
-  Do **not** attempt to translate the content from `/blogs`; these cannot be translated due to
-  limitations in the framework. However, in the `docusaurus-plugin-content-blog` directory, there
-  may be an `options.json`. This should be translated. **5.** PR Requirements:
+- Any other `.json` or `.yml` files
+
+**3.** Ensure that all text is properly translated while keeping the formatting intact (headings,
+lists, code blocks, notes, tips, admonitions, and images).
+
+**4.** Do **not** attempt to translate the content from `/blogs`; these cannot be translated due to
+limitations in the framework. However, in the `docusaurus-plugin-content-blog` directory, there may
+be an `options.json`. This should be translated.
+
+**5.** PR Requirements:
+
 - Any PR that anyone merges with the `needs-translating` tag must be translated into your language.
-- Translation PRs must begin with the prefix `[Translation - YOUR_LOCALE_CODE]`. **6.** Submit your
-  changes via Pull Request. A wiki maintainer will review your submission before merging.
+- Translation PRs must begin with the prefix `[Translation - YOUR_LOCALE_CODE]`.
+
+**6.** Submit your changes via Pull Request. A wiki maintainer will review your submission before
+merging.
 
 ---
 
@@ -81,10 +89,10 @@ localeConfigs: {
 },
 ```
 
-:::important If
+:::important
 
-you are using a regional dialect of a language that already exists (like Chinese
-having `zh-CN` and `zh-TW`), you should use that instead of a 2 letter code, like `fr`. Example:
+If you are using a regional dialect of a language that already exists (like Chinese having `zh-CN`
+and `zh-TW`), you should use that instead of a 2 letter code, like `fr`. Example:
 
 ```js
 locales: ['en', 'es', 'zh-CN', 'zh-TW'],
@@ -123,9 +131,11 @@ npx docusaurus write-translations --locale YOUR_LOCALE_CODE
 ### Step 3 - Organize Your Translation Workspace {#organize-your-translation-workspace}
 
 **1.** Inside `docusaurus-plugin-content-docs` and `docusaurus-plugin-content-modding-docs`, create
-a folder called `current`. **2.** Copy all files from `docs/` and `modding-docs/` into their
-respective `current`. **3.** Begin translating these files. Maintain the original formatting,
-including:
+a folder called `current`.
+
+**2.** Copy all files from `docs/` and `modding-docs/` into their respective `current`.
+
+**3.** Begin translating these files. Maintain the original formatting, including:
 
 - Headings
 - Lists
@@ -133,9 +143,11 @@ including:
 - Notes (`:::note`)
 - Tips (`:::tip`)
 - Important warnings (`:::important`)
-- Images and captions **4.** Translate all other files in the directory, such as `code.json` and
-  `tags.yml`. **5.** Remember that links, page IDs, names, and image references **should not be
-  translated**.
+- Images and captions
+
+**4.** Translate all other files in the directory, such as `code.json` and `tags.yml`.
+
+**5.** Remember that links, page IDs, names, and image references **should not be translated**.
 
 ### Step 4 - Submit Your PR {#submit-your-pr}
 
@@ -162,7 +174,11 @@ Translators must understand both.
   - Admonitions (notes, tips, important warnings):
 
 ```md
-:::note This is a note. You may translate the text inside. :::
+:::note
+
+This is a note. You may translate the text inside.
+
+:::
 ```
 
 - Images and captions: do not translate filenames or captions that reference proper names.
@@ -184,7 +200,11 @@ title: Example Page
 
 Text content here.
 
-:::tip This is a tip for the user. :::
+:::tip
+
+This is a tip for the user.
+
+:::
 ```
 
 - All text inside MDX content can be translated, including admonitions, lists, and paragraphs.
@@ -258,7 +278,12 @@ Here are details for the currently supported languages:
 
 ## Updating Translations {#updating-translations}
 
-**1.** Pull the latest changes from the main branch. **2.** Review any new or updated files in
-`docs/` and `modding-docs/`. **3.** Translate any new content in your language folder. **4.** Submit
-updates via PR using the `[Translation - YOUR_LOCALE_CODE]` prefix. **5.** Repeat the review process
-with a wiki maintainer before merging.
+**1.** Pull the latest changes from the main branch.
+
+**2.** Review any new or updated files in `docs/` and `modding-docs/`.
+
+**3.** Translate any new content in your language folder.
+
+**4.** Submit updates via PR using the `[Translation - YOUR_LOCALE_CODE]` prefix.
+
+**5.** Repeat the review process with a wiki maintainer before merging.

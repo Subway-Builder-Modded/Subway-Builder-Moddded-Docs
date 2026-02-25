@@ -40,9 +40,9 @@ api.hooks.onMapReady((map) => {
 });
 ```
 
-:::note `onMapReady`
+:::note
 
-puede ejecutarse varias veces (por ejemplo, al cambiar de ciudad). La
+`onMapReady` puede ejecutarse varias veces (por ejemplo, al cambiar de ciudad). La
 protección `initialized` asegura que tu UI y hooks se configuren solo una vez.
 
 :::
@@ -293,9 +293,9 @@ api.modifyConstants({
 });
 ```
 
-:::important Llama
+:::important
 
-a `modifyConstants()` temprano — idealmente antes de `onMapReady`. Las constantes
+Llama a `modifyConstants()` temprano — idealmente antes de `onMapReady`. Las constantes
 afectan toda la sesión del juego.
 
 :::
@@ -368,9 +368,9 @@ await api.storage.delete("highScore");
 const keys = await api.storage.keys();
 ```
 
-:::note El
+:::note
 
-almacenamiento solo funciona en la aplicación de escritorio (Electron). En la versión del
+El almacenamiento solo funciona en la aplicación de escritorio (Electron). En la versión del
 navegador, `set` no hace nada y `get` siempre devuelve el valor predeterminado.
 
 :::

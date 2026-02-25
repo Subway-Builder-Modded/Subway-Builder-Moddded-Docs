@@ -15,9 +15,9 @@ die Version, die zu Deinem Betriebssystem passt.
 
 <img width="1000" alt="image" src="/images/map-manager-download.png" />
 
-:::warning Für
+:::warning
 
-Windows benötigst Du die `.exe` Datei. Für Linux nutzt Du die `.zip` Datei. Für MacOS
+Für Windows benötigst Du die `.exe` Datei. Für Linux nutzt Du die `.zip` Datei. Für MacOS
 nimmst Du die `arm64.dmg` Datei, wenn Dein Mac einen Apple Silicon Prozessor hat (z.B. M1, M2, M3,
 etc.) und die `x64.dmg` Datei, wenn dein Mac einen Intel Prozessor hat. Als Faustregel: Macs nach
 ca. 2021 benutzen Apple Silicon, ältere benutzen Intel Prozessoren. Überprüfe trotzdem Dein Gerät,
@@ -25,9 +25,9 @@ da es einige Ausnahmen gibt.
 
 :::
 
-:::warning Auf
+:::warning
 
-MacOS wird der .dmg Installer wahrscheinlich in die Quarantäne versetzt. Um den
+Auf MacOS wird der .dmg Installer wahrscheinlich in die Quarantäne versetzt. Um den
 Installer auszuführen öffne ein Terminal in dem Ordner, in dem der Installer liegt, und führe den
 Befehl `xattr -d com.apple.quarantine {INSTALLER_DATEINAME}` aus. Beispiel: Wenn Du Version 0.2.7
 für einen ARM Mac heruntergeladen hast, lautet Dein Befehl
@@ -67,9 +67,9 @@ Die nächsten vier benötigen etwas mehr Arbeit. Du solltest sie alle relativ sc
 allerdings liegen Sie nur komprimiert vor (mit der Dateiendung `.gz`). Du musst sie also als Archiv
 entpacken.
 
-:::tip Auf
+:::tip
 
-Windows und Linux kannst du [7-Zip](https://www.7-zip.org/download.html) zum Extrahieren
+Auf Windows und Linux kannst du [7-Zip](https://www.7-zip.org/download.html) zum Extrahieren
 von `.gz` Archiven benutzen. MacOS unterstützt nativ das entpacken von gzip-Archiven, Du kannst sie
 also mit einem Rechtsklick extrahieren.
 
@@ -84,9 +84,9 @@ Die letzte Datei die wir brauchen ist die `config.json`. Diese ist am komplizier
 benötigen dafür ein paar Dinge. Als erstes erstellst Du eine neue Datei und nennst sie
 `config.json`.
 
-:::tip Stell
+:::tip
 
-sicher, dass es sich um eine `.json` Datei handelt. Wenn auf deinem Betriebssystem die
+Stell sicher, dass es sich um eine `.json` Datei handelt. Wenn auf deinem Betriebssystem die
 Dateiendungen nicht angezeigt werden, kannst Du mit einer schnellen Google-Suche herausfinden, wie
 du sie aktivierst. Der Dateityp muss als `JSON Datei` angezeigt werden.
 
@@ -119,9 +119,9 @@ Du etwas sehr ähnliches zu unserer Vorlage.
 
 > Das ist der Inhalt der `index.js` Datei aus dem Canadian Cities Map Pack.
 
-:::tip Wenn
+:::tip
 
-Dein Verzeichnis mehrere `.js` Dateien beinhaltet, überprüfe alle. Eine davon hat die
+Wenn Dein Verzeichnis mehrere `.js` Dateien beinhaltet, überprüfe alle. Eine davon hat die
 Daten, die wir brauchen.
 
 :::
@@ -134,9 +134,9 @@ Aus dieser Datei bekommen wir:
 - `population`
 - `intialViewState` (und die dazugehörigen Argumente)
 
-:::note Wenn
+:::note
 
-Deine Datei kein `initialViewState` enthält, kannst Du einfach 12 oder 13 für `zoom`
+Wenn Deine Datei kein `initialViewState` enthält, kannst Du einfach 12 oder 13 für `zoom`
 und 0 für `bearing` einsetzen. Für `latitude` und `longitude` kannst Du eine Nummer wählen, die sich
 innerhalb der bbox Koordinaten befindet ( `latitude` korrespondiert zur **2nd** und **4th** Zahl und
 `longitude` korrespondiert zur **1st** und **3rd**.) Im Toronto Beispiel, das oben gezeigt wird,
@@ -149,9 +149,9 @@ Die letzten beiden Dinge die wir brauchen sind `creator` und `version` die Du be
 zusammen hast stelle sicher, dass Du alle sechs Dateien hast. Dann kannst Du mit dem nächsten
 Schritt fortfahren.
 
-:::important Auch
+:::important
 
-wenn es nicht verpflichtend ist, gib bitte den `creator` an, wenn Du die portierte
+Auch wenn es nicht verpflichtend ist, gib bitte den `creator` an, wenn Du die portierte
 Karte veröffentlichen willst. So wird sichergestellt, dass die ursprünglichen Autoren Anerkennung
 für ihre Karten erhalten.
 
@@ -178,9 +178,9 @@ Wenn Du alle Deine Karten hinzugefügt hast kannst Du das Spiel über `START GAM
 Du ab jetzt immer das Spiel starten. In den Einstellungen des Spiels erscheinen Deine Karten unter
 dem `CUSTOM` Tab und können sofort bespielt werden!
 
-:::important Aufgrund
+:::important
 
-der Art, wie das Spiel aktuell funktioniet, musst Du es jedes mal über den Map
+Aufgrund der Art, wie das Spiel aktuell funktioniet, musst Du es jedes mal über den Map
 Manager starten, wenn Du eine von Deinen benutzerdefinierten Karten spielen willst. Wenn Du das
 nicht tust werden Dir Gebäude und Gewässer im Spiel nicht angezeigt.
 
