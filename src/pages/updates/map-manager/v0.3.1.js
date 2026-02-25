@@ -1,11 +1,12 @@
 import React from "react";
-import UpdateTemplate from "./update-template";
+import UpdateTemplateModManager from "./update-template";
 
 export default function MapManager_UpdateV0_3_1() {
   return (
-    <UpdateTemplate
+    <UpdateTemplateModManager
       titleId="updates.map-manager.v0-3-1.title"
       titleMessage="Map Manager - v0.3.1"
+      titleLink="https://github.com/Subway-Builder-Modded/subwaybuilder-patcher/releases/tag/v0.3.1-beta"
       releaseDateId="updates.map-manager.v0-3-1.releaseDate"
       releaseDateMessage="February 21, 2026"
       itemsBySection={{

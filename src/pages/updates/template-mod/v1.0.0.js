@@ -1,11 +1,12 @@
 import React from "react";
-import UpdateTemplate from "./update-template";
+import UpdateTemplateTemplateMod from "./update-template";
 
 export default function TemplateMod_UpdateV1_0_0() {
   return (
-    <UpdateTemplate
+    <UpdateTemplateTemplateMod
       titleId="updates.template-mod.v1-0-0.title"
       titleMessage="Template Mod - v1.0.0"
+      titleLink="https://github.com/Subway-Builder-Modded/SubwayBuilderTemplateMod"
       releaseDateId="updates.template-mod.v1-0-0.releaseDate"
       releaseDateMessage="February 18, 2026"
       itemsBySection={{

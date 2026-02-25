@@ -11,13 +11,20 @@ const SECTION_DEFINITIONS = [
   { key: "otherNotes", letter: "O", titleId: "updates.otherNotes", defaultMessage: "Other Notes", color: "#000000" },
 ];
 
-export default function UpdateTemplate({
+export default function UpdateTemplateModManager({
   titleId = "updates.fallback.title",
   titleMessage = "Update",
+  titleLink = null,
   releaseDateId = "updates.fallback.date",
   releaseDateMessage = "",
   itemsBySection = {},
 }) {
+  const TitleContent = (
+    <span className={styles.titleBulletText}>
+      <Translate id={titleId}>{titleMessage}</Translate>
+    </span>
+  );
+
   return (
     <Layout
       title={titleMessage}
@@ -30,13 +37,14 @@ export default function UpdateTemplate({
         </Link>
 
         <div className={styles.container}>
-
           <div className={styles.headerCenter}>
-            <div className={styles.titleBullet}>
-              <span className={styles.titleBulletText}>
-                <Translate id={titleId}>{titleMessage}</Translate>
-              </span>
-            </div>
+            {titleLink ? (
+              <Link to={titleLink} className={styles.titleBulletLink}>
+                <div className={styles.titleBullet}>{TitleContent}</div>
+              </Link>
+            ) : (
+              <div className={styles.titleBullet}>{TitleContent}</div>
+            )}
 
             {releaseDateMessage && (
               <p className={styles.subtitle}>
@@ -51,23 +59,17 @@ export default function UpdateTemplate({
             const items = itemsBySection[section.key]?.filter(
               (item) => item && (item.message || item.defaultMessage || typeof item === "string")
             );
-
             if (!items || items.length === 0) return null;
 
             return (
               <div key={section.key} className={styles.section}>
                 <div className={styles.sectionHeader}>
-                  <span
-                    className={styles.grayBullet}
-                    style={{ backgroundColor: section.color }}
-                  >
+                  <span className={styles.grayBullet} style={{ backgroundColor: section.color }}>
                     {section.letter}
                   </span>
 
                   <h2 className={styles.sectionLabel}>
-                    <Translate id={section.titleId}>
-                      {section.defaultMessage}
-                    </Translate>
+                    <Translate id={section.titleId}>{section.defaultMessage}</Translate>
                   </h2>
 
                   <span className={styles.headerLine} />
@@ -76,15 +78,9 @@ export default function UpdateTemplate({
                 <ul className={styles.sectionList}>
                   {items.map((item, i) => {
                     if (typeof item === "string") return <li key={i}>{item}</li>;
-
                     const messageText = item.message || item.defaultMessage || "";
                     const itemId = item.id || `updates.${section.key}.item.${i}`;
-
-                    return (
-                      <li key={i}>
-                        <Translate id={itemId}>{messageText}</Translate>
-                      </li>
-                    );
+                    return <li key={i}><Translate id={itemId}>{messageText}</Translate></li>;
                   })}
                 </ul>
               </div>
