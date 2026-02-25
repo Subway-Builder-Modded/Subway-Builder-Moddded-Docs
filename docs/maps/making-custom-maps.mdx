@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 
 This guide will teach you how to make custom maps for [Kronifer's Map Manager](https://github.com/Subway-Builder-Modded/subwaybuilder-patcher/releases). We will generate realistic demand data using [rslurry's Demand Data Generator](https://github.com/rslurry/subwaybuilder-US-demand-data) and then properly format our working directory to prepare it for the Map Manager.
 
-:::danger caution
+:::danger
 The Demand Data Generator **ONLY** works for US cities. If you are making a non-US city, you will need to find a way to generate and format the data correctly so that it works in Subway Builder. That will not be covered in this wiki, as it differs from country to country and is a complex task. This is because data is not always readily available for every country.
 :::
 
@@ -52,17 +52,17 @@ If your city code clashes with a vanilla city's code, your map may not load in t
 :::note
 If you are using Google, make sure to note that the population number should only include people who are employed in the region, not the total population.
 :::
- - "BBox": the coordinates of the bounding box for your city. This should be in the format `[minLat /*East*/, minLon /*South*/, maxLat /*West*/, maxLon /*North*/]`.
+ - "BBox": the coordinates of the bounding box for your city. This should be in the format `[minLon, minLat, maxLon, maxLat]`.
  - "Initial View State": the initial view state that all players will see when they load your map. For `zoom` and `bearing`, the default values will work fine.
 ::::
 
 <img width="1000" alt="image" src="/images/map-patcher-config.png" />
 
-Once you have this data inputted, click "Next" and then click "Back". **On the previous screen, simply clicking "`Run Full Map Setup`" without this step will not save the config and may generate data for a different map.**  
+Once you have this data inputted, click "`Next`" and then click "`Back`". **On the previous screen, simply clicking "`Run Full Map Setup`" without this step will not save the config and may generate data for a different map.**  
 
 After that, you can click "`Run Full Map Setup`". This will generate the data for your map. Once the data is finished generating, you can find the output at `subwaybuilder-patcher/patcher/packages/mapPatcher/processed_data`. We will use `buildings_index.json`, `roads.geojson`, and `runways_taxiways.geojson`. You can ignore `demand_data.json` as we will be generating our own demand data in the next step. In `subwaybuilder-patcher/patcher/packages/mapPatcher/map_tiles`, you can find the `XXX.pmtiles` file, where `XXX` is your city code. We will need this file later. In It is now safe to close out of the patcher.
 
-:::danger caution
+:::danger
 Do not run through the rest of the patcher setup. This is a legacy patcher and is no longer a supported method of modifying your game. We are only using this GUI to make it easier to generate our data.
 :::
 
@@ -550,7 +550,7 @@ This will let us create a ZIP file from the command line. Run the following comm
 zip MAP_NAME.zip demand_data.json buildings_index.json roads.geojson runways_taxiways.geojson XXX.pmtiles config.json
 ```
 
-:::danger caution
+:::danger
 If you'd like, you can manually make the ZIP however you want. **However, ensure that your files are in the root of the ZIP, not nested inside of a subfolder.** The correct format should be:
 ```
 - MAP_NAME.zip
@@ -587,7 +587,7 @@ Open a terminal and navigate to the directory in which all 6 files are located. 
 zip MAP_NAME.zip demand_data.json buildings_index.json roads.geojson runways_taxiways.geojson XXX.pmtiles config.json
 ```
 
-:::danger caution
+:::danger
 If you'd like, you can manually make the ZIP any way you'd like. **However, ensure that your files are in the root of the ZIP, not nested inside of a subfolder.** The correct format should be:
 ```
 - MAP_NAME.zip
@@ -629,7 +629,7 @@ This will let us create a ZIP file from the command line. Run the following comm
 zip MAP_NAME.zip demand_data.json buildings_index.json roads.geojson runways_taxiways.geojson XXX.pmtiles config.json
 ```
 
-:::danger caution
+:::danger
 If you'd like, you can manually make the ZIP any way you'd like. **However, ensure that your files are in the root of the ZIP, not nested inside of a subfolder.** The correct format should be:
 ```
 - MAP_NAME.zip

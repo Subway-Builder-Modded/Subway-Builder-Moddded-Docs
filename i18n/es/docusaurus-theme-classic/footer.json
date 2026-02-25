@@ -1,0 +1,30 @@
+{
+  "link.title.Pages": {
+    "message": "Páginas",
+    "description": "The title of the footer links column with title=Pages in the footer"
+  },
+  "link.title.Other Links": {
+    "message": "Otros Enlaces",
+    "description": "The title of the footer links column with title=Other Links in the footer"
+  },
+  "link.item.label.Wiki": {
+    "message": "Wiki",
+    "description": "The label of footer link with label=Wiki linking to /wiki/home"
+  },
+  "link.item.label.Modding Docs": {
+    "message": "Documentación de Modding",
+    "description": "The label of footer link with label=Modding Docs linking to /modding-docs/getting-started"
+  },
+  "link.item.label.Updates": {
+    "message": "Actualizaciones",
+    "description": "The label of footer link with label=Updates linking to /updates"
+  },
+  "link.item.label.Credits": {
+    "message": "Créditos",
+    "description": "The label of footer link with label=Credits linking to /credits"
+  },
+  "copyright": {
+    "message": "© Subway Builder Mod Wiki 2026. No afiliado con Subway Builder ni Redistricter, LLC. Todo el contenido es creado por la comunidad y compartido bajo las licencias correspondientes.",
+    "description": "The footer copyright"
+  }
+}
