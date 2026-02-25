@@ -18,7 +18,7 @@ const UPDATES = [
     creator: "Kronifer",
     image: "/images/updates-map-manager.png",
     bullet: "M",
-    link: "/wiki/updates/map-manager-v2-3-1",
+    link: "/updates/map-manager",
   },
   {
     titleId: "updates.templateMod.title",
@@ -29,7 +29,7 @@ const UPDATES = [
     creator: "IMB11",
     image: "/images/updates-template-mod.png",
     bullet: "T",
-    link: "/wiki/updates/mod-template-v1-5",
+    link: "/updates/template-mod",
   },
 ];
 

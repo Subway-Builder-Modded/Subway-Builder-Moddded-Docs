@@ -1,70 +1,25 @@
 import React from "react";
-import Layout from "@theme/Layout";
-import { translate } from "@docusaurus/Translate";
-import styles from "../../../css/updatepage.module.css";
+import UpdateTemplate from "./update-template";
 
-const SECTIONS = [
-  { letter: "F", titleId: "updates.features", default: "Features", color: "#ED6D32" },
-  { letter: "B", titleId: "updates.bugfixes", default: "Bugfixes", color: "#ED6D32" },
-  { letter: "U", titleId: "updates.upgrades", default: "Upgrades", color: "#000000" },
-  { letter: "O", titleId: "updates.otherNotes", default: "Other Notes", color: "#000000" },
-];
-
-export default function UpdateTemplate() {
+export default function UpdateV0_2_0() {
   return (
-    <Layout
-      title={translate({ id: "updates.v2026-02-24.title", message: "Map Manager - v2.3.1" })}
-      description={translate({
-        id: "updates.v2026-02-24.description",
-        message: "Release notes for Map Manager v2.3.1",
-      })}
-    >
-      <div className={styles.page}>
-        <div className={styles.container}>
-
-          <div id="update-title-bullet" className={styles.titleBullet}>
-            <span className={styles.titleBulletText}>
-              {translate({ id: "updates.v2026-02-24.title", message: "Map Manager - v2.3.1" })}
-            </span>
-          </div>
-
-          <p id="update-date" className={styles.subtitle}>
-            {translate({ id: "updates.v2026-02-24.releaseDate", message: "Released February 24, 2026" })}
-          </p>
-
-          <hr id="update-date-separator" className={styles.dateSeparator} />
-
-          {SECTIONS.map((section, idx) => (
-            <div key={idx} className={styles.section}>
-              <div className={styles.sectionHeader}>
-                <span
-                  className={styles.grayBullet}
-                  style={{ backgroundColor: section.color }}
-                >
-                  {section.letter}
-                </span>
-                <h2 className={styles.sectionLabel}>
-                  {translate({ id: section.titleId, message: section.default })}
-                </h2>
-                <span className={styles.headerLine} />
-              </div>
-
-              <ul className={styles.sectionList}>
-                <li>{translate({ id: `updates.v2026-02-24.${section.titleId}.item1`, message: "Example item 1" })}</li>
-                <li>{translate({ id: `updates.v2026-02-24.${section.titleId}.item2`, message: "Example item 2" })}</li>
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        <footer className={styles.footerBars}>
-          <span className={styles.bar} style={{ background: "#0039A6" }} />
-          <span className={styles.bar} style={{ background: "#FF6319" }} />
-          <span className={styles.bar} style={{ background: "#00933C" }} />
-          <span className={styles.bar} style={{ background: "#FCCC0A" }} />
-          <span className={styles.bar} style={{ background: "#752F82" }} />
-        </footer>
-      </div>
-    </Layout>
+    <UpdateTemplate
+      titleId="updates.map-manager.v0-2-0.title"
+      titleMessage="Map Manager - v0.2.0"
+      releaseDateId="updates.map-manager.v0-2-0.releaseDate"
+      releaseDateMessage="February 18, 2026"
+      itemsBySection={{
+        features: [
+          { id: "updates.map-manager.v0-2-0.features1", message: "More than one map can be selected for install at a time" },
+          { id: "updates.map-manager.v0-2-0.features2", message: "If a map doesn't include a thumbnail but includes `thumbnailBbox` in its config, the manager will autogenerate a thumbnail" },
+        ],
+        bugfixes: [
+          { id: "updates.map-manager.v0-2-0.bugfixes1", message: "Fixed an issue where vanilla maps could be overwritten by the map manager" },
+          { id: "updates.map-manager.v0-2-0.bugfixes2", message: "Fixed an issue where the map manager attempted to download the wrong version of pmtiles for Linux" },
+        ],
+        upgrades: [],
+        otherNotes: [],
+      }}
+    />
   );
 }
