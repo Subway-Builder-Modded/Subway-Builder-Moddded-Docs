@@ -1,91 +1,97 @@
 import React from "react";
 import Layout from "@theme/Layout";
-import { translate } from "@docusaurus/Translate";
+import Translate from "@docusaurus/Translate";
 import styles from "../../../css/templatemodupdate.module.css";
 import Link from "@docusaurus/Link";
 
-// Global, constant section definitions used for all changelogs
 const SECTION_DEFINITIONS = [
-  { letter: "F", titleId: "updates.features", default: "Features", color: "#ED6D32" },
-  { letter: "B", titleId: "updates.bugfixes", default: "Bugfixes", color: "#ED6D32" },
-  { letter: "U", titleId: "updates.upgrades", default: "Upgrades/Changes", color: "#000000" },
-  { letter: "O", titleId: "updates.otherNotes", default: "Other Notes", color: "#000000" },
+  { key: "features", letter: "F", titleId: "updates.features", defaultMessage: "Features", color: "#ED6D32" },
+  { key: "bugfixes", letter: "B", titleId: "updates.bugfixes", defaultMessage: "Bugfixes", color: "#ED6D32" },
+  { key: "upgrades", letter: "U", titleId: "updates.upgrades", defaultMessage: "Upgrades/Changes", color: "#000000" },
+  { key: "otherNotes", letter: "O", titleId: "updates.otherNotes", defaultMessage: "Other Notes", color: "#000000" },
 ];
 
-/**
- * UpdateTemplate - reusable template for any Map Manager changelog.
- *
- * Props:
- *   titleId, titleMessage           -> The main title of this changelog
- *   releaseDateId, releaseDateMessage -> The release date
- *   itemsBySection                 -> Object mapping section keys ("features", "bugfixes", etc.) to arrays of {id, message}
- */
-export default function UpdateTemplate({ 
-  titleId, 
-  titleMessage, 
-  releaseDateId, 
-  releaseDateMessage, 
-  itemsBySection
+export default function UpdateTemplate({
+  titleId = "updates.fallback.title",
+  titleMessage = "Update",
+  releaseDateId = "updates.fallback.date",
+  releaseDateMessage = "",
+  itemsBySection = {},
 }) {
   return (
     <Layout
-      title={translate({ id: titleId, message: titleMessage })}
-      description={translate({ id: `${titleId}-desc`, message: `Release notes for ${titleMessage}` })}
+      title={titleMessage}
+      description={`Release notes for ${titleMessage}`}
     >
       <div className={styles.page}>
+
+        {/* 🟢 Floating Back button */}
+        <Link to="/updates" className={styles.floatingBack}>
+          &larr; Back
+        </Link>
+
         <div className={styles.container}>
-
-          {/* Back link */}
-          <Link to="/updates/template-mod" className={styles.backLink}>
-            &larr; Back
-          </Link>
-
-          {/* Centered title bullet */}
           <div className={styles.headerCenter}>
             <div className={styles.titleBullet}>
               <span className={styles.titleBulletText}>
-                {translate({ id: titleId, message: titleMessage })}
+                <Translate id={titleId}>{titleMessage}</Translate>
               </span>
             </div>
 
-            <p className={styles.subtitle}>
-              {translate({ id: releaseDateId, message: releaseDateMessage })}
-            </p>
+            {releaseDateMessage && (
+              <p className={styles.subtitle}>
+                <Translate id={releaseDateId}>{releaseDateMessage}</Translate>
+              </p>
+            )}
 
             <hr className={styles.dateSeparator} />
           </div>
 
-          {/* Sections */}
           {SECTION_DEFINITIONS.map((section) => {
-            const sectionKey = section.titleId.split(".")[1]; // e.g., "features"
-            const items = itemsBySection[sectionKey];
+            const items = itemsBySection[section.key]?.filter(
+              (item) => item && (item.message || item.defaultMessage || typeof item === "string")
+            );
+
             if (!items || items.length === 0) return null;
 
             return (
-              <div key={section.titleId} className={styles.section}>
+              <div key={section.key} className={styles.section}>
                 <div className={styles.sectionHeader}>
-                  <span className={styles.grayBullet} style={{ backgroundColor: section.color }}>
+                  <span
+                    className={styles.grayBullet}
+                    style={{ backgroundColor: section.color }}
+                  >
                     {section.letter}
                   </span>
+
                   <h2 className={styles.sectionLabel}>
-                    {translate({ id: section.titleId, message: section.default })}
+                    <Translate id={section.titleId}>
+                      {section.defaultMessage}
+                    </Translate>
                   </h2>
+
                   <span className={styles.headerLine} />
                 </div>
 
                 <ul className={styles.sectionList}>
-                  {items.map((item, i) => (
-                    <li key={i}>
-                      {translate({ id: item.id, message: item.message })}
-                    </li>
-                  ))}
+                  {items.map((item, i) => {
+                    if (typeof item === "string") return <li key={i}>{item}</li>;
+
+                    const messageText = item.message || item.defaultMessage || "";
+                    const itemId = item.id || `updates.${section.key}.item.${i}`;
+
+                    return (
+                      <li key={i}>
+                        <Translate id={itemId}>{messageText}</Translate>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             );
           })}
         </div>
 
-        {/* Footer bars */}
         <footer className={styles.footerBars}>
           <span className={styles.bar} style={{ background: "#0039A6" }} />
           <span className={styles.bar} style={{ background: "#FF6319" }} />

@@ -19,7 +19,7 @@ function Tag({ tag, isLatest }) {
   const style =
     type === "release"
       ? { backgroundColor: "#00933C", color: "#fff" }
-      : { backgroundColor: "#FCCC0A", color: "#000" };
+      : { backgroundColor: "#C29324", color: "#fff" };
 
   return (
     <div style={{ display: "flex", gap: "8px" }}>
