@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "@theme/Layout";
 import { translate } from "@docusaurus/Translate";
 import styles from "../../css/templatemodupdate.module.css";
+import Link from "@docusaurus/Link";
 
 const UPDATES = [
   {
@@ -35,7 +36,7 @@ function Tag({ tag, isLatest }) {
   );
 }
 
-export default function MapManagerHub() {
+export default function TemplateModHub() {
   const sortedUpdates = [...UPDATES].reverse();
 
   return (
@@ -44,6 +45,11 @@ export default function MapManagerHub() {
       description={translate({ id: "updates.template-mod.pageDescription", message: "Changelogs and release notes for the Subway Builder Template Mod." })}
     >
       <div className={styles.page}>
+
+        <Link to="/updates" className={styles.floatingBack}>
+          &larr; Back
+        </Link>
+
         <div className={styles.container}>
           <div className={styles.headerCenter}>
             <h1 className={styles.pageTitle}>

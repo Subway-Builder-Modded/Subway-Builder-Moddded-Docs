@@ -25,7 +25,6 @@ export default function UpdateTemplate({
     >
       <div className={styles.page}>
 
-        {/* 🟢 Floating Back button */}
         <Link to="/updates/template-mod" className={styles.floatingBack}>
           &larr; Back
         </Link>

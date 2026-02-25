@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "@theme/Layout";
 import { translate } from "@docusaurus/Translate";
 import styles from "../../css/mapmanagerupdate.module.css";
+import Link from "@docusaurus/Link";
 
 const UPDATES = [
   {
@@ -140,6 +141,11 @@ export default function MapManagerHub() {
       description={translate({ id: "updates.map-manager.pageDescription", message: "Changelogs and release notes for the Subway Builder Map Manager." })}
     >
       <div className={styles.page}>
+
+        <Link to="/updates" className={styles.floatingBack}>
+          &larr; Back
+        </Link>
+
         <div className={styles.container}>
           <div className={styles.headerCenter}>
             <h1 className={styles.pageTitle}>
