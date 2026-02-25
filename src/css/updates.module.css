@@ -72,14 +72,6 @@
   background: var(--home-surface-hover, #f5f5f5);
 }
 
-.cardHeader {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: clamp(6px, 1vw, 10px);
-  padding: clamp(12px, 1.5vw, 16px);
-}
-
 .badge {
   width: clamp(28px, 3vw, 32px);
   height: clamp(28px, 3vw, 32px);
@@ -93,10 +85,33 @@
   flex-shrink: 0;
 }
 
+.cardHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: clamp(12px, 1.5vw, 16px);
+}
+
 .cardTitle {
   margin: 0;
   font-size: clamp(14px, 1.3vw, 18px);
   font-weight: 700;
+  word-break: break-word;
+  color: var(--home-text, #1b1b1d);
+}
+
+.cardSubtitle {
+  font-size: clamp(12px, 1.1vw, 14px);
+  color: var(--home-text-muted, #666) !important;
+  margin: 0;
+}
+
+.cardDesc {
+  padding: clamp(12px, 1.5vw, 16px);
+  font-size: clamp(12px, 1.2vw, 14px);
+  line-height: 1.5;
+  color: var(--home-text-muted, #666) !important;
   word-break: break-word;
 }
 
@@ -116,14 +131,6 @@
 
 .card:hover .cardImg img {
   opacity: 1;
-}
-
-.cardDesc {
-  padding: clamp(12px, 1.5vw, 16px);
-  font-size: clamp(12px, 1.2vw, 14px);
-  line-height: 1.5;
-  color: var(--home-text-muted, #666);
-  word-break: break-word;
 }
 
 .footerBars {

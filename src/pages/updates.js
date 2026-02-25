@@ -15,6 +15,7 @@ const UPDATES = [
     descId: "updates.mapManager.desc",
     descDefault:
       "Map management tool for Subway Builder that allows you to import custom maps into the game",
+    creator: "Kronifer",
     image: "/images/updates-map-manager.png",
     bullet: "M",
     link: "/wiki/updates/map-manager-v2-3-1",
@@ -25,6 +26,7 @@ const UPDATES = [
     descId: "updates.templateMod.desc",
     descDefault:
       "Documented TypeScript template to create your own mods for Subway Builder",
+    creator: "IMB11",
     image: "/images/updates-template-mod.png",
     bullet: "T",
     link: "/wiki/updates/mod-template-v1-5",
@@ -50,6 +52,9 @@ function UpdateCard({ update }) {
         <h3 className={styles.cardTitle}>
           {translate({ id: update.titleId, message: update.titleDefault })}
         </h3>
+        <p className={styles.cardSubtitle}>
+          {update.creator}
+        </p>
       </div>
       <div className={styles.cardImg}>
         <img
