@@ -16,9 +16,12 @@ La miniatura de un mapa es la imagen que se muestra cuando un jugador intenta cr
 
 Podemos crear una personalizada de 2 maneras diferentes.
 
-:::tip La miniatura es opcional, sin embargo, si no la configuras, aparecerá en blanco.
+:::tip La
+
+miniatura es opcional, sin embargo, si no la configuras, aparecerá en blanco.
 
 <img width="150" alt="image" src="/images/empty-thumbnail.png" />
+
 :::
 
 ### Método 1 - Archivo de Configuración {#config-file}
@@ -48,9 +51,13 @@ hacer que aparezca bajo la pestaña de ese país, como ocurre con los mapas vani
 
 <img width="500" alt="image" src="/images/map-country-tabs.png" />
 
-:::important Actualmente esto no funcionará para mapas de Estados Unidos o Reino Unido, ya que esos
+:::important Actualmente
+
+esto no funcionará para mapas de Estados Unidos o Reino Unido, ya que esos
 países ya están categorizados bajo las pestañas "`US`" y "`UK`" respectivamente y se manejan de
-manera diferente internamente. :::
+manera diferente internamente.
+
+:::
 
 Para hacer esto, simplemente puedes añadir el siguiente campo en tu archivo `config.json`:
 
@@ -61,7 +68,10 @@ Para hacer esto, simplemente puedes añadir el siguiente campo en tu archivo `co
 Esto categorizará automáticamente tu mapa bajo la pestaña del país especificado. Si no incluyes este
 campo, tu mapa se categorizará bajo la pestaña "`Custom`" de forma predeterminada.
 
-:::note Todos los mapas personalizados seguirán estando categorizados bajo la pestaña "`Custom`" en
+:::note Todos
+
+los mapas personalizados seguirán estando categorizados bajo la pestaña "`Custom`" en
 la pantalla de creación de mapas, independientemente de si tienes o no este campo en tu
 `config.json`. Esto solo lo añade también a la pestaña de ese país, además de la pestaña "`Custom`".
+
 :::

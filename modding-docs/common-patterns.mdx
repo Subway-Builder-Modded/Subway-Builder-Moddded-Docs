@@ -40,8 +40,12 @@ api.hooks.onMapReady((map) => {
 });
 ```
 
-:::note `onMapReady` can fire multiple times (e.g., when switching cities). The `initialized` guard
-ensures your UI and hooks are only set up once. :::
+:::note `onMapReady`
+
+can fire multiple times (e.g., when switching cities). The `initialized` guard
+ensures your UI and hooks are only set up once.
+
+:::
 
 ## Adding UI Panels {#adding-ui-panels}
 
@@ -288,8 +292,12 @@ api.modifyConstants({
 });
 ```
 
-:::important Call `modifyConstants()` early — ideally before `onMapReady`. Constants affect the
-entire game session. :::
+:::important Call
+
+`modifyConstants()` early — ideally before `onMapReady`. Constants affect the
+entire game session.
+
+:::
 
 ## Building Tracks Programmatically {#building-tracks-programatically}
 
@@ -357,5 +365,9 @@ await api.storage.delete("highScore");
 const keys = await api.storage.keys();
 ```
 
-:::note Storage only works in the desktop (Electron) app. In the browser version, `set` does nothing
-and `get` always returns the default value. :::
+:::note Storage
+
+only works in the desktop (Electron) app. In the browser version, `set` does nothing
+and `get` always returns the default value.
+
+:::

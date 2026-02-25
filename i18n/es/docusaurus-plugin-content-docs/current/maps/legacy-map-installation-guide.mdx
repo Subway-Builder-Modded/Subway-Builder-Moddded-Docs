@@ -15,13 +15,19 @@ la versión que corresponda a tu sistema operativo.
 
 <img width="1000" alt="image" src="/images/map-manager-download.png" />
 
-:::note Para Windows, necesitas el archivo `.exe`. Para Linux, el archivo `.zip`. Para MacOS, usa el
+:::note Para
+
+Windows, necesitas el archivo `.exe`. Para Linux, el archivo `.zip`. Para MacOS, usa el
 archivo `arm64.dmg` si tu Mac tiene un chip Apple Silicon (por ejemplo M1, M2, M3, etc.) y el
 archivo `x64.dmg` si tu Mac tiene un chip Intel. Como regla general, los Macs más nuevos de
 alrededor de 2021 tienden a tener chips Apple Silicon y los modelos más antiguos chips Intel, pero
-verifica siempre, ya que hay excepciones. :::
+verifica siempre, ya que hay excepciones.
 
-:::warning En MacOS, el instalador .dmg probablemente esté en cuarentena. Para ejecutar el
+:::
+
+:::warning En
+
+MacOS, el instalador .dmg probablemente esté en cuarentena. Para ejecutar el
 instalador, abre una terminal en la carpeta donde descargaste el instalador y ejecuta
 `xattr -d com.apple.quarantine {INSTALLER_FILENAME}`. Por ejemplo, al descargar la versión 0.2.7
 para un Mac ARM, ejecutarías
@@ -29,7 +35,9 @@ para un Mac ARM, ejecutarías
 
 Además, la carpeta Library que contiene la carpeta `metro-maker4` puede estar oculta por defecto.
 Para solucionarlo, abre Finder y la carpeta Home, luego selecciona Vista -> Mostrar opciones de
-vista -> Mostrar carpeta Library. :::
+vista -> Mostrar carpeta Library.
+
+:::
 
 Después de eso, instala la aplicación como cualquier otra. Una vez que el instalador termine,
 ejecuta la app y sigue el proceso de configuración, seleccionando la ubicación de tu ejecutable del
@@ -58,9 +66,13 @@ Los siguientes 4 requieren un poco más de trabajo. Deberías poder encontrar to
 relativamente fácil, pero todos están en sus formas comprimidas (terminan en `.gz`). Para esto,
 necesitaremos extraerlos como un archivo.
 
-:::tip En Windows y Linux, puedes usar [7-Zip](https://www.7-zip.org/download.html) para extraer el
+:::tip En
+
+Windows y Linux, puedes usar [7-Zip](https://www.7-zip.org/download.html) para extraer el
 archivo `.gz`. MacOS soporta nativamente descomprimir archivos gzip, por lo que solo necesitas hacer
-clic para extraerlo. :::
+clic para extraerlo.
+
+:::
 
 Dentro deberías ver un solo archivo. Si estás en el archivo `demand_data.json.gz`, deberías ver
 `demand_data.json` dentro, y lo mismo para los otros 3 archivos. Extrae los 4 archivos y colócalos
@@ -70,8 +82,12 @@ directorio. No importa cuál elijas, todos son iguales.
 El último archivo que necesitamos es `config.json`. Este es el más difícil. Para esto, necesitamos
 algunas cosas. Primero, crea un nuevo archivo llamado `config.json`.
 
-:::tip Asegúrate de que sea un archivo `.json`. Busca cómo habilitar extensiones de nombre de
-archivo en tu sistema operativo si el tipo de archivo no indica `JSON File`. :::
+:::tip Asegúrate
+
+de que sea un archivo `.json`. Busca cómo habilitar extensiones de nombre de
+archivo en tu sistema operativo si el tipo de archivo no indica `JSON File`.
+
+:::
 
 Dentro de `config.json`, pega esta plantilla:
 
@@ -100,8 +116,12 @@ similar a nuestra plantilla.
 
 > Esto está dentro del archivo `index.js` del Canadian Cities Map Pack.
 
-:::tip Si tu directorio tiene varios archivos `.js`, revisa todos. Uno de ellos tiene los datos que
-necesitas. :::
+:::tip Si
+
+tu directorio tiene varios archivos `.js`, revisa todos. Uno de ellos tiene los datos que
+necesitas.
+
+:::
 
 De este archivo, podemos obtener:
 
@@ -111,18 +131,26 @@ De este archivo, podemos obtener:
 - `population`
 - `initialViewState` (y todos sus argumentos)
 
-:::note Si tus datos no incluyen `initialViewState`, puedes poner 12 o 13 para `zoom` y 0 para
+:::note Si
+
+tus datos no incluyen `initialViewState`, puedes poner 12 o 13 para `zoom` y 0 para
 `bearing`. Para `latitude` y `longitude`, puedes elegir cualquier número dentro del rango de
 coordenadas de tu bbox (`latitude` corresponde al **2º** y **4º** número, y `longitude` corresponde
 al **1º** y **3º**). En el ejemplo de Toronto mostrado arriba, podríamos usar 44.0 y -79.0 para
-`latitude` y `longitude` respectivamente. :::
+`latitude` y `longitude` respectivamente.
+
+:::
 
 Las últimas 2 cosas que necesitamos, `creator` y `version`, se encuentran en `manifest.json`, que
 todo proyecto tiene. Una vez que tengas todo lo necesario para tu config.json, asegúrate de tener
 los 6 archivos. Después de esto, estarás listo para el siguiente paso.
 
-:::important Aunque no es obligatorio, si planeas compartir este mapa portado, incluye el `creator`.
-Esto asegura que los creadores originales reciban crédito por los mapas que hicieron. :::
+:::important Aunque
+
+no es obligatorio, si planeas compartir este mapa portado, incluye el `creator`.
+Esto asegura que los creadores originales reciban crédito por los mapas que hicieron.
+
+:::
 
 ## Paso 3 - Comprimir los Archivos {#zipping-the-files}
 
@@ -145,6 +173,10 @@ Una vez que hayas agregado todos tus mapas, puedes lanzar el juego usando `START
 lanzarás el juego de ahora en adelante. Dentro del juego, tus mapas aparecerán en la pestaña
 `CUSTOM` y estarán listos para jugar.
 
-:::important Debido a la forma en que funciona actualmente el juego, debes iniciar el juego a través
+:::important Debido
+
+a la forma en que funciona actualmente el juego, debes iniciar el juego a través
 del Map Manager cada vez que quieras jugar un mapa personalizado. Si no inicias el juego usando el
-Map Manager, los edificios y el agua no aparecerán en el juego. :::
+Map Manager, los edificios y el agua no aparecerán en el juego.
+
+:::
