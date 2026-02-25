@@ -141,7 +141,7 @@ export default function Home() {
             <div className={styles.sectionHeader}>
               <Badge letter="P" className={styles.badgeMaps} />
               <h2 className={styles.sectionLabel}>
-                {translate({ id: "homepage.maps.title", message: "Subway Builder Players" })}
+                {translate({ id: "homepage.maps.title", message: "Players" })}
               </h2>
               <span className={styles.headerLine} />
             </div>

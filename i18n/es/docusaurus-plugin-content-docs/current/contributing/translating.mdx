@@ -3,7 +3,7 @@ id: translating
 title: Traducción
 ---
 
-Esta guía cubre cómo contribuir con traducciones al Wiki Modificado de Subway Builder. Los traductores son responsables de asegurarse de que sus contribuciones sean precisas, claras y consistentes con el contenido original. Todas las contribuciones deben seguir la gramática adecuada, mantener el formato y enviarse mediante Pull Request (PR) para revisión.
+Esta guía cubre cómo contribuir con traducciones al Subway Builder Modded Wiki. Los traductores son responsables de asegurarse de que sus contribuciones sean precisas, claras y consistentes con el contenido original. Todas las contribuciones deben seguir la gramática adecuada, mantener el formato y enviarse mediante Pull Request (PR) para revisión.
 
 ## Tabla de Contenidos {#table-of-contents}
 1. [Contribuir a un idioma existente](#contributing-to-an-existing-language)
@@ -24,16 +24,19 @@ A lo largo de esta guía, `YOUR_LOCALE_CODE` se referirá al idioma en el que es
 Si deseas contribuir con traducciones a un idioma que ya existe en el proyecto:
 
 **1.** Navega a la carpeta correspondiente a tu idioma en `i18n/YOUR_LOCALE_CODE`. Por ejemplo, las traducciones al español se encuentran en `i18n/es`.  
+
 **2.** Eres responsable de todos los archivos en esta carpeta, incluyendo, pero no limitado a:  
  - `code.json`
  - `tags.yml`
  - Cualquier otro archivo `.json` o `.yml`
+
 **3.** Asegúrate de que todo el texto esté correctamente traducido mientras se mantiene el formato original (encabezados, listas, bloques de código, notas, consejos, admoniciones e imágenes).  
-**4.** **No** intentes traducir el contenido de `/blogs`; estos no pueden ser traducidos debido a limitaciones del framework. Sin embargo, en el directorio `docusaurus-plugin-content-blog` puede haber un `options.json`. Este sí debe traducirse.  
-**5.** Requisitos de PR:  
+
+**4.** Requisitos de PR:  
  - Cualquier PR que se fusione con la etiqueta `needs-translating` debe traducirse a tu idioma.  
  - Las PR de traducción deben comenzar con el prefijo `[Translation - YOUR_LOCALE_CODE]`.  
-**6.** Envía tus cambios mediante Pull Request. Un mantenedor del wiki revisará tu envío antes de fusionarlo.
+
+**5.** Envía tus cambios mediante Pull Request. Un mantenedor del wiki revisará tu envío antes de fusionarlo.
 
 ---
 
@@ -44,6 +47,7 @@ Si deseas agregar un idioma completamente nuevo:
 ### Paso 1 - Configura tu Localidad {#set-up-your-locale}
 
 **1.** Abre `docusaurus.config.js`.  
+
 **2.** Agrega tu idioma en la sección `localeConfigs`. Ejemplo para italiano:
 ```js
 locales: ['en', 'es', 'fr', 'it'],
@@ -104,7 +108,9 @@ npx docusaurus write-translations --locale YOUR_LOCALE_CODE
 ### Paso 3 - Organiza tu Área de Traducción {#organize-your-translation-workspace}
 
 **1.** Dentro de `docusaurus-plugin-content-docs` y `docusaurus-plugin-content-modding-docs`, crea una carpeta llamada `current`.  
+
 **2.** Copia todos los archivos de `docs/` y `modding-docs/` en sus respectivas carpetas `current`.  
+
 **3.** Comienza a traducir estos archivos. Mantén el formato original, incluyendo:  
  - Encabezados  
  - Listas  
@@ -113,7 +119,9 @@ npx docusaurus write-translations --locale YOUR_LOCALE_CODE
  - Consejos (`:::tip`)  
  - Advertencias importantes (`:::important`)  
  - Imágenes y subtítulos  
+
 **4.** Traduce todos los demás archivos en el directorio, como `code.json` y `tags.yml`.  
+
 **5.** Recuerda que los enlaces, IDs de página, nombres y referencias de imágenes **no deben traducirse**.
 
 ### Paso 4 - Envía tu PR {#submit-your-pr}
@@ -234,7 +242,11 @@ Aquí están los detalles para los idiomas actualmente soportados:
 ## Actualización de Traducciones {#updating-translations}
 
 **1.** Obtén los últimos cambios desde la rama principal.  
+
 **2.** Revisa cualquier archivo nuevo o actualizado en `docs/` y `modding-docs/`.  
+
 **3.** Traduce cualquier contenido nuevo en tu carpeta de idioma.  
+
 **4.** Envía actualizaciones mediante PR usando el prefijo `[Translation - YOUR_LOCALE_CODE]`.  
+
 **5.** Repite el proceso de revisión con un mantenedor del wiki antes de fusionar.

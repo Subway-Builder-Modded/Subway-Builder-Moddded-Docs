@@ -11,7 +11,7 @@ const CONTRIBUTORS = {
       description: translate({
         id: "credits.maintainers.kai.description",
         message:
-          "Lead maintainer of the Mod Wiki. Oversees structure, updates, and content accuracy. Maintains the Spanish translation.",
+          "Lead maintainer of Subway Builder Modded. Oversees structure, updates, and content accuracy. Maintains the Spanish translation.",
       }),
       link: "https://github.com/kaicardenas0618",
     },
@@ -135,13 +135,13 @@ const CONTRIBUTORS = {
 const SECTION_INFO = [
   {
     key: "maintainers",
-    title: translate({ id: "credits.section.maintainers", message: "Mod Wiki Maintainers" }),
+    title: translate({ id: "credits.section.maintainers", message: "Subway Builder Modded Maintainers" }),
     letter: "M",
     color: "#FF6319",
   },
   {
     key: "translators",
-    title: translate({ id: "credits.section.translators", message: "Mod Wiki Translators" }),
+    title: translate({ id: "credits.section.translators", message: "Subway Builder Modded Wiki Translators" }),
     letter: "T",
     color: "#0039A6",
   },
@@ -191,7 +191,7 @@ export default function Credits() {
       description={translate({
         id: "credits.pageDescription",
         message:
-          "The Subway Builder Mod Wiki is a community-driven project made possible by these dedicated contributors.",
+          "Subway Builder Modded is a community-driven project made possible by these dedicated contributors.",
       })}
     >
       <div className={styles.page}>
@@ -201,12 +201,8 @@ export default function Credits() {
               <Translate id="credits.pageTitle">Credits</Translate>
             </h1>
             <p className={styles.pageSubtitle}>
-              <Translate id="credits.pageSubtitlePart1">
-                The Subway Builder Mod Wiki is a community-driven project
-              </Translate>
-              <br />
-              <Translate id="credits.pageSubtitlePart2">
-                made possible by dedicated contributors.
+              <Translate id="credits.pageSubtitle">
+                Subway Builder Modded is a community-driven project made possible by dedicated contributors.
               </Translate>
             </p>
           </div>
@@ -227,6 +223,13 @@ export default function Credits() {
             </section>
           ))}
         </div>
+        <footer className={styles.footerBars}>
+          <span className={styles.bar} style={{ background: "#0039A6" }} />
+          <span className={styles.bar} style={{ background: "#FF6319" }} />
+          <span className={styles.bar} style={{ background: "#00933C" }} />
+          <span className={styles.bar} style={{ background: "#FCCC0A" }} />
+          <span className={styles.bar} style={{ background: "#752F82" }} />
+        </footer>
       </div>
     </Layout>
   );
