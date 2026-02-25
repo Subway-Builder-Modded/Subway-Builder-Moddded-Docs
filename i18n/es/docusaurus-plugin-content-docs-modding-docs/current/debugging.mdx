@@ -30,7 +30,7 @@ el juego completamente es la forma más segura de restablecerlo.
 Usa `console.log` con un prefijo identificador para distinguir la salida de tu mod:
 
 ```ts
-const TAG = "[MyMod]";
+const TAG = '[MyMod]';
 console.log(`${TAG} Inicializado`);
 console.warn(`${TAG} Algo inesperado`, someData);
 console.error(`${TAG} Error al cargar`, error);
@@ -58,7 +58,7 @@ api.hooks.onMapReady((_map) => {
     console.log(`${TAG} Inicializado correctamente.`);
   } catch (err) {
     console.error(`${TAG} Error al inicializar:`, err);
-    api.ui.showNotification("My Mod falló al cargar. Revisa la consola.", "error");
+    api.ui.showNotification('My Mod falló al cargar. Revisa la consola.', 'error');
   }
 });
 ```

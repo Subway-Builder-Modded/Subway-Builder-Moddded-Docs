@@ -70,7 +70,7 @@ logic. The template comes with a working example:
 const api = window.SubwayBuilderAPI;
 
 if (!api) {
-  console.error("SubwayBuilderAPI not found!");
+  console.error('SubwayBuilderAPI not found!');
 } else {
   let initialized = false;
 
@@ -80,9 +80,9 @@ if (!api) {
 
     // Set up your mod here
     api.ui.addFloatingPanel({
-      id: "my-mod-panel",
-      title: "My Mod",
-      icon: "Puzzle",
+      id: 'my-mod-panel',
+      title: 'My Mod',
+      icon: 'Puzzle',
       render: ExamplePanel,
     });
   });
@@ -95,7 +95,7 @@ A sample React component that demonstrates how to use game UI components and hoo
 panel:
 
 ```tsx
-import { useState } from "react";
+import { useState } from 'react';
 
 const api = window.SubwayBuilderAPI;
 const { Button } = api.utils.components as Record<string, React.ComponentType<any>>;

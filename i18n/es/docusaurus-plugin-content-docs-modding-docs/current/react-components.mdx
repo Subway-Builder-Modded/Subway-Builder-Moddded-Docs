@@ -20,7 +20,7 @@ Vite está configurado para redirigir todos los imports de `react` a este shim, 
 escribir React estándar:
 
 ```tsx
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 ```
 
 Esto simplemente funciona — el import se redirige al shim en tiempo de compilación y, en tiempo de
@@ -71,7 +71,7 @@ const { Button } = api.utils.components as Record<string, React.ComponentType<an
 function MyPanel() {
   return (
     <div className="flex flex-col gap-2">
-      <Button onClick={() => console.log("click")}>Predeterminado</Button>
+      <Button onClick={() => console.log('click')}>Predeterminado</Button>
       <Button variant="secondary">Secundario</Button>
       <Button variant="destructive">Eliminar</Button>
       <Button variant="outline">Contorno</Button>
@@ -137,9 +137,9 @@ el nombre en PascalCase como string:
 
 ```ts
 api.ui.addFloatingPanel({
-  id: "my-panel",
-  icon: "Train", // Nombre como string, no el componente
-  title: "Mi Panel",
+  id: 'my-panel',
+  icon: 'Train', // Nombre como string, no el componente
+  title: 'Mi Panel',
   render: MyPanel,
 });
 ```
@@ -235,9 +235,9 @@ function MyPanel() {
 
 // Registrándolo
 api.ui.addFloatingPanel({
-  id: "my-panel",
-  title: "Mi Mod",
-  icon: "Puzzle",
+  id: 'my-panel',
+  title: 'Mi Mod',
+  icon: 'Puzzle',
   render: MyPanel,
 });
 ```
@@ -259,8 +259,8 @@ function MySettingsSection() {
   );
 }
 
-api.ui.registerComponent("settings-menu", {
-  id: "my-settings",
+api.ui.registerComponent('settings-menu', {
+  id: 'my-settings',
   component: MySettingsSection,
 });
 ```

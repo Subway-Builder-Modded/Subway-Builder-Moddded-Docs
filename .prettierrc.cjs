@@ -7,6 +7,7 @@ module.exports = {
       files: ["*.md", "*.mdx"],
       options: {
         proseWrap: "preserve",
+        singleQuote: true,
       },
     },
   ],

@@ -70,7 +70,7 @@ de tu mod. La plantilla incluye un ejemplo funcional:
 const api = window.SubwayBuilderAPI;
 
 if (!api) {
-  console.error("¡SubwayBuilderAPI no encontrado!");
+  console.error('¡SubwayBuilderAPI no encontrado!');
 } else {
   let initialized = false;
 
@@ -80,9 +80,9 @@ if (!api) {
 
     // Configura tu mod aquí
     api.ui.addFloatingPanel({
-      id: "my-mod-panel",
-      title: "Mi Mod Genial",
-      icon: "Puzzle",
+      id: 'my-mod-panel',
+      title: 'Mi Mod Genial',
+      icon: 'Puzzle',
       render: ExamplePanel,
     });
   });
@@ -95,7 +95,7 @@ Un componente de ejemplo en React que demuestra cómo usar componentes de UI del
 de un panel flotante:
 
 ```tsx
-import { useState } from "react";
+import { useState } from 'react';
 
 const api = window.SubwayBuilderAPI;
 const { Button } = api.utils.components as Record<string, React.ComponentType<any>>;

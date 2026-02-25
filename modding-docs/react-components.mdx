@@ -19,7 +19,7 @@ export const { useState, useEffect, useCallback, useMemo, useRef } = React;
 Vite is configured to alias all `react` imports to this shim, so you can write standard React:
 
 ```tsx
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 ```
 
 This just works — the import gets redirected to the shim at build time, and at runtime it uses the
@@ -70,7 +70,7 @@ const { Button } = api.utils.components as Record<string, React.ComponentType<an
 function MyPanel() {
   return (
     <div className="flex flex-col gap-2">
-      <Button onClick={() => console.log("click")}>Default</Button>
+      <Button onClick={() => console.log('click')}>Default</Button>
       <Button variant="secondary">Secondary</Button>
       <Button variant="destructive">Delete</Button>
       <Button variant="outline">Outline</Button>
@@ -135,9 +135,9 @@ directly:
 
 ```ts
 api.ui.addFloatingPanel({
-  id: "my-panel",
-  icon: "Train", // String name, not the component
-  title: "My Panel",
+  id: 'my-panel',
+  icon: 'Train', // String name, not the component
+  title: 'My Panel',
   render: MyPanel,
 });
 ```
@@ -232,9 +232,9 @@ function MyPanel() {
 
 // Registering it
 api.ui.addFloatingPanel({
-  id: "my-panel",
-  title: "My Mod",
-  icon: "Puzzle",
+  id: 'my-panel',
+  title: 'My Mod',
+  icon: 'Puzzle',
   render: MyPanel,
 });
 ```
@@ -255,8 +255,8 @@ function MySettingsSection() {
   );
 }
 
-api.ui.registerComponent("settings-menu", {
-  id: "my-settings",
+api.ui.registerComponent('settings-menu', {
+  id: 'my-settings',
   component: MySettingsSection,
 });
 ```

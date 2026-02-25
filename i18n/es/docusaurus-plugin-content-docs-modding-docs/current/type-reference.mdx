@@ -108,26 +108,26 @@ interface Train {
 ```ts
 type Coordinate = [number, number]; // [longitud, latitud]
 type BoundingBox = [number, number, number, number]; // [minLng, minLat, maxLng, maxLat]
-type GameSpeed = "slow" | "normal" | "fast" | "ultrafast";
-type BuildType = "blueprint" | "built";
+type GameSpeed = 'slow' | 'normal' | 'fast' | 'ultrafast';
+type BuildType = 'blueprint' | 'built';
 ```
 
 ### Tipos de UI {#ui-types}
 
 ```ts
 type UIPlacement =
-  | "settings-menu"
-  | "escape-menu"
-  | "escape-menu-buttons"
-  | "main-menu"
-  | "bottom-bar"
-  | "top-bar"
-  | "debug-panel"
-  | "menu-items"
-  | "pause-menu"
-  | "debug";
+  | 'settings-menu'
+  | 'escape-menu'
+  | 'escape-menu-buttons'
+  | 'main-menu'
+  | 'bottom-bar'
+  | 'top-bar'
+  | 'debug-panel'
+  | 'menu-items'
+  | 'pause-menu'
+  | 'debug';
 
-type NotificationType = "success" | "error" | "info" | "warning";
+type NotificationType = 'success' | 'error' | 'info' | 'warning';
 ```
 
 ## Extender Tipos {#extending-types}
