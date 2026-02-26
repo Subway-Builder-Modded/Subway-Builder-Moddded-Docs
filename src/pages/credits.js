@@ -174,7 +174,6 @@ function ContributorCard({ contributor, color }) {
         {contributor.role}
       </span>
 
-      {/* ✅ Optional description */}
       {contributor.description && (
         <p className={styles.contributorDesc}>
           {contributor.description}

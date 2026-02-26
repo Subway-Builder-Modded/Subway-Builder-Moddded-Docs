@@ -6,12 +6,11 @@
 }
 
 .container {
-  max-width: 1600px; /* wider layout */
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 0 40px; /* extend left/right */
+  padding: 0 40px;
 }
 
-/* Centered title & subtitle */
 .headerCenter {
   text-align: center;
   margin-bottom: 32px;
@@ -28,7 +27,6 @@
   color: var(--home-text-dim, #555);
 }
 
-/* Sections and badges */
 .section {
   margin-bottom: 40px;
   text-align: left;
@@ -43,7 +41,7 @@
 
 .sectionTitle {
   margin: 0;
-  font-size: clamp(16px, 1.8vw, 20px); /* headings stay larger */
+  font-size: clamp(16px, 1.8vw, 20px);
   font-weight: 700;
   color: var(--home-text-dim, #555);
   text-transform: uppercase;
@@ -69,16 +67,15 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 per row */
+  grid-template-columns: repeat(4, 1fr);
   gap: clamp(20px, 1.5vw, 28px);
 }
 
-/* Contributor cards */
 .card {
   background: var(--home-surface, #fff);
   border: 1px solid var(--home-border, #ccc);
   border-radius: 10px;
-  padding: clamp(20px, 2vw, 28px); /* more padding */
+  padding: clamp(20px, 2vw, 28px);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -93,7 +90,7 @@
 
 .contributorName {
   margin: 0;
-  font-size: clamp(16px, 1.5vw, 20px); /* slightly smaller */
+  font-size: clamp(16px, 1.5vw, 20px);
   font-weight: 700;
 }
 
@@ -107,7 +104,7 @@
 }
 
 .contributorRole {
-  font-size: clamp(12px, 1.2vw, 14px); /* smaller */
+  font-size: clamp(12px, 1.2vw, 14px);
   font-weight: 600;
   display: inline-flex;
   align-items: center;
@@ -116,12 +113,11 @@
 
 .contributorDesc {
   margin: 4px 0 0 0;
-  font-size: clamp(12px, 1.2vw, 14px); /* smaller */
+  font-size: clamp(12px, 1.2vw, 14px);
   line-height: 1.5;
   color: var(--home-text-muted, #666);
 }
 
-/* Responsive fallback */
 @media (max-width: 1200px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
