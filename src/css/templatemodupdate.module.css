@@ -382,7 +382,7 @@
 }
 
 .floatingBack {
-  position: fixed;
+  position: sticky;
   top: 70px;
   left: 24px;
   padding: 8px 12px;
@@ -391,7 +391,7 @@
   font-weight: 700;
   border-radius: 8px;
   z-index: 9999;
-  text-decoration: none !important; /* force no underline */
+  text-decoration: none !important;
   transition: transform 0.2s ease, background 0.15s, color 0.15s;
   display: inline-block;
 }
@@ -400,7 +400,7 @@
 .floatingBack:focus,
 .floatingBack:active {
   background-color: #eee;
-  transform: scale(1.1);
+  transform: scale(1.02);
   text-decoration: none !important;
 }
 
@@ -414,7 +414,7 @@
 [data-theme="dark"] .floatingBack:focus,
 [data-theme="dark"] .floatingBack:active {
   background-color: #222;
-  transform: scale(1.05);
+  transform: scale(1.02);
   text-decoration: none !important;
 }
 
