@@ -370,6 +370,7 @@
   font-weight: 700;
   color: var(--home-text, #1b1b1d);
   text-decoration: none;
+  position: relative;
 }
 
 .updateBox,
@@ -391,9 +392,10 @@
   font-weight: 700;
   border-radius: 8px;
   z-index: 9999;
-  text-decoration: none !important; /* force no underline */
+  text-decoration: none !important;
   transition: transform 0.2s ease, background 0.15s, color 0.15s;
   display: inline-block;
+  position: relative
 }
 
 .floatingBack:hover,
