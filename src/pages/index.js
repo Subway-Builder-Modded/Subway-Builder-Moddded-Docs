@@ -8,7 +8,7 @@ const HOMEPAGE_ITEMS = [
   {
     id: "directory",
     letter: "M",
-    bullet: "#0039A6",
+    bullet: "#9A662F",
     title: translate({
       id: "homepage.directory.title",
       message: "Map Directory",
@@ -22,7 +22,7 @@ const HOMEPAGE_ITEMS = [
   {
     id: "install",
     letter: "I",
-    bullet: "#FF6319",
+    bullet: "#000000",
     title: translate({
       id: "homepage.install.title",
       message: "Installing Maps",
@@ -36,7 +36,7 @@ const HOMEPAGE_ITEMS = [
   {
     id: "create",
     letter: "C",
-    bullet: "#752F82",
+    bullet: "#0036A7",
     title: translate({
       id: "homepage.create.title",
       message: "Making Custom Maps",
@@ -50,7 +50,7 @@ const HOMEPAGE_ITEMS = [
   {
     id: "updates",
     letter: "U",
-    bullet: "#FCCC0A",
+    bullet: "#0C493B",
     title: translate({
       id: "homepage.updates.title",
       message: "Updates & Changelogs",
@@ -64,7 +64,7 @@ const HOMEPAGE_ITEMS = [
   {
     id: "modding",
     letter: "D",
-    bullet: "#00933C",
+    bullet: "#FF6312",
     title: translate({
       id: "homepage.modding.title",
       message: "Modding Documentation",

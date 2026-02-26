@@ -7,7 +7,7 @@ import Link from "@docusaurus/Link";
 const SECTION_DEFINITIONS = [
   { key: "features", letter: "F", titleId: "updates.features", defaultMessage: "Features", color: "#ED6D32" },
   { key: "bugfixes", letter: "B", titleId: "updates.bugfixes", defaultMessage: "Bugfixes", color: "#ED6D32" },
-  { key: "upgrades", letter: "U", titleId: "updates.upgrades", defaultMessage: "Upgrades/Changes", color: "#000000" },
+  { key: "upgrades", letter: "U", titleId: "updates.upgrades", defaultMessage: "Upgrades/Changes", color: "#0C493B" },
   { key: "otherNotes", letter: "O", titleId: "updates.otherNotes", defaultMessage: "Other Notes", color: "#000000" },
 ];
 
