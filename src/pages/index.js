@@ -108,7 +108,7 @@ export default function Home() {
     <Layout
       description={translate({
         id: "homepage.meta.description",
-        message: "Subway Builder Mods, Maps, and Documentation",
+        message: "Subway Builder Maps, Mods, and Documentation",
       })}
     >
       <div className={styles.homepage}>
