@@ -13,6 +13,14 @@ const UPDATES = [
     tag: "release",
     link: "/updates/template-mod/v1.0.0",
   },
+  {
+    titleId: "updates.template-mod.v1-0-1.title",
+    titleDefault: "Template Mod - v1.0.1",
+    dateId: "updates.template-mod.v1-0-1.releaseDate",
+    dateDefault: "February 24, 2026",
+    tag: "release",
+    link: "/updates/template-mod/v1.0.1",
+  },
 ];
 
 function Tag({ tag, isLatest }) {
