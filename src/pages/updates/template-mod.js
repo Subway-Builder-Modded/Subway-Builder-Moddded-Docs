@@ -17,7 +17,7 @@ const UPDATES = [
     titleId: "updates.template-mod.v1-0-1.title",
     titleDefault: "Template Mod - v1.0.1",
     dateId: "updates.template-mod.v1-0-1.releaseDate",
-    dateDefault: "February 24, 2026",
+    dateDefault: "February 25, 2026",
     tag: "release",
     link: "/updates/template-mod/v1.0.1",
   },

@@ -8,7 +8,7 @@ export default function TemplateMod_UpdateV1_0_1() {
       titleMessage="Template Mod - v1.0.1"
       titleLink="https://github.com/Subway-Builder-Modded/SubwayBuilderTemplateMod"
       releaseDateId="updates.template-mod.v1-0-1.releaseDate"
-      releaseDateMessage="February 24, 2026"
+      releaseDateMessage="February 25, 2026"
       itemsBySection={{
         features: [],
         bugfixes: [],
