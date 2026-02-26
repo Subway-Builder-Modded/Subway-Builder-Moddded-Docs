@@ -10,7 +10,7 @@
   --home-bg: #111214;
   --home-surface: #242526;
   --home-border: #3a3a3d;
-  --home-text-title: #ffffff;
+  --home-text-title: #e3e3e3;
   --home-text-desc: #ccc;
 }
 
@@ -65,7 +65,7 @@
 }
 
 [data-theme="dark"] .heroTitle {
-  color: #fff;
+  color: #e3e3e3;
 }
 
 .heroSubtitle {
@@ -160,7 +160,7 @@
 }
 
 [data-theme="dark"] .homepage .cardTitle {
-  color: #ffffff;
+  color: #e3e3e3;
 }
 
 .homepage .cardDesc {
