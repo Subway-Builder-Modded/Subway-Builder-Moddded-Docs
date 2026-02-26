@@ -13,6 +13,14 @@ const UPDATES = [
     tag: "release",
     link: "/updates/template-mod/v1.0.0",
   },
+  {
+    titleId: "updates.template-mod.v1-0-1.title",
+    titleDefault: "Template Mod - v1.0.1",
+    dateId: "updates.template-mod.v1-0-1.releaseDate",
+    dateDefault: "February 25, 2026",
+    tag: "release",
+    link: "/updates/template-mod/v1.0.1",
+  },
 ];
 
 function Tag({ tag, isLatest }) {
@@ -20,11 +28,7 @@ function Tag({ tag, isLatest }) {
     <div style={{ display: "flex", gap: "8px" }}>
       {isLatest && (
         <span
-          className={styles.tag}
-          style={{
-            backgroundColor: "#1335A1",
-            color: "#fff !important",
-          }}
+          className={`${styles.tag} ${styles.latestTag}`}
         >
           LATEST
         </span>

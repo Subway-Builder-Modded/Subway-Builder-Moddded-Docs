@@ -167,6 +167,14 @@
   color: var(--home-text, #1b1b1d);
 }
 
+[data-theme="dark"] .sectionList {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: 0;
+  font-size: clamp(14px, 1.2vw, 16px);
+  color: var(--home-text, #e5e5e5);
+}
+
 .footerBars {
   display: flex;
   justify-content: center;
@@ -339,6 +347,11 @@
 .updateBox .releaseTag {
   color: #fff !important;
   background-color: #00933C;
+}
+
+.updateBox .latestTag {
+  color: #fff !important;
+  background-color: #1335A1;
 }
 
 .fullWidthWrapper {

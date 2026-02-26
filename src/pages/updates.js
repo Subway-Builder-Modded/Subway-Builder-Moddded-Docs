@@ -26,7 +26,7 @@ const UPDATES = [
     descId: "updates.templateMod.desc",
     descDefault:
       "Documented TypeScript template to create your own mods for Subway Builder",
-    creator: "IMB11",
+    creator: "IMB11 & ahkimn",
     image: "/images/updates-template-mod.png",
     bullet: "T",
     link: "/updates/template-mod",
