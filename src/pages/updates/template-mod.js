@@ -28,11 +28,7 @@ function Tag({ tag, isLatest }) {
     <div style={{ display: "flex", gap: "8px" }}>
       {isLatest && (
         <span
-          className={styles.tag}
-          style={{
-            backgroundColor: "#1335A1",
-            color: "#fff !important",
-          }}
+          className={`${styles.tag} ${styles.latestTag}`}
         >
           LATEST
         </span>

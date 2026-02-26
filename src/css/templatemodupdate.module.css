@@ -337,12 +337,8 @@
   border-radius: 12px;
   font-weight: 700;
   font-size: clamp(12px, 1vw, 14px);
-  color: #fff !important;
 }
 
-.updateBox .tag {
-  color: #fff !important;
-}
 .updateBox .betaTag {
   color: #000 !important;
   background-color: #F5CF46;
@@ -351,6 +347,11 @@
 .updateBox .releaseTag {
   color: #fff !important;
   background-color: #00933C;
+}
+
+.updateBox .latestTag {
+  color: #fff !important;
+  background-color: #1335A1;
 }
 
 .fullWidthWrapper {
