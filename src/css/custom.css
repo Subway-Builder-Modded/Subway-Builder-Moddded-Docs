@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 
+a:hover {
+  color: #62C98E;
+}
+
+:root {
+  --ifm-link-color: #62C98E;
+  --ifm-color-primary: #62C98E;
+}
+
 :root {
   --ifm-font-family-base: 'Inter', sans-serif;
   --ifm-font-family-monospace: 'Fira Code', monospace;
@@ -17,8 +26,8 @@ code, pre {
 /* === Navbar / Header === */
 :root {
   --ifm-navbar-background-color: #E3E3E3;   /* bg color */
-  --ifm-navbar-link-color: #242526;         /* links */
-  --ifm-navbar-link-hover-color: #3578E5;   /* hover links */
+  --ifm-navbar-link-color: #111;         /* links */
+  --ifm-navbar-link-hover-color: #62C98E;   /* hover links */
   --ifm-navbar-height: 60px;
   --ifm-navbar-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
@@ -26,7 +35,7 @@ code, pre {
 [data-theme='dark'] {
   --ifm-navbar-background-color: #242526;   /* bg color */
   --ifm-navbar-link-color: #E3E3E3;         /* links */
-  --ifm-navbar-link-hover-color: #3578E5;   /* hover links */
+  --ifm-navbar-link-hover-color: #62C98E;   /* hover links */
   --ifm-navbar-height: 60px;
   --ifm-navbar-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
@@ -49,16 +58,31 @@ code, pre {
 /* === Footer === */
 :root {
   --ifm-footer-background-color: #E3E3E3;
-  --ifm-footer-color: #242526;
-  --ifm-footer-link-color: #242526;
-  --ifm-footer-link-hover-color: #3578E5;
+  --ifm-footer-color: #111;
+  --ifm-footer-link-color: #111;
+  --ifm-footer-link-hover-color: #62C98E;
 }
 
 [data-theme='dark'] {
   --ifm-footer-background-color: #242526;
   --ifm-footer-color: #E3E3E3;
   --ifm-footer-link-color: #E3E3E3;
-  --ifm-footer-link-hover-color: #3578E5;
+  --ifm-footer-link-hover-color: #62C98E;
+}
+
+/* === Footer === */
+:root {
+  --ifm-footer-background-color: #E3E3E3;
+  --ifm-footer-color: #111;
+  --ifm-footer-link-color: #111;
+  --ifm-footer-link-hover-color: #62C98E;
+}
+
+[data-theme='dark'] {
+  --ifm-footer-background-color: #242526;
+  --ifm-footer-color: #E3E3E3;
+  --ifm-footer-link-color: #E3E3E3;
+  --ifm-footer-link-hover-color: #62C98E;
 }
 
 /* === Footer === */
@@ -66,29 +90,14 @@ code, pre {
   --ifm-footer-background-color: #E3E3E3;
   --ifm-footer-color: #242526;
   --ifm-footer-link-color: #242526;
-  --ifm-footer-link-hover-color: #3578E5;
+  --ifm-footer-link-hover-color: #62C98E;
 }
 
 [data-theme='dark'] {
   --ifm-footer-background-color: #242526;
   --ifm-footer-color: #E3E3E3;
   --ifm-footer-link-color: #E3E3E3;
-  --ifm-footer-link-hover-color: #3578E5;
-}
-
-/* === Footer === */
-:root {
-  --ifm-footer-background-color: #E3E3E3;
-  --ifm-footer-color: #242526;
-  --ifm-footer-link-color: #242526;
-  --ifm-footer-link-hover-color: #3578E5;
-}
-
-[data-theme='dark'] {
-  --ifm-footer-background-color: #242526;
-  --ifm-footer-color: #E3E3E3;
-  --ifm-footer-link-color: #E3E3E3;
-  --ifm-footer-link-hover-color: #3578E5;
+  --ifm-footer-link-hover-color: #62C98E;
 }
 
 .footer {

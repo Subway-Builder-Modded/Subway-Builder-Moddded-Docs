@@ -1,3 +1,7 @@
+a:hover {
+  color: #62C98E;
+}
+
 .page {
   display: flex;
   flex-direction: column;
@@ -62,7 +66,7 @@
   justify-content: center;
   font-weight: 800;
   font-size: clamp(14px, 1.5vw, 18px);
-  color: #fff;
+  color: #e3e3e3;
 }
 
 .grid {
@@ -74,18 +78,22 @@
 .card {
   background: var(--home-surface, #fff);
   border: 1px solid var(--home-border, #ccc);
-  border-radius: 10px;
-  padding: clamp(20px, 2vw, 28px);
+  border-radius: 16px;
+  padding: 28px;
+  text-decoration: none !important;
+  color: inherit !important;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  min-height: 160px;
-  transition: background 0.15s, transform 0.15s;
+  gap: 16px;
+  min-width: 280px;
+  max-width: 320px;
+  transition: all 0.25s ease;
 }
 
 .card:hover {
-  background: var(--home-surface-hover, #f5f5f5);
-  transform: translateY(-2px);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  background: var(--home-surface-hover);
 }
 
 .contributorName {

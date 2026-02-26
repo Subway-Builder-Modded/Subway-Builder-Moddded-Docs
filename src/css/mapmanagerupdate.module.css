@@ -1,3 +1,7 @@
+a:hover {
+  color: #62C98E;
+}
+
 .page {
   display: flex;
   flex-direction: column;
@@ -95,7 +99,7 @@
 }
 
 .updateBox .releaseTag {
-  color: #fff !important;
+  color: #e3e3e3 !important;
   background-color: #00933C;
 }
 
@@ -109,7 +113,7 @@
 }
 
 .titleBulletText {
-  color: #fff;
+  color: #e3e3e3;
   font-weight: 700;
   display: block;
   white-space: nowrap;
@@ -150,7 +154,7 @@
   justify-content: center;
   font-weight: 800;
   font-size: 14px;
-  color: #fff;
+  color: #e3e3e3;
   flex-shrink: 0;
 }
 
@@ -218,8 +222,9 @@
 }
 
 .card:hover {
-  transform: translateY(-2px);
-  background: var(--home-surface-hover, #f5f5f5);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  background: var(--home-surface-hover);
 }
 
 .cardHeader {
@@ -282,7 +287,7 @@
   justify-content: center;
   font-weight: 800;
   font-size: clamp(14px, 1.5vw, 18px);
-  color: #fff;
+  color: #e3e3e3;
   flex-shrink: 0;
 }
 
@@ -351,7 +356,7 @@
 
 .updateBox .latestTag {
   background-color: #1335A1;
-  color: #ffffff !important;
+  color: #e3e3e3 !important;
 }
 
 .fullWidthWrapper {
@@ -406,7 +411,7 @@
 
 [data-theme="dark"] .floatingBack {
   background-color: #333;
-  color: #fff;
+  color: #e3e3e3;
   text-decoration: none !important;
 }
 
@@ -433,7 +438,7 @@
 }
 
 .titleBulletText {
-  color: #fff;
+  color: #e3e3e3;
   font-weight: 700;
   display: block;
   white-space: nowrap;

@@ -1,3 +1,7 @@
+a:hover {
+  color: #62C98E;
+}
+
 :root {
   --home-bg: #ffffff;
   --home-surface: #f5f6f7;
@@ -156,7 +160,7 @@
 }
 
 .homepage .cardTitle {
-  color: #111;
+  color: #1b1b1d;
 }
 
 [data-theme="dark"] .homepage .cardTitle {

@@ -1,3 +1,7 @@
+a:hover {
+  color: #62C98E;
+}
+
 .page {
   display: flex;
   flex-direction: column;
@@ -68,8 +72,9 @@
 }
 
 .card:hover {
-  transform: translateY(-2px);
-  background: var(--home-surface-hover, #f5f5f5);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  background: var(--home-surface-hover);
 }
 
 .badge {
@@ -81,7 +86,7 @@
   justify-content: center;
   font-weight: 800;
   font-size: clamp(14px, 1.5vw, 18px);
-  color: #fff !important;
+  color: #e3e3e3 !important;
   flex-shrink: 0;
 }
 
