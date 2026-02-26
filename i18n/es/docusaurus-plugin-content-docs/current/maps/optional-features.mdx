@@ -1,0 +1,77 @@
+---
+id: optional-features
+title: Funciones Opcionales
+---
+
+Esta guía cubre funciones opcionales para
+[Kronifer's Map Manager](https://github.com/Subway-Builder-Modded/subwaybuilder-patcher/releases)
+que pueden ser añadidas por los creadores de mapas. Estas funciones opcionales son en su mayoría
+visuales/relacionadas con la interfaz y no tienen ningún efecto en la jugabilidad.
+
+## Miniatura {#thumbnail}
+
+La miniatura de un mapa es la imagen que se muestra cuando un jugador intenta crear un nuevo mapa.
+
+<img width="300" alt="image" src="/images/create-thumbnail.png" />
+
+Podemos crear una personalizada de 2 maneras diferentes.
+
+:::tip
+
+La miniatura es opcional, sin embargo, si no la configuras, aparecerá en blanco.
+
+<img width="150" alt="image" src="/images/empty-thumbnail.png" />
+
+:::
+
+### Método 1 - Archivo de Configuración {#config-file}
+
+Para crear una miniatura personalizada usando el archivo `config.json`, simplemente puedes añadir el
+siguiente campo al archivo:
+
+```json
+  "thumbnailBbox": [minLon, minLat, maxLon, maxLat]
+```
+
+Esto generará automáticamente una miniatura con estilo vanilla para tu mapa basada en el cuadro
+delimitador que hayas introducido.
+
+### Método 2 - Imagen Personalizada {#custom-image}
+
+Para crear una miniatura personalizada usando una imagen, puedes añadir un archivo `XXX.svg` (`XXX`
+es el código de tu ciudad). Simplemente colócalo junto con los otros archivos de datos dentro del
+ZIP y el Map Manager lo usará automáticamente como la miniatura de tu mapa. La imagen debe estar en
+formato SVG.
+
+## Pestaña de País Personalizada {#custom-country-tab}
+
+Cuando importes tus mapas, aparecerán en la pestaña "`Custom`" en la pantalla de creación de mapas.
+Podemos crear una pestaña personalizada si tenemos un mapa de un país diferente. Esto nos permitirá
+hacer que aparezca bajo la pestaña de ese país, como ocurre con los mapas vanilla.
+
+<img width="500" alt="image" src="/images/map-country-tabs.png" />
+
+:::important
+
+Actualmente esto no funcionará para mapas de Estados Unidos o Reino Unido, ya que esos
+países ya están categorizados bajo las pestañas "`US`" y "`UK`" respectivamente y se manejan de
+manera diferente internamente.
+
+:::
+
+Para hacer esto, simplemente puedes añadir el siguiente campo en tu archivo `config.json`:
+
+```json
+  "country": "en" /* The country code of the country you want your map to be categorized under. For example, "CA" for Canada, "FR" for France, etc. A list of country codes can be found at https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes. */
+```
+
+Esto categorizará automáticamente tu mapa bajo la pestaña del país especificado. Si no incluyes este
+campo, tu mapa se categorizará bajo la pestaña "`Custom`" de forma predeterminada.
+
+:::note
+
+Todos los mapas personalizados seguirán estando categorizados bajo la pestaña "`Custom`" en
+la pantalla de creación de mapas, independientemente de si tienes o no este campo en tu
+`config.json`. Esto solo lo añade también a la pestaña de ese país, además de la pestaña "`Custom`".
+
+:::

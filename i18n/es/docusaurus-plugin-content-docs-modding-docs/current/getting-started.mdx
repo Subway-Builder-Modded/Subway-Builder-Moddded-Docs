@@ -1,0 +1,135 @@
+---
+id: getting-started
+title: Primeros Pasos
+---
+
+Esta guía te acompaña en la configuración de tu primer mod de Subway Builder utilizando la plantilla
+comunitaria en TypeScript.
+
+:::note Prerrequisitos
+
+Antes de comenzar, deberías tener una comprensión básica de **JavaScript** o
+**TypeScript**. Si nunca has escrito JS/TS antes, recomendamos seguir primero un tutorial para
+principiantes — la API de modding es sencilla, pero necesitas entender variables, funciones y
+sintaxis básica.
+
+También necesitarás:
+
+- [Node.js](https://nodejs.org/) v22 o posterior
+- El gestor de paquetes [pnpm](https://pnpm.io/) (`npm install -g pnpm`)
+- [Subway Builder](https://subwaybuilder.com) v1.1.0 o posterior
+- Un editor de código (recomendamos [VS Code](https://code.visualstudio.com/))
+
+:::
+
+## Paso 1 - Clonar la Plantilla {#clone-the-template}
+
+```bash
+git clone https://github.com/Subway-Builder-Modded/SubwayBuilderTemplateMod.git my-mod
+cd my-mod
+```
+
+## Paso 2 - Instalar Dependencias {#install-dependencies}
+
+```bash
+pnpm install
+```
+
+Esto instala la cadena de herramientas de compilación (Vite/Rolldown, TypeScript, etc.). Las APIs
+del juego se acceden en tiempo de ejecución — no hay ningún paquete SDK que instalar.
+
+## Paso 3 - Configurar Tu Mod {#configure-your-mod}
+
+Edita `manifest.json` con la identidad de tu mod:
+
+```json
+{
+  "id": "com.yourname.yourmod",
+  "name": "My Mod Genial",
+  "description": "Hace algo genial",
+  "version": "1.0.0",
+  "author": { "name": "Su nombre" },
+  "main": "index.js"
+}
+```
+
+El `id` debe ser un identificador único en formato dominio invertido. El campo `main` siempre debe
+ser `"index.js"` — es el archivo que genera la compilación.
+
+## Paso 4 - Compilar {#build}
+
+```bash
+pnpm build
+```
+
+Esto compila tu código TypeScript + React en un único archivo `dist/index.js` y copia
+`manifest.json` dentro de `dist/`.
+
+## Paso 5 - Vincular al Juego {#link-to-the-game}
+
+```bash
+pnpm dev:link
+```
+
+Esto crea un symlink desde `dist/` a la carpeta de mods del juego. La ubicación de la carpeta de
+mods depende de tu sistema operativo:
+
+| SO          | Ruta                                               |
+| ----------- | -------------------------------------------------- |
+| **macOS**   | `~/Library/Application Support/metro-maker4/mods/` |
+| **Windows** | `%APPDATA%\metro-maker4\mods\`                     |
+| **Linux**   | `~/.config/metro-maker4/mods/`                     |
+
+El symlink significa que cada vez que recompiles, el juego verá tu código más reciente sin que
+tengas que copiar archivos manualmente.
+
+:::tip
+
+En Windows, puede que necesites ejecutar tu terminal como Administrador para que el symlink
+funcione.
+
+:::
+
+## Paso 6 - Activar Tu Mod {#enable-your-mod}
+
+1. Inicia Subway Builder
+2. Ve a **Settings > Mods**
+3. Activa tu mod
+4. Reinicia el juego (o carga una ciudad)
+
+Deberías ver los mensajes de registro de tu mod en la consola de desarrollador del juego.
+
+## Paso 7 - Flujo de Trabajo de Desarrollo {#development-workflow}
+
+Para desarrollo activo, usa el comando `dev`, que observa cambios en los archivos y lanza el juego
+con registro habilitado:
+
+```bash
+pnpm dev
+```
+
+Esto ejecuta dos procesos simultáneamente:
+
+- **Vite watcher** — recompila en cada guardado de archivo
+- **Game launcher** — inicia Subway Builder con registros en `debug/latest.log`
+
+Después de hacer cambios, recarga los mods dentro del juego con **Ctrl+Shift+R** (o **Cmd+Shift+R**
+en Mac) para ver tus actualizaciones sin reiniciar el juego.
+
+## Paso 8 - Desvincular al Finalizar {#unlink-when-done}
+
+Para eliminar el symlink:
+
+```bash
+pnpm dev:unlink
+```
+
+## Scripts Disponibles {#available-scripts}
+
+| Comando           | Descripción                                     |
+| ----------------- | ----------------------------------------------- |
+| `pnpm build`      | Compila el mod en `dist/`                       |
+| `pnpm dev`        | Modo observación + lanza el juego con logs      |
+| `pnpm dev:link`   | Crea un symlink de `dist/` a la carpeta de mods |
+| `pnpm dev:unlink` | Elimina el symlink                              |
+| `pnpm typecheck`  | Ejecuta la verificación de tipos de TypeScript  |

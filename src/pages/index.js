@@ -1,10 +1,93 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "@theme/Layout";
 import Link from "@docusaurus/Link";
 import { translate } from "@docusaurus/Translate";
 import styles from "../css/index.module.css";
 
-function useTheme() {
+const HOMEPAGE_ITEMS = [
+  {
+    id: "directory",
+    letter: "M",
+    bullet: "#9A662F",
+    title: translate({
+      id: "homepage.directory.title",
+      message: "Map Directory",
+    }),
+    description: translate({
+      id: "homepage.directory.description",
+      message: "Browse community-made maps from cities around the world.",
+    }),
+    href: "/wiki/maps/map-directory",
+  },
+  {
+    id: "install",
+    letter: "I",
+    bullet: "#000000",
+    title: translate({
+      id: "homepage.install.title",
+      message: "Installing Maps",
+    }),
+    description: translate({
+      id: "homepage.install.description",
+      message: "Step-by-step guide to installing custom maps using Kronifer's Map Patcher.",
+    }),
+    href: "/wiki/maps/map-installation-guide",
+  },
+  {
+    id: "create",
+    letter: "C",
+    bullet: "#0036A7",
+    title: translate({
+      id: "homepage.create.title",
+      message: "Making Custom Maps",
+    }),
+    description: translate({
+      id: "homepage.create.description",
+      message: "The complete guide to creating, packaging, and distributing custom Subway Builder maps.",
+    }),
+    href: "/wiki/maps/making-custom-maps",
+  },
+  {
+    id: "updates",
+    letter: "U",
+    bullet: "#0C493B",
+    title: translate({
+      id: "homepage.updates.title",
+      message: "Updates & Changelogs",
+    }),
+    description: translate({
+      id: "homepage.updates.description",
+      message: "Stay up to date with new releases from the Subway Builder Modded Team.",
+    }),
+    href: "/updates",
+  },
+  {
+    id: "modding",
+    letter: "D",
+    bullet: "#FF6312",
+    title: translate({
+      id: "homepage.modding.title",
+      message: "Modding Documentation",
+    }),
+    description: translate({
+      id: "homepage.modding.description",
+      message: "Build your own mods using our Mod Template.",
+    }),
+    href: "/modding-docs/getting-started",
+  },
+];
+
+function useHeroZoom() {
+  const [scale, setScale] = useState(1);
+  useEffect(() => {
+    const onScroll = () => setScale(Math.min(1 + window.scrollY * 0.0004, 1.25));
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return scale;
+}
+
+function useThemeImage(light, dark) {
   const [isDark, setIsDark] = useState(false);
   useEffect(() => {
     const check = () =>
@@ -14,212 +97,61 @@ function useTheme() {
     observer.observe(document.documentElement, { attributes: true });
     return () => observer.disconnect();
   }, []);
-  return isDark;
+  return isDark ? dark : light;
 }
-
-function ThemedImage({ lightSrc, darkSrc, alt }) {
-  const isDark = useTheme();
-  return <img src={isDark ? darkSrc : lightSrc} alt={alt} loading="lazy" />;
-}
-
-function Badge({ letter, className }) {
-  return (
-    <span aria-hidden="true" className={`${styles.badge} ${className}`}>
-      {letter}
-    </span>
-  );
-}
-
-function HoverCard({ to, className, children }) {
-  const [hovered, setHovered] = useState(false);
-  return (
-    <Link
-      to={to}
-      className={`${styles.card} ${className || ""} ${
-        hovered ? styles.cardHovered : ""
-      }`}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      {children}
-    </Link>
-  );
-}
-
-const MAPS = [
-  {
-    title: translate({
-      id: "homepage.maps.directory.title",
-      message: "Map Directory",
-    }),
-    description: translate({
-      id: "homepage.maps.directory.description",
-      message:
-        "Browse community-made cities from around the world, including custom maps for the US, Canada, Europe, Asia, and more.",
-    }),
-    linkText: translate({
-      id: "homepage.maps.directory.link",
-      message: "Browse All Maps",
-    }),
-    lightImg: "/images/home-light-regions-table.png",
-    darkImg: "/images/home-dark-regions-table.png",
-    href: "/wiki/maps/map-directory",
-    color: "#0039A6",
-  },
-  {
-    title: translate({
-      id: "homepage.maps.install.title",
-      message: "Installing Maps",
-    }),
-    description: translate({
-      id: "homepage.maps.install.description",
-      message:
-        "Add custom cities to your game using Kronifer's Map Manager. Follow our step-by-step guide to download and install.",
-    }),
-    linkText: translate({
-      id: "homepage.maps.install.link",
-      message: "View Installation Guide",
-    }),
-    lightImg: "/images/home-light-stations.png",
-    darkImg: "/images/home-dark-stations.png",
-    href: "/wiki/maps/map-installation-guide",
-    color: "#FF6319",
-  },
-  {
-    title: translate({
-      id: "homepage.maps.creating.title",
-      message: "Making Custom Maps",
-    }),
-    description: translate({
-      id: "homepage.maps.creating.description",
-      message:
-        "Learn how to create your own custom maps for Subway Builder using the Subway Builder Modded map creation tools.",
-    }),
-    linkText: translate({
-      id: "homepage.maps.creating.link",
-      message: "Making Custom Maps",
-    }),
-    lightImg: "/images/home-light-trains.png",
-    darkImg: "/images/home-dark-trains.png",
-    href: "/wiki/maps/making-custom-maps",
-    color: "#752F82",
-  },
-  {
-    title: translate({
-      id: "homepage.maps.updates.title",
-      message: "Updates & Changelogs",
-    }),
-    description: translate({
-      id: "homepage.maps.updates.description",
-      message:
-        "Stay up to date with the latest Map Manager releases, new map additions, and wiki changes.",
-    }),
-    linkText: translate({
-      id: "homepage.maps.updates.link",
-      message: "View Updates",
-    }),
-    lightImg: "/images/home-light-transit.png",
-    darkImg: "/images/home-dark-transit.png",
-    href: "/updates",
-    color: "#FCCC0A",
-  },
-];
 
 export default function Home() {
+  const heroScale = useHeroZoom();
+  const heroBg = useThemeImage("/images/home-light.png", "/images/home-dark.png");
+
   return (
     <Layout
       description={translate({
-        id: "homepage.description",
-        message: "Subway Builder Mods, Maps, and Installation Guides",
+        id: "homepage.meta.description",
+        message: "Subway Builder Maps, Mods, and Documentation",
       })}
-      image="/logo.png"
     >
-      <div className={styles.page}>
-        <div className={styles.content}>
-          {/* Maps Section */}
-          <section className={styles.mapsSection}>
-            <div className={styles.sectionHeader}>
-              <Badge letter="P" className={styles.badgeMaps} />
-              <h2 className={styles.sectionLabel}>
-                {translate({ id: "homepage.maps.title", message: "Subway Builder Players" })}
-              </h2>
-              <span className={styles.headerLine} />
-            </div>
-            <div className={styles.mapsGrid}>
-              {MAPS.map((card, index) => (
-                <HoverCard key={index} to={card.href}>
-                  <div className={styles.cardImg}>
-                    <ThemedImage
-                      lightSrc={card.lightImg}
-                      darkSrc={card.darkImg}
-                      alt={card.title}
-                    />
-                  </div>
-                  <div className={styles.moddingBody}>
-                    <h3 className={styles.moddingTitle}>{card.title}</h3>
-                    <p className={styles.moddingDesc}>{card.description}</p>
-                    <span
-                      className={styles.cardLinkMods}
-                      style={{ color: card.color }}
-                    >
-                      {card.linkText} {"\u2192"}
-                    </span>
-                  </div>
-                </HoverCard>
-              ))}
-            </div>
-          </section>
+      <div className={styles.homepage}>
 
-          {/* Modding Section */}
-          <section className={styles.moddingSection}>
-            <div className={styles.sectionHeader}>
-              <Badge letter="D" className={styles.badgeMods} />
-              <h2 className={styles.sectionLabel}>
-                {translate({ id: "homepage.modding.title", message: "Mod Developers" })}
-              </h2>
-              <span className={styles.headerLine} />
-            </div>
-            <HoverCard
-              to="/modding-docs/getting-started"
-              className={styles.moddingCard}
-            >
-              <div className={styles.cardImg}>
-                <ThemedImage
-                  lightSrc="/images/home-light-regions-sankey.png"
-                  darkSrc="/images/home-dark-regions-sankey.png"
-                  alt="Subway Builder modding"
-                />
-              </div>
-              <div className={styles.moddingBody}>
-                <h3 className={styles.moddingTitle}>
-                  {translate({
-                    id: "homepage.modding.card.title",
-                    message: "Modding Documentation",
-                  })}
-                </h3>
-                <p className={styles.moddingDesc}>
-                  {translate({
-                    id: "homepage.modding.card.description",
-                    message:
-                      "Build your own mods with the Subway Builder Modding API. Get Started with the TypeScript template, add custom UI panels, react to game events, build tracks programmatically, and more.",
-                  })}
-                </p>
-                <span
-                  className={styles.cardLinkMods}
-                  style={{ color: "#00933C" }}
-                >
-                  {translate({
-                    id: "homepage.modding.card.link",
-                    message: "Get Started",
-                  })}{" "}
-                  {"\u2192"}
-                </span>
-              </div>
-            </HoverCard>
-          </section>
-        </div>
+        <section className={styles.hero}>
+          <img
+            src={heroBg}
+            alt="Hero Background"
+            className={styles.heroBackground}
+            style={{ transform: `scale(${heroScale})` }}
+          />
+          <div className={styles.heroOverlay} />
+          <div className={styles.heroContent}>
+            <h1 className={styles.heroTitle}>
+              {translate({ id: "homepage.hero.title", message: "Subway Builder Modded" })}
+            </h1>
+            <p className={styles.heroSubtitle}>
+              {translate({
+                id: "homepage.hero.subtitle",
+                message: "The complete hub for everything modded in Subway Builder.",
+              })}
+            </p>
+          </div>
+        </section>
 
-        {/* Footer Bars */}
+        <section className={styles.cardsSection}>
+          <div className={styles.cardsGrid}>
+            {HOMEPAGE_ITEMS.map((item) => (
+              <Link key={item.id} to={item.href} className={styles.card}>
+                <div className={styles.cardHeader}>
+                  <div
+                    className={styles.metroBullet}
+                    style={{ background: item.bullet }}
+                  >
+                    {item.letter}
+                  </div>
+                  <h3 className={styles.cardTitle}>{item.title}</h3>
+                </div>
+                <p className={styles.cardDesc}>{item.description}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
         <footer className={styles.footerBars}>
           <span className={styles.bar} style={{ background: "#0039A6" }} />
           <span className={styles.bar} style={{ background: "#FF6319" }} />

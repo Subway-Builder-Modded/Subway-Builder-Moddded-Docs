@@ -1,0 +1,673 @@
+---
+id: making-custom-maps
+title: Making Custom Maps
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Esta guía te enseñará cómo crear mapas personalizados para [Kronifer's Map Manager](https://github.com/Subway-Builder-Modded/subwaybuilder-patcher/releases). Generaremos datos de demanda realistas usando [rslurry's Demand Data Generator](https://github.com/rslurry/subwaybuilder-US-demand-data) y luego formatearemos correctamente nuestro directorio de trabajo para prepararlo para el Map Manager.
+
+:::danger
+El Demand Data Generator **SOLO** funciona para ciudades de EE. UU. Si estás creando una ciudad que no sea de EE. UU., necesitarás encontrar una manera de generar y formatear los datos correctamente para que funcionen en Subway Builder. Esto no se cubrirá en este wiki, ya que varía de un país a otro y es una tarea compleja. Esto se debe a que los datos no siempre están disponibles para todos los países.
+:::
+
+:::info prerequisites
+Antes de comenzar, hay algunas cosas con las que deberías familiarizarte. Usaremos estas herramientas y recursos a lo largo de la guía.
+
+- [Git](https://git.org)
+- [node.js](https://https://nodejs.org)
+- Conocimiento del terminal de tu sistema operativo
+- Comprensión de [JavaScript y la sintaxis de JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide)
+- **Para Windows:** [WSL](https://learn.microsoft.com/en-us/windows/wsl/install)
+  :::
+
+## Paso 1 - Instalando el Map Patcher {#installing-the-map-pacher}
+
+La versión antigua de Kronifer's Map Manager incluía una GUI de parcheo de mapas que aún puede ayudarnos a generar nuestros datos. Ejecuta el siguiente comando para clonar el map patcher.
+
+```bash
+git clone -b legacy https://github.com/Subway-Builder-Modded/subwaybuilder-patcher
+```
+
+Ahora, tenemos una copia del map patcher legacy instalada. Desde aquí, busca el script de instalación. Ejecuta el script. En Windows, este script es `Install dependencies.bat`. En MacOS y Linux, este script es `Install dependencies.sh`.
+
+## Paso 2 - Generando Datos {#generating-data}
+
+Inicia la GUI. En Windows, esto es `Start_GUI.bat`. En MacOS y Linux, esto es `Start_GUI.sh`. Una vez que esté funcionando, se abrirá una GUI en tu navegador. Esta GUI tiene todo lo que necesitamos para ejecutar el map patcher.
+
+<img width="1000" alt="image" src="/images/legacy-patcher.png" />
+
+Al abrir el patcher, se te pedirá seleccionar la ubicación de instalación de Subway Builder. Ten en cuenta que no importa lo que pongas aquí, ya que en realidad no vamos a parchear el juego. En la siguiente pantalla, asegúrate de que esté seleccionado "`Map Patcher (Kronifer)`" is selected. No debería estar seleccionado nada más.
+
+Una vez que estés en la configuración del map patcher, haz clic en la pestaña que dice "`Manual Configuration`". Aquí es donde ingresaremos nuestros campos para generar nuestros datos.
+
+::::tip
+
+- "Code": El código de ciudad de 2 a 4 letras para tu mapa. Se recomienda encarecidamente usar códigos IATA o ICAO, pero se puede usar otro código siempre que no coincida con el código IATA o ICAO de otra ciudad.
+
+:::danger
+Si el código de tu ciudad coincide con el código de una ciudad estándar, tu mapa puede no cargarse en el Map Manager. Puedes consultar una lista de códigos de ciudades existentes en `metro-maker4/cities/latest-cities.yml`.
+:::
+
+- "Name": El nombre de tu ciudad. Esto es lo que aparecerá en el Map Manager y en el juego cuando cargues tu mapa.
+- "Description": Una breve descripción de tu ciudad. Esto aparecerá en el juego.
+- "Population": La población de tu ciudad.
+  :::note
+  Si estás usando Google, ten en cuenta que el número de población solo debe incluir a las personas que están empleadas en la región, no a la población total.
+  :::
+- "BBox": las coordenadas del cuadro delimitador de tu ciudad. Esto debe estar en el formato `[minLon, minLat, maxLon, maxLat]`.
+- "Initial View State": el estado de vista inicial que todos los jugadores verán cuando carguen tu mapa. Para `zoom` y `bearing`, los valores predeterminados funcionarán bien.
+  ::::
+
+<img width="1000" alt="image" src="/images/map-patcher-config.png" />
+
+Una vez que hayas ingresado estos datos, haz clic en "`Next`" y luego en "`Back`". **En la pantalla anterior, simplemente hacer clic en "`Run Full Map Setup`" sin este paso no guardará la configuración y puede generar datos para un mapa diferente.**
+
+Después de eso, puedes hacer clic en "`Run Full Map Setup`". Esto generará los datos para tu mapa. Una vez que se complete la generación de datos, puedes encontrar la salida en `subwaybuilder-patcher/patcher/packages/mapPatcher/processed_data`. Usaremos `buildings_index.json`, `roads.geojson` y `runways_taxiways.geojson`. Puedes ignorar `demand_data.json` ya que generaremos nuestros propios datos de demanda en el siguiente paso. En `subwaybuilder-patcher/patcher/packages/mapPatcher/map_tiles`, puedes encontrar el archivo `XXX.pmtiles`, donde `XXX` es el código de tu ciudad. Necesitaremos este archivo más adelante. Ahora es seguro cerrar el patcher.
+
+:::danger
+No continúes con el resto de la configuración del patcher. Este es un patcher legacy y ya no es un método soportado para modificar tu juego. Solo estamos usando esta GUI para facilitar la generación de nuestros datos.
+:::
+
+## Paso 3 - Generando Datos de Demanda {#generating-demand-data}
+
+<Tabs>
+<TabItem value="windows" label="Windows" default>
+
+:::important
+A partir de este punto, cualquier acción realizada en la "terminal" se hará a través de WSL. El Demand Data Generator **no** es compatible con Windows, por lo que necesitaremos usar WSL para utilizar la versión de Linux. Cualquier archivo descargado desde este punto, a menos que se indique lo contrario, debe ser la versión de Linux.
+:::
+
+Dirígete a https://github.com/rslurry/subwaybuilder-US-demand-data/releases y descarga la última versión que corresponda a tu sistema operativo. Crea un directorio de trabajo temporal para almacenar nuestros archivos por ahora y coloca allí el archivo descargado. Ejecuta los comandos (reemplazando `<YOUR_BINARY_FILE>` con el nombre de tu archivo binario donde sea necesario):
+
+```bash
+chmod +x <YOUR_BINARY_FILE>.bin
+```
+
+A partir de aquí, es momento de configurar nuestro generador de demanda. Crea un archivo llamado `<YOUR_CITY>.json`, donde `YOUR_CITY` es el nombre de tu ciudad (el nombre del archivo no importa, pero esto facilitará las cosas más adelante). Algunos parámetros son opcionales, incluyendo ubicaciones requeridas de los airports y tamaños de pops, algunos parámetros para las universidades y todos los parámetros relacionados con entretenimiento.
+
+En este archivo, incluye los siguientes parámetros:
+
+```json
+       city : string, la ciudad que estás modelando.
+              Ejemplo: "Rochester"
+       airport : lista de strings, códigos IATA del airport local
+              Nota: El primer airport listado se usa aquí para identificar de manera única la ciudad.
+              Ejemplo: ["ROC"]
+       states : string o lista de strings, código de dos letras para el/los estado(s) que cubre tu mapa.
+              Ejemplo: "ny"
+              Ejemplo: ["md", "dc", "va"]
+       year : int, el año que deseas usar para los datos LODES. Al momento de escribir esto, debe estar entre 2002-2023.
+              Ejemplo: 2022
+       bbox : lista de ints, los límites [min_lon, min_lat, max_lon, max_lat] de la ciudad.
+              Ejemplo: [-77.8216, 43.0089, -77.399, 43.3117]
+       cbd_bbox : lista de ints, igual que `bbox` pero para el Central Business District (CBD).
+              Puede usarse para reducir el agrupamiento en el centro de la ciudad.
+              Para desactivar, configúralo como null.
+              Ejemplo: null
+
+       HUMAN_READABLE : (opcional) bool, determina si el archivo de salida demand_data.json tendrá indentación
+                     para legibilidad (true) o no (false) para minimizar el tamaño del archivo.
+                     Por defecto: false
+       MAX_WORKERS : (opcional) int, establece el número de workers para procesamiento en paralelo.
+                     Por defecto: None (total de hilos de CPU)
+       MAXPOPSIZE : int, tamaño máximo que puede tener cualquier pop.
+              Los pops más grandes que este valor se dividirán en múltiples pops para cumplir esta configuración.
+              Ejemplo: 200
+       CALCULATE_ROUTES : bool, determina si se calculan rutas de viaje.
+                     Se recomienda configurarlo en false al probar límites y agrupamientos.
+                     NOTA: ¡Puede tardar mucho en calcular las rutas! Ciudades pequeñas tardan 15-30 minutos
+                            en una máquina de 16 núcleos, lo que significa ~1-2 horas en una máquina de 4 núcleos.
+                     Ejemplo: true
+       SMALL_THRESHOLD : int, tamaño máximo de pop considerado para clustering aglomerativo.
+                     Los pops más pequeños que este valor se combinarán con otros cercanos que trabajen en la misma ubicación.
+                     Ejemplo: 100
+       DISTANCE_THRESHOLD_NONCBD : float, umbral de distancia en grados a considerar al agrupar.
+                                   Se aplica fuera del CBD, o si no se usa CBD, entonces se aplica en todas partes.
+                                   Nota: obtendrás puntos de demanda separados por menos de este valor,
+                                   por lo que no uses este valor como parámetro de "separación mínima".
+                                   Ejemplo: 0.1
+       DISTANCE_THRESHOLD_CBD : float, igual que `DISTANCE_THRESHOLD_NONCBD` pero aplicado dentro del CBD definido por
+                            `cbd_bbox`.
+                            Ejemplo: 0.05
+       DEMAND_FACTOR : float, multiplica todos los tamaños de pop de LODES por este factor.
+                     Este parámetro se ofrece solo para hacer viables ciudades con un número pequeño de viajes.
+                     En general se recomienda usar un valor de 1.
+                     Ejemplo: 2
+
+       point_locs_to_move : lista de lista de floats, coordenadas en [lon, lat] de puntos de demanda que deseas mover
+                            por cualquier motivo (sobre agua, superposición, etc.).
+                            Deben corresponder exactamente al orden usado en `moved_point_locs`.
+                            Para no usarlo, configúralo como []
+                            Ejemplo: [[-77.69260, 43.29925], [-77.69280, 43.28780], [-77.74163, 43.30533],
+                                   [-77.76616, 43.29830], [-77.75377, 43.29501], [-77.73190, 43.29221],
+                                   [-77.71047, 43.28571], [-77.53833, 43.22158]]
+       moved_point_locs : lista de lista de floats, coordenadas en [lon, lat] a donde quieres mover los puntos de demanda.
+                     Deben corresponder exactamente al orden usado en `point_locs_to_move`.
+                     Ejemplo: [[-77.69253, 43.29669], [-77.69224, 43.28529], [-77.73431, 43.30351],
+                                   [-77.76969, 43.29365], [-77.75209, 43.29262], [-77.72819, 43.29165],
+                                   [-77.71078, 43.28141], [-77.54152, 43.22132]]
+
+       airport_daily_passengers : (opcional) lista de ints, número de pasajeros diarios en los airports de la ciudad.
+                            Ejemplo: [7000]
+       airport_loc : lista de lista de floats, coordenadas en [lon, lat] de los airports de la ciudad.
+                     Ejemplo: [[-77.67166, 43.12919]]
+       airport_required_locs : lista de lista de lista de floats, coordenadas en [lon, lat] donde quieres que residan los viajeros de los airports.
+                            Se colocará un pop en la burbuja de demanda más cercana a cada coordenada especificada.
+                            Si no deseas configurar esto, usa [] y el código decidirá automáticamente.
+                            Ejemplo: [[[-77.61298, 43.15729], [-77.60688, 43.15614], [-77.58936, 43.1547],
+                                          [-77.59342, 43.15564], [-77.6741, 43.21029], [-77.61647, 43.10564],
+                                          [-77.61391, 43.08771], [-77.55086, 43.11299], [-77.57981, 43.19774],
+                                          [-77.4567, 43.2146], [-77.44227, 43.21617], [-77.68496, 43.18599],
+                                          [-77.64286, 43.0601], [-77.65179, 43.05802], [-77.44922, 43.01093],
+                                          [-77.51514, 43.09333]]]
+       air_pop_size_req : lista de ints, tamaño de los pops de airports asignados por `airport_required_locs`.
+                     Nota: si excede `MAXPOPSIZE`, cada pop se dividirá en múltiples pops más pequeños.
+                     Ejemplo: [200]
+       air_pop_size_remain : lista de ints, tamaño de los pops de airports asignados automáticamente por el código.
+                            Nota: si excede `MAXPOPSIZE`, cada pop se dividirá en múltiples pops más pequeños.
+                            Ejemplo: [150]
+
+       universities : lista de strings, identificador de 2-4 letras para cada university considerada.
+                     Todos los parámetros relacionados con universities deben corresponder exactamente a este orden.
+                     Ejemplo: ["UR", "RIT", "SJF", "NU", "RWU"]
+       univ_loc : lista de lista de floats, coordenadas de la burbuja de demanda de cada university.
+              Ejemplo: [[-77.62668, 43.12989], [-77.67629, 43.08389], [-77.51239, 43.11575],
+                            [-77.51873, 43.10218], [-77.79857, 43.12568]]
+       univ_merge_within : lista de ints, distancia en metros para fusionar puntos de demanda cercanos en el nuevo punto de university.
+                     Ejemplo: [0, 350, 300, 0, 0]
+       students : lista de ints, número de estudiantes en cada campus.
+              Ejemplo: [11946, 17166, 4000, 2500, 1500]
+       perc_oncampus : lista de floats, porcentaje de estudiantes que viven en residencias dentro del campus para cada university.
+                     Ejemplo: [0.45, 0.4, 0.33, 0.5, 0.6]
+       univ_pop_size : lista de ints, tamaño de cada pop creado para cada university.
+                     Ejemplo: [75, 75, 75, 75, 75]
+       univ_perc_travel : lista de lista de floats, fracción de estudiantes que viven [en campus, fuera del campus] que viajan
+                     en un día promedio.
+                     Por defecto: [0.3, 0.5]
+
+       entertainment : lista de strings, identificadores cortos para cada lugar de entretenimiento
+       ent_loc : lista de lista de floats, coordenadas en [lon, lat] de cada lugar de entretenimiento
+       ent_req_residences : lista de lista de lista de floats, como `airport_required_locs` pero para lugares de entretenimiento
+       ent_size : lista de ints, número de visitantes diarios a cada lugar de entretenimiento
+       ent_pop_size : lista de ints, tamaño de cada pop creado para cada lugar de entretenimiento
+```
+
+Una vez configurado, ejecuta:
+
+```bash
+./<YOUR_BINARY_FILE>.bin <YOUR_CITY>.json
+```
+
+:::important
+Puede que necesites incluir el parámetro `MAX_WORKERS` en tu archivo de configuración para evitar que el programa use demasiados recursos. Si encuentras problemas con el script que se cierra, ajusta `MAX_WORKERS` a un número menor. Mientras más alto sea el número, más rápido se ejecutará el script, pero consumirá más recursos.
+:::
+:::note
+Este proceso puede tardar desde una hora hasta varios días dependiendo de las especificaciones de tu computadora, el tamaño del mapa y el valor de `MAX_WORKERS` configurado.
+:::
+
+Este proceso generará un archivo `demand_data.json` en `demand_data/<YOUR_CITY>/`. Este es el archivo de datos final que necesitamos para terminar de crear tu mapa.
+
+</TabItem>
+
+<TabItem value="macos" label="MacOS">
+
+Dirígete a https://github.com/rslurry/subwaybuilder-US-demand-data/releases y descarga la última versión que corresponda a tu sistema operativo. Crea un directorio de trabajo temporal para almacenar nuestros archivos por ahora y coloca allí el archivo descargado. Ejecuta los comandos (reemplazando `<YOUR_BINARY_FILE>` con el nombre de tu archivo binario donde sea necesario):
+
+```bash
+chmod +x <YOUR_BINARY_FILE>.bin
+```
+
+A partir de aquí, es momento de configurar nuestro generador de demanda. Crea un archivo llamado `<YOUR_CITY>.json`, donde `YOUR_CITY` es el nombre de tu ciudad (el nombre del archivo no importa, pero esto facilitará las cosas más adelante). Algunos parámetros son opcionales, incluyendo ubicaciones requeridas de los airports y tamaños de pops, algunos parámetros para las universidades y todos los parámetros relacionados con entretenimiento.
+
+En este archivo, incluye los siguientes parámetros:
+
+```json
+       city : string, la ciudad que estás modelando.
+              Ejemplo: "Rochester"
+       airport : lista de strings, códigos IATA del airport local
+              Nota: El primer airport listado se usa aquí para identificar de manera única la ciudad.
+              Ejemplo: ["ROC"]
+       states : string o lista de strings, código de dos letras para el/los estado(s) que cubre tu mapa.
+              Ejemplo: "ny"
+              Ejemplo: ["md", "dc", "va"]
+       year : int, el año que deseas usar para los datos LODES. Al momento de escribir esto, debe estar entre 2002-2023.
+              Ejemplo: 2022
+       bbox : lista de ints, los límites [min_lon, min_lat, max_lon, max_lat] de la ciudad.
+              Ejemplo: [-77.8216, 43.0089, -77.399, 43.3117]
+       cbd_bbox : lista de ints, igual que `bbox` pero para el Central Business District (CBD).
+              Puede usarse para reducir el agrupamiento en el centro de la ciudad.
+              Para desactivar, configúralo como null.
+              Ejemplo: null
+
+       HUMAN_READABLE : (opcional) bool, determina si el archivo de salida demand_data.json tendrá indentación
+                     para legibilidad (true) o no (false) para minimizar el tamaño del archivo.
+                     Por defecto: false
+       MAX_WORKERS : (opcional) int, establece el número de workers para procesamiento en paralelo.
+                     Por defecto: None (total de hilos de CPU)
+       MAXPOPSIZE : int, tamaño máximo que puede tener cualquier pop.
+              Los pops más grandes que este valor se dividirán en múltiples pops para cumplir esta configuración.
+              Ejemplo: 200
+       CALCULATE_ROUTES : bool, determina si se calculan rutas de viaje.
+                     Se recomienda configurarlo en false al probar límites y agrupamientos.
+                     NOTA: ¡Puede tardar mucho en calcular las rutas! Ciudades pequeñas tardan 15-30 minutos
+                            en una máquina de 16 núcleos, lo que significa ~1-2 horas en una máquina de 4 núcleos.
+                     Ejemplo: true
+       SMALL_THRESHOLD : int, tamaño máximo de pop considerado para clustering aglomerativo.
+                     Los pops más pequeños que este valor se combinarán con otros cercanos que trabajen en la misma ubicación.
+                     Ejemplo: 100
+       DISTANCE_THRESHOLD_NONCBD : float, umbral de distancia en grados a considerar al agrupar.
+                                   Se aplica fuera del CBD, o si no se usa CBD, entonces se aplica en todas partes.
+                                   Nota: obtendrás puntos de demanda separados por menos de este valor,
+                                   por lo que no uses este valor como parámetro de "separación mínima".
+                                   Ejemplo: 0.1
+       DISTANCE_THRESHOLD_CBD : float, igual que `DISTANCE_THRESHOLD_NONCBD` pero aplicado dentro del CBD definido por
+                            `cbd_bbox`.
+                            Ejemplo: 0.05
+       DEMAND_FACTOR : float, multiplica todos los tamaños de pop de LODES por este factor.
+                     Este parámetro se ofrece solo para hacer viables ciudades con un número pequeño de viajes.
+                     En general se recomienda usar un valor de 1.
+                     Ejemplo: 2
+
+       point_locs_to_move : lista de lista de floats, coordenadas en [lon, lat] de puntos de demanda que deseas mover
+                            por cualquier motivo (sobre agua, superposición, etc.).
+                            Deben corresponder exactamente al orden usado en `moved_point_locs`.
+                            Para no usarlo, configúralo como []
+                            Ejemplo: [[-77.69260, 43.29925], [-77.69280, 43.28780], [-77.74163, 43.30533],
+                                   [-77.76616, 43.29830], [-77.75377, 43.29501], [-77.73190, 43.29221],
+                                   [-77.71047, 43.28571], [-77.53833, 43.22158]]
+       moved_point_locs : lista de lista de floats, coordenadas en [lon, lat] a donde quieres mover los puntos de demanda.
+                     Deben corresponder exactamente al orden usado en `point_locs_to_move`.
+                     Ejemplo: [[-77.69253, 43.29669], [-77.69224, 43.28529], [-77.73431, 43.30351],
+                                   [-77.76969, 43.29365], [-77.75209, 43.29262], [-77.72819, 43.29165],
+                                   [-77.71078, 43.28141], [-77.54152, 43.22132]]
+
+       airport_daily_passengers : (opcional) lista de ints, número de pasajeros diarios en los airports de la ciudad.
+                            Ejemplo: [7000]
+       airport_loc : lista de lista de floats, coordenadas en [lon, lat] de los airports de la ciudad.
+                     Ejemplo: [[-77.67166, 43.12919]]
+       airport_required_locs : lista de lista de lista de floats, coordenadas en [lon, lat] donde quieres que residan los viajeros de los airports.
+                            Se colocará un pop en la burbuja de demanda más cercana a cada coordenada especificada.
+                            Si no deseas configurar esto, usa [] y el código decidirá automáticamente.
+                            Ejemplo: [[[-77.61298, 43.15729], [-77.60688, 43.15614], [-77.58936, 43.1547],
+                                          [-77.59342, 43.15564], [-77.6741, 43.21029], [-77.61647, 43.10564],
+                                          [-77.61391, 43.08771], [-77.55086, 43.11299], [-77.57981, 43.19774],
+                                          [-77.4567, 43.2146], [-77.44227, 43.21617], [-77.68496, 43.18599],
+                                          [-77.64286, 43.0601], [-77.65179, 43.05802], [-77.44922, 43.01093],
+                                          [-77.51514, 43.09333]]]
+       air_pop_size_req : lista de ints, tamaño de los pops de airports asignados por `airport_required_locs`.
+                     Nota: si excede `MAXPOPSIZE`, cada pop se dividirá en múltiples pops más pequeños.
+                     Ejemplo: [200]
+       air_pop_size_remain : lista de ints, tamaño de los pops de airports asignados automáticamente por el código.
+                            Nota: si excede `MAXPOPSIZE`, cada pop se dividirá en múltiples pops más pequeños.
+                            Ejemplo: [150]
+
+       universities : lista de strings, identificador de 2-4 letras para cada university considerada.
+                     Todos los parámetros relacionados con universities deben corresponder exactamente a este orden.
+                     Ejemplo: ["UR", "RIT", "SJF", "NU", "RWU"]
+       univ_loc : lista de lista de floats, coordenadas de la burbuja de demanda de cada university.
+              Ejemplo: [[-77.62668, 43.12989], [-77.67629, 43.08389], [-77.51239, 43.11575],
+                            [-77.51873, 43.10218], [-77.79857, 43.12568]]
+       univ_merge_within : lista de ints, distancia en metros para fusionar puntos de demanda cercanos en el nuevo punto de university.
+                     Ejemplo: [0, 350, 300, 0, 0]
+       students : lista de ints, número de estudiantes en cada campus.
+              Ejemplo: [11946, 17166, 4000, 2500, 1500]
+       perc_oncampus : lista de floats, porcentaje de estudiantes que viven en residencias dentro del campus para cada university.
+                     Ejemplo: [0.45, 0.4, 0.33, 0.5, 0.6]
+       univ_pop_size : lista de ints, tamaño de cada pop creado para cada university.
+                     Ejemplo: [75, 75, 75, 75, 75]
+       univ_perc_travel : lista de lista de floats, fracción de estudiantes que viven [en campus, fuera del campus] que viajan
+                     en un día promedio.
+                     Por defecto: [0.3, 0.5]
+
+       entertainment : lista de strings, identificadores cortos para cada lugar de entretenimiento
+       ent_loc : lista de lista de floats, coordenadas en [lon, lat] de cada lugar de entretenimiento
+       ent_req_residences : lista de lista de lista de floats, como `airport_required_locs` pero para lugares de entretenimiento
+       ent_size : lista de ints, número de visitantes diarios a cada lugar de entretenimiento
+       ent_pop_size : lista de ints, tamaño de cada pop creado para cada lugar de entretenimiento
+```
+
+Una vez configurado, ejecuta:
+
+```bash
+./<YOUR_BINARY_FILE>.bin <YOUR_CITY>.json
+```
+
+:::important
+Puede que necesites incluir el parámetro `MAX_WORKERS` en tu archivo de configuración para evitar que el programa use demasiados recursos. Si encuentras problemas con el script que se cierra, ajusta `MAX_WORKERS` a un número menor. Mientras más alto sea el número, más rápido se ejecutará el script, pero consumirá más recursos.
+:::
+:::note
+Este proceso puede tardar desde una hora hasta varios días dependiendo de las especificaciones de tu computadora, el tamaño del mapa y el valor de `MAX_WORKERS` configurado.
+:::
+
+Este proceso generará un archivo `demand_data.json` en `demand_data/<YOUR_CITY>/`. Este es el archivo de datos final que necesitamos para terminar de crear tu mapa.
+
+</TabItem>
+
+<TabItem value="linux" label="Linux">
+
+Dirígete a https://github.com/rslurry/subwaybuilder-US-demand-data/releases y descarga la última versión que corresponda a tu sistema operativo. Crea un directorio de trabajo temporal para almacenar nuestros archivos por ahora y coloca allí el archivo descargado. Ejecuta los comandos (reemplazando `<YOUR_BINARY_FILE>` con el nombre de tu archivo binario donde sea necesario):
+
+```bash
+chmod +x <YOUR_BINARY_FILE>.bin
+```
+
+A partir de aquí, es momento de configurar nuestro generador de demanda. Crea un archivo llamado `<YOUR_CITY>.json`, donde `YOUR_CITY` es el nombre de tu ciudad (el nombre del archivo no importa, pero esto facilitará las cosas más adelante). Algunos parámetros son opcionales, incluyendo ubicaciones requeridas de los airports y tamaños de pops, algunos parámetros para las universidades y todos los parámetros relacionados con entretenimiento.
+
+En este archivo, incluye los siguientes parámetros:
+
+```json
+       city : string, la ciudad que estás modelando.
+              Ejemplo: "Rochester"
+       airport : lista de strings, códigos IATA del airport local
+              Nota: El primer airport listado se usa aquí para identificar de manera única la ciudad.
+              Ejemplo: ["ROC"]
+       states : string o lista de strings, código de dos letras para el/los estado(s) que cubre tu mapa.
+              Ejemplo: "ny"
+              Ejemplo: ["md", "dc", "va"]
+       year : int, el año que deseas usar para los datos LODES. Al momento de escribir esto, debe estar entre 2002-2023.
+              Ejemplo: 2022
+       bbox : lista de ints, los límites [min_lon, min_lat, max_lon, max_lat] de la ciudad.
+              Ejemplo: [-77.8216, 43.0089, -77.399, 43.3117]
+       cbd_bbox : lista de ints, igual que `bbox` pero para el Central Business District (CBD).
+              Puede usarse para reducir el agrupamiento en el centro de la ciudad.
+              Para desactivar, configúralo como null.
+              Ejemplo: null
+
+       HUMAN_READABLE : (opcional) bool, determina si el archivo de salida demand_data.json tendrá indentación
+                     para legibilidad (true) o no (false) para minimizar el tamaño del archivo.
+                     Por defecto: false
+       MAX_WORKERS : (opcional) int, establece el número de workers para procesamiento en paralelo.
+                     Por defecto: None (total de hilos de CPU)
+       MAXPOPSIZE : int, tamaño máximo que puede tener cualquier pop.
+              Los pops más grandes que este valor se dividirán en múltiples pops para cumplir esta configuración.
+              Ejemplo: 200
+       CALCULATE_ROUTES : bool, determina si se calculan rutas de viaje.
+                     Se recomienda configurarlo en false al probar límites y agrupamientos.
+                     NOTA: ¡Puede tardar mucho en calcular las rutas! Ciudades pequeñas tardan 15-30 minutos
+                            en una máquina de 16 núcleos, lo que significa ~1-2 horas en una máquina de 4 núcleos.
+                     Ejemplo: true
+       SMALL_THRESHOLD : int, tamaño máximo de pop considerado para clustering aglomerativo.
+                     Los pops más pequeños que este valor se combinarán con otros cercanos que trabajen en la misma ubicación.
+                     Ejemplo: 100
+       DISTANCE_THRESHOLD_NONCBD : float, umbral de distancia en grados a considerar al agrupar.
+                                   Se aplica fuera del CBD, o si no se usa CBD, entonces se aplica en todas partes.
+                                   Nota: obtendrás puntos de demanda separados por menos de este valor,
+                                   por lo que no uses este valor como parámetro de "separación mínima".
+                                   Ejemplo: 0.1
+       DISTANCE_THRESHOLD_CBD : float, igual que `DISTANCE_THRESHOLD_NONCBD` pero aplicado dentro del CBD definido por
+                            `cbd_bbox`.
+                            Ejemplo: 0.05
+       DEMAND_FACTOR : float, multiplica todos los tamaños de pop de LODES por este factor.
+                     Este parámetro se ofrece solo para hacer viables ciudades con un número pequeño de viajes.
+                     En general se recomienda usar un valor de 1.
+                     Ejemplo: 2
+
+       point_locs_to_move : lista de lista de floats, coordenadas en [lon, lat] de puntos de demanda que deseas mover
+                            por cualquier motivo (sobre agua, superposición, etc.).
+                            Deben corresponder exactamente al orden usado en `moved_point_locs`.
+                            Para no usarlo, configúralo como []
+                            Ejemplo: [[-77.69260, 43.29925], [-77.69280, 43.28780], [-77.74163, 43.30533],
+                                   [-77.76616, 43.29830], [-77.75377, 43.29501], [-77.73190, 43.29221],
+                                   [-77.71047, 43.28571], [-77.53833, 43.22158]]
+       moved_point_locs : lista de lista de floats, coordenadas en [lon, lat] a donde quieres mover los puntos de demanda.
+                     Deben corresponder exactamente al orden usado en `point_locs_to_move`.
+                     Ejemplo: [[-77.69253, 43.29669], [-77.69224, 43.28529], [-77.73431, 43.30351],
+                                   [-77.76969, 43.29365], [-77.75209, 43.29262], [-77.72819, 43.29165],
+                                   [-77.71078, 43.28141], [-77.54152, 43.22132]]
+
+       airport_daily_passengers : (opcional) lista de ints, número de pasajeros diarios en los airports de la ciudad.
+                            Ejemplo: [7000]
+       airport_loc : lista de lista de floats, coordenadas en [lon, lat] de los airports de la ciudad.
+                     Ejemplo: [[-77.67166, 43.12919]]
+       airport_required_locs : lista de lista de lista de floats, coordenadas en [lon, lat] donde quieres que residan los viajeros de los airports.
+                            Se colocará un pop en la burbuja de demanda más cercana a cada coordenada especificada.
+                            Si no deseas configurar esto, usa [] y el código decidirá automáticamente.
+                            Ejemplo: [[[-77.61298, 43.15729], [-77.60688, 43.15614], [-77.58936, 43.1547],
+                                          [-77.59342, 43.15564], [-77.6741, 43.21029], [-77.61647, 43.10564],
+                                          [-77.61391, 43.08771], [-77.55086, 43.11299], [-77.57981, 43.19774],
+                                          [-77.4567, 43.2146], [-77.44227, 43.21617], [-77.68496, 43.18599],
+                                          [-77.64286, 43.0601], [-77.65179, 43.05802], [-77.44922, 43.01093],
+                                          [-77.51514, 43.09333]]]
+       air_pop_size_req : lista de ints, tamaño de los pops de airports asignados por `airport_required_locs`.
+                     Nota: si excede `MAXPOPSIZE`, cada pop se dividirá en múltiples pops más pequeños.
+                     Ejemplo: [200]
+       air_pop_size_remain : lista de ints, tamaño de los pops de airports asignados automáticamente por el código.
+                            Nota: si excede `MAXPOPSIZE`, cada pop se dividirá en múltiples pops más pequeños.
+                            Ejemplo: [150]
+
+       universities : lista de strings, identificador de 2-4 letras para cada university considerada.
+                     Todos los parámetros relacionados con universities deben corresponder exactamente a este orden.
+                     Ejemplo: ["UR", "RIT", "SJF", "NU", "RWU"]
+       univ_loc : lista de lista de floats, coordenadas de la burbuja de demanda de cada university.
+              Ejemplo: [[-77.62668, 43.12989], [-77.67629, 43.08389], [-77.51239, 43.11575],
+                            [-77.51873, 43.10218], [-77.79857, 43.12568]]
+       univ_merge_within : lista de ints, distancia en metros para fusionar puntos de demanda cercanos en el nuevo punto de university.
+                     Ejemplo: [0, 350, 300, 0, 0]
+       students : lista de ints, número de estudiantes en cada campus.
+              Ejemplo: [11946, 17166, 4000, 2500, 1500]
+       perc_oncampus : lista de floats, porcentaje de estudiantes que viven en residencias dentro del campus para cada university.
+                     Ejemplo: [0.45, 0.4, 0.33, 0.5, 0.6]
+       univ_pop_size : lista de ints, tamaño de cada pop creado para cada university.
+                     Ejemplo: [75, 75, 75, 75, 75]
+       univ_perc_travel : lista de lista de floats, fracción de estudiantes que viven [en campus, fuera del campus] que viajan
+                     en un día promedio.
+                     Por defecto: [0.3, 0.5]
+
+       entertainment : lista de strings, identificadores cortos para cada lugar de entretenimiento
+       ent_loc : lista de lista de floats, coordenadas en [lon, lat] de cada lugar de entretenimiento
+       ent_req_residences : lista de lista de lista de floats, como `airport_required_locs` pero para lugares de entretenimiento
+       ent_size : lista de ints, número de visitantes diarios a cada lugar de entretenimiento
+       ent_pop_size : lista de ints, tamaño de cada pop creado para cada lugar de entretenimiento
+```
+
+Una vez configurado, ejecuta:
+
+```bash
+./<YOUR_BINARY_FILE>.bin <YOUR_CITY>.json
+```
+
+:::important
+Puede que necesites incluir el parámetro `MAX_WORKERS` en tu archivo de configuración para evitar que el programa use demasiados recursos. Si encuentras problemas con el script que se cierra, ajusta `MAX_WORKERS` a un número menor. Mientras más alto sea el número, más rápido se ejecutará el script, pero consumirá más recursos.
+:::
+:::note
+Este proceso puede tardar desde una hora hasta varios días dependiendo de las especificaciones de tu computadora, el tamaño del mapa y el valor de `MAX_WORKERS` configurado.
+:::
+
+Este proceso generará un archivo `demand_data.json` en `demand_data/<YOUR_CITY>/`. Este es el archivo de datos final que necesitamos para terminar de crear tu mapa.
+
+</TabItem>
+
+</Tabs>
+
+## Paso 4 - Creando el Archivo de Configuración {#creating-the-config-file}
+
+Para continuar con este paso, necesitamos un total de 5 archivos:
+
+- `demand_data.json` (generado con el Demand Data Generator)
+- `buildings_index.json` (generado con el map patcher)
+- `roads.geojson` (generado con el map patcher)
+- `runways_taxiways.geojson` (generado con el map patcher)
+- `XXX.pmtiles` (generado con el map patcher; `XXX` es el código de tu ciudad)
+
+En tu directorio de trabajo temporal, crea un archivo llamado `config.json`. Este archivo contendrá nuestra configuración para el Map Manager. Dentro, puedes colocar esta plantilla:
+
+```json
+{
+  "name": "Wyoming",
+  "code": "WYO",
+  "description": "it's wyomin' time",
+  "population": 240000,
+  "initialViewState": {
+    "zoom": 12,
+    "latitude": 42.731833,
+    "longitude": -107.30072,
+    "bearing": 0
+  },
+  "creator": "muffintime",
+  "version": "1.0.0"
+}
+```
+
+:::tip
+Para más características opcionales que se pueden incluir en `config.json`, consulta la [página de características opcionales](/wiki/maps/optional-features).
+:::
+Edita esto según tus necesidades. Nota que `creator` y `version` pueden ser valores arbitrarios.
+
+:::warning
+Los campos `name`, `code`, `description`, `population` y `initialViewState` deben coincidir **exactamente** con lo que ingresaste en el map patcher. Si no los copias exactamente, esto podría causar problemas a los jugadores más adelante.
+:::
+
+## Paso 5 - Empaquetando el Mapa {#packaging-the-map}
+
+<Tabs>
+<TabItem value="windows" label="Windows" default>
+
+Ahora, deberíamos tener un total de 6 archivos (los 5 mencionados anteriormente y el `config.json` que acabamos de crear). Es hora de empaquetarlos en formato ZIP para poder distribuir nuestro mapa a los usuarios.
+
+Abre una terminal y navega al directorio donde se encuentran los 6 archivos. Instala el paquete `zip` si aún no lo tienes. Puedes hacerlo ejecutando:
+
+```bash
+sudo apt install zip
+```
+
+Esto nos permitirá crear un archivo ZIP desde la línea de comandos. Ejecuta el siguiente comando (reemplaza `MAP_NAME.zip` y `XXX.pmtiles` según corresponda):
+
+```bash
+zip MAP_NAME.zip demand_data.json buildings_index.json roads.geojson runways_taxiways.geojson XXX.pmtiles config.json
+```
+
+:::danger
+Si lo deseas, puedes crear el ZIP manualmente de la manera que quieras. **Sin embargo, asegúrate de que tus archivos estén en la raíz del ZIP, no dentro de una subcarpeta.** El formato correcto debería ser:
+
+```
+- MAP_NAME.zip
+--- demand_data.json
+--- building_index.json
+--- roads.geojson
+--- runways_taxiways.geojson
+--- config.json
+--- XXX.pmtiles
+```
+
+y NO:
+
+```
+- MAP_NAME.zip
+// highlight-next-line
+--- subfolder
+----- demand_data.json
+----- building_index.json
+----- roads.geojson
+----- runways_taxiways.geojson
+----- config.json
+----- XXX.pmtiles
+```
+
+:::
+
+</TabItem>
+
+<TabItem value="macos" label="MacOS">
+
+Ahora, deberíamos tener un total de 6 archivos (los 5 mencionados anteriormente y el `config.json` que acabamos de crear). Es hora de empaquetarlos en formato ZIP para poder distribuir nuestro mapa a los usuarios.
+
+Abre una terminal y navega al directorio donde se encuentran los 6 archivos. Ahora podemos crear un archivo ZIP desde la línea de comandos. Ejecuta el siguiente comando (reemplaza `MAP_NAME.zip` y `XXX.pmtiles` según corresponda):
+
+```bash
+zip MAP_NAME.zip demand_data.json buildings_index.json roads.geojson runways_taxiways.geojson XXX.pmtiles config.json
+```
+
+:::danger
+Si lo deseas, puedes crear el ZIP manualmente de la manera que quieras. **Sin embargo, asegúrate de que tus archivos estén en la raíz del ZIP, no dentro de una subcarpeta.** El formato correcto debería ser:
+
+```
+- MAP_NAME.zip
+--- demand_data.json
+--- building_index.json
+--- roads.geojson
+--- runways_taxiways.geojson
+--- config.json
+--- XXX.pmtiles
+```
+
+y NO:
+
+```
+- MAP_NAME.zip
+// highlight-next-line
+--- subfolder
+----- demand_data.json
+----- building_index.json
+----- roads.geojson
+----- runways_taxiways.geojson
+----- config.json
+----- XXX.pmtiles
+```
+
+:::
+
+</TabItem>
+
+<TabItem value="linux" label="Linux">
+
+Ahora, deberíamos tener un total de 6 archivos (los 5 mencionados anteriormente y el `config.json` que acabamos de crear). Es hora de empaquetarlos en formato ZIP para poder distribuir nuestro mapa a los usuarios.
+
+Abre una terminal y navega al directorio donde se encuentran los 6 archivos. Instala el paquete `zip` si aún no lo tienes. Puedes hacerlo ejecutando:
+
+```
+sudo apt install zip
+```
+
+Esto nos permitirá crear un archivo ZIP desde la línea de comandos. Ejecuta el siguiente comando (reemplaza `MAP_NAME.zip` y `XXX.pmtiles` según corresponda):
+
+```
+zip MAP_NAME.zip demand_data.json buildings_index.json roads.geojson runways_taxiways.geojson XXX.pmtiles config.json
+```
+
+:::danger
+Si lo deseas, puedes crear el ZIP manualmente de la manera que quieras. **Sin embargo, asegúrate de que tus archivos estén en la raíz del ZIP, no dentro de una subcarpeta.** El formato correcto debería ser:
+
+```
+- MAP_NAME.zip
+--- demand_data.json
+--- building_index.json
+--- roads.geojson
+--- runways_taxiways.geojson
+--- config.json
+--- XXX.pmtiles
+```
+
+y NO:
+
+```
+- MAP_NAME.zip
+// highlight-next-line
+--- subfolder
+----- demand_data.json
+----- building_index.json
+----- roads.geojson
+----- runways_taxiways.geojson
+----- config.json
+----- XXX.pmtiles
+```
+
+:::
+
+</TabItem>
+
+</Tabs>
+
+## Paso 6 - Probando y Distribuyendo tu Mapa {#testing-and-distributing-your-map}
+
+Una vez que tengas el ZIP, ¡tu mapa estará listo! Lo único que queda por hacer es probarlo y distribuirlo a los usuarios. Importa tu mapa en el juego usando el Map Manager (puedes seguir la [guía de instalación de mapas](/wiki/maps/map-installation-guide) si es necesario). Prueba tu mapa en el juego para verificar que se carga correctamente y que los datos de demanda se ven bien. Si no es así, puedes ajustar los parámetros del Demand Data Generator y generar los datos nuevamente. Asegúrate de indicar en tu lanzamiento la calidad de los datos: muy buena, buena, regular, aceptable o mala.
+
+Para compartir tu archivo, súbelo a un servicio de almacenamiento de archivos como Google Drive o Mediafire. Copia el enlace para compartir (asegúrate de que sea visible/público).
+:::note
+Dado que GitHub tiene límites de tamaño de archivo, no se recomienda subir el mapa a GitHub. Puedes usar GitHub de manera segura si el archivo ZIP de tu mapa es menor a 100 MB. Se recomienda encarecidamente **no usar GitHub LFS**.
+:::
+
+En la [página de issues](https://github.com/Subway-Builder-Modded/Subway-Builder-Modded-Docs/issues) del wiki, puedes abrir un issue con el prefijo [New Map] seguido del nombre de tu mapa. Incluye un enlace para descargar tu mapa, **así como la población de tu mapa para que se muestre en el wiki**. Además, puedes publicar el mapa en el canal #map-sharing del [Discord de Subway Builder](https://discord.gg/jrNQpbytUQ).
+
+Después de esto, ¡deberías haber terminado! Si tienes problemas o preguntas sobre el Demand Data Generator o el Map Patcher, puedes enviar un mensaje en el canal #mod-support del Discord de Subway Builder para obtener asistencia adicional.
