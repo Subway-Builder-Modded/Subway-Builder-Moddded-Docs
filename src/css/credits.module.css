@@ -1,7 +1,4 @@
-a:hover {
-  color: #62C98E;
-}
-
+/* === Page === */
 .page {
   display: flex;
   flex-direction: column;
@@ -28,7 +25,7 @@ a:hover {
 
 .pageSubtitle {
   font-size: clamp(12px, 1.5vw, 16px);
-  color: var(--home-text-dim, #555);
+  color: var(--ifm-subtitle-color);
 }
 
 .section {
@@ -36,6 +33,7 @@ a:hover {
   text-align: left;
 }
 
+/* === Sections === */
 .sectionHeader {
   display: flex;
   align-items: center;
@@ -47,28 +45,31 @@ a:hover {
   margin: 0;
   font-size: clamp(16px, 1.8vw, 20px);
   font-weight: 700;
-  color: var(--home-text-dim, #555);
+  color: var(--ifm-subtitle-color);
   text-transform: uppercase;
 }
 
 .headerLine {
   flex: 1;
   height: 1px;
-  background: var(--home-border, #ccc);
+  background: var(--ifm-border-color);
 }
 
+/* === Line Bullets === */
 .lineBullet {
-  width: clamp(28px, 3vw, 32px);
-  height: clamp(28px, 3vw, 32px);
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  font-size: clamp(14px, 1.5vw, 18px);
-  color: #e3e3e3;
+  color: white;
+  font-size: 1rem;
+  flex-shrink: 0;
 }
 
+/* === Cards === */
 .cardGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -76,24 +77,28 @@ a:hover {
 }
 
 .card {
-  background: var(--home-surface, #fff);
-  border: 1px solid var(--home-border, #ccc);
-  border-radius: 16px;
-  padding: 28px;
+  background: var(--ifm-alt-background-color);
+  border: 1px solid var(--ifm-border-color);
+  border-radius: 10px;
   text-decoration: none !important;
   color: inherit !important;
   display: flex;
+  transition: all 0.25s ease;
   flex-direction: column;
+  padding: 28px;
   gap: 16px;
   min-width: 280px;
   max-width: 320px;
-  transition: all 0.25s ease;
 }
 
 .card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-  background: var(--home-surface-hover);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+}
+
+[data-theme='dark'] .card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(150,150,150,0.1);
 }
 
 .contributorName {
@@ -112,18 +117,18 @@ a:hover {
 }
 
 .contributorRole {
+  margin: 0;
   font-size: clamp(12px, 1.2vw, 14px);
   font-weight: 600;
   display: inline-flex;
   align-items: center;
-  margin-top: 3px;
 }
 
 .contributorDesc {
-  margin: 4px 0 0 0;
+  margin: 0;
   font-size: clamp(12px, 1.2vw, 14px);
   line-height: 1.5;
-  color: var(--home-text-muted, #666);
+  color: var(--ifm-subtitle-color);
 }
 
 @media (max-width: 1200px) {
@@ -138,6 +143,7 @@ a:hover {
   }
 }
 
+/* === Footer ===*/
 .footerBars {
   display: flex;
   justify-content: center;
@@ -145,7 +151,7 @@ a:hover {
   gap: 6px;
   flex-shrink: 0;
   padding-top: clamp(8px, 1.2vw, 14px);
-  border-top: 1px solid var(--home-border, #ccc);
+  border-top: 1px solid var(--ifm-border-color);
 }
 
 .bar {
