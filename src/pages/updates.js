@@ -33,10 +33,10 @@ const UPDATES = [
   },
 ];
 
-function Badge({ letter }) {
+function LineBullet({ letter }) {
   return (
     <span
-      className={styles.badge}
+      className={styles.lineBullet}
       style={{ backgroundColor: SUBWAY_BULLETS[letter] || "#000" }}
     >
       {letter}
@@ -48,7 +48,7 @@ function UpdateCard({ update }) {
   return (
     <a href={update.link} className={styles.card}>
       <div className={styles.cardHeader}>
-        <Badge letter={update.bullet} />
+        <LineBullet letter={update.bullet} />
         <h3 className={styles.cardTitle}>
           {translate({ id: update.titleId, message: update.titleDefault })}
         </h3>
@@ -93,7 +93,7 @@ export default function Updates() {
               })}
             </p>
           </div>
-          <div className={styles.grid}>
+          <div className={styles.cardGrid}>
             {UPDATES.map((update, index) => (
               <UpdateCard key={index} update={update} />
             ))}

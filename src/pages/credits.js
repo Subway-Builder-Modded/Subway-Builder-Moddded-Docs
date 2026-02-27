@@ -153,8 +153,8 @@ const SECTION_INFO = [
   },
 ];
 
-function Badge({ letter, color }) {
-  return <span className={styles.badge} style={{ backgroundColor: color }}>{letter}</span>;
+function LineBullet({ letter, color }) {
+  return <span className={styles.lineBullet} style={{ backgroundColor: color }}>{letter}</span>;
 }
 
 function ContributorCard({ contributor, color }) {
@@ -209,12 +209,12 @@ export default function Credits() {
           {SECTION_INFO.map((section) => (
             <section key={section.key} className={styles.section}>
               <div className={styles.sectionHeader}>
-                <Badge letter={section.letter} color={section.color} />
+                <LineBullet letter={section.letter} color={section.color} />
                 <h2 className={styles.sectionTitle}>{section.title}</h2>
                 <span className={styles.headerLine}></span>
               </div>
 
-              <div className={styles.grid}>
+              <div className={styles.cardGrid}>
                 {CONTRIBUTORS[section.key].map((contributor, index) => (
                   <ContributorCard key={index} contributor={contributor} color={section.color} />
                 ))}

@@ -3,6 +3,7 @@ import Layout from "@theme/Layout";
 import Link from "@docusaurus/Link";
 import { translate } from "@docusaurus/Translate";
 import styles from "../css/index.module.css";
+import globalStyles from "../css/global.css";
 
 const HOMEPAGE_ITEMS = [
   {
@@ -134,13 +135,13 @@ export default function Home() {
           </div>
         </section>
 
-        <section className={styles.cardsSection}>
-          <div className={styles.cardsGrid}>
+        <section className={styles.cardSection}>
+          <div className={styles.cardGrid}>
             {HOMEPAGE_ITEMS.map((item) => (
               <Link key={item.id} to={item.href} className={styles.card}>
                 <div className={styles.cardHeader}>
                   <div
-                    className={styles.metroBullet}
+                    className={styles.lineBullet}
                     style={{ background: item.bullet }}
                   >
                     {item.letter}
