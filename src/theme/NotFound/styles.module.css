@@ -1,3 +1,4 @@
+/* === Wrapper === */
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -9,13 +10,16 @@
   padding: 2rem 1rem;
 }
 
-/* === Train Background === */
+/* === Train === */
 .trainWrapper {
   position: absolute;
   top: 10%;
-  width: 100%;
-  z-index: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 500px;
   opacity: 0.15;
+  z-index: 0;
   color: #333;
 }
 
@@ -27,11 +31,13 @@
 }
 
 .train {
-  width: 500px;
-  max-width: 90%;
+  width: 100%;
+  height: 100%;
+  display: block;
   margin: 0 auto;
 }
 
+/* === Content === */
 .content {
   position: relative;
   z-index: 1;
@@ -52,7 +58,7 @@
   height: 110px;
   border-radius: 50%;
   background-color: var(--bullet-color);
-  color: #FFFFFF;
+  color: #fff;
   font-size: 4.5rem;
   font-weight: 800;
   display: flex;
@@ -94,11 +100,10 @@ p {
 
 .back:hover {
   transform: scale(1.02);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
   background: var(--ifm-alt-background-color);
 }
 
 [data-theme='dark'] .back:hover {
-  box-shadow: 0 12px 30px rgba(150,150,150,0.1);
-  background: var(--ifm-alt-background-color);
+  box-shadow: 0 12px 30px rgba(150, 150, 150, 0.1);
 }
