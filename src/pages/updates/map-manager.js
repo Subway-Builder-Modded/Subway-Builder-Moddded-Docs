@@ -115,16 +115,12 @@ function Tag({ tag, isLatest }) {
   return (
     <div style={{ display: "flex", gap: "8px" }}>
       {isLatest && (
-        <span
-          className={`${styles.tag} ${styles.latestTag}`}
-        >
-          LATEST
+        <span className={`${styles.tag} ${styles.latestTag}`}>
+          latest
         </span>
       )}
-      <span
-        className={`${styles.tag} ${tag === "beta" ? styles.betaTag : styles.releaseTag}`}
-      >
-        {tag.toUpperCase()}
+      <span className={`${styles.tag} ${tag === "beta" ? styles.betaTag : styles.releaseTag}`}>
+        {tag}
       </span>
     </div>
   );
@@ -135,42 +131,58 @@ export default function MapManagerHub() {
 
   return (
     <Layout
-      title={translate({ id: "updates.map-manager.pageTitle", message: "Map Manager Changelogs" })}
-      description={translate({ id: "updates.map-manager.pageDescription", message: "Changelogs and release notes for the Subway Builder Map Manager." })}
+      title={translate({
+        id: "updates.map-manager.pageTitle",
+        message: "Map Manager Changelogs",
+      })}
+      description={translate({
+        id: "updates.map-manager.pageDescription",
+        message:
+          "Changelogs and release notes for the Subway Builder Map Manager.",
+      })}
     >
       <div className={styles.page}>
-
-        <Link to="/updates" className={styles.floatingBack}>
+        <Link to="/updates" className={styles.back}>
           &larr; Back
         </Link>
 
         <div className={styles.container}>
           <div className={styles.headerCenter}>
             <h1 className={styles.pageTitle}>
-              {translate({ id: "updates.map-manager.pageTitle", message: "Map Manager Changelogs" })}
+              {translate({
+                id: "updates.map-manager.pageTitle",
+                message: "Map Manager Changelogs",
+              })}
             </h1>
             <p className={styles.pageSubtitle}>
-              {translate({ id: "updates.map-manager.pageSubtitle", message: "Changelogs and release notes for the Subway Builder Map Manager." })}
+              {translate({
+                id: "updates.map-manager.pageSubtitle",
+                message:
+                  "Changelogs and release notes for the Subway Builder Map Manager.",
+              })}
             </p>
           </div>
         </div>
 
-        <div className={styles.fullWidthWrapper}>
+        <div className={styles.cardSection}>
           {sortedUpdates.map((update, idx) => (
-            <a key={idx} href={update.link} className={styles.updateBox}>
-              <div className={styles.updateContent}>
-                <div className={styles.updateHeader}>
-                  <div className={styles.updateTitle}>
-                    {translate({ id: update.titleId, message: update.titleDefault })}
-                  </div>
-                  <div className={styles.updateDate}>
-                    {translate({ id: update.dateId, message: update.dateDefault })}
-                  </div>
+            <a key={idx} href={update.link} className={styles.card}>
+              <div className={styles.cardHeader}>
+                <div className={styles.cardTitle}>
+                  {translate({
+                    id: update.titleId,
+                    message: update.titleDefault,
+                  })}
+                </div>
+                <div className={styles.cardDesc}>
+                  {translate({
+                    id: update.dateId,
+                    message: update.dateDefault,
+                  })}
                 </div>
               </div>
-              <div className={styles.updateTag}>
-                <Tag tag={update.tag} isLatest={idx === 0} />
-              </div>
+
+              <Tag tag={update.tag} isLatest={idx === 0} />
             </a>
           ))}
         </div>

@@ -19,12 +19,6 @@ export default function UpdateTemplateTemplateMod({
   releaseDateMessage = "",
   itemsBySection = {},
 }) {
-  const TitleContent = (
-    <span className={styles.titleBulletText}>
-      <Translate id={titleId}>{titleMessage}</Translate>
-    </span>
-  );
-
   return (
     <Layout
       title={titleMessage}
@@ -32,18 +26,25 @@ export default function UpdateTemplateTemplateMod({
     >
       <div className={styles.page}>
 
-        <Link to="/updates/template-mod" className={styles.floatingBack}>
+        <Link to="/updates/template-mod" className={styles.back}>
           &larr; Back
         </Link>
 
         <div className={styles.container}>
           <div className={styles.headerCenter}>
+
             {titleLink ? (
-              <Link to={titleLink} className={styles.titleBulletLink}>
-                <div className={styles.titleBullet}>{TitleContent}</div>
+              <Link to={titleLink} className={styles.titleLineBullet}>
+                <span className={styles.titleLineBulletText}>
+                  <Translate id={titleId}>{titleMessage}</Translate>
+                </span>
               </Link>
             ) : (
-              <div className={styles.titleBullet}>{TitleContent}</div>
+              <div className={styles.titleLineBullet}>
+                <span className={styles.titleLineBulletText}>
+                  <Translate id={titleId}>{titleMessage}</Translate>
+                </span>
+              </div>
             )}
 
             {releaseDateMessage && (
@@ -56,31 +57,45 @@ export default function UpdateTemplateTemplateMod({
           </div>
 
           {SECTION_DEFINITIONS.map((section) => {
-            const items = itemsBySection[section.key]?.filter(
-              (item) => item && (item.message || item.defaultMessage || typeof item === "string")
-            );
+            const items = itemsBySection[section.key];
             if (!items || items.length === 0) return null;
 
             return (
               <div key={section.key} className={styles.section}>
                 <div className={styles.sectionHeader}>
-                  <span className={styles.grayBullet} style={{ backgroundColor: section.color }}>
+                  <span
+                    className={styles.lineBullet}
+                    style={{ backgroundColor: section.color }}
+                  >
                     {section.letter}
                   </span>
 
                   <h2 className={styles.sectionLabel}>
-                    <Translate id={section.titleId}>{section.defaultMessage}</Translate>
+                    <Translate id={section.titleId}>
+                      {section.defaultMessage}
+                    </Translate>
                   </h2>
 
-                  <span className={styles.headerLine} />
+                  <span className={styles.sectionLabelLine} />
                 </div>
 
                 <ul className={styles.sectionList}>
                   {items.map((item, i) => {
-                    if (typeof item === "string") return <li key={i}>{item}</li>;
-                    const messageText = item.message || item.defaultMessage || "";
+                    if (typeof item === "string") {
+                      return <li key={i}>{item}</li>;
+                    }
+
                     const itemId = item.id || `updates.${section.key}.item.${i}`;
-                    return <li key={i}><Translate id={itemId}>{messageText}</Translate></li>;
+                    const messageText =
+                      item.message || item.defaultMessage || "";
+
+                    return (
+                      <li key={i}>
+                        <Translate id={itemId}>
+                          {messageText}
+                        </Translate>
+                      </li>
+                    );
                   })}
                 </ul>
               </div>
@@ -95,6 +110,7 @@ export default function UpdateTemplateTemplateMod({
           <span className={styles.bar} style={{ background: "#FCCC0A" }} />
           <span className={styles.bar} style={{ background: "#752F82" }} />
         </footer>
+
       </div>
     </Layout>
   );

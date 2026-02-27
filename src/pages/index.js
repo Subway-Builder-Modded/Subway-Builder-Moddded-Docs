@@ -3,7 +3,6 @@ import Layout from "@theme/Layout";
 import Link from "@docusaurus/Link";
 import { translate } from "@docusaurus/Translate";
 import styles from "../css/index.module.css";
-import globalStyles from "../css/global.css";
 
 const HOMEPAGE_ITEMS = [
   {
@@ -30,7 +29,8 @@ const HOMEPAGE_ITEMS = [
     }),
     description: translate({
       id: "homepage.install.description",
-      message: "Step-by-step guide to installing custom maps using Kronifer's Map Patcher.",
+      message:
+        "Step-by-step guide to installing custom maps using Kronifer's Map Patcher.",
     }),
     href: "/wiki/maps/map-installation-guide",
   },
@@ -44,7 +44,8 @@ const HOMEPAGE_ITEMS = [
     }),
     description: translate({
       id: "homepage.create.description",
-      message: "The complete guide to creating, packaging, and distributing custom Subway Builder maps.",
+      message:
+        "The complete guide to creating, packaging, and distributing custom Subway Builder maps.",
     }),
     href: "/wiki/maps/making-custom-maps",
   },
@@ -58,7 +59,8 @@ const HOMEPAGE_ITEMS = [
     }),
     description: translate({
       id: "homepage.updates.description",
-      message: "Stay up to date with new releases from the Subway Builder Modded Team.",
+      message:
+        "Stay up to date with new releases from the Subway Builder Modded Team.",
     }),
     href: "/updates",
   },
@@ -80,87 +82,107 @@ const HOMEPAGE_ITEMS = [
 
 function useHeroZoom() {
   const [scale, setScale] = useState(1);
+
   useEffect(() => {
-    const onScroll = () => setScale(Math.min(1 + window.scrollY * 0.0004, 1.25));
+    const onScroll = () =>
+      setScale(Math.min(1 + window.scrollY * 0.0004, 1.25));
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
   return scale;
 }
 
 function useThemeImage(light, dark) {
   const [isDark, setIsDark] = useState(false);
+
   useEffect(() => {
-    const check = () =>
-      setIsDark(document.documentElement.getAttribute("data-theme") === "dark");
-    check();
-    const observer = new MutationObserver(check);
+    const checkTheme = () =>
+      setIsDark(
+        document.documentElement.getAttribute("data-theme") === "dark"
+      );
+
+    checkTheme();
+
+    const observer = new MutationObserver(checkTheme);
     observer.observe(document.documentElement, { attributes: true });
+
     return () => observer.disconnect();
   }, []);
+
   return isDark ? dark : light;
 }
 
 export default function Home() {
   const heroScale = useHeroZoom();
-  const heroBg = useThemeImage("/images/home-light.png", "/images/home-dark.png");
+  const heroBg = useThemeImage(
+    "/images/home-light.png",
+    "/images/home-dark.png"
+  );
 
   return (
     <Layout
       description={translate({
         id: "homepage.meta.description",
-        message: "Subway Builder Maps, Mods, and Documentation",
+        message:
+          "The complete hub for everything modded in Subway Builder.",
       })}
     >
-      <div className={styles.homepage}>
+      <section className={styles.hero}>
+        <img
+          src={heroBg}
+          alt="Hero Background"
+          className={styles.heroBackground}
+          style={{ transform: `scale(${heroScale})` }}
+        />
+        <div className={styles.heroOverlay} />
+        <div className={styles.heroContent}>
+          <h1 className={styles.heroTitle}>
+            {translate({
+              id: "homepage.hero.title",
+              message: "Subway Builder Modded",
+            })}
+          </h1>
+          <p className={styles.heroSubtitle}>
+            {translate({
+              id: "homepage.hero.subtitle",
+              message:
+                "The complete hub for everything modded in Subway Builder.",
+            })}
+          </p>
+        </div>
+      </section>
 
-        <section className={styles.hero}>
-          <img
-            src={heroBg}
-            alt="Hero Background"
-            className={styles.heroBackground}
-            style={{ transform: `scale(${heroScale})` }}
-          />
-          <div className={styles.heroOverlay} />
-          <div className={styles.heroContent}>
-            <h1 className={styles.heroTitle}>
-              {translate({ id: "homepage.hero.title", message: "Subway Builder Modded" })}
-            </h1>
-            <p className={styles.heroSubtitle}>
-              {translate({
-                id: "homepage.hero.subtitle",
-                message: "The complete hub for everything modded in Subway Builder.",
-              })}
-            </p>
-          </div>
-        </section>
-
-        <section className={styles.cardSection}>
-          <div className={styles.cardGrid}>
-            {HOMEPAGE_ITEMS.map((item) => (
-              <Link key={item.id} to={item.href} className={styles.card}>
-                <div className={styles.cardHeader}>
-                  <div
-                    className={styles.lineBullet}
-                    style={{ background: item.bullet }}
-                  >
-                    {item.letter}
-                  </div>
-                  <h3 className={styles.cardTitle}>{item.title}</h3>
+      <section className={styles.cardSection}>
+        <div className={styles.cardGrid}>
+          {HOMEPAGE_ITEMS.map((item) => (
+            <Link key={item.id} to={item.href} className={styles.card}>
+              <div className={styles.cardHeader}>
+                <div
+                  className={styles.lineBullet}
+                  style={{ background: item.bullet }}
+                >
+                  {item.letter}
                 </div>
-                <p className={styles.cardDesc}>{item.description}</p>
-              </Link>
-            ))}
-          </div>
-        </section>
-        <footer className={styles.footerBars}>
-          <span className={styles.bar} style={{ background: "#0039A6" }} />
-          <span className={styles.bar} style={{ background: "#FF6319" }} />
-          <span className={styles.bar} style={{ background: "#00933C" }} />
-          <span className={styles.bar} style={{ background: "#FCCC0A" }} />
-          <span className={styles.bar} style={{ background: "#752F82" }} />
-        </footer>
-      </div>
+                <h3 className={styles.cardTitle}>
+                  {item.title}
+                </h3>
+              </div>
+              <p className={styles.cardDesc}>
+                {item.description}
+              </p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <footer className={styles.footerBars}>
+        <span className={styles.bar} style={{ background: "#0039A6" }} />
+        <span className={styles.bar} style={{ background: "#FF6319" }} />
+        <span className={styles.bar} style={{ background: "#00933C" }} />
+        <span className={styles.bar} style={{ background: "#FCCC0A" }} />
+        <span className={styles.bar} style={{ background: "#752F82" }} />
+      </footer>
     </Layout>
   );
 }

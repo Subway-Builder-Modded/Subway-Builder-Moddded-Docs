@@ -27,16 +27,12 @@ function Tag({ tag, isLatest }) {
   return (
     <div style={{ display: "flex", gap: "8px" }}>
       {isLatest && (
-        <span
-          className={`${styles.tag} ${styles.latestTag}`}
-        >
-          LATEST
+        <span className={`${styles.tag} ${styles.latestTag}`}>
+          latest
         </span>
       )}
-      <span
-        className={`${styles.tag} ${tag === "beta" ? styles.betaTag : styles.releaseTag}`}
-      >
-        {tag.toUpperCase()}
+      <span className={`${styles.tag} ${tag === "beta" ? styles.betaTag : styles.releaseTag}`}>
+        {tag}
       </span>
     </div>
   );
@@ -47,42 +43,58 @@ export default function TemplateModHub() {
 
   return (
     <Layout
-      title={translate({ id: "updates.template-mod.pageTitle", message: "Template Mod Changelogs" })}
-      description={translate({ id: "updates.template-mod.pageDescription", message: "Changelogs and release notes for the Subway Builder Template Mod." })}
+      title={translate({
+        id: "updates.template-mod.pageTitle",
+        message: "Template Mod Changelogs",
+      })}
+      description={translate({
+        id: "updates.template-mod.pageDescription",
+        message:
+          "Changelogs and release notes for the Subway Builder Template Mod.",
+      })}
     >
       <div className={styles.page}>
-
-        <Link to="/updates" className={styles.floatingBack}>
+        <Link to="/updates" className={styles.back}>
           &larr; Back
         </Link>
 
         <div className={styles.container}>
           <div className={styles.headerCenter}>
             <h1 className={styles.pageTitle}>
-              {translate({ id: "updates.template-mod.template-mod.pageTitle", message: "Template Mod Changelogs" })}
+              {translate({
+                id: "updates.template-mod.pageTitle",
+                message: "Template Manager Changelogs",
+              })}
             </h1>
             <p className={styles.pageSubtitle}>
-              {translate({ id: "updates.template-mod.template-mod.pageSubtitle", message: "Changelogs and release notes for the Subway Builder Template Mod." })}
+              {translate({
+                id: "updates.template-mod.pageSubtitle",
+                message:
+                  "Changelogs and release notes for the Subway Builder Template Mod.",
+              })}
             </p>
           </div>
         </div>
 
-        <div className={styles.fullWidthWrapper}>
+        <div className={styles.cardSection}>
           {sortedUpdates.map((update, idx) => (
-            <a key={idx} href={update.link} className={styles.updateBox}>
-              <div className={styles.updateContent}>
-                <div className={styles.updateHeader}>
-                  <div className={styles.updateTitle}>
-                    {translate({ id: update.titleId, message: update.titleDefault })}
-                  </div>
-                  <div className={styles.updateDate}>
-                    {translate({ id: update.dateId, message: update.dateDefault })}
-                  </div>
+            <a key={idx} href={update.link} className={styles.card}>
+              <div className={styles.cardHeader}>
+                <div className={styles.cardTitle}>
+                  {translate({
+                    id: update.titleId,
+                    message: update.titleDefault,
+                  })}
+                </div>
+                <div className={styles.cardDesc}>
+                  {translate({
+                    id: update.dateId,
+                    message: update.dateDefault,
+                  })}
                 </div>
               </div>
-              <div className={styles.updateTag}>
-                <Tag tag={update.tag} isLatest={idx === 0} />
-              </div>
+
+              <Tag tag={update.tag} isLatest={idx === 0} />
             </a>
           ))}
         </div>

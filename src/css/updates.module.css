@@ -43,31 +43,28 @@
 }
 
 .card {
-  background: var(--ifm-card-background-color);
-  border: 1px solid var(--ifm-card-border-color);
+  background: var(--ifm-alt-background-color);
+  border: 1px solid var(--ifm-border-color);
   border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  cursor: pointer;
   text-decoration: none !important;
   color: inherit !important;
+  display: flex;
   transition: all 0.25s ease;
-  text-align: center;
+  flex-direction: column;
   width: 100%;
+  overflow: hidden;
+  text-align: center;
   word-wrap: break-word;
 }
 
 .card:hover {
   transform: translateY(-6px);
   box-shadow: 0 12px 30px rgba(0,0,0,0.2);
-  background: var(--ifm-alt-background-color);
 }
 
 [data-theme='dark'] .card:hover {
   transform: translateY(-6px);
   box-shadow: 0 12px 30px rgba(150,150,150,0.1);
-  background: var(--ifm-alt-background-color);
 }
 
 .cardHeader {
@@ -114,7 +111,7 @@
   object-fit: cover;
   display: block;
   opacity: 0.5;
-  transition: opacity 0.15s;
+  transition: opacity 0.25s;
 }
 
 .card:hover .cardImg img {
@@ -143,7 +140,7 @@
   gap: 6px;
   flex-shrink: 0;
   padding-top: clamp(8px, 1.2vw, 14px);
-  border-top: 1px solid var(--ifm-border-color, #ccc);
+  border-top: 1px solid var(--ifm-border-color);
 }
 
 .bar {
