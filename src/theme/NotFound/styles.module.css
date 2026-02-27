@@ -6,15 +6,17 @@
   min-height: 70vh;
   text-align: center;
   position: relative;
+  padding: 2rem 1rem;
 }
 
+/* === Train Background === */
 .trainWrapper {
   position: absolute;
   top: 10%;
   width: 100%;
   z-index: 0;
   opacity: 0.15;
-  color: #333333;
+  color: #333;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -27,65 +29,76 @@
 .train {
   width: 500px;
   max-width: 90%;
+  margin: 0 auto;
 }
 
 .content {
   position: relative;
   z-index: 1;
+  max-width: 600px;
 }
 
-.bullets {
+/* === Line Bullets === */
+.lineBullets {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   gap: 2rem;
   margin-bottom: 2rem;
 }
 
-.bullet {
-  width: 100px;
-  height: auto;
-  transition: transform 0.3s ease, fill 0.3s ease;
-  cursor: pointer;
+.lineBullet {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background-color: var(--bullet-color);
+  color: #FFFFFF;
+  font-size: 4.5rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  cursor: default;
 }
 
-.bullet.first4:hover circle {
-  fill: #1E4B95;
-}
-.bullet.zero:hover circle {
-  fill: #FFD500;
-}
-.bullet.second4:hover circle {
-  fill: #FF8000;
-}
-
-.bullet:hover {
+.lineBullet:hover {
   transform: scale(1.1);
+  background-color: var(--bullet-hover);
 }
 
-.button {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  margin-top: 1rem;
-  background-color: black;
-  color: white;
+/* === Text === */
+h2 {
+  margin-bottom: 1rem;
+}
+
+p {
+  color: var(--ifm-subtitle-color);
+  margin-bottom: 1.5rem;
+}
+
+/* === Back Button === */
+.back {
+  margin-top: 1.5rem;
+  padding: 16px 24px;
+  font-size: 30px;
+  border: 1px solid var(--ifm-border-color);
   border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: 0.2s ease;
+  background-color: var(--ifm-alt-background-color);
+  font-weight: 700;
+  text-decoration: none !important;
+  color: inherit !important;
+  display: inline-block;
+  transition: transform 0.25s ease, background 0.25s, color 0.25s;
 }
 
-.button:hover {
-  background-color: #ddd;
-  color: black;
+.back:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+  background: var(--ifm-alt-background-color);
 }
 
-[data-theme="dark"] .button {
-  background-color: white;
-  color: black;
-}
-
-[data-theme="dark"] .button:hover {
-  background-color: #333;
-  color: white;
+[data-theme='dark'] .back:hover {
+  box-shadow: 0 12px 30px rgba(150,150,150,0.1);
+  background: var(--ifm-alt-background-color);
 }
