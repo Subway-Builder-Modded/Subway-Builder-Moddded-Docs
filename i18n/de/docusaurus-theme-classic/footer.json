@@ -13,7 +13,7 @@
   },
   "link.item.label.Modding Docs": {
     "message": "Modding-Dokumentation",
-    "description": "Die Bezeichnung des Footer-Links mit label=Modding Docs, der auf /modding-docs/getting-started verweist"
+    "description": "Die Bezeichnung des Footer-Links mit label=Modding Docs, der auf /modding-docs/template-mod/getting-started verweist"
   },
   "link.item.label.Updates": {
     "message": "Updates",

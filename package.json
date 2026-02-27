@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "clear": "docusaurus clear",
     "start": "docusaurus start",
     "build": "docusaurus build",
     "serve": "docusaurus serve",

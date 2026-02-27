@@ -48,7 +48,7 @@
 .heroSubtitle {
   margin-top: 16px;
   font-size: clamp(1rem, 2vw, 1.25rem);
-  color: var(--ifm-subtitle-color);
+  color: var(--ifm-description-color);
   transition: color 0.5s ease;
 }
 
@@ -106,7 +106,7 @@
 
 .cardDesc {
   margin: 0;
-  color: var(--ifm-subtitle-color);
+  color: var(--ifm-description-color);
   line-height: 1.5;
 }
 

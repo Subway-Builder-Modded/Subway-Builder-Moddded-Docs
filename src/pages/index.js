@@ -76,7 +76,7 @@ const HOMEPAGE_ITEMS = [
       id: "homepage.modding.description",
       message: "Build your own mods using our Mod Template.",
     }),
-    href: "/modding-docs/getting-started",
+    href: "/modding-docs/template-mod/getting-started",
   },
 ];
 

@@ -79,7 +79,7 @@ h2 {
 }
 
 p {
-  color: var(--ifm-subtitle-color);
+  color: var(--ifm-color);
   margin-bottom: 1.5rem;
 }
 
