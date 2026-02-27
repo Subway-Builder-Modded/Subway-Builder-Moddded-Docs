@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "@theme/Layout";
 import { translate } from "@docusaurus/Translate";
 import styles from "../css/updates.module.css";
@@ -16,7 +16,8 @@ const UPDATES = [
     descDefault:
       "Map management tool for Subway Builder that allows you to import custom maps into the game",
     creator: "Kronifer",
-    image: "/images/updates-map-manager.png",
+    imageLight: "/images/updates-map-manager-light.png",
+    imageDark: "/images/updates-map-manager-dark.png",
     bullet: "M",
     link: "/updates/map-manager",
   },
@@ -27,7 +28,8 @@ const UPDATES = [
     descDefault:
       "Documented TypeScript template to create your own mods for Subway Builder",
     creator: "IMB11 & ahkimn",
-    image: "/images/updates-template-mod.png",
+    imageLight: "/images/updates-template-mod-light.png",
+    imageDark: "/images/updates-template-mod-dark.png",
     bullet: "T",
     link: "/updates/template-mod",
   },
@@ -45,6 +47,22 @@ function LineBullet({ letter }) {
 }
 
 function UpdateCard({ update }) {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const checkTheme = () =>
+      setIsDark(document.documentElement.getAttribute("data-theme") === "dark");
+
+    checkTheme();
+
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, { attributes: true });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const imageSrc = isDark ? update.imageDark : update.imageLight;
+
   return (
     <a href={update.link} className={styles.card}>
       <div className={styles.cardHeader}>
@@ -52,14 +70,12 @@ function UpdateCard({ update }) {
         <h3 className={styles.cardTitle}>
           {translate({ id: update.titleId, message: update.titleDefault })}
         </h3>
-        <p className={styles.cardSubtitle}>
-          {update.creator}
-        </p>
+        <p className={styles.cardSubtitle}>{update.creator}</p>
       </div>
 
       <div className={styles.cardImg}>
         <img
-          src={update.image}
+          src={imageSrc}
           alt={translate({ id: update.titleId, message: update.titleDefault })}
           loading="lazy"
         />
@@ -98,8 +114,7 @@ export default function Updates() {
             <p className={styles.pageSubtitle}>
               {translate({
                 id: "updates.pageSubtitle",
-                message:
-                  "All of the Subway Builder Modded tools in one place.",
+                message: "All of the Subway Builder Modded tools in one place.",
               })}
             </p>
           </div>
