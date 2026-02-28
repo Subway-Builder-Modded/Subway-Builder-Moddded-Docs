@@ -25,8 +25,7 @@ module.exports = {
       label: "Railyard",
       items: [
         "railyard/publishing-projects",
-        "railyard/publishing-map-packs",
-        "railyard/updating-projects"
+        "railyard/publishing-map-packs"
       ],
     },
   ],
