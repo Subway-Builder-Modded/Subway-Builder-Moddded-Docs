@@ -3,16 +3,371 @@ id: common-patterns
 title: Gemeinsame Muster
 ---
 
+Praktische Rezepte für die dinge, die du beim Schreiben von Mods am meisten brauchst.
+
+## Zugriff auf die API {#accessing-the-api}
+
+Jede Mod startet mit dem globalen API-Objekt:
+
+```ts
+const api = window.SubwayBuilderAPI;
+```
+
+Überprüfe immer, dass es existiert, bevor du es benutzt:
+
+```ts
+if (!api) {
+  console.error('[MyMod] SubwayBuilderAPI not found!');
+} else {
+  // Sicherer Nutzen der API
+}
+```
+
+## Eine Mod initialisieren {#initializing-a-mod}
+
+Die meisten Mods sollten mit `onMapReady` initialisieren, welches ausgeführt wird
+sobald die Stadt geladen und die Karte bereit ist. Beuge doppelter Initialisierung vor:
+
+```ts
+let initialized = false;
+
+api.hooks.onMapReady((map) => {
+  if (initialized) return;
+  initialized = true;
+
+  // Dein Setup hier
+  console.log('[MyMod] Initialized!');
+});
+```
+
 :::note
 
-Note Diese Anleitung muss noch übersetzt werden. Wenn Sie als Mitwirkender diese Datei
-bearbeiten, können Sie den Inhalt der englischen Version kopieren und mit der Übersetzung beginnen.
+`onMapReady` kann mehrfach auslösen (z.B. nach dem wechseln von Städten). Der `initialized` Test 
+stellt sicher, dass UI und Hooks nur ein mal festgelegt werden.
 
 :::
 
+## UI-Panele hinzufügen {#adding-ui-panels}
+
+### fliegende Panel {#floating-panel}
+
+Die häufigste Art, UI zu einer Mod hinzuzufügen. Erstellt ein verschiebbares Panel aus der Toolbar:
+
+```ts
+api.ui.addFloatingPanel({
+  id: 'mein-panel',
+  title: 'Mein Panel',
+  icon: 'Settings', // Lucide Iconname (PascalCase)
+  render: MyComponent, // Eine React-Komponente
+});
+```
+
+### Toolbar Button {#toolbar-button}
+
+Fügt einen Button zur Ingame-Toolbar hinzu:
+
+```ts
+api.ui.addToolbarButton({
+  id: 'mein-button',
+  icon: 'Zap',
+  tooltip: 'macht etwas',
+  onClick: () => {
+    api.ui.showNotification('Button gedrückt!', 'info');
+  },
+});
+```
+
+### Pause-Menü Button {#escape-menu-button}
+
+Fügt einen Button zum Ingame-Pause/ESC-Manü hinzu:
+
+```ts
+api.ui.addButton('escape-menu', {
+  id: 'mein-menu-btn',
+  label: 'Meine Modeinstellungen',
+  onClick: () => {
+    // Einstellungen öffnen, Funktionen umschalten, etc.
+  },
+});
+```
+
+### Settings-Menu Einstellungen {#settings-menu-controls}
+
+Fügt Schalter, Slider und Auswahl in das Settings-Menü hinzu:
+
+```ts
+api.ui.addToggle('settings-menu', {
+  id: 'Mein-Schalter',
+  label: 'Funktion einschalten',
+  defaultValue: true,
+  onChange: (enabled) => {
+    console.log('Feature:', enabled);
+  },
+});
+
+api.ui.addSlider('settings-menu', {
+  id: 'Mein-slider',
+  label: 'Geschwindigkeit',
+  min: 1,
+  max: 10,
+  step: 0.5,
+  defaultValue: 1,
+  onChange: (value) => {
+    console.log('Speed:', value);
+  },
+});
+```
+
+### UI-Platzierung {#ui-placements}
+
+Das `placement` Argument kontrolliert, wo UI-Elemente erscheinen:
+
+| Placement               | Wo es sichtbar wird    |
+| ----------------------- | ---------------------- |
+| `'settings-menu'`       | Settings-Menü          |
+| `'escape-menu'`         | Escape/Pause-Menü Body |
+| `'escape-menu-buttons'` | Escape-Menu Buttonreihe|
+| `'main-menu'`           | Hauptmenü              |
+| `'bottom-bar'`          | untere Toolbar         |
+| `'top-bar'`             | Obere Leiste           |
+| `'debug-panel'`         | Debug Overlay          |
+
+### Benachrichtigungen {#notifications}
+
+Zeige dem Spieler eine Nachricht an:
+
+```ts
+api.ui.showNotification('Map erfolgreich geladen!', 'success');
+api.ui.showNotification('Etwas ging schief.', 'error');
+api.ui.showNotification('Tipp: Versuch es mit Tunneln.', 'info');
+api.ui.showNotification('Fast pleite!', 'warning');
+```
+
+## Spielstatus auslesen {#reading-game-state}
+
+Jeder Spielstatus ist read-only über `api.gameState` auslesbar:
+
+```ts
+// Stationen, Linien, Gleise, Züge
+const stations = api.gameState.getStations();
+const routes = api.gameState.getRoutes();
+const tracks = api.gameState.getTracks();
+const trains = api.gameState.getTrains();
+
+// Finanziell
+const budget = api.gameState.getBudget();
+const ticketPrice = api.gameState.getTicketPrice();
+
+// Zeit
+const day = api.gameState.getCurrentDay();
+const hour = api.gameState.getCurrentHour();
+
+// Performance
+const ridership = api.gameState.getRidershipStats();
+const modeChoice = api.gameState.getModeChoiceStats();
+const lineMetrics = api.gameState.getLineMetrics();
+```
+
+## Stationsdaten {#station-data}
+
+Jede Station hat Koordinaten, Track-IDs und Nearby-Station-Info:
+
+```ts
+const stations = api.gameState.getStations();
+
+for (const station of stations) {
+  console.log(station.name, station.coords); // [Longitude, Latitude]
+  console.log('Tracks:', station.trackIds.length);
+  console.log(
+    'Nearby:',
+    station.nearbyStations.map((n) => n.stationId),
+  );
+}
+```
+
+## Passagierdaten {#ridership-data}
+
+```ts
+// Allgemeine Statistik
+const stats = api.gameState.getRidershipStats();
+console.log(`${stats.totalRidersPerHour} Passagiere/Stunde`);
+
+// Pro Station
+const stationData = api.gameState.getStationRidership('Stations-uuid-hier');
+console.log(`${stationData.total} Passagiere an dieser Station`);
+
+// Pro Linie
+const routeData = api.gameState.getRouteRidership('Linien-uuid-hier');
+```
+
+## Auf Events reagieren {#reacting-to-events}
+
+Registriere Callbacks für Spielereignisse mit `api.hooks`:
+
+```ts
+// Reagiere auf neue Station
+api.hooks.onStationBuilt((station) => {
+  console.log(`Neue Station: ${station.name} bei ${station.coords}`);
+});
+
+// Reagiere auf Veränderung des Geldes
+api.hooks.onMoneyChanged((balance, change, type, category) => {
+  if (type === 'expense' && change > 1000000) {
+    api.ui.showNotification('großer Einkauf!', 'info');
+  }
+});
+
+// Reagiere auf Tageswechsel
+api.hooks.onDayChange((day) => {
+  console.log(`Tag ${day}`);
+});
+
+// Reagiere auf Geschwindigkeitseinstellungen
+api.hooks.onSpeedChanged((speed) => {
+  console.log(`Geschwindigkeit: ${speed}`); // 'slow' | 'normal' | 'fast' | 'ultrafast'
+});
+
+// Reagiere auf Speichern des Spielstandes
+api.hooks.onGameSaved((saveName) => {
+  console.log(`Stand gespeichert: ${saveName}`);
+});
+```
+
+## Alle verfügbaren Hooks {#all-available-hooks}
+
+| Hook                | Callback Argumente                             |
+| ------------------- | ---------------------------------------------- |
+| `onGameInit`        | (none)                                         |
+| `onDayChange`       | `day: number`                                  |
+| `onCityLoad`        | `cityCode: string`                             |
+| `onMapReady`        | `map: MapLibreMap`                             |
+| `onStationBuilt`    | `station: Station`                             |
+| `onStationDeleted`  | `stationId: string`                            |
+| `onRouteCreated`    | `route: Route`                                 |
+| `onRouteDeleted`    | `routeId: string, routeBullet: string`         |
+| `onTrackBuilt`      | `tracks: Track[]`                              |
+| `onBlueprintPlaced` | `tracks: Track[]`                              |
+| `onDemandChange`    | `popCount: number`                             |
+| `onTrackChange`     | `changeType: 'add' \| 'delete', count: number` |
+| `onTrainSpawned`    | `train: Train`                                 |
+| `onTrainDeleted`    | `trainId: string, routeId: string`             |
+| `onPauseChanged`    | `isPaused: boolean`                            |
+| `onSpeedChanged`    | `newSpeed: GameSpeed`                          |
+| `onMoneyChanged`    | `newBalance, change, type, category?`          |
+| `onGameSaved`       | `saveName: string`                             |
+| `onGameLoaded`      | `saveName: string`                             |
+| `onWarning`         | `message: string`                              |
+| `onError`           | `error: string`                                |
+| `onGameEnd`         | (none)                                         |
+
+## Spielzustand modifizieren {#modifying-game-actions}
+
+Nutze `api.actions` um den Spielzustand zu verändern:
+
+```ts
+// Geld
+api.actions.setMoney(5000000);
+api.actions.addMoney(1000000, 'grant');
+api.actions.subtractMoney(500000, 'maintenance');
+
+// Spielsteuerung
+api.actions.setPause(true);
+api.actions.setSpeed('fast'); // 'slow' | 'normal' | 'fast' | 'ultrafast'
+
+// Ticketpreis
+api.actions.setTicketPrice(5);
+```
+
+## Spielkonstanten modifizieren  {#modifying-game-constants}
+
+Passe die Regeln des Spiels an:
+
+```ts
+api.modifyConstants({
+  STARTING_MONEY: 10000000000, // 10 Milliarden
+  DEFAULT_TICKET_COST: 5,
+  CONSTRUCTION_COSTS: {
+    TUNNEL: { SINGLE_MULTIPLIER: 0.5 }, // Tunnel zum halben Preis
+  },
+});
+```
+
+:::important
+
+Rufe `modifyConstants()` möglichst früh auf, idealerweise vor `onMapReady`. Konstanten wirken sich
+auf die komplette Spielsession aus.
+
+:::
+
+## Gleise programmatisch verlegen {#building-tracks-programatically}
+
+Nutze `api.build` um Gleise über Code zu platzieren und zu konstruieren:
+
+```ts
+// Gleisentwurf platzieren
+const result = api.build.placeBlueprintTracks([
+  {
+    coords: [
+      [-74.006, 40.7128],
+      [-74.009, 40.715],
+    ], // [lng, lat] Paare
+    trackType: 'heavy-metro',
+    startElevation: -15, // unterirdisch
+    endElevation: -15,
+  },
+]);
+
+if (result.success) {
+  console.log(`Placed ${result.trackIds.length} tracks`);
+
+  // Baue die Entwürfe (kostet Geld)
+  const buildResult = await api.build.buildBlueprints();
+  console.log(`Built ${buildResult.builtTrackCount} tracks, cost: $${buildResult.totalCost}`);
+}
+```
+
+## Linien erstellen und Züge hinzufügen {#creating-routes-and-adding-trains}
+
+```ts
+// Erstelle eine neue Linie
+const route = api.build.createRoute({
+  bullet: 'A',
+  color: '#0039A6',
+  textColor: '#FFFFFF',
+  shape: 'circle',
+  trainType: 'heavy-metro',
+});
+
+if (route.success && route.route) {
+  // Kaufe Züge und füge sie der Linie hinzu
+  api.build.buyTrains(4, 'heavy-metro');
+  api.build.addTrainToRoute(route.route.id, 0); // An erster Station einfügen
+}
+```
+
+## Dauerhafter Speicher {#persistent-storage}
+
+Speichere Mod-Daten über Sessions hinaus (nur Desktop-App):
+
+```ts
+// Speichern
+await api.storage.set('highScore', 42);
+await api.storage.set('settings', { sound: true, difficulty: 'hard' });
+
+// Laden
+const score = await api.storage.get('highScore', 0);
+const settings = await api.storage.get('settings', { sound: true, difficulty: 'normal' });
+
+// Löschen
+await api.storage.delete('highScore');
+
+// Alle Schlüssel auflisten
+const keys = await api.storage.keys();
+```
+
 :::note
 
-This guide is yet to be translated. If you are a contributor editing this file, you may copy
-the contents of the English version and begin translating.
+Speichern funktioniert nur in der (Electron) Desktop-App. In der Browserversion führt `set` nichts aus
+und `get` gibt nur Standardwerte wieder.
 
 :::
