@@ -69,10 +69,11 @@ export default function NotFound() {
 
         <h2>This page seems to have missed its stop.</h2>
 
-        <p>
-          The page you’re looking for doesn’t exist, was moved, or never
-          arrived at this station.
-        </p>
+        <div className={styles.body}>
+          <p>
+            The page you’re looking for doesn’t exist, was moved, or never arrived at this station.
+          </p>
+        </div>
 
         <Link to="/" className={styles.back}>
           Return Home

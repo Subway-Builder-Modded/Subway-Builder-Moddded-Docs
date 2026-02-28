@@ -1,7 +1,13 @@
 module.exports = {
   docs: [
-    "making-custom-maps",
-    "custom-map-optional-features",
+    {
+      type: "category",
+      label: "Creating Maps",
+      items: [
+        "creating-maps/making-custom-maps",
+        "creating-maps/custom-map-optional-features",
+      ],
+    },
     {
       type: "category",
       label: "Template Mod",
@@ -17,7 +23,11 @@ module.exports = {
     {
       type: "category",
       label: "Railyard",
-      items: ["railyard/submitting-projects", "railyard/hosting-map-packs"],
+      items: [
+        "railyard/publishing-projects",
+        "railyard/publishing-map-packs",
+        "railyard/updating-projects"
+      ],
     },
   ],
 };

@@ -78,8 +78,8 @@ h2 {
   margin-bottom: 1rem;
 }
 
-p {
-  color: var(--ifm-color);
+.body {
+  color: var(--ifm-description-color);
   margin-bottom: 1.5rem;
 }
 
