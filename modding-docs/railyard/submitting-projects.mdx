@@ -1,0 +1,26 @@
+---
+id: submitting-projects
+title: Submitting Projects
+---
+
+Railyard does not host mods or maps within the service. Instead, Railyard pulls from its [registry](https://github.com/Subway-Builder-Modded/The-Railyard), which contains the data pointing to all the user-created projects. To add a project to Railyard for people to download and play with, we must first add it to the registry.
+
+:::important
+
+If you have many different maps, you can upload them all onto one repository instead of creating one for each individual map using [this guide](/modding-docs/railyard/hosting-map-packs) instead. This can be helpful if you are the creator of a map pack (like the [France Pack](https://github.com/flopinou/FrancePack)), which often contain large numbers of maps.
+
+:::
+
+## Step 1 - Hosting the File {#hosting-the-file}
+In order to make a submission to the Railyard registry, we need to first upload the source code and release to GitHub and link it to Railyard. To do this, create a new GitHub repository. The actual contents can contain the source code for your mod.
+
+Once you have the repository set up, create a new release. In this release, place a ZIP file containing **exactly** files that will go in the player's `metro-maker4/mods` folder (in the correct format).
+
+:::tip
+
+When updating a mod, you can create a new release with the updated files. From here, you can create an update ticket in the [Railyard registry](https://github.com/Subway-Builder-Modded/The-Railyard).
+
+:::
+
+## Step 2 - Submitting to the Registry {#submitting-to-the-registry}
+Now that our files are hosted on GitHub, we are ready to make a submission to the registry. Go to the [registry's issues page](https://github.com/Subway-Builder-Modded/The-Railyard/issues) and click on "`New Issue`". Here, we can create our submission, which will then be reviewed by a Railyard maintainer.
