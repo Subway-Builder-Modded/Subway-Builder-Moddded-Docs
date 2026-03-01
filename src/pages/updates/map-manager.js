@@ -109,6 +109,14 @@ const UPDATES = [
     tag: "release",
     link: "/updates/map-manager/v1.0.2",
   },
+  {
+    titleId: "updates.map-manager.v1-0-3.title",
+    titleDefault: "Map Manager - v1.0.3",
+    dateId: "updates.map-manager.v1-0-3.releaseDate",
+    dateDefault: "February 28, 2026",
+    tag: "release",
+    link: "/updates/map-manager/v1.0.3",
+  },
 ];
 
 function Tag({ tag, isLatest }) {
