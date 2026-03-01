@@ -1,1 +1,13 @@
-files: []
+files:
+  - source: docs/home.mdx
+    translation: i18n/%two_letters_code%/docusaurus-plugin-content-docs/current/home.mdx
+  - source: docs/contributing/
+    translation: i18n/%two_letters_code%/docusaurus-plugin-content-docs/current/contributing/%original_file_name%
+  - source: docs/maps/
+    translation: i18n/%two_letters_code%/docusaurus-plugin-content-docs/current/maps/%original_file_name%
+  - source: modding-docs/creating-maps/
+    translation: i18n/%two_letters_code%/docusaurus-plugin-content-docs-modding-docs/current/creating-maps/%original_file_name%
+  - source: modding-docs/railyard
+    translation: i18n/%two_letters_code%/docusaurus-plugin-content-docs-modding-docs/current/railyard/%original_file_name%
+  - source: modding-docs/template-mod/
+    translation: i18n/%two_letters_code%/docusaurus-plugin-content-docs-modding-docs/current/template-mod/%original_file_name%
