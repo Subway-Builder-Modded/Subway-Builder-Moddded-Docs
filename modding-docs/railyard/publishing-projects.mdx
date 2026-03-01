@@ -17,6 +17,26 @@ If you have many different maps, you can upload them all onto one repository ins
 ## Step 1 - Hosting the File {#hosting-the-file}
 In order to make a submission to the Railyard registry, you need to first upload the source code and release to GitHub and link it to Railyard. To do this, create a new GitHub repository. The actual contents can contain the source code for your map/mod.
 
+:::note
+
+Railyard is currently looking to implement a system to check mods for direct dependencies to other mods.
+
+There currently exists an optional field in the mod's `manifest.json` to store dependencies, e.g.:
+
+```json
+"dependencies": {
+  "mod_id_1": ">=0.3.0"
+  "mod_id_2": ">=0.5.5"
+},
+"version": "x.y.z"
+```
+
+However, there is no clear documentation on the intended structure.
+
+If you have feedback on a preferred structure/format for dependency tracking, please tag one of the Railyard members in #modders of the Subway Builder Discord.
+
+:::
+
 Once you have the repository set up, create a new release. In this release, place a ZIP file containing **exactly** files that will go in the player's `metro-maker4/mods` folder (in the correct format).
 
 ## Step 2 - Submitting to the Registry {#submitting-to-the-registry}
