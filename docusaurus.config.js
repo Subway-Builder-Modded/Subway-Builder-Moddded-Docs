@@ -14,28 +14,28 @@ module.exports = {
   },
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'es', 'de'],
+    locales: ['en'],
     localeConfigs: {
       en: {
         label: 'English',
         htmlLang: 'en-US',
       },
-      es: {
+      /*es: {
         label: 'Español',
         htmlLang: 'es-ES',
       },
-      /*ca: {
+      ca: {
         label: 'Català',
         htmlLang: 'ca-ES',
       },
       fr: {
         label: 'Français',
         htmlLang: 'fr-FR',
-      }, */
+      },
       de: {
         label: 'Deutsch',
         htmlLang: 'de-DE',
-      }, /*
+      },
       it: {
         label: 'Italiano',
         htmlLang: 'it-IT',
@@ -98,7 +98,7 @@ module.exports = {
           },
           {
             from: ['/modding-docs'],
-            to: '/modding-docs/getting-started',
+            to: '/modding-docs/template-mod/getting-started',
           },
         ],
       },
@@ -135,7 +135,7 @@ module.exports = {
         },
         {
           type: 'doc',
-          docId: 'getting-started',
+          docId: 'template-mod/getting-started',
           docsPluginId: 'modding-docs',
           position: 'left',
           label: 'Modding Docs',
@@ -188,7 +188,7 @@ module.exports = {
             },
             {
               label: 'Modding Docs',
-              to: '/modding-docs/getting-started',
+              to: '/modding-docs/template-mod/getting-started',
             },
             {
               label: 'Updates',

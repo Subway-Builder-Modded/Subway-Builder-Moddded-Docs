@@ -47,7 +47,7 @@ const HOMEPAGE_ITEMS = [
       message:
         "The complete guide to creating, packaging, and distributing custom Subway Builder maps.",
     }),
-    href: "/wiki/maps/making-custom-maps",
+    href: "/modding-docs/creating-maps/making-custom-maps",
   },
   {
     id: "updates",
@@ -76,7 +76,7 @@ const HOMEPAGE_ITEMS = [
       id: "homepage.modding.description",
       message: "Build your own mods using our Mod Template.",
     }),
-    href: "/modding-docs/getting-started",
+    href: "/modding-docs/template-mod/getting-started",
   },
 ];
 

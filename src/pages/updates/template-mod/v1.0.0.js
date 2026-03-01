@@ -16,7 +16,7 @@ export default function TemplateMod_UpdateV1_0_0() {
         bugfixes: [],
         upgrades: [],
         otherNotes: [
-            { id: "updates.template-mod.v1-0-0.otherNotes1", message: "Documentation is available at https://subwaybuildermodded.com/modding-docs/getting-started" },
+            { id: "updates.template-mod.v1-0-0.otherNotes1", message: "Documentation is available at https://subwaybuildermodded.com/modding-docs/template-mod/getting-started" },
         ],
       }}
     />
