@@ -1,24 +1,24 @@
 module.exports = {
-  title: 'Subway Builder Modded',
-  tagline: 'A complete directory and guide for all Subway Builder maps and mods',
-  url: 'https://subwaybuildermodded.com',
-  baseUrl: '/',
-  favicon: 'favicon.ico',
-  organizationName: 'Subway-Builder-Modded',
-  projectName: 'Subway-Builder-Modded-Docs',
-  deploymentBranch: 'gh-pages',
+  title: "Subway Builder Modded",
+  tagline: "A complete directory and guide for all Subway Builder maps and mods",
+  url: "https://subwaybuildermodded.com",
+  baseUrl: "/",
+  favicon: "favicon.ico",
+  organizationName: "Subway-Builder-Modded",
+  projectName: "Subway-Builder-Modded-Docs",
+  deploymentBranch: "gh-pages",
   markdown: {
     hooks: {
-      onBrokenMarkdownLinks: 'throw', // 'throw', 'warn', or 'ignore'
+      onBrokenMarkdownLinks: "throw", // 'throw', 'warn', or 'ignore'
     },
   },
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: "en",
+    locales: ["en"],
     localeConfigs: {
       en: {
-        label: 'English',
-        htmlLang: 'en-US',
+        label: "English",
+        htmlLang: "en-US",
       },
       /*es: {
         label: 'Español',
@@ -64,41 +64,41 @@ module.exports = {
   },
   presets: [
     [
-      '@docusaurus/preset-classic',
+      "@docusaurus/preset-classic",
       {
         docs: {
-          routeBasePath: 'wiki',
-          sidebarPath: require.resolve('./sidebars/wiki.js'),
+          routeBasePath: "wiki",
+          sidebarPath: require.resolve("./sidebars/wiki.js"),
           admonitions: true,
         },
         theme: {
-          customCss: require.resolve('./src/css/global.css'),
+          customCss: require.resolve("./src/css/global.css"),
         },
       },
     ],
   ],
   plugins: [
     [
-      '@docusaurus/plugin-content-docs',
+      "@docusaurus/plugin-content-docs",
       {
-        id: 'modding-docs',
-        path: 'modding-docs',
-        routeBasePath: 'modding-docs',
-        sidebarPath: require.resolve('./sidebars/modding-docs.js'),
+        id: "modding-docs",
+        path: "modding-docs",
+        routeBasePath: "modding-docs",
+        sidebarPath: require.resolve("./sidebars/modding-docs.js"),
         admonitions: true,
       },
     ],
     [
-      '@docusaurus/plugin-client-redirects',
+      "@docusaurus/plugin-client-redirects",
       {
         redirects: [
           {
-            from: ['/wiki'],
-            to: '/wiki/home',
+            from: ["/wiki"],
+            to: "/wiki/home",
           },
           {
-            from: ['/modding-docs'],
-            to: '/modding-docs/template-mod/getting-started',
+            from: ["/modding-docs"],
+            to: "/modding-docs/template-mod/getting-started",
           },
         ],
       },
@@ -106,10 +106,9 @@ module.exports = {
   ],
   themeConfig: {
     metadata: [
-      { name: 'description', content: 'A complete hub for Subway Builder maps, mods, and guides' },
-      { name: 'og:image', content: '/logo.png' },
-      { name: 'twitter:image', content: '/logo.png' },
-      
+      { name: "description", content: "A complete hub for Subway Builder maps, mods, and guides" },
+      { name: "og:image", content: "/logo.png" },
+      { name: "twitter:image", content: "/logo.png" },
     ],
     docs: {
       sidebar: {
@@ -121,87 +120,93 @@ module.exports = {
       maxHeadingLevel: 5,
     },
     navbar: {
-      title: 'Subway Builder Modded',
+      title: "Subway Builder Modded",
       logo: {
-        alt: 'Subway Builder Logo',
-        src: 'logo.png',
+        alt: "Subway Builder Logo",
+        src: "logo.png",
       },
       items: [
         {
-          type: 'doc',
-          docId: 'home',
-          position: 'left',
-          label: 'Wiki',
+          type: "doc",
+          docId: "home",
+          position: "left",
+          label: "Wiki",
         },
         {
-          type: 'doc',
-          docId: 'template-mod/getting-started',
-          docsPluginId: 'modding-docs',
-          position: 'left',
-          label: 'Modding Docs',
+          type: "doc",
+          docId: "template-mod/getting-started",
+          docsPluginId: "modding-docs",
+          position: "left",
+          label: "Modding Docs",
         },
         {
-          to: 'updates',
-          position: 'left',
-          label: 'Updates',
+          to: "updates",
+          position: "left",
+          label: "Updates",
         },
         {
-          to: 'credits',
-          position: 'left',
-          label: 'Credits',
+          to: "credits",
+          position: "left",
+          label: "Credits",
         },
         {
-          href: 'https://github.com/Subway-Builder-Modded/Subway-Builder-Modded-Docs',
-          position: 'right',
+          href: "https://github.com/Subway-Builder-Modded/Subway-Builder-Modded-Docs",
+          position: "right",
           html: `
             <img src="/assets/github.svg" width="24" height="24" style="vertical-align: middle; margin-right: 4px;" />
           `,
         },
         {
-          href: 'https://discord.gg/jrNQpbytUQ',
-          position: 'right',
+          href: "https://discord.gg/jrNQpbytUQ",
+          position: "right",
           html: `
             <img src="/assets/discord.svg" width="24" height="24" style="vertical-align: middle; margin-right: 4px;" />
           `,
         },
         {
-          href: 'https://subwaybuilder.com',
-          position: 'right',
+          href: "https://subwaybuilder.com",
+          position: "right",
           html: `
             <img src="/assets/subway-builder.svg" width="20" height="20" style="vertical-align: middle; margin-right: 4px;" />
           `,
         },
         {
-          type: 'localeDropdown',
-          position: 'right',
+          type: "localeDropdown",
+          position: "right",
         },
       ],
+    },
+    algolia: {
+      appId: "DV5CJOSPH9",
+      apiKey: "3aa7006d94c5b0971cac9aea2940b53f",
+      indexName: "Subway Builder Modded",
+      contextualSearch: true,
     },
     footer: {
       links: [
         {
-          title: 'Pages',
+          title: "Pages",
           items: [
             {
-              label: 'Wiki',
-              to: '/wiki/home',
+              label: "Wiki",
+              to: "/wiki/home",
             },
             {
-              label: 'Modding Docs',
-              to: '/modding-docs/template-mod/getting-started',
+              label: "Modding Docs",
+              to: "/modding-docs/template-mod/getting-started",
             },
             {
-              label: 'Updates',
-              to: '/updates',
+              label: "Updates",
+              to: "/updates",
             },
             {
-              label: 'Credits',
-              to: '/credits',
+              label: "Credits",
+              to: "/credits",
             },
           ],
         },
         {
-          title: 'Other Links',
+          title: "Other Links",
           items: [
             {
               html: `
@@ -233,7 +238,7 @@ module.exports = {
       copyright: `© Subway Builder Modded ${new Date().getFullYear()}. Not affiliated with Subway Builder or Redistricter, LLC. All content is community-created and shared under appropriate licenses.`,
     },
     colorMode: {
-      defaultMode: 'dark',
+      defaultMode: "dark",
       disableSwitch: false,
     },
   },
