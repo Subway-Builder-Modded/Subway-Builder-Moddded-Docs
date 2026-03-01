@@ -347,6 +347,12 @@ if (route.success && route.route) {
 
 ## Persistent Storage {#persistent-storage}
 
+:::warning
+
+Mod-level storage is currently broken. You may use localStorage or game-level Electron storage as a workaround, but be aware that these are not sandboxed and can cause conflicts with other mods (or even with the game itself). Use at your own risk!
+
+:::
+
 Save mod data between sessions (desktop app only):
 
 ```ts

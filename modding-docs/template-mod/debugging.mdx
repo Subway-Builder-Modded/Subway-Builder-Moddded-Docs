@@ -42,6 +42,12 @@ console.error(`${TAG} Failed to load`, error);
 **With `pnpm dev`**: Logs are printed to your terminal and saved to `debug/latest.log`. The game
 launcher enables Electron logging automatically.
 
+## Checking Performance {#checking-performance}
+
+You can monitor the effects of your mod on game performance by pressing `Ctrl+Shift+P` to view the performance monitor in-game. Run benchmarks while your mod is active to compare frame rates and memory usage.
+
+<img height="320" alt="image" src="/images/performance-monitor.png" />
+
 ## Error Handling {#error-handling}
 
 Wrap your initialization in try/catch to avoid crashing the game:
