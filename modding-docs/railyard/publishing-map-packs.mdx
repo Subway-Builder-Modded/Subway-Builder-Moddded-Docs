@@ -3,17 +3,17 @@ id: publishing-map-packs
 title: Publishing Map Packs
 ---
 
-If you are a map creator and have made multiple maps or are planning to, you can host them all on the same repository via a custom `updates.json` file. In this file, we can place all the necessary information required for Railyard to fetch updates for your map.
+If you are a map creator and have made multiple maps or are planning to, you can host them all on the same repository via a custom `updates.json` file. In this file, you can place all the necessary information required for Railyard to fetch updates for your map.
 
 ## Step 1 - Hosting the File {#hosting-the-file}
-In order to make a submission to the Railyard registry, we need to first upload the source code and release to GitHub and link it to Railyard. To do this, create a new GitHub repository. The actual contents can contain the source code for your map/mod.
+In order to make a submission to the Railyard registry, you need to first upload the source code and release to GitHub and link it to Railyard. To do this, create a new GitHub repository. The actual contents can contain the source code for your map/mod.
 
 Once you have the repository set up, create a new release. In this release, place **ALL** the ZIP files containing your maps (as different release assets). They should contain **exactly** files that will go in the player's `metro-maker4/mods` folder (in the correct format).
 
 ## Step 2 - Setting Up the Updates Files {#setting-up-the-updates-files}
-The first step is to set up our `update.json` files. We will need several of these, one for every map.
+The first step is to set up our `update.json` files. You will need several of these, one for every map.
 
-Create a new folder and call it something like `releases` or `railyard`. This is where our `update.json` files will be located. Create a new file for every map and call it `XXX.json`, where `XXX` is your map's city code. Inside each file, you can place the custom update schema found below and update it to match your mod.
+Create a new folder and call it something like `releases` or `railyard`. This is where your `update.json` files will be located. Create a new file for every map and call it `XXX.json`, where `XXX` is your map's city code. Inside each file, you can place the custom update schema found below and update it to match your mod.
 
 ### Custom Update Schema Template {#custom-update-schema-template}
 ```json
@@ -66,18 +66,18 @@ To update your mod, simply add a new field in the `versions` array and add your 
 }
 ```
 
-Now that we have our `update.json` files set up, we can move on to actually creating the submission ticket on the Railyard registry.
+Now that you have your `update.json` files set up, we can move on to actually creating the submission ticket on the Railyard registry.
 
 ## Step 3 - Submitting to the Registry {#submitting-to-the-registry}
-Now that our files are hosted on GitHub, we are ready to make a submission to the registry. Go to the [registry's issues page](https://github.com/Subway-Builder-Modded/The-Railyard/issues) and click on "`New Issue`". Here, we can create our submission, which will then be reviewed by a Railyard maintainer. Once you have the issue selection screen open, select "`Publish New Map`".
+Now that your files are hosted on GitHub, you are ready to make a submission to the registry. Go to the [registry's issues page](https://github.com/Subway-Builder-Modded/The-Railyard/issues) and click on "`New Issue`". Here, you can create your submission, which will then be reviewed by a Railyard maintainer. Once you have the issue selection screen open, select "`Publish New Map`".
 
 :::important
 
-For map packs, we will be utilizing "`Custom URL`" as our update type. You can ignore "`GitHub Releases`" in the update type drop-down menu and the "`GitHub Repository`" input field.
+For map packs, you will be utilizing "`Custom URL`" as your update type. You can ignore "`GitHub Releases`" in the update type drop-down menu and the "`GitHub Repository`" input field.
 
 :::
 
-Once you select "`Publish New Map`", a popup window will appear asking us to input some information about our map. The information should be inputted as follows:
+Once you select "`Publish New Map`", a popup window will appear asking you to input some information about your map. The information should be inputted as follows:
 
 ```
 Map ID:       A unique identifier for your map in kebab-case. This is the permanent directory name in the
@@ -157,7 +157,7 @@ jobs:
         uses: actions/deploy-pages@v4
 ```
 
-This will automatically deploy our `update.json` files to GitHub Pages. Once you do this, put the direct link to your `updates.json` file for the corresponding map in the `Custom URL` field. Now every time we update our map (and our `updates.json` file), it will automatically deploy the latest `updates.json` file for Railyard to use.
+This will automatically deploy your `update.json` files to GitHub Pages. Once you do this, put the direct link to your `updates.json` file for the corresponding map in the `Custom URL` field. Now every time you update your map (and our `updates.json` file), it will automatically deploy the latest `updates.json` file for Railyard to use.
 
 Once you deploy your `update.json` files and fill out the submission ticket, a Pull Request should automatically be created. A Railyard maintainer will review it and it will be automatically submitted once they do. After that, it will be available on Railyard for everyone to download.
 
