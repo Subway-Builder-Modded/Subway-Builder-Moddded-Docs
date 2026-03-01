@@ -1,13 +1,16 @@
-name: Deploy Subway Builder Site
+name: Build Subway Builder Site
 
 on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  deploy:
-    name: Deploy site
+  build:
+    name: Build site
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -19,10 +22,3 @@ jobs:
           version: latest
       - run: pnpm install --frozen-lockfile
       - run: pnpm run build
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          publish_dir: ./build
-          force_orphan: true
