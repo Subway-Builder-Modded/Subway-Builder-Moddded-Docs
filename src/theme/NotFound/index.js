@@ -72,8 +72,7 @@ export default function NotFound() {
 
           <div className={styles.body}>
             <p>
-              The page you’re looking for doesn’t exist, was moved, or never arrived at this
-              station.
+              The page you’re looking for doesn’t exist, was moved, or never arrived at the Railyard.
             </p>
           </div>
 
