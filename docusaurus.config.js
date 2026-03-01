@@ -153,21 +153,27 @@ module.exports = {
           href: "https://github.com/Subway-Builder-Modded/Subway-Builder-Modded-Docs",
           position: "right",
           html: `
-            <img src="/assets/github.svg" width="24" height="24" style="vertical-align: middle; margin-right: 4px;" />
+            <a class="navbar-icon-link" href="https://github.com/Subway-Builder-Modded/Subway-Builder-Modded-Docs">
+              <img src="/assets/github.svg" width="24" height="24" />
+            </a>
           `,
         },
         {
           href: "https://discord.gg/jrNQpbytUQ",
           position: "right",
           html: `
-            <img src="/assets/discord.svg" width="24" height="24" style="vertical-align: middle; margin-right: 4px;" />
+            <a class="navbar-icon-link" href="https://discord.gg/jrNQpbytUQ">
+              <img src="/assets/discord.svg" width="24" height="24" />
+            </a>
           `,
         },
         {
           href: "https://subwaybuilder.com",
           position: "right",
           html: `
-            <img src="/assets/subway-builder.svg" width="20" height="20" style="vertical-align: middle; margin-right: 4px;" />
+            <a class="navbar-icon-link" href="https://subwaybuilder.com">
+              <img src="/assets/subway-builder.svg" width="20" height="20" />
+            </a>
           `,
         },
         {

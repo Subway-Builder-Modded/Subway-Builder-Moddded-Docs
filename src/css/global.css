@@ -102,6 +102,22 @@ code, pre {
   font-weight: 500;
 }
 
+.navbar-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+
+  border-radius: 50%;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.navbar-icon-link:hover {
+  background-color: var(--ifm-color-emphasis-300);
+}
+
 /* === Footer === */
 :root {
   --ifm-footer-background-color: var(--ifm-alt-background-color);
