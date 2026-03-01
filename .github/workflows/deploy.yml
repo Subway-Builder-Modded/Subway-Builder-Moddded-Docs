@@ -10,6 +10,7 @@ on:
 
 jobs:
   build:
+    name: Build site
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
