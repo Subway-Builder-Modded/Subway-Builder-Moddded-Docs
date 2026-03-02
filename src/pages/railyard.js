@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Layout from "@theme/Layout";
 import Link from "@docusaurus/Link";
 import Translate, { translate } from "@docusaurus/Translate";
@@ -16,12 +16,19 @@ const FEATURES = [
       message: "Browse hundreds of community-made maps of cities from around the world.",
     }),
     bullets: [
-      "Filter by region, style, and difficulty.",
-      "Preview maps before installing.",
-      "Discover trending creations weekly.",
+      translate({
+        id: "railyard.feature.browse.bullet1",
+        message: "Find maps by style, complexity, and region.",
+      }),
+      translate({
+        id: "railyard.feature.browse.bullet2",
+        message: "Discover new community highlights every week.",
+      }),
+      translate({
+        id: "railyard.feature.browse.bullet3",
+        message: "Install directly from one polished app experience.",
+      }),
     ],
-    actionLabel: "Explore Cities",
-    actionTo: "/wiki/maps/map-directory",
   },
   {
     id: "install",
@@ -35,12 +42,19 @@ const FEATURES = [
         "From adding 500+ new trains to seeing detailed demand data by region, there's a mod for anything you desire.",
     }),
     bullets: [
-      "Install mods with one click.",
-      "See compatibility notes at a glance.",
-      "Get updates without manual file hunting.",
+      translate({
+        id: "railyard.feature.install.bullet1",
+        message: "Browse and add gameplay mods quickly.",
+      }),
+      translate({
+        id: "railyard.feature.install.bullet2",
+        message: "Keep your favorites organized in one place.",
+      }),
+      translate({
+        id: "railyard.feature.install.bullet3",
+        message: "Spend more time playing, less time configuring.",
+      }),
     ],
-    actionLabel: "Browse Mods",
-    actionTo: "/modding-docs/template-mod/getting-started",
   },
   {
     id: "manage",
@@ -54,12 +68,19 @@ const FEATURES = [
         "No more messing around with your system's file manager. Click the download button for the map or mod you want to play and let Railyard do the rest.",
     }),
     bullets: [
-      "No manual folder setup.",
-      "Automatic handling for standard packages.",
-      "Faster onboarding for new players.",
+      translate({
+        id: "railyard.feature.manage.bullet1",
+        message: "No manual folder juggling.",
+      }),
+      translate({
+        id: "railyard.feature.manage.bullet2",
+        message: "Smooth onboarding for new players.",
+      }),
+      translate({
+        id: "railyard.feature.manage.bullet3",
+        message: "Cleaner setup with fewer errors.",
+      }),
     ],
-    actionLabel: "See Install Guide",
-    actionTo: "/wiki/maps/map-installation-guide",
   },
   {
     id: "updates",
@@ -73,12 +94,19 @@ const FEATURES = [
         "Want to test a mod or disable something for a specific playthrough? You can simply disable the mod and just enable it later with one simple click.",
     }),
     bullets: [
-      "Toggle content instantly.",
-      "Keep clean setups for specific playthroughs.",
-      "Spend less time troubleshooting conflicts.",
+      translate({
+        id: "railyard.feature.updates.bullet1",
+        message: "Toggle content instantly for each run.",
+      }),
+      translate({
+        id: "railyard.feature.updates.bullet2",
+        message: "Try new combinations without risk.",
+      }),
+      translate({
+        id: "railyard.feature.updates.bullet3",
+        message: "Keep stable setups ready whenever you want.",
+      }),
     ],
-    actionLabel: "Read Updates",
-    actionTo: "/updates",
   },
 ];
 
@@ -88,92 +116,96 @@ const ALL_DOWNLOADS = [
     arch: "x64",
     link: "https://geek.co.il/2023/02/09/imported-rant-why-i-hate-macos",
     label: "Windows x64",
-    size: "121 MB",
     type: ".zip",
-    checksum: "SHA256",
+    size: "121 MB",
   },
   {
     os: "Windows",
     arch: "arm64",
     link: "https://geek.co.il/2023/02/09/imported-rant-why-i-hate-macos",
     label: "Windows ARM64",
-    size: "119 MB",
     type: ".zip",
-    checksum: "SHA256",
+    size: "119 MB",
   },
   {
     os: "macOS",
     arch: "arm64",
     link: "https://geek.co.il/2023/02/09/imported-rant-why-i-hate-macos",
     label: "macOS Apple Silicon",
-    size: "117 MB",
     type: ".dmg",
-    checksum: "SHA256",
+    size: "117 MB",
   },
   {
     os: "macOS",
     arch: "x64",
     link: "https://geek.co.il/2023/02/09/imported-rant-why-i-hate-macos",
     label: "macOS Intel",
-    size: "118 MB",
     type: ".dmg",
-    checksum: "SHA256",
+    size: "118 MB",
   },
   {
     os: "Linux",
     arch: "x64",
     link: "https://geek.co.il/2023/02/09/imported-rant-why-i-hate-macos",
     label: "Linux x64",
-    size: "116 MB",
     type: ".AppImage",
-    checksum: "SHA256",
+    size: "116 MB",
   },
   {
     os: "Linux",
     arch: "arm64",
     link: "https://geek.co.il/2023/02/09/imported-rant-why-i-hate-macos",
     label: "Linux ARM64",
-    size: "114 MB",
     type: ".AppImage",
-    checksum: "SHA256",
+    size: "114 MB",
   },
 ];
 
 const WORKFLOW_STOPS = [
   {
     id: "find",
-    title: "Find",
-    desc: "Search community maps and mods quickly with clear categories and tags.",
+    title: translate({ id: "railyard.workflow.find.title", message: "Find" }),
+    desc: translate({
+      id: "railyard.workflow.find.desc",
+      message: "Browse curated maps and mods from the community.",
+    }),
   },
   {
     id: "install",
-    title: "Install",
-    desc: "Add what you want in one click, without digging through folders.",
+    title: translate({ id: "railyard.workflow.install.title", message: "Install" }),
+    desc: translate({
+      id: "railyard.workflow.install.desc",
+      message: "Choose what you want and install it quickly.",
+    }),
   },
   {
     id: "manage",
-    title: "Manage",
-    desc: "Enable, disable, and test configurations for specific playthroughs.",
+    title: translate({ id: "railyard.workflow.manage.title", message: "Manage" }),
+    desc: translate({
+      id: "railyard.workflow.manage.desc",
+      message: "Enable or disable content anytime for each playthrough.",
+    }),
   },
 ];
 
-const HERO_STATS = [
-  { value: "600+", label: "Cities" },
-  { value: "500+", label: "Mods" },
-  { value: "1-Click", label: "Install" },
-  { value: "Win/Mac/Linux", label: "Platforms" },
-];
+const DATA_SOURCES = {
+  mods: "https://raw.githubusercontent.com/Subway-Builder-Modded/The-Railyard/refs/heads/main/mods/index.json",
+  maps: "https://raw.githubusercontent.com/Subway-Builder-Modded/The-Railyard/refs/heads/main/maps/index.json",
+};
 
 export default function Railyard() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
   const [nativeOS, setNativeOS] = useState(ALL_DOWNLOADS[0]);
 
+  const [selectedOS, setSelectedOS] = useState("Windows");
+  const [selectedArch, setSelectedArch] = useState("x64");
+
   const [activeFeature, setActiveFeature] = useState(FEATURES[0].id);
   const [activeStop, setActiveStop] = useState(WORKFLOW_STOPS[0].id);
 
-  const [selectedOS, setSelectedOS] = useState("Windows");
-  const [selectedArch, setSelectedArch] = useState("x64");
+  const [mapCount, setMapCount] = useState(null);
+  const [modCount, setModCount] = useState(null);
 
   const dropdownRef = useRef(null);
 
@@ -186,9 +218,9 @@ export default function Railyard() {
 
     const updateScroll = () => {
       const scrollPos = window.scrollY;
-      const threshold = 200;
+      const threshold = 140;
       const zoomVal = Math.max(0, scrollPos - threshold);
-      const exposureVal = Math.min(1, scrollPos / 500);
+      const exposureVal = Math.min(1, scrollPos / 560);
 
       root.style.setProperty("--railyard-zoom", zoomVal.toString());
       root.style.setProperty("--railyard-exposure", exposureVal.toString());
@@ -234,10 +266,34 @@ export default function Railyard() {
       setSelectedArch(match.arch);
     };
 
-    detect();
+    const fetchCount = async (url, setValue) => {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) return;
+        const data = await response.json();
 
-    const closeMenu = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        if (Array.isArray(data)) {
+          setValue(data.length);
+          return;
+        }
+        if (data && Array.isArray(data.items)) {
+          setValue(data.items.length);
+          return;
+        }
+        if (data && typeof data === "object") {
+          setValue(Object.keys(data).length);
+        }
+      } catch {
+        // no-op fallback
+      }
+    };
+
+    detect();
+    fetchCount(DATA_SOURCES.maps, setMapCount);
+    fetchCount(DATA_SOURCES.mods, setModCount);
+
+    const closeMenu = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setMenuOpen(false);
       }
     };
@@ -257,6 +313,8 @@ export default function Railyard() {
   );
 
   const heroBg = isDark ? "/images/railyard-home-dark.png" : "/images/railyard-home-light.png";
+  const mapCountLabel = mapCount == null ? "—" : mapCount.toLocaleString();
+  const modCountLabel = modCount == null ? "—" : modCount.toLocaleString();
 
   return (
     <Layout
@@ -269,143 +327,131 @@ export default function Railyard() {
       <div className={styles.fixedBgContainer}>
         <img src={heroBg} className={styles.fixedBgImage} alt="" />
         <div className={styles.heroOverlay} />
+        <div className={styles.greenTint} />
         <div className={styles.fixedBgOverlay} />
         <div className={styles.colorEffect} />
       </div>
 
       <main className={styles.pageWrapper}>
         <section className={styles.heroSection}>
-          <div className={styles.heroGrid}>
-            <div className={styles.heroLeft}>
-              <h1 className={styles.heroTitle}>
-                <Translate id="railyard.hero.title">Railyard</Translate>
-              </h1>
+          <div className={styles.heroContent}>
+            <h1 className={styles.heroTitle}>
+              <Translate id="railyard.hero.title">Railyard</Translate>
+            </h1>
 
-              <p className={styles.heroSubtitle}>
-                <Translate id="railyard.hero.subtitle">
-                  The all-in-one tool for downloading and managing your Subway Builder mods and
-                  cities.
+            <p className={styles.heroSubtitle}>
+              <Translate id="railyard.hero.subtitle">
+                The easiest way to discover, install, and manage Subway Builder community content.
+              </Translate>
+            </p>
+
+            <div className={styles.heroButtonGroup} ref={dropdownRef}>
+              <Link to={nativeOS.link} className={styles.mainDownloadButton}>
+                <Translate id="railyard.hero.downloadButton" values={{ platform: nativeOS.label }}>
+                  {"Download for {platform}"}
                 </Translate>
-              </p>
+              </Link>
 
-              <div className={styles.heroButtonGroup} ref={dropdownRef}>
-                <Link to={nativeOS.link} className={styles.mainDownloadButton}>
-                  <Translate
-                    id="railyard.hero.downloadButton"
-                    values={{ platform: nativeOS.label }}
-                  >
-                    {"Download for {platform}"}
-                  </Translate>
-                </Link>
-
-                <button
-                  className={styles.dropdownToggle}
-                  onClick={() => setMenuOpen((v) => !v)}
-                  aria-label={translate({ message: "More Platforms" })}
-                  type="button"
+              <button
+                type="button"
+                className={styles.dropdownToggle}
+                onClick={() => setMenuOpen((v) => !v)}
+                aria-label={translate({
+                  id: "railyard.hero.morePlatforms",
+                  message: "More Platforms",
+                })}
+              >
+                <svg
+                  width="12"
+                  height="7"
+                  viewBox="0 0 14 8"
+                  fill="none"
+                  className={menuOpen ? styles.rotated : ""}
                 >
-                  <svg
-                    width="12"
-                    height="7"
-                    viewBox="0 0 14 8"
-                    fill="none"
-                    className={menuOpen ? styles.rotated : ""}
-                  >
-                    <path
-                      d="M1 1L7 7L13 1"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
+                  <path
+                    d="M1 1L7 7L13 1"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
 
-                {menuOpen && (
-                  <div className={styles.heroDropdownMenu}>
-                    {ALL_DOWNLOADS.map((dl) => (
-                      <Link key={dl.label} to={dl.link} className={styles.dropdownItem}>
-                        {dl.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              <div className={styles.heroQuickLinks}>
-                <Link to="/wiki/maps/map-directory" className={styles.heroGhostButton}>
-                  Browse Maps
-                </Link>
-                <Link
-                  to="/modding-docs/template-mod/getting-started"
-                  className={styles.heroGhostButton}
-                >
-                  Browse Mods
-                </Link>
-                <Link to="/updates" className={styles.heroGhostButton}>
-                  View Changelog
-                </Link>
-              </div>
-
-              <div className={styles.heroStatsStrip}>
-                {HERO_STATS.map((s) => (
-                  <div key={s.label} className={styles.statPill}>
-                    <span className={styles.statValue}>{s.value}</span>
-                    <span className={styles.statLabel}>{s.label}</span>
-                  </div>
-                ))}
-              </div>
+              {menuOpen && (
+                <div className={styles.heroDropdownMenu}>
+                  {ALL_DOWNLOADS.map((dl) => (
+                    <Link key={dl.label} to={dl.link} className={styles.dropdownItem}>
+                      {dl.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
 
-            <div className={styles.heroRight} aria-hidden="true">
-              <div className={styles.networkPanel}>
-                <div className={styles.networkGrid} />
-                <span className={`${styles.networkNode} ${styles.nodeA}`} />
-                <span className={`${styles.networkNode} ${styles.nodeB}`} />
-                <span className={`${styles.networkNode} ${styles.nodeC}`} />
-                <span className={styles.networkLine} />
-              </div>
+            <div className={styles.heroStatsStrip}>
+              <article className={styles.statPill}>
+                <span className={styles.statValue}>{mapCountLabel}</span>
+                <span className={styles.statLabel}>
+                  <Translate id="railyard.stats.maps">Maps Available</Translate>
+                </span>
+              </article>
+
+              <article className={styles.statPill}>
+                <span className={styles.statValue}>{modCountLabel}</span>
+                <span className={styles.statLabel}>
+                  <Translate id="railyard.stats.mods">Mods Available</Translate>
+                </span>
+              </article>
             </div>
+
+            <p className={styles.heroTrustLine}>
+              <Translate id="railyard.hero.trust">
+                Built for players first: faster setup, cleaner management, and more time actually
+                playing.
+              </Translate>
+            </p>
           </div>
         </section>
 
+        <div className={styles.sectionSeparator} />
+        <section className={styles.spacerSection} aria-hidden="true" />
         <div className={styles.sectionSeparator} />
 
         <section className={styles.solidSection}>
           <div className={styles.container}>
             <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Features</h2>
+              <h2 className={styles.sectionTitle}>
+                <Translate id="railyard.features.header">Why Players Use Railyard</Translate>
+              </h2>
               <span className={styles.headerLine} />
             </div>
 
             <div className={styles.routeBoard}>
-              {FEATURES.map((f) => {
-                const isActive = activeFeature === f.id;
+              {FEATURES.map((feature) => {
+                const active = activeFeature === feature.id;
                 return (
                   <article
-                    key={f.id}
-                    className={`${styles.routeCard} ${isActive ? styles.routeCardActive : ""}`}
-                    onMouseEnter={() => setActiveFeature(f.id)}
-                    onFocus={() => setActiveFeature(f.id)}
+                    key={feature.id}
+                    className={`${styles.routeCard} ${active ? styles.routeCardActive : ""}`}
+                    onMouseEnter={() => setActiveFeature(feature.id)}
+                    onFocus={() => setActiveFeature(feature.id)}
                     tabIndex={0}
                   >
                     <div
                       className={styles.routeNode}
-                      style={{ background: f.color, color: f.textColor }}
+                      style={{ background: feature.color, color: feature.textColor }}
                     >
-                      {f.letter}
+                      {feature.letter}
                     </div>
                     <div className={styles.routeContent}>
-                      <h3 className={styles.cardTitle}>{f.title}</h3>
-                      <p className={styles.cardDesc}>{f.desc}</p>
+                      <h3 className={styles.cardTitle}>{feature.title}</h3>
+                      <p className={styles.cardDesc}>{feature.desc}</p>
                       <ul className={styles.featureBullets}>
-                        {f.bullets.map((b) => (
-                          <li key={b}>{b}</li>
+                        {feature.bullets.map((bullet) => (
+                          <li key={bullet}>{bullet}</li>
                         ))}
                       </ul>
-                      <Link to={f.actionTo} className={styles.inlineAction}>
-                        {f.actionLabel} →
-                      </Link>
                     </div>
                   </article>
                 );
@@ -415,22 +461,28 @@ export default function Railyard() {
         </section>
 
         <div className={styles.sectionSeparator} />
+        <section className={styles.spacerSection} aria-hidden="true" />
+        <div className={styles.sectionSeparator} />
 
         <section className={styles.solidSection}>
           <div className={styles.container}>
             <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Workflow in 3 Stops</h2>
+              <h2 className={styles.sectionTitle}>
+                <Translate id="railyard.workflow.header">
+                  From Download to Play in Three Stops
+                </Translate>
+              </h2>
               <span className={styles.headerLine} />
             </div>
 
             <div className={styles.workflowTrack}>
               {WORKFLOW_STOPS.map((stop) => {
-                const isActive = activeStop === stop.id;
+                const active = activeStop === stop.id;
                 return (
                   <button
                     key={stop.id}
                     type="button"
-                    className={`${styles.workflowStop} ${isActive ? styles.workflowStopActive : ""}`}
+                    className={`${styles.workflowStop} ${active ? styles.workflowStopActive : ""}`}
                     onMouseEnter={() => setActiveStop(stop.id)}
                     onFocus={() => setActiveStop(stop.id)}
                     onClick={() => setActiveStop(stop.id)}
@@ -444,6 +496,8 @@ export default function Railyard() {
           </div>
         </section>
 
+        <div className={styles.sectionSeparator} />
+        <section className={styles.spacerSection} aria-hidden="true" />
         <div className={styles.sectionSeparator} />
 
         <section className={styles.solidSection}>
@@ -498,26 +552,12 @@ export default function Railyard() {
                             <Translate id="railyard.downloads.detected">Detected</Translate>
                           </span>
                         )}
-                        <span className={styles.downloadMeta}>
-                          {` ${dl.type} · ${dl.size} · ${dl.checksum}`}
-                        </span>
+                        <span className={styles.downloadMeta}>{` ${dl.type} · ${dl.size}`}</span>
                       </span>
-                      <span className={styles.ButtonArrow}>→</span>
+                      <span className={styles.buttonArrow}>→</span>
                     </Link>
                   );
                 })}
-              </div>
-
-              <div className={styles.allPlatformsBlock}>
-                <h3 className={styles.allPlatformsTitle}>All platform builds</h3>
-                {ALL_DOWNLOADS.map((dl) => (
-                  <Link key={`all-${dl.label}`} to={dl.link} className={styles.platformRow}>
-                    <span>{dl.label}</span>
-                    <span className={styles.downloadMeta}>
-                      {dl.type} · {dl.size}
-                    </span>
-                  </Link>
-                ))}
               </div>
             </div>
           </div>
