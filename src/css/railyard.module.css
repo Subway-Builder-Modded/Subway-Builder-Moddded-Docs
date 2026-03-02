@@ -308,6 +308,12 @@
     gap: 0.95rem;
 }
 
+.statPillLink {
+    text-decoration: none !important;
+    color: inherit;
+    display: block;
+}
+
 .statPill {
     border: 1px solid var(--ifm-border-color);
     border-radius: 14px;

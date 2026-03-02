@@ -386,19 +386,23 @@ export default function Railyard() {
             </div>
 
             <div className={styles.heroStatsStrip}>
-              <article className={styles.statPill}>
-                <span className={styles.statValue}>{mapCountLabel}</span>
-                <span className={styles.statLabel}>
-                  <Translate id="railyard.stats.maps">Maps Available</Translate>
-                </span>
-              </article>
+              <Link to="/railyard/maps" className={styles.statPillLink}>
+                <article className={styles.statPill}>
+                  <span className={styles.statValue}>{mapCountLabel}</span>
+                  <span className={styles.statLabel}>
+                    <Translate id="railyard.stats.maps">Maps Available</Translate>
+                  </span>
+                </article>
+              </Link>
 
-              <article className={styles.statPill}>
-                <span className={styles.statValue}>{modCountLabel}</span>
-                <span className={styles.statLabel}>
-                  <Translate id="railyard.stats.mods">Mods Available</Translate>
-                </span>
-              </article>
+              <Link to="/railyard/mods" className={styles.statPillLink}>
+                <article className={styles.statPill}>
+                  <span className={styles.statValue}>{modCountLabel}</span>
+                  <span className={styles.statLabel}>
+                    <Translate id="railyard.stats.mods">Mods Available</Translate>
+                  </span>
+                </article>
+              </Link>
             </div>
           </div>
         </section>

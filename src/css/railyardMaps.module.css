@@ -1,0 +1,235 @@
+.page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 3.5rem;
+}
+
+.hero {
+    background: color-mix(in srgb, var(--ifm-background-color) 82%, #10b981 18%);
+    border: 1px solid var(--ifm-border-color);
+    border-radius: 16px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.quickStats {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-weight: 700;
+}
+
+.controls {
+    background: var(--ifm-alt-background-color);
+    border: 1px solid var(--ifm-border-color);
+    border-radius: 16px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.search {
+    width: 100%;
+    border: 1px solid var(--ifm-border-color);
+    border-radius: 12px;
+    padding: 0.8rem;
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+}
+
+.controlRow {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.8rem;
+}
+
+.controlRow label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-weight: 700;
+}
+
+.controlRow select {
+    border: 1px solid var(--ifm-border-color);
+    border-radius: 10px;
+    padding: 0.45rem;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tagButton {
+    border: 1px solid var(--ifm-border-color);
+    background: var(--ifm-background-color);
+    border-radius: 999px;
+    padding: 0.35rem 0.7rem;
+    font-size: 0.88rem;
+    cursor: pointer;
+}
+
+.tagButtonActive {
+    background: #10b981;
+    color: #04100b;
+    border-color: #10b981;
+    font-weight: 700;
+}
+
+.status,
+.error {
+    padding: 0.75rem;
+    border-radius: 12px;
+}
+
+.error {
+    background: rgba(220, 38, 38, 0.2);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.card {
+    border: 1px solid var(--ifm-border-color);
+    border-radius: 14px;
+    background: var(--ifm-alt-background-color);
+    padding: 0.85rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card[role="button"] {
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    align-items: baseline;
+}
+
+.cardHeader h2 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.cardId {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.carousel {
+    position: relative;
+    margin-top: 0.75rem;
+}
+
+.previewImage,
+.noImage {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    border: 1px solid var(--ifm-border-color);
+}
+
+.previewImage {
+    object-fit: cover;
+}
+
+.noImage {
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.carouselButton {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.62);
+    color: #fff;
+    cursor: pointer;
+}
+
+.carouselPrev { left: 0.45rem; }
+.carouselNext { right: 0.45rem; }
+
+.description {
+    margin: 0.75rem 0;
+}
+
+.metaRow,
+.tagRow {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+}
+
+.cardTag {
+    border: 1px solid var(--ifm-border-color);
+    border-radius: 999px;
+    padding: 0.18rem 0.5rem;
+}
+
+.details {
+    margin-top: 0.7rem;
+}
+
+.fieldRow {
+    display: grid;
+    grid-template-columns: minmax(120px, 36%) 1fr;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
+}
+
+.fieldRow dt {
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.fieldRow dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.pagination {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.pagination button {
+    border: 1px solid var(--ifm-border-color);
+    border-radius: 10px;
+    padding: 0.35rem 0.8rem;
+}
+
+.footerBars {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.35rem;
+    margin-top: 1.2rem;
+}
+
+.footerBars span {
+    display: block;
+    height: 7px;
+    border-radius: 999px;
+}
