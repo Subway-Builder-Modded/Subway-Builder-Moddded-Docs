@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Link from "@docusaurus/Link";
 import { translate } from "@docusaurus/Translate";
 import { ALL_DOWNLOADS } from "./railyardHelpers";
@@ -11,6 +11,125 @@ export function getSortValue(sortBy, sortConfig) {
     getValue: config.value,
     descending: sortDirection === "desc",
   };
+}
+
+function renderInlineMarkdown(text) {
+  const nodes = [];
+  const regex = /(\*\*([^*]+)\*\*|\*([^*]+)\*|\[([^\]]+)\]\(([^)]+)\)|`([^`]+)`)/g;
+  let match;
+  let last = 0;
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > last) {
+      nodes.push(text.slice(last, match.index));
+    }
+
+    if (match[2]) {
+      nodes.push(<strong key={`b-${match.index}`}>{match[2]}</strong>);
+    } else if (match[3]) {
+      nodes.push(<em key={`i-${match.index}`}>{match[3]}</em>);
+    } else if (match[4] && match[5]) {
+      nodes.push(
+        <a key={`a-${match.index}`} href={match[5]} target="_blank" rel="noreferrer">
+          {match[4]}
+        </a>,
+      );
+    } else if (match[6]) {
+      nodes.push(<code key={`c-${match.index}`}>{match[6]}</code>);
+    }
+
+    last = regex.lastIndex;
+  }
+
+  if (last < text.length) {
+    nodes.push(text.slice(last));
+  }
+
+  return nodes;
+}
+
+function renderMarkdownBlocks(markdown) {
+  const lines = String(markdown || "").split(/\r?\n/);
+  const blocks = [];
+  let listItems = [];
+
+  const flushList = () => {
+    if (listItems.length > 0) {
+      blocks.push(
+        <ul key={`ul-${blocks.length}`}>
+          {listItems.map((item, index) => (
+            <li key={`li-${index}`}>{renderInlineMarkdown(item)}</li>
+          ))}
+        </ul>,
+      );
+      listItems = [];
+    }
+  };
+
+  lines.forEach((line) => {
+    const trimmed = line.trim();
+
+    if (!trimmed) {
+      flushList();
+      return;
+    }
+
+    const listMatch = trimmed.match(/^[-*]\s+(.*)$/);
+    if (listMatch) {
+      listItems.push(listMatch[1]);
+      return;
+    }
+
+    flushList();
+
+    const headingMatch = trimmed.match(/^#{1,3}\s+(.*)$/);
+    if (headingMatch) {
+      blocks.push(
+        <strong key={`h-${blocks.length}`}>{renderInlineMarkdown(headingMatch[1])}</strong>,
+      );
+      return;
+    }
+
+    blocks.push(<span key={`p-${blocks.length}`}>{renderInlineMarkdown(trimmed)}</span>);
+  });
+
+  flushList();
+  return blocks;
+}
+
+export function ExpandableMarkdown({ text, styles, readMoreId }) {
+  const [expanded, setExpanded] = useState(false);
+  const [isOverflowing, setIsOverflowing] = useState(false);
+  const content = useMemo(() => renderMarkdownBlocks(text), [text]);
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    const node = contentRef.current;
+    if (!node) return;
+    setIsOverflowing(node.scrollHeight > node.clientHeight + 1);
+  }, [content]);
+
+  return (
+    <div>
+      <div
+        ref={contentRef}
+        className={`${styles.description} ${expanded ? styles.descriptionExpanded : ""}`}
+      >
+        {content}
+      </div>
+      {isOverflowing && (
+        <button
+          type="button"
+          className={styles.readMoreButton}
+          onClick={() => setExpanded((value) => !value)}
+        >
+          {expanded
+            ? translate({ id: `${readMoreId}.showLess`, message: "Show Less" })
+            : translate({ id: `${readMoreId}.readMore`, message: "Read More" })}
+        </button>
+      )}
+    </div>
+  );
 }
 
 export function MapPinPlaceholder({ className, size = 42 }) {
@@ -141,56 +260,61 @@ export function DownloadInAppModal({ styles, selectedItem, nativeDownload, onClo
           >
             {translate({ id: "railyard.shared.modal.comingSoon", message: "Coming Soon" })}
           </button>
-          <Link
-            to={nativeDownload.link}
-            className={`${styles.modalActionButton} ${styles.modalActionDownload}`}
-          >
-            {translate(
-              {
-                id: "railyard.shared.modal.downloadForPlatform",
-                message: "Download for {platform}",
-              },
-              { platform: nativeDownload.label },
-            )}
-          </Link>
-        </div>
 
-        <div className={styles.modalDropdownWrap}>
-          <button
-            type="button"
-            className={styles.modalDropdownToggle}
-            aria-expanded={downloadsOpen}
-            onClick={() => setDownloadsOpen((value) => !value)}
-          >
-            <span>
-              {translate({ id: "railyard.shared.modal.moreDownloads", message: "More Downloads" })}
-            </span>
-            <svg
-              width="12"
-              height="7"
-              viewBox="0 0 14 8"
-              fill="none"
-              className={downloadsOpen ? styles.rotated : ""}
+          <div className={styles.modalDownloadGroup}>
+            <Link
+              to={nativeDownload.link}
+              className={`${styles.modalActionButton} ${styles.modalActionDownload}`}
             >
-              <path
-                d="M1 1L7 7L13 1"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
+              {translate(
+                {
+                  id: "railyard.shared.modal.downloadForPlatform",
+                  message: "Download for {platform}",
+                },
+                { platform: nativeDownload.label },
+              )}
+            </Link>
+            <button
+              type="button"
+              className={styles.modalDownloadToggle}
+              aria-label={translate({
+                id: "railyard.shared.modal.moreDownloads",
+                message: "More Downloads",
+              })}
+              aria-expanded={downloadsOpen}
+              onClick={() => setDownloadsOpen((value) => !value)}
+            >
+              <svg
+                width="12"
+                height="7"
+                viewBox="0 0 14 8"
+                fill="none"
+                className={downloadsOpen ? styles.rotated : ""}
+              >
+                <path
+                  d="M1 1L7 7L13 1"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
 
-          {downloadsOpen && (
-            <div className={styles.modalDropdownMenu}>
-              {ALL_DOWNLOADS.map((download) => (
-                <Link key={download.label} to={download.link} className={styles.modalDropdownItem}>
-                  {download.label}
-                </Link>
-              ))}
-            </div>
-          )}
+            {downloadsOpen && (
+              <div className={styles.modalDropdownMenu}>
+                {ALL_DOWNLOADS.map((download) => (
+                  <Link
+                    key={download.label}
+                    to={download.link}
+                    className={styles.modalDropdownItem}
+                  >
+                    {download.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </section>
     </div>

@@ -19,6 +19,7 @@ import {
 } from "../../helpers/railyardHelpers";
 import {
   DownloadInAppModal,
+  ExpandableMarkdown,
   GalleryImage,
   MapPinPlaceholder,
   PaginationNav,
@@ -396,7 +397,11 @@ export default function RailyardModsPage() {
                   )}
                 </div>
 
-                <p className={sharedStyles.description}>{item.description}</p>
+                <ExpandableMarkdown
+                  text={item.description}
+                  styles={sharedStyles}
+                  readMoreId="railyard.mods.description"
+                />
                 <p className={sharedStyles.metaLine}>
                   <strong>{translate({ id: "railyard.mods.author", message: "Author" })}:</strong>{" "}
                   <span className={sharedStyles.metaValue}>{String(item.author)}</span>

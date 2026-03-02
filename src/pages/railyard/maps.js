@@ -20,6 +20,7 @@ import {
 } from "../../helpers/railyardHelpers";
 import {
   DownloadInAppModal,
+  ExpandableMarkdown,
   GalleryImage,
   MapPinPlaceholder,
   PaginationNav,
@@ -411,7 +412,11 @@ export default function RailyardMapsPage() {
                   )}
                 </div>
 
-                <p className={sharedStyles.description}>{item.description}</p>
+                <ExpandableMarkdown
+                  text={item.description}
+                  styles={sharedStyles}
+                  readMoreId="railyard.maps.description"
+                />
                 <p className={sharedStyles.metaLine}>
                   <strong>{translate({ id: "railyard.maps.author", message: "Author" })}:</strong>{" "}
                   <span className={sharedStyles.metaValue}>{String(item.author)}</span>
