@@ -1,4 +1,3 @@
-/* === Base / Theme Vars === */
 .pageWrapper {
     --railyard-primary: #10b981;
     --railyard-primary-hover: #059669;
@@ -17,7 +16,6 @@
     --railyard-glow: 98, 201, 142;
 }
 
-/* === Fixed Background Stack === */
 .fixedBgContainer {
     position: fixed;
     inset: 0;
@@ -53,8 +51,8 @@
     pointer-events: none;
     z-index: 2;
     background:
-            radial-gradient(circle at 25% 20%, rgba(16, 185, 129, 0.34) 0%, transparent 40%),
-            radial-gradient(circle at 75% 70%, rgba(16, 185, 129, 0.24) 0%, transparent 45%);
+            radial-gradient(circle at 25% 20%, rgba(16, 185, 129, 0.38) 0%, transparent 40%),
+            radial-gradient(circle at 75% 70%, rgba(16, 185, 129, 0.28) 0%, transparent 45%);
     mix-blend-mode: screen;
     animation: greenBreath 8s ease-in-out infinite;
 }
@@ -89,10 +87,10 @@
     inset: 0;
     pointer-events: none;
     z-index: 4;
-    opacity: 0.5;
+    opacity: 0.35;
     background:
-            radial-gradient(circle at 15% 85%, rgba(0, 57, 166, 0.25), transparent 35%),
-            radial-gradient(circle at 85% 25%, rgba(255, 99, 25, 0.2), transparent 40%);
+            radial-gradient(circle at 10% 85%, rgba(16, 185, 129, 0.24), transparent 36%),
+            radial-gradient(circle at 90% 20%, rgba(16, 185, 129, 0.2), transparent 40%);
     animation: ambientShift 10s ease-in-out infinite;
 }
 
@@ -106,7 +104,6 @@
     }
 }
 
-/* === Structure === */
 .container {
     max-width: 1120px;
     margin: 0 auto;
@@ -170,7 +167,6 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-/* === Hero Typography === */
 .heroTitle {
     margin: 0;
     font-size: clamp(3.1rem, 10vw, 5.5rem);
@@ -185,18 +181,10 @@
     max-width: 58ch;
     font-size: 1.12rem;
     line-height: 1.62;
-    color: var(--ifm-color);
+    color: var(--ifm-description-color);
     font-weight: 550;
 }
 
-.heroTrustLine {
-    margin: 1rem 0 0;
-    color: var(--ifm-description-color);
-    font-size: 0.98rem;
-    font-weight: 600;
-}
-
-/* === Hero CTA + Dropdown === */
 .heroButtonGroup {
     display: inline-flex;
     position: relative;
@@ -312,7 +300,6 @@
     background: var(--railyard-card-hover-bg);
 }
 
-/* === Hero Stats (2 cards only) === */
 .heroStatsStrip {
     margin: 1.2rem auto 0;
     max-width: 560px;
@@ -349,7 +336,6 @@
     color: var(--ifm-description-color);
 }
 
-/* === Shared section headers === */
 .sectionHeader {
     display: flex;
     align-items: center;
@@ -359,7 +345,7 @@
 
 .sectionTitle {
     margin: 0;
-    color: var(--ifm-color);
+    color: var(--ifm-description-color);
     font-size: 18px;
     font-weight: 850;
     letter-spacing: 0.12em;
@@ -372,7 +358,6 @@
     background: var(--ifm-border-color);
 }
 
-/* === Feature cards === */
 .routeBoard {
     display: grid;
     gap: 14px;
@@ -443,7 +428,6 @@
     margin-bottom: 0.35rem;
 }
 
-/* === Workflow === */
 .workflowTrack {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -480,13 +464,12 @@
     outline: none;
 }
 
-/* === Downloads === */
 .downloadsPanel {
     border: 1px solid var(--ifm-border-color);
     border-radius: 16px;
     background: var(--ifm-alt-background-color);
     padding: 1rem;
-    margin-bottom: 1.9rem; /* requested gap before footer separator */
+    margin-bottom: 1.9rem;
 }
 
 .osTabs,
@@ -553,8 +536,8 @@
 }
 
 .activeDownload {
-    background: color-mix(in srgb, var(--railyard-primary) 24%, var(--ifm-background-color));
-    color: #000 !important;
+    background: color-mix(in srgb, var(--railyard-primary) 26%, var(--ifm-background-color));
+    color: var(--ifm-color) !important;
 }
 
 .currentBadge {
@@ -565,6 +548,10 @@
     background: rgba(0, 0, 0, 0.12);
 }
 
+[data-theme="dark"] .currentBadge {
+    background: rgba(255, 255, 255, 0.16);
+}
+
 .downloadMeta {
     margin-left: 8px;
     font-size: 0.82rem;
@@ -572,7 +559,6 @@
     opacity: 0.75;
 }
 
-/* === Footer bars === */
 .footerBars {
     display: flex;
     justify-content: center;
@@ -589,7 +575,6 @@
     border-radius: 3px;
 }
 
-/* === Motion safety === */
 @media (prefers-reduced-motion: reduce) {
     .colorEffect,
     .greenTint,
@@ -604,7 +589,6 @@
     }
 }
 
-/* === Responsive === */
 @media (max-width: 900px) {
     .container {
         padding: 0 1.2rem;

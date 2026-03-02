@@ -18,11 +18,11 @@ const FEATURES = [
     bullets: [
       translate({
         id: "railyard.feature.browse.bullet1",
-        message: "Find maps by style, complexity, and region.",
+        message: "Find maps by size, data, and region.",
       }),
       translate({
         id: "railyard.feature.browse.bullet2",
-        message: "Discover new community highlights every week.",
+        message: "Sort and toggle your maps easily.",
       }),
       translate({
         id: "railyard.feature.browse.bullet3",
@@ -117,7 +117,7 @@ const ALL_DOWNLOADS = [
     link: "https://geek.co.il/2023/02/09/imported-rant-why-i-hate-macos",
     label: "Windows x64",
     type: ".zip",
-    size: "121 MB",
+    size: "0 MB",
   },
   {
     os: "Windows",
@@ -125,7 +125,7 @@ const ALL_DOWNLOADS = [
     link: "https://geek.co.il/2023/02/09/imported-rant-why-i-hate-macos",
     label: "Windows ARM64",
     type: ".zip",
-    size: "119 MB",
+    size: "0 MB",
   },
   {
     os: "macOS",
@@ -133,7 +133,7 @@ const ALL_DOWNLOADS = [
     link: "https://geek.co.il/2023/02/09/imported-rant-why-i-hate-macos",
     label: "macOS Apple Silicon",
     type: ".dmg",
-    size: "117 MB",
+    size: "0 MB",
   },
   {
     os: "macOS",
@@ -141,7 +141,7 @@ const ALL_DOWNLOADS = [
     link: "https://geek.co.il/2023/02/09/imported-rant-why-i-hate-macos",
     label: "macOS Intel",
     type: ".dmg",
-    size: "118 MB",
+    size: "0 MB",
   },
   {
     os: "Linux",
@@ -149,7 +149,7 @@ const ALL_DOWNLOADS = [
     link: "https://geek.co.il/2023/02/09/imported-rant-why-i-hate-macos",
     label: "Linux x64",
     type: ".AppImage",
-    size: "116 MB",
+    size: "0 MB",
   },
   {
     os: "Linux",
@@ -157,7 +157,7 @@ const ALL_DOWNLOADS = [
     link: "https://geek.co.il/2023/02/09/imported-rant-why-i-hate-macos",
     label: "Linux ARM64",
     type: ".AppImage",
-    size: "114 MB",
+    size: "0 MB",
   },
 ];
 
@@ -266,31 +266,27 @@ export default function Railyard() {
       setSelectedArch(match.arch);
     };
 
-    const fetchCount = async (url, setValue) => {
+    const fetchCount = async (url, key, setValue) => {
       try {
         const response = await fetch(url);
         if (!response.ok) return;
         const data = await response.json();
 
-        if (Array.isArray(data)) {
-          setValue(data.length);
+        if (data && Array.isArray(data[key])) {
+          setValue(data[key].length);
           return;
         }
-        if (data && Array.isArray(data.items)) {
-          setValue(data.items.length);
-          return;
-        }
-        if (data && typeof data === "object") {
-          setValue(Object.keys(data).length);
-        }
+
+        // fallback safety
+        if (Array.isArray(data)) setValue(data.length);
       } catch {
         // no-op fallback
       }
     };
 
     detect();
-    fetchCount(DATA_SOURCES.maps, setMapCount);
-    fetchCount(DATA_SOURCES.mods, setModCount);
+    fetchCount(DATA_SOURCES.maps, "maps", setMapCount);
+    fetchCount(DATA_SOURCES.mods, "mods", setModCount);
 
     const closeMenu = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -404,17 +400,9 @@ export default function Railyard() {
                 </span>
               </article>
             </div>
-
-            <p className={styles.heroTrustLine}>
-              <Translate id="railyard.hero.trust">
-                Built for players first: faster setup, cleaner management, and more time actually
-                playing.
-              </Translate>
-            </p>
           </div>
         </section>
 
-        <div className={styles.sectionSeparator} />
         <section className={styles.spacerSection} aria-hidden="true" />
         <div className={styles.sectionSeparator} />
 
@@ -422,7 +410,7 @@ export default function Railyard() {
           <div className={styles.container}>
             <div className={styles.sectionHeader}>
               <h2 className={styles.sectionTitle}>
-                <Translate id="railyard.features.header">Why Players Use Railyard</Translate>
+                <Translate id="railyard.features.header">Features</Translate>
               </h2>
               <span className={styles.headerLine} />
             </div>
@@ -460,7 +448,6 @@ export default function Railyard() {
           </div>
         </section>
 
-        <div className={styles.sectionSeparator} />
         <section className={styles.spacerSection} aria-hidden="true" />
         <div className={styles.sectionSeparator} />
 
@@ -496,7 +483,6 @@ export default function Railyard() {
           </div>
         </section>
 
-        <div className={styles.sectionSeparator} />
         <section className={styles.spacerSection} aria-hidden="true" />
         <div className={styles.sectionSeparator} />
 
