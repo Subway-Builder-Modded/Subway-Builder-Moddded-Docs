@@ -11,14 +11,11 @@ const SOURCE = {
 };
 
 const PAGE_SIZES = [9, 27, 54];
-const GITHUB_CDN_BASE = "https://cdn.jsdelivr.net/gh/Subway-Builder-Modded/The-Railyard@main";
-const PLACEHOLDER_IMAGE = "/assets/map-pin-placeholder.svg";
 
 const fieldPathLookup = {
   title: ["name", "title", "displayName"],
   description: ["description", "summary"],
   author: ["author", "creator", "publisher"],
-  download: ["download", "downloadUrl", "download_url", "url", "file"],
   tags: ["tags", "categories", "labels"],
   images: ["images", "gallery", "screenshots", "thumbnails"],
 };
@@ -51,13 +48,6 @@ function flattenRecord(record, prefix = "") {
   return rows;
 }
 
-function normalizeTagList(rawTags) {
-  if (!rawTags) return [];
-  if (Array.isArray(rawTags)) return rawTags.map((tag) => String(tag));
-  if (typeof rawTags === "string") return rawTags.split(",").map((tag) => tag.trim());
-  return [];
-}
-
 function toTitleCaseTag(tag) {
   return tag
     .split("-")
@@ -66,18 +56,32 @@ function toTitleCaseTag(tag) {
     .join(" ");
 }
 
-function normalizeGithubImageUrl(url) {
-  if (url.includes("raw.githubusercontent.com")) {
-    return url.replace("/refs/heads/", "/");
+function buildGithubImageCandidates(url) {
+  if (!url) return [];
+
+  const normalized = url.replace("/refs/heads/", "/").replace("?raw=true", "");
+  const candidates = [encodeURI(normalized)];
+
+  const githubMatch = normalized.match(
+    /^https:\/\/github\.com\/([^/]+)\/([^/]+)\/(?:blob|raw)\/([^/]+)\/(.+)$/,
+  );
+  if (githubMatch) {
+    const [, owner, repo, branch, rawPath] = githubMatch;
+    candidates.push(
+      `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${encodeURI(rawPath)}`,
+    );
+    candidates.push(`https://cdn.jsdelivr.net/gh/${owner}/${repo}@${branch}/${encodeURI(rawPath)}`);
   }
 
-  if (url.includes("github.com") && url.includes("/blob/")) {
-    return url
-      .replace("https://github.com/Subway-Builder-Modded/The-Railyard/blob/main", GITHUB_CDN_BASE)
-      .replace("?raw=true", "");
+  const rawMatch = normalized.match(
+    /^https:\/\/raw\.githubusercontent\.com\/([^/]+)\/([^/]+)\/([^/]+)\/(.+)$/,
+  );
+  if (rawMatch) {
+    const [, owner, repo, branch, rawPath] = rawMatch;
+    candidates.push(`https://cdn.jsdelivr.net/gh/${owner}/${repo}@${branch}/${encodeURI(rawPath)}`);
   }
 
-  return url;
+  return [...new Set(candidates)];
 }
 
 function normalizeImageList(manifest, id) {
@@ -85,11 +89,22 @@ function normalizeImageList(manifest, id) {
   if (!imageCandidates) return [];
 
   const toUrl = (value) => {
-    if (!value) return null;
+    if (!value) return [];
 
     if (typeof value === "string") {
-      if (value.startsWith("http")) return normalizeGithubImageUrl(value);
-      return `${GITHUB_CDN_BASE}/mods/${id}/gallery/${value}`;
+      if (value.startsWith("http")) return buildGithubImageCandidates(value);
+      const cleaned = value
+        .replace(/^\.\//, "")
+        .replace(new RegExp(`^mods/${id}/gallery/`), "")
+        .replace(new RegExp(`^${id}/gallery/`), "")
+        .replace(/^gallery\//, "")
+        .replace(/^mods\//, "")
+        .replace(/^\//, "");
+      const relative = `mods/${id}/gallery/${cleaned}`;
+      return [
+        `https://raw.githubusercontent.com/Subway-Builder-Modded/The-Railyard/main/${encodeURI(relative)}`,
+        `https://cdn.jsdelivr.net/gh/Subway-Builder-Modded/The-Railyard@main/${encodeURI(relative)}`,
+      ];
     }
 
     if (typeof value === "object") {
@@ -97,24 +112,19 @@ function normalizeImageList(manifest, id) {
       return toUrl(nested);
     }
 
-    return null;
+    return [];
   };
 
   if (Array.isArray(imageCandidates)) {
-    return imageCandidates.map(toUrl).filter(Boolean);
+    return imageCandidates.map(toUrl).filter((candidateList) => candidateList.length > 0);
   }
 
   const singleUrl = toUrl(imageCandidates);
-  return singleUrl ? [singleUrl] : [];
+  return singleUrl.length > 0 ? [singleUrl] : [];
 }
 
 function getTitle(manifest, id) {
   return getFirstValue(manifest, "title") || id;
-}
-
-function getDownloadUrl(manifest) {
-  const value = getFirstValue(manifest, "download");
-  return typeof value === "string" ? value : null;
 }
 
 function compareValues(a, b) {
@@ -122,6 +132,50 @@ function compareValues(a, b) {
   if (a == null) return 1;
   if (b == null) return -1;
   return String(a).localeCompare(String(b), undefined, { numeric: true, sensitivity: "base" });
+}
+
+function MapPinPlaceholder() {
+  return (
+    <div className={styles.noImage}>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="40"
+        height="40"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z" />
+        <circle cx="12" cy="10" r="3" />
+      </svg>
+    </div>
+  );
+}
+
+function GalleryImage({ candidates, alt, className }) {
+  const [candidateIndex, setCandidateIndex] = useState(0);
+
+  useEffect(() => {
+    setCandidateIndex(0);
+  }, [candidates]);
+
+  if (candidateIndex >= candidates.length) {
+    return <MapPinPlaceholder />;
+  }
+
+  return (
+    <img
+      src={candidates[candidateIndex]}
+      alt={alt}
+      className={className}
+      loading="lazy"
+      onError={() => setCandidateIndex((current) => current + 1)}
+    />
+  );
 }
 
 export default function RailyardModsPage() {
@@ -134,6 +188,7 @@ export default function RailyardModsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [imageIndexById, setImageIndexById] = useState({});
+  const [pendingFocusId, setPendingFocusId] = useState(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -178,14 +233,13 @@ export default function RailyardModsPage() {
                     id: "railyard.mods.noDescription",
                     message: "No description provided.",
                   }),
-                tags: normalizeTagList(getFirstValue(manifest, "tags")),
+                tags: getFirstValue(manifest, "tags"),
                 author:
                   getFirstValue(manifest, "author") ||
                   translate({
                     id: "railyard.mods.unknownAuthor",
                     message: "Unknown",
                   }),
-                downloadUrl: getDownloadUrl(manifest),
                 images: normalizeImageList(manifest, id),
                 fields: flattenRecord(manifest),
               };
@@ -269,7 +323,18 @@ export default function RailyardModsPage() {
 
   useEffect(() => {
     setPage(1);
-  }, [query, sortBy, selectedTags, pageSize]);
+  }, [query, sortBy, pageSize]);
+
+  useEffect(() => {
+    if (!pendingFocusId) return;
+    requestAnimationFrame(() => {
+      const target = document.querySelector(`[data-card-id="${pendingFocusId}"]`);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+      setPendingFocusId(null);
+    });
+  }, [pendingFocusId, paginated]);
 
   function toggleTag(tag) {
     setSelectedTags((current) =>
@@ -283,6 +348,38 @@ export default function RailyardModsPage() {
       const next = (start + direction + max) % max;
       return { ...current, [id]: next };
     });
+  }
+
+  function renderPagination(isTop = false) {
+    if (totalPages <= 1) return null;
+
+    return (
+      <nav className={`${styles.pagination} ${isTop ? styles.paginationTop : ""}`}>
+        <button
+          type="button"
+          disabled={safePage <= 1}
+          onClick={() => setPage((value) => Math.max(1, value - 1))}
+        >
+          {translate({ id: "railyard.mods.previous", message: "Back" })}
+        </button>
+        <span>
+          {translate(
+            {
+              id: "railyard.mods.pageCounter",
+              message: "Page {page} of {totalPages}",
+            },
+            { page: safePage, totalPages },
+          )}
+        </span>
+        <button
+          type="button"
+          disabled={safePage >= totalPages}
+          onClick={() => setPage((value) => Math.min(totalPages, value + 1))}
+        >
+          {translate({ id: "railyard.mods.next", message: "Next" })}
+        </button>
+      </nav>
+    );
   }
 
   return (
@@ -304,29 +401,12 @@ export default function RailyardModsPage() {
             {translate({
               id: "railyard.mods.subtitle",
               message:
-                "Search, sort, filter, and download community mods directly from the registry.",
+                "Search, sort, filter, and browse community mods directly from the registry.",
             })}
           </p>
-          <div className={styles.quickStats}>
-            <span>
-              {translate(
-                {
-                  id: "railyard.mods.loaded",
-                  message: "{count} mods loaded",
-                },
-                { count: items.length },
-              )}
-            </span>
-            <span>
-              {translate(
-                {
-                  id: "railyard.mods.matching",
-                  message: "{count} matching current filters",
-                },
-                { count: filtered.length },
-              )}
-            </span>
-          </div>
+          <Link to="/railyard/maps" className={styles.switchLink}>
+            {translate({ id: "railyard.mods.switchToMaps", message: "Browse Maps" })} →
+          </Link>
         </section>
 
         <section className={styles.controls}>
@@ -392,6 +472,8 @@ export default function RailyardModsPage() {
           </div>
         </section>
 
+        {renderPagination(true)}
+
         {isLoading && (
           <p className={styles.status}>
             {translate({ id: "railyard.mods.loading", message: "Loading mod manifests…" })}
@@ -402,34 +484,25 @@ export default function RailyardModsPage() {
         <section className={styles.grid}>
           {paginated.map((item) => {
             const imageIndex = imageIndexById[item.id] || 0;
-            const activeImage = item.images[imageIndex] || PLACEHOLDER_IMAGE;
+            const activeImage = item.images[imageIndex] || [];
 
             return (
-              <article
-                key={item.id}
-                className={styles.card}
-                onClick={() =>
-                  item.downloadUrl && window.open(item.downloadUrl, "_blank", "noopener,noreferrer")
-                }
-                role={item.downloadUrl ? "button" : undefined}
-                tabIndex={item.downloadUrl ? 0 : -1}
-                onKeyDown={(event) => {
-                  if (item.downloadUrl && (event.key === "Enter" || event.key === " ")) {
-                    window.open(item.downloadUrl, "_blank", "noopener,noreferrer");
-                  }
-                }}
-              >
+              <article key={item.id} className={styles.card} data-card-id={item.id}>
                 <header className={styles.cardHeader}>
                   <h2>{item.title}</h2>
                   <span className={styles.cardId}>{item.id}</span>
                 </header>
 
                 <div className={styles.carousel}>
-                  <img
-                    src={activeImage}
-                    alt={`${item.title} preview`}
-                    className={styles.previewImage}
-                  />
+                  {activeImage.length > 0 ? (
+                    <GalleryImage
+                      candidates={activeImage}
+                      alt={`${item.title} preview`}
+                      className={styles.previewImage}
+                    />
+                  ) : (
+                    <MapPinPlaceholder />
+                  )}
                   {item.images.length > 1 && (
                     <>
                       <button
@@ -439,10 +512,7 @@ export default function RailyardModsPage() {
                           message: "Previous image",
                         })}
                         className={`${styles.carouselButton} ${styles.carouselPrev}`}
-                        onClick={(event) => {
-                          event.stopPropagation();
-                          cycleImage(item.id, -1, item.images.length);
-                        }}
+                        onClick={() => cycleImage(item.id, -1, item.images.length)}
                       >
                         ‹
                       </button>
@@ -453,10 +523,7 @@ export default function RailyardModsPage() {
                           message: "Next image",
                         })}
                         className={`${styles.carouselButton} ${styles.carouselNext}`}
-                        onClick={(event) => {
-                          event.stopPropagation();
-                          cycleImage(item.id, 1, item.images.length);
-                        }}
+                        onClick={() => cycleImage(item.id, 1, item.images.length)}
                       >
                         ›
                       </button>
@@ -467,10 +534,10 @@ export default function RailyardModsPage() {
                 <p className={styles.description}>{item.description}</p>
 
                 <div className={styles.metaRow}>
-                  <span>
+                  <p className={styles.metaLine}>
                     <strong>{translate({ id: "railyard.mods.author", message: "Author" })}:</strong>{" "}
                     <span className={styles.metaValue}>{String(item.author)}</span>
-                  </span>
+                  </p>
                 </div>
 
                 <div className={styles.tagRow}>
@@ -479,8 +546,8 @@ export default function RailyardModsPage() {
                       type="button"
                       key={`${item.id}-${tag}`}
                       className={styles.cardTag}
-                      onClick={(event) => {
-                        event.stopPropagation();
+                      onClick={() => {
+                        setPendingFocusId(item.id);
                         toggleTag(tag);
                       }}
                     >
@@ -489,7 +556,7 @@ export default function RailyardModsPage() {
                   ))}
                 </div>
 
-                <details className={styles.details} onClick={(event) => event.stopPropagation()}>
+                <details className={styles.details}>
                   <summary>
                     {translate({ id: "railyard.mods.allFields", message: "All manifest fields" })}
                   </summary>
@@ -507,31 +574,7 @@ export default function RailyardModsPage() {
           })}
         </section>
 
-        <footer className={styles.pagination}>
-          <button
-            type="button"
-            disabled={safePage <= 1}
-            onClick={() => setPage((value) => Math.max(1, value - 1))}
-          >
-            {translate({ id: "railyard.mods.previous", message: "Previous" })}
-          </button>
-          <span>
-            {translate(
-              {
-                id: "railyard.mods.pageCounter",
-                message: "Page {page} of {totalPages}",
-              },
-              { page: safePage, totalPages },
-            )}
-          </span>
-          <button
-            type="button"
-            disabled={safePage >= totalPages}
-            onClick={() => setPage((value) => Math.min(totalPages, value + 1))}
-          >
-            {translate({ id: "railyard.mods.next", message: "Next" })}
-          </button>
-        </footer>
+        {renderPagination()}
 
         <footer className={styles.footerBars}>
           <span className={styles.bar} style={{ background: "#0039A6" }} />
