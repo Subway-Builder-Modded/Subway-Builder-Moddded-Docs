@@ -7,6 +7,81 @@ const fieldPathLookup = {
   images: ["images", "gallery", "screenshots", "thumbnails"],
 };
 
+export const PAGE_SIZES = [12, 24, 48];
+
+export const ALL_DOWNLOADS = [
+  {
+    os: "Windows",
+    arch: "x64",
+    link: "https://geek.co.il/2023/02/09/imported-rant-why-i-hate-macos",
+    label: "Windows x64",
+    type: ".zip",
+    size: "0 MB",
+  },
+  {
+    os: "Windows",
+    arch: "arm64",
+    link: "https://geek.co.il/2023/02/09/imported-rant-why-i-hate-macos",
+    label: "Windows ARM64",
+    type: ".zip",
+    size: "0 MB",
+  },
+  {
+    os: "macOS",
+    arch: "arm64",
+    link: "https://geek.co.il/2023/02/09/imported-rant-why-i-hate-macos",
+    label: "macOS Apple Silicon",
+    type: ".dmg",
+    size: "0 MB",
+  },
+  {
+    os: "macOS",
+    arch: "x64",
+    link: "https://geek.co.il/2023/02/09/imported-rant-why-i-hate-macos",
+    label: "macOS Intel",
+    type: ".dmg",
+    size: "0 MB",
+  },
+  {
+    os: "Linux",
+    arch: "x64",
+    link: "https://geek.co.il/2023/02/09/imported-rant-why-i-hate-macos",
+    label: "Linux x64",
+    type: ".AppImage",
+    size: "0 MB",
+  },
+  {
+    os: "Linux",
+    arch: "arm64",
+    link: "https://geek.co.il/2023/02/09/imported-rant-why-i-hate-macos",
+    label: "Linux ARM64",
+    type: ".AppImage",
+    size: "0 MB",
+  },
+];
+
+export async function detectNativeDownload() {
+  if (typeof navigator === "undefined") {
+    return ALL_DOWNLOADS[0];
+  }
+
+  const ua = navigator.userAgent.toLowerCase();
+  let os = "Windows";
+  let arch = "x64";
+
+  if (ua.includes("mac")) os = "macOS";
+  else if (ua.includes("linux")) os = "Linux";
+
+  if (navigator.userAgentData?.getHighEntropyValues) {
+    const hints = await navigator.userAgentData.getHighEntropyValues(["architecture"]);
+    if (hints.architecture === "arm") arch = "arm64";
+  } else if (ua.includes("arm64") || ua.includes("aarch64")) {
+    arch = "arm64";
+  }
+
+  return ALL_DOWNLOADS.find((entry) => entry.os === os && entry.arch === arch) || ALL_DOWNLOADS[0];
+}
+
 export function getFirstValue(record, key) {
   for (const path of fieldPathLookup[key] || []) {
     if (Object.prototype.hasOwnProperty.call(record, path) && record[path] != null) {
@@ -35,14 +110,15 @@ export function flattenRecord(record, prefix = "") {
   return rows;
 }
 
-export function formatTagLabel(tag) {
-  return String(tag).replace(/[-_]+/g, " ").trim().toLowerCase();
-}
-
 export function compareValues(a, b) {
   if (a == null && b == null) return 0;
   if (a == null) return 1;
   if (b == null) return -1;
+
+  if (a instanceof Date && b instanceof Date) {
+    return a.getTime() - b.getTime();
+  }
+
   return String(a).localeCompare(String(b), undefined, { numeric: true, sensitivity: "base" });
 }
 
@@ -56,13 +132,50 @@ export function getPopulation(manifest) {
   return Number.isFinite(numeric) ? numeric : null;
 }
 
+export function normalizeTags(manifest) {
+  const rawTags = getFirstValue(manifest, "tags");
+  if (!rawTags) return [];
+  if (Array.isArray(rawTags)) return rawTags.map((tag) => String(tag));
+  return [String(rawTags)];
+}
+
+export function formatUpdatedDate(isoDate, locale = undefined) {
+  if (!isoDate) return null;
+  const date = new Date(isoDate);
+  if (Number.isNaN(date.getTime())) return null;
+  return new Intl.DateTimeFormat(locale, {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  }).format(date);
+}
+
+export function buildManifestUrl(type, id) {
+  return `https://raw.githubusercontent.com/Subway-Builder-Modded/The-Railyard/main/${type}/${id}/manifest.json`;
+}
+
+export function buildManifestCommitUrl(type, id) {
+  const path = encodeURIComponent(`${type}/${id}/manifest.json`);
+  return `https://api.github.com/repos/Subway-Builder-Modded/The-Railyard/commits?path=${path}&per_page=1`;
+}
+
+export async function fetchUpdatedAt(type, id) {
+  const response = await fetch(buildManifestCommitUrl(type, id));
+  if (!response.ok) {
+    return null;
+  }
+
+  const commits = await response.json();
+  const latest = Array.isArray(commits) ? commits[0] : null;
+  return latest?.commit?.committer?.date || latest?.commit?.author?.date || null;
+}
+
 function buildGithubImageCandidates(url) {
   if (!url) return [];
 
   const normalized = url.replace("/refs/heads/", "/").replace("?raw=true", "");
   const candidates = [encodeURI(normalized)];
 
-  // Matches GitHub blob/raw links so we can generate equivalent raw + CDN URLs.
   const githubMatch = normalized.match(
     /^https:\/\/github\.com\/([^/]+)\/([^/]+)\/(?:blob|raw)\/([^/]+)\/(.+)$/,
   );
@@ -74,7 +187,6 @@ function buildGithubImageCandidates(url) {
     candidates.push(`https://cdn.jsdelivr.net/gh/${owner}/${repo}@${branch}/${encodeURI(rawPath)}`);
   }
 
-  // Matches raw.githubusercontent URLs so we can add a jsDelivr mirror fallback.
   const rawMatch = normalized.match(
     /^https:\/\/raw\.githubusercontent\.com\/([^/]+)\/([^/]+)\/([^/]+)\/(.+)$/,
   );
@@ -96,16 +208,11 @@ export function normalizeImageList(manifest, type, id) {
     if (typeof value === "string") {
       if (value.startsWith("http")) return buildGithubImageCandidates(value);
       const cleaned = value
-        // Strips a local './' prefix from manifest image paths.
         .replace(/^\.\//, "")
-        // Removes type/id/gallery prefixes when authors include full repository paths.
         .replace(new RegExp(`^${type}/${id}/gallery/`), "")
-        // Removes id/gallery prefixes when authors include path relative to type directory.
         .replace(new RegExp(`^${id}/gallery/`), "")
-        // Removes remaining gallery or type prefixes before rebuilding canonical path.
         .replace(/^gallery\//, "")
         .replace(new RegExp(`^${type}/`), "")
-        // Removes any accidental leading slash.
         .replace(/^\//, "");
       const relative = `${type}/${id}/gallery/${cleaned}`;
       return [

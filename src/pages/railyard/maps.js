@@ -2,17 +2,29 @@ import React, { useEffect, useMemo, useState } from "react";
 import Layout from "@theme/Layout";
 import Link from "@docusaurus/Link";
 import { translate } from "@docusaurus/Translate";
-import styles from "../../css/railyardMaps.module.css";
 import sharedStyles from "../../css/railyardShared.module.css";
 import {
+  buildManifestUrl,
   compareValues,
+  fetchUpdatedAt,
   flattenRecord,
-  formatTagLabel,
+  formatUpdatedDate,
   getFirstValue,
   getPopulation,
   getTitle,
   normalizeImageList,
+  normalizeTags,
+  PAGE_SIZES,
+  ALL_DOWNLOADS,
+  detectNativeDownload,
 } from "../../helpers/railyardHelpers";
+import {
+  DownloadInAppModal,
+  GalleryImage,
+  MapPinPlaceholder,
+  PaginationNav,
+  getSortValue,
+} from "../../helpers/railyardCatalogHelpers";
 
 const SOURCE = {
   type: "maps",
@@ -20,88 +32,26 @@ const SOURCE = {
     "https://raw.githubusercontent.com/Subway-Builder-Modded/The-Railyard/main/maps/index.json",
 };
 
-const PAGE_SIZES = [12, 24, 48];
-
 const SORT_CONFIG = {
-  name: {
-    value: (item) => item.title,
-    defaultDirection: "asc",
-  },
-  population: {
-    value: (item) => item.population,
-    defaultDirection: "desc",
-  },
-  id: {
-    value: (item) => item.id,
-    defaultDirection: "asc",
-  },
+  name: { value: (item) => item.title, defaultDirection: "asc" },
+  population: { value: (item) => item.population, defaultDirection: "desc" },
+  updated: { value: (item) => item.updatedAtDate, defaultDirection: "desc" },
+  id: { value: (item) => item.id, defaultDirection: "asc" },
 };
-
-function getSortValue(sortBy) {
-  const [column, direction] = sortBy.split("-");
-  const config = SORT_CONFIG[column] || SORT_CONFIG.name;
-  const sortDirection = direction || config.defaultDirection;
-  return {
-    getValue: config.value,
-    descending: sortDirection === "desc",
-  };
-}
-
-function MapPinPlaceholder() {
-  return (
-    <div className={styles.noImage}>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="42"
-        height="42"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z" />
-        <circle cx="12" cy="10" r="3" />
-      </svg>
-    </div>
-  );
-}
-
-function GalleryImage({ candidates, alt, className }) {
-  const [candidateIndex, setCandidateIndex] = useState(0);
-
-  useEffect(() => {
-    setCandidateIndex(0);
-  }, [candidates]);
-
-  if (candidateIndex >= candidates.length) {
-    return <MapPinPlaceholder />;
-  }
-
-  return (
-    <img
-      src={candidates[candidateIndex]}
-      alt={alt}
-      className={className}
-      loading="lazy"
-      onError={() => setCandidateIndex((current) => current + 1)}
-    />
-  );
-}
 
 export default function RailyardMapsPage() {
   const [items, setItems] = useState([]);
   const [query, setQuery] = useState("");
   const [selectedTags, setSelectedTags] = useState([]);
-  const [sortBy, setSortBy] = useState("name-asc");
-  const [pageSize, setPageSize] = useState(24);
+  const [sortBy, setSortBy] = useState("updated-desc");
+  const [pageSize, setPageSize] = useState(12);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [imageIndexById, setImageIndexById] = useState({});
   const [pendingFocusId, setPendingFocusId] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [nativeDownload, setNativeDownload] = useState(ALL_DOWNLOADS[0]);
 
   useEffect(() => {
     let cancelled = false;
@@ -120,23 +70,24 @@ export default function RailyardMapsPage() {
             }),
           );
         }
+
         const indexData = await indexResponse.json();
         const idsRaw = Array.isArray(indexData) ? indexData : indexData[SOURCE.type] || [];
-
         const ids = idsRaw
-          .map((entry) => {
-            if (typeof entry === "string") return entry;
-            return entry?.id || entry?.slug || entry?.name || null;
-          })
+          .map((entry) =>
+            typeof entry === "string" ? entry : entry?.id || entry?.slug || entry?.name || null,
+          )
           .filter(Boolean);
 
         const loadedItems = await Promise.all(
           ids.map(async (id) => {
-            const manifestUrl = `https://raw.githubusercontent.com/Subway-Builder-Modded/The-Railyard/main/maps/${id}/manifest.json`;
             try {
-              const response = await fetch(manifestUrl);
+              const response = await fetch(buildManifestUrl(SOURCE.type, id));
               if (!response.ok) return null;
               const manifest = await response.json();
+              const updatedAt = await fetchUpdatedAt(SOURCE.type, id);
+              const updatedAtDate = updatedAt ? new Date(updatedAt) : null;
+
               return {
                 id,
                 title: getTitle(manifest, id),
@@ -146,14 +97,13 @@ export default function RailyardMapsPage() {
                     id: "railyard.maps.noDescription",
                     message: "No description provided.",
                   }),
-                tags: getFirstValue(manifest, "tags"),
+                tags: normalizeTags(manifest),
                 population: getPopulation(manifest),
                 author:
                   getFirstValue(manifest, "author") ||
-                  translate({
-                    id: "railyard.maps.unknownAuthor",
-                    message: "Unknown",
-                  }),
+                  translate({ id: "railyard.maps.unknownAuthor", message: "Unknown" }),
+                updatedAt,
+                updatedAtDate,
                 images: normalizeImageList(manifest, SOURCE.type, id),
                 fields: flattenRecord(manifest),
               };
@@ -163,18 +113,13 @@ export default function RailyardMapsPage() {
           }),
         );
 
-        if (!cancelled) {
-          setItems(loadedItems.filter(Boolean));
-        }
+        if (!cancelled) setItems(loadedItems.filter(Boolean));
       } catch (loadError) {
         if (!cancelled) {
           setError(
             loadError instanceof Error
               ? loadError.message
-              : translate({
-                  id: "railyard.maps.error.unknown",
-                  message: "Unknown loading error.",
-                }),
+              : translate({ id: "railyard.maps.error.unknown", message: "Unknown loading error." }),
           );
         }
       } finally {
@@ -204,6 +149,7 @@ export default function RailyardMapsPage() {
         item.title,
         item.description,
         item.author,
+        item.updatedAt,
         item.tags.join("-"),
         item.fields.map((field) => `${field.key} ${field.value}`).join("-"),
       ]
@@ -217,7 +163,7 @@ export default function RailyardMapsPage() {
     );
 
     return tagFiltered.sort((a, b) => {
-      const { getValue, descending } = getSortValue(sortBy);
+      const { getValue, descending } = getSortValue(sortBy, SORT_CONFIG);
       const comparison = compareValues(getValue(a), getValue(b));
       return descending ? -comparison : comparison;
     });
@@ -235,12 +181,24 @@ export default function RailyardMapsPage() {
     if (!pendingFocusId) return;
     requestAnimationFrame(() => {
       const target = document.querySelector(`[data-card-id="${pendingFocusId}"]`);
-      if (target) {
-        target.scrollIntoView({ behavior: "smooth", block: "center" });
-      }
+      if (target) target.scrollIntoView({ behavior: "smooth", block: "center" });
       setPendingFocusId(null);
     });
   }, [pendingFocusId, paginated]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function detectDownload() {
+      const detected = await detectNativeDownload();
+      if (!cancelled) setNativeDownload(detected);
+    }
+
+    detectDownload();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   function toggleTag(tag) {
     setSelectedTags((current) =>
@@ -256,40 +214,6 @@ export default function RailyardMapsPage() {
     });
   }
 
-  function renderPagination(isTop = false) {
-    if (totalPages <= 1) return null;
-
-    return (
-      <nav
-        className={`${styles.pagination} ${sharedStyles.pagination} ${isTop ? styles.paginationTop : ""}`}
-      >
-        <button
-          type="button"
-          disabled={safePage <= 1}
-          onClick={() => setPage((value) => Math.max(1, value - 1))}
-        >
-          {translate({ id: "railyard.maps.previous", message: "Back" })}
-        </button>
-        <span>
-          {translate(
-            {
-              id: "railyard.maps.pageCounter",
-              message: "Page {page} of {totalPages}",
-            },
-            { page: safePage, totalPages },
-          )}
-        </span>
-        <button
-          type="button"
-          disabled={safePage >= totalPages}
-          onClick={() => setPage((value) => Math.min(totalPages, value + 1))}
-        >
-          {translate({ id: "railyard.maps.next", message: "Next" })}
-        </button>
-      </nav>
-    );
-  }
-
   return (
     <Layout
       title={translate({ id: "railyard.maps.layoutTitle", message: "Railyard Maps" })}
@@ -298,29 +222,34 @@ export default function RailyardMapsPage() {
         message: "Browse community Subway Builder maps from Railyard.",
       })}
     >
-      <main className={styles.page}>
-        <Link to="/railyard" className={styles.back}>
+      <main className={sharedStyles.page}>
+        <Link to="/railyard" className={sharedStyles.back}>
           &larr; {translate({ id: "railyard.maps.back", message: "Back" })}
         </Link>
 
-        <section className={styles.hero}>
-          <h1>{translate({ id: "railyard.maps.heading", message: "Railyard Maps" })}</h1>
-          <p>
+        <section className={sharedStyles.hero}>
+          <p className={sharedStyles.heroEyebrow}>
+            {translate({ id: "railyard.maps.eyebrow", message: "Railyard registry" })}
+          </p>
+          <h1 className={sharedStyles.heroHeading}>
+            {translate({ id: "railyard.maps.heading", message: "Railyard Maps" })}
+          </h1>
+          <p className={sharedStyles.heroDescription}>
             {translate({
               id: "railyard.maps.subtitle",
               message:
-                "Search, sort, filter, and browse community maps directly from the registry.",
+                "Discover community maps, filter by tags, and track what was updated most recently.",
             })}
           </p>
-          <Link to="/railyard/mods" className={styles.switchLink}>
-            {translate({ id: "railyard.maps.switchToMods", message: "Browse Mods" })} →
+          <Link to="/railyard/mods" className={sharedStyles.switchLink}>
+            {translate({ id: "railyard.maps.switchToMods", message: "Switch to Mods" })} →
           </Link>
         </section>
 
-        <section className={styles.controls}>
+        <section className={sharedStyles.controls}>
           <input
             type="search"
-            className={styles.search}
+            className={sharedStyles.search}
             placeholder={translate({
               id: "railyard.maps.searchPlaceholder",
               message: "Search by name, author, tags, IDs, or any manifest field...",
@@ -329,14 +258,20 @@ export default function RailyardMapsPage() {
             onChange={(event) => setQuery(event.target.value)}
           />
 
-          <div className={styles.controlRow}>
-            <label>
-              {translate({ id: "railyard.maps.sortBy", message: "Sort by" })}
+          <div className={sharedStyles.controlRow}>
+            <label className={sharedStyles.controlLabel}>
+              {translate({ id: "railyard.maps.sortBy", message: "Sort By" })}
               <select
                 className={sharedStyles.select}
                 value={sortBy}
                 onChange={(event) => setSortBy(event.target.value)}
               >
+                <option value="updated-desc">
+                  {translate({ id: "railyard.maps.sort.updatedDesc", message: "Recently Updated" })}
+                </option>
+                <option value="updated-asc">
+                  {translate({ id: "railyard.maps.sort.updatedAsc", message: "Oldest Updated" })}
+                </option>
                 <option value="name-asc">
                   {translate({ id: "railyard.maps.sort.nameAsc", message: "Name (A → Z)" })}
                 </option>
@@ -364,8 +299,8 @@ export default function RailyardMapsPage() {
               </select>
             </label>
 
-            <label>
-              {translate({ id: "railyard.maps.cardsPerPage", message: "Cards per page" })}
+            <label className={sharedStyles.controlLabel}>
+              {translate({ id: "railyard.maps.cardsPerPage", message: "Cards Per Page" })}
               <select
                 className={sharedStyles.select}
                 value={pageSize}
@@ -380,53 +315,73 @@ export default function RailyardMapsPage() {
             </label>
           </div>
 
-          <div className={styles.tags}>
+          <div className={sharedStyles.tags}>
             {allTags.map((tag) => {
               const active = selectedTags.includes(tag);
               return (
                 <button
                   type="button"
                   key={tag}
-                  className={`${styles.tagButton} ${active ? styles.tagButtonActive : ""}`}
+                  className={`${sharedStyles.tagButton} ${active ? sharedStyles.tagButtonActive : ""}`}
                   onClick={() => toggleTag(tag)}
                 >
-                  {formatTagLabel(tag)}
+                  {tag}
                 </button>
               );
             })}
           </div>
         </section>
 
-        {renderPagination(true)}
+        <PaginationNav
+          styles={sharedStyles}
+          isTop
+          safePage={safePage}
+          totalPages={totalPages}
+          onPrev={() => setPage((value) => Math.max(1, value - 1))}
+          onNext={() => setPage((value) => Math.min(totalPages, value + 1))}
+          prefix="railyard.maps"
+        />
 
         {isLoading && (
-          <p className={styles.status}>
+          <p className={sharedStyles.status}>
             {translate({ id: "railyard.maps.loading", message: "Loading map manifests…" })}
           </p>
         )}
-        {error && <p className={styles.error}>{error}</p>}
+        {error && <p className={sharedStyles.error}>{error}</p>}
 
-        <section className={styles.grid}>
+        <section className={sharedStyles.grid}>
           {paginated.map((item) => {
             const imageIndex = imageIndexById[item.id] || 0;
             const activeImage = item.images[imageIndex] || [];
 
             return (
-              <article key={item.id} className={styles.card} data-card-id={item.id}>
-                <header className={styles.cardHeader}>
-                  <h2>{item.title}</h2>
-                  <span className={styles.cardId}>{item.id}</span>
+              <article key={item.id} className={sharedStyles.card} data-card-id={item.id}>
+                <header className={sharedStyles.cardHeader}>
+                  <button
+                    type="button"
+                    className={sharedStyles.itemTitleButton}
+                    onClick={() => setSelectedItem(item)}
+                  >
+                    {item.title}
+                  </button>
+                  <span className={sharedStyles.cardId}>{item.id}</span>
                 </header>
+                <p className={sharedStyles.updatedText}>
+                  {translate({ id: "railyard.maps.updated", message: "Updated" })}:{" "}
+                  {formatUpdatedDate(item.updatedAt) ||
+                    translate({ id: "railyard.maps.updatedUnknown", message: "Unknown" })}
+                </p>
 
-                <div className={styles.carousel}>
+                <div className={sharedStyles.carousel}>
                   {activeImage.length > 0 ? (
                     <GalleryImage
                       candidates={activeImage}
                       alt={`${item.title} preview`}
-                      className={styles.previewImage}
+                      className={sharedStyles.previewImage}
+                      placeholderClassName={sharedStyles.noImage}
                     />
                   ) : (
-                    <MapPinPlaceholder />
+                    <MapPinPlaceholder className={sharedStyles.noImage} />
                   )}
                   {item.images.length > 1 && (
                     <>
@@ -436,7 +391,7 @@ export default function RailyardMapsPage() {
                           id: "railyard.maps.prevImage",
                           message: "Previous image",
                         })}
-                        className={`${styles.carouselButton} ${styles.carouselPrev}`}
+                        className={`${sharedStyles.carouselButton} ${sharedStyles.carouselPrev}`}
                         onClick={() => cycleImage(item.id, -1, item.images.length)}
                       >
                         ‹
@@ -447,7 +402,7 @@ export default function RailyardMapsPage() {
                           id: "railyard.maps.nextImage",
                           message: "Next image",
                         })}
-                        className={`${styles.carouselButton} ${styles.carouselNext}`}
+                        className={`${sharedStyles.carouselButton} ${sharedStyles.carouselNext}`}
                         onClick={() => cycleImage(item.id, 1, item.images.length)}
                       >
                         ›
@@ -456,48 +411,45 @@ export default function RailyardMapsPage() {
                   )}
                 </div>
 
-                <p className={styles.description}>{item.description}</p>
+                <p className={sharedStyles.description}>{item.description}</p>
+                <p className={sharedStyles.metaLine}>
+                  <strong>{translate({ id: "railyard.maps.author", message: "Author" })}:</strong>{" "}
+                  <span className={sharedStyles.metaValue}>{String(item.author)}</span>
+                </p>
+                <p className={sharedStyles.metaLine}>
+                  <strong>
+                    {translate({ id: "railyard.maps.population", message: "Population" })}:
+                  </strong>{" "}
+                  <span className={sharedStyles.metaValue}>
+                    {item.population == null
+                      ? translate({ id: "railyard.maps.unknownPopulation", message: "Unknown" })
+                      : item.population.toLocaleString()}
+                  </span>
+                </p>
 
-                <div className={styles.metaRow}>
-                  <p className={styles.metaLine}>
-                    <strong>{translate({ id: "railyard.maps.author", message: "Author" })}:</strong>{" "}
-                    <span className={styles.metaValue}>{String(item.author)}</span>
-                  </p>
-                  <p className={styles.metaLine}>
-                    <strong>
-                      {translate({ id: "railyard.maps.population", message: "Population" })}:
-                    </strong>{" "}
-                    <span className={styles.metaValue}>
-                      {item.population == null
-                        ? translate({ id: "railyard.maps.unknownPopulation", message: "Unknown" })
-                        : item.population.toLocaleString()}
-                    </span>
-                  </p>
-                </div>
-
-                <div className={styles.tagRow}>
+                <div className={sharedStyles.tagRow}>
                   {item.tags.map((tag) => (
                     <button
                       type="button"
                       key={`${item.id}-${tag}`}
-                      className={styles.cardTag}
+                      className={sharedStyles.cardTag}
                       onClick={() => {
                         setPendingFocusId(item.id);
                         toggleTag(tag);
                       }}
                     >
-                      {formatTagLabel(tag)}
+                      {tag}
                     </button>
                   ))}
                 </div>
 
-                <details className={styles.details}>
+                <details className={sharedStyles.details}>
                   <summary>
                     {translate({ id: "railyard.maps.allFields", message: "All manifest fields" })}
                   </summary>
                   <dl>
                     {item.fields.map((field) => (
-                      <div key={`${item.id}-${field.key}`} className={styles.fieldRow}>
+                      <div key={`${item.id}-${field.key}`} className={sharedStyles.fieldRow}>
                         <dt>{field.key}</dt>
                         <dd>{field.value}</dd>
                       </div>
@@ -509,15 +461,29 @@ export default function RailyardMapsPage() {
           })}
         </section>
 
-        {renderPagination()}
+        <PaginationNav
+          styles={sharedStyles}
+          safePage={safePage}
+          totalPages={totalPages}
+          onPrev={() => setPage((value) => Math.max(1, value - 1))}
+          onNext={() => setPage((value) => Math.min(totalPages, value + 1))}
+          prefix="railyard.maps"
+        />
 
-        <footer className={styles.footerBars}>
-          <span className={styles.bar} style={{ background: "#0039A6" }} />
-          <span className={styles.bar} style={{ background: "#FF6319" }} />
-          <span className={styles.bar} style={{ background: "#00933C" }} />
-          <span className={styles.bar} style={{ background: "#FCCC0A" }} />
-          <span className={styles.bar} style={{ background: "#752F82" }} />
+        <footer className={sharedStyles.footerBars}>
+          <span className={sharedStyles.bar} style={{ background: "#0039A6" }} />
+          <span className={sharedStyles.bar} style={{ background: "#FF6319" }} />
+          <span className={sharedStyles.bar} style={{ background: "#00933C" }} />
+          <span className={sharedStyles.bar} style={{ background: "#FCCC0A" }} />
+          <span className={sharedStyles.bar} style={{ background: "#752F82" }} />
         </footer>
+
+        <DownloadInAppModal
+          styles={sharedStyles}
+          selectedItem={selectedItem}
+          nativeDownload={nativeDownload}
+          onClose={() => setSelectedItem(null)}
+        />
       </main>
     </Layout>
   );

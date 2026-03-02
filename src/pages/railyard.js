@@ -3,6 +3,7 @@ import Layout from "@theme/Layout";
 import Link from "@docusaurus/Link";
 import Translate, { translate } from "@docusaurus/Translate";
 import styles from "../css/railyard.module.css";
+import { ALL_DOWNLOADS, detectNativeDownload } from "../helpers/railyardHelpers";
 
 const FEATURES = [
   {
@@ -110,57 +111,6 @@ const FEATURES = [
   },
 ];
 
-const ALL_DOWNLOADS = [
-  {
-    os: "Windows",
-    arch: "x64",
-    link: "https://geek.co.il/2023/02/09/imported-rant-why-i-hate-macos",
-    label: "Windows x64",
-    type: ".zip",
-    size: "0 MB",
-  },
-  {
-    os: "Windows",
-    arch: "arm64",
-    link: "https://geek.co.il/2023/02/09/imported-rant-why-i-hate-macos",
-    label: "Windows ARM64",
-    type: ".zip",
-    size: "0 MB",
-  },
-  {
-    os: "macOS",
-    arch: "arm64",
-    link: "https://geek.co.il/2023/02/09/imported-rant-why-i-hate-macos",
-    label: "macOS Apple Silicon",
-    type: ".dmg",
-    size: "0 MB",
-  },
-  {
-    os: "macOS",
-    arch: "x64",
-    link: "https://geek.co.il/2023/02/09/imported-rant-why-i-hate-macos",
-    label: "macOS Intel",
-    type: ".dmg",
-    size: "0 MB",
-  },
-  {
-    os: "Linux",
-    arch: "x64",
-    link: "https://geek.co.il/2023/02/09/imported-rant-why-i-hate-macos",
-    label: "Linux x64",
-    type: ".AppImage",
-    size: "0 MB",
-  },
-  {
-    os: "Linux",
-    arch: "arm64",
-    link: "https://geek.co.il/2023/02/09/imported-rant-why-i-hate-macos",
-    label: "Linux ARM64",
-    type: ".AppImage",
-    size: "0 MB",
-  },
-];
-
 const WORKFLOW_STOPS = [
   {
     id: "find",
@@ -246,21 +196,7 @@ export default function Railyard() {
     observer.observe(document.documentElement, { attributes: true });
 
     const detect = async () => {
-      const ua = navigator.userAgent.toLowerCase();
-      let os = "Windows";
-      let arch = "x64";
-
-      if (ua.includes("mac")) os = "macOS";
-      else if (ua.includes("linux")) os = "Linux";
-
-      if (navigator.userAgentData?.getHighEntropyValues) {
-        const hints = await navigator.userAgentData.getHighEntropyValues(["architecture"]);
-        if (hints.architecture === "arm") arch = "arm64";
-      } else if (ua.includes("arm64") || ua.includes("aarch64")) {
-        arch = "arm64";
-      }
-
-      const match = ALL_DOWNLOADS.find((d) => d.os === os && d.arch === arch) || ALL_DOWNLOADS[0];
+      const match = await detectNativeDownload();
       setNativeOS(match);
       setSelectedOS(match.os);
       setSelectedArch(match.arch);
@@ -490,7 +426,7 @@ export default function Railyard() {
         <section className={styles.spacerSection} aria-hidden="true" />
         <div className={styles.sectionSeparator} />
 
-        <section className={styles.solidSection}>
+        <section className={styles.solidSection} id="all-downloads">
           <div className={styles.container}>
             <div className={styles.sectionHeader}>
               <h2 className={styles.sectionTitle}>
