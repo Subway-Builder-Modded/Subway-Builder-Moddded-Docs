@@ -8,7 +8,7 @@ If you are a map creator and have made multiple maps or are planning to, you can
 ## Step 1 - Hosting the File {#hosting-the-file}
 In order to make a submission to the Railyard registry, you need to first upload the source code and release to GitHub and link it to Railyard. To do this, create a new GitHub repository. The actual contents can contain the source code for your map/mod.
 
-Once you have the repository set up, create a new release. In this release, place **ALL** the ZIP files containing your maps (as different release assets). They should contain **exactly** files that will go in the player's `metro-maker4/cities/data` folder (in the correct format).
+Once you have the repository set up, create a new release. In this release, place **ALL** the ZIP files containing your maps/mods (as different release assets). They should contain **exactly** files that are used for the map/mod, meaning no nested subfolders. For maps, use the ZIP that you made using the [custom map creation guide](/modding-docs/creating-maps/making-custom-maps). For mods, the ZIP should contain everything that will go in the `metro-maker4/mods/<your_mod>` folder.
 
 ## Step 2 - Setting Up the Updates Files {#setting-up-the-updates-files}
 The first step is to set up our `update.json` files. You will need several of these, one for every map.
