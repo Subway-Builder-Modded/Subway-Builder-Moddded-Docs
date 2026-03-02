@@ -97,6 +97,22 @@ function renderMarkdownBlocks(markdown) {
   return blocks;
 }
 
+function getCompactPlatformLabel(download) {
+  const osAbbreviations = {
+    Windows: "Win",
+    macOS: "macOS",
+    Linux: "Linux",
+  };
+  const archAbbreviations = {
+    x64: "x64",
+    arm64: "ARM64",
+  };
+
+  const osShort = osAbbreviations[download.os] || download.os;
+  const archShort = archAbbreviations[download.arch] || download.arch;
+  return `${osShort} ${archShort}`;
+}
+
 export function ExpandableMarkdown({ text, styles, readMoreId }) {
   const [expanded, setExpanded] = useState(false);
   const [isOverflowing, setIsOverflowing] = useState(false);
@@ -210,12 +226,26 @@ export function PaginationNav({
 
 export function DownloadInAppModal({ styles, selectedItem, nativeDownload, onClose }) {
   const [downloadsOpen, setDownloadsOpen] = useState(false);
+  const downloadGroupRef = useRef(null);
 
   useEffect(() => {
     if (!selectedItem) {
       setDownloadsOpen(false);
     }
   }, [selectedItem]);
+
+  useEffect(() => {
+    function handleDocumentPointerDown(event) {
+      if (!downloadGroupRef.current?.contains(event.target)) {
+        setDownloadsOpen(false);
+      }
+    }
+
+    document.addEventListener("pointerdown", handleDocumentPointerDown);
+    return () => {
+      document.removeEventListener("pointerdown", handleDocumentPointerDown);
+    };
+  }, []);
 
   if (!selectedItem) return null;
 
@@ -239,7 +269,7 @@ export function DownloadInAppModal({ styles, selectedItem, nativeDownload, onClo
         <h2 id="railyard-modal-title">
           {translate({
             id: "railyard.shared.modal.title",
-            message: "Open in the Railyard app",
+            message: "Open In Railyard App",
           })}
         </h2>
         <p>
@@ -247,7 +277,7 @@ export function DownloadInAppModal({ styles, selectedItem, nativeDownload, onClo
             {
               id: "railyard.shared.modal.description",
               message:
-                "{name} is available through the Railyard app. Direct web downloads are intentionally disabled so installation stays streamlined and up to date.",
+                "{name} is available through the Railyard app. You can install it directly via the app by clicking the link below.",
             },
             { name: selectedItem.title },
           )}
@@ -261,17 +291,17 @@ export function DownloadInAppModal({ styles, selectedItem, nativeDownload, onClo
             {translate({ id: "railyard.shared.modal.comingSoon", message: "Coming Soon" })}
           </button>
 
-          <div className={styles.modalDownloadGroup}>
+          <div className={styles.modalDownloadGroup} ref={downloadGroupRef}>
             <Link
               to={nativeDownload.link}
               className={`${styles.modalActionButton} ${styles.modalActionDownload}`}
             >
               {translate(
                 {
-                  id: "railyard.shared.modal.downloadForPlatform",
-                  message: "Download for {platform}",
+                  id: "railyard.shared.modal.downloadForPlatformShort",
+                  message: "Download {platform}",
                 },
-                { platform: nativeDownload.label },
+                { platform: getCompactPlatformLabel(nativeDownload) },
               )}
             </Link>
             <button
@@ -289,7 +319,7 @@ export function DownloadInAppModal({ styles, selectedItem, nativeDownload, onClo
                 height="7"
                 viewBox="0 0 14 8"
                 fill="none"
-                className={downloadsOpen ? styles.rotated : ""}
+                className={`${styles.dropdownChevron} ${downloadsOpen ? styles.rotated : ""}`}
               >
                 <path
                   d="M1 1L7 7L13 1"
@@ -301,19 +331,25 @@ export function DownloadInAppModal({ styles, selectedItem, nativeDownload, onClo
               </svg>
             </button>
 
-            {downloadsOpen && (
-              <div className={styles.modalDropdownMenu}>
-                {ALL_DOWNLOADS.map((download) => (
-                  <Link
-                    key={download.label}
-                    to={download.link}
-                    className={styles.modalDropdownItem}
-                  >
-                    {download.label}
-                  </Link>
-                ))}
-              </div>
-            )}
+            <div
+              className={`${styles.modalDropdownMenu} ${downloadsOpen ? styles.modalDropdownMenuOpen : ""}`}
+            >
+              {ALL_DOWNLOADS.map((download) => (
+                <Link
+                  key={`${download.os}-${download.arch}`}
+                  to={download.link}
+                  className={styles.modalDropdownItem}
+                >
+                  {translate(
+                    {
+                      id: "railyard.shared.modal.downloadForPlatformShort",
+                      message: "Download {platform}",
+                    },
+                    { platform: getCompactPlatformLabel(download) },
+                  )}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>

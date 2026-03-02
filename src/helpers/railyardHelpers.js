@@ -9,6 +9,8 @@ const fieldPathLookup = {
 
 export const PAGE_SIZES = [12, 24, 48];
 
+export const CARD_POPUP_ENABLED = true;
+
 export const ALL_DOWNLOADS = [
   {
     os: "Windows",

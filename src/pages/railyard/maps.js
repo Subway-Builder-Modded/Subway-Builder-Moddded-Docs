@@ -17,6 +17,7 @@ import {
   PAGE_SIZES,
   ALL_DOWNLOADS,
   detectNativeDownload,
+  CARD_POPUP_ENABLED,
 } from "../../helpers/railyardHelpers";
 import {
   DownloadInAppModal,
@@ -188,6 +189,8 @@ export default function RailyardMapsPage() {
   }, [pendingFocusId, paginated]);
 
   useEffect(() => {
+    if (!CARD_POPUP_ENABLED) return undefined;
+
     let cancelled = false;
 
     async function detectDownload() {
@@ -239,7 +242,7 @@ export default function RailyardMapsPage() {
             {translate({
               id: "railyard.maps.subtitle",
               message:
-                "Discover community maps, filter by tags, and track what was updated most recently.",
+                "Discover community maps, filter by tags, or search for what you're looking for.",
             })}
           </p>
           <Link to="/railyard/mods" className={sharedStyles.switchLink}>
@@ -358,13 +361,17 @@ export default function RailyardMapsPage() {
             return (
               <article key={item.id} className={sharedStyles.card} data-card-id={item.id}>
                 <header className={sharedStyles.cardHeader}>
-                  <button
-                    type="button"
-                    className={sharedStyles.itemTitleButton}
-                    onClick={() => setSelectedItem(item)}
-                  >
-                    {item.title}
-                  </button>
+                  {CARD_POPUP_ENABLED ? (
+                    <button
+                      type="button"
+                      className={sharedStyles.itemTitleButton}
+                      onClick={() => setSelectedItem(item)}
+                    >
+                      {item.title}
+                    </button>
+                  ) : (
+                    <span className={sharedStyles.itemTitleText}>{item.title}</span>
+                  )}
                   <span className={sharedStyles.cardId}>{item.id}</span>
                 </header>
                 <p className={sharedStyles.updatedText}>
@@ -483,12 +490,14 @@ export default function RailyardMapsPage() {
           <span className={sharedStyles.bar} style={{ background: "#752F82" }} />
         </footer>
 
-        <DownloadInAppModal
-          styles={sharedStyles}
-          selectedItem={selectedItem}
-          nativeDownload={nativeDownload}
-          onClose={() => setSelectedItem(null)}
-        />
+        {CARD_POPUP_ENABLED && (
+          <DownloadInAppModal
+            styles={sharedStyles}
+            selectedItem={selectedItem}
+            nativeDownload={nativeDownload}
+            onClose={() => setSelectedItem(null)}
+          />
+        )}
       </main>
     </Layout>
   );
