@@ -1,14 +1,18 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Layout from "@theme/Layout";
+import Link from "@docusaurus/Link";
+import { translate } from "@docusaurus/Translate";
 import styles from "../../css/railyardMods.module.css";
 
 const SOURCE = {
   type: "mods",
   indexUrl:
-    "https://raw.githubusercontent.com/Subway-Builder-Modded/The-Railyard/refs/heads/main/mods/index.json",
+    "https://raw.githubusercontent.com/Subway-Builder-Modded/The-Railyard/main/mods/index.json",
 };
 
-const PAGE_SIZES = [10, 25, 50];
+const PAGE_SIZES = [9, 27, 54];
+const GITHUB_CDN_BASE = "https://cdn.jsdelivr.net/gh/Subway-Builder-Modded/The-Railyard@main";
+const PLACEHOLDER_IMAGE = "/assets/map-pin-placeholder.svg";
 
 const fieldPathLookup = {
   title: ["name", "title", "displayName"],
@@ -16,7 +20,6 @@ const fieldPathLookup = {
   author: ["author", "creator", "publisher"],
   download: ["download", "downloadUrl", "download_url", "url", "file"],
   tags: ["tags", "categories", "labels"],
-  population: ["population", "cityPopulation", "populationEstimate"],
   images: ["images", "gallery", "screenshots", "thumbnails"],
 };
 
@@ -55,20 +58,45 @@ function normalizeTagList(rawTags) {
   return [];
 }
 
+function toTitleCaseTag(tag) {
+  return tag
+    .split("-")
+    .filter(Boolean)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
+}
+
+function normalizeGithubImageUrl(url) {
+  if (url.includes("raw.githubusercontent.com")) {
+    return url.replace("/refs/heads/", "/");
+  }
+
+  if (url.includes("github.com") && url.includes("/blob/")) {
+    return url
+      .replace("https://github.com/Subway-Builder-Modded/The-Railyard/blob/main", GITHUB_CDN_BASE)
+      .replace("?raw=true", "");
+  }
+
+  return url;
+}
+
 function normalizeImageList(manifest, id) {
   const imageCandidates = getFirstValue(manifest, "images");
   if (!imageCandidates) return [];
 
   const toUrl = (value) => {
     if (!value) return null;
+
     if (typeof value === "string") {
-      if (value.startsWith("http")) return value;
-      return `https://raw.githubusercontent.com/Subway-Builder-Modded/The-Railyard/refs/heads/main/mods/${id}/gallery/${value}?raw=true`;
+      if (value.startsWith("http")) return normalizeGithubImageUrl(value);
+      return `${GITHUB_CDN_BASE}/mods/${id}/gallery/${value}`;
     }
+
     if (typeof value === "object") {
       const nested = value.file || value.src || value.path || value.url;
       return toUrl(nested);
     }
+
     return null;
   };
 
@@ -89,12 +117,6 @@ function getDownloadUrl(manifest) {
   return typeof value === "string" ? value : null;
 }
 
-function getPopulation(manifest) {
-  const value = getFirstValue(manifest, "population");
-  const numeric = Number(value);
-  return Number.isFinite(numeric) ? numeric : null;
-}
-
 function compareValues(a, b) {
   if (a == null && b == null) return 0;
   if (a == null) return 1;
@@ -107,7 +129,7 @@ export default function RailyardModsPage() {
   const [query, setQuery] = useState("");
   const [selectedTags, setSelectedTags] = useState([]);
   const [sortBy, setSortBy] = useState("name-asc");
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(27);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
@@ -123,7 +145,12 @@ export default function RailyardModsPage() {
       try {
         const indexResponse = await fetch(SOURCE.indexUrl);
         if (!indexResponse.ok) {
-          throw new Error(`Unable to load ${SOURCE.type} registry.`);
+          throw new Error(
+            translate({
+              id: "railyard.mods.error.registry",
+              message: "Unable to load mods registry.",
+            }),
+          );
         }
         const indexData = await indexResponse.json();
         const idsRaw = Array.isArray(indexData) ? indexData : indexData[SOURCE.type] || [];
@@ -137,19 +164,27 @@ export default function RailyardModsPage() {
 
         const loadedItems = await Promise.all(
           ids.map(async (id) => {
-            const manifestUrl = `https://raw.githubusercontent.com/Subway-Builder-Modded/The-Railyard/refs/heads/main/mods/${id}/manifest.json`;
+            const manifestUrl = `https://raw.githubusercontent.com/Subway-Builder-Modded/The-Railyard/main/mods/${id}/manifest.json`;
             try {
               const response = await fetch(manifestUrl);
               if (!response.ok) return null;
               const manifest = await response.json();
               return {
                 id,
-                manifest,
                 title: getTitle(manifest, id),
-                description: getFirstValue(manifest, "description") || "No description provided.",
+                description:
+                  getFirstValue(manifest, "description") ||
+                  translate({
+                    id: "railyard.mods.noDescription",
+                    message: "No description provided.",
+                  }),
                 tags: normalizeTagList(getFirstValue(manifest, "tags")),
-                population: getPopulation(manifest),
-                author: getFirstValue(manifest, "author") || "Unknown",
+                author:
+                  getFirstValue(manifest, "author") ||
+                  translate({
+                    id: "railyard.mods.unknownAuthor",
+                    message: "Unknown",
+                  }),
                 downloadUrl: getDownloadUrl(manifest),
                 images: normalizeImageList(manifest, id),
                 fields: flattenRecord(manifest),
@@ -165,7 +200,14 @@ export default function RailyardModsPage() {
         }
       } catch (loadError) {
         if (!cancelled) {
-          setError(loadError instanceof Error ? loadError.message : "Unknown loading error.");
+          setError(
+            loadError instanceof Error
+              ? loadError.message
+              : translate({
+                  id: "railyard.mods.error.unknown",
+                  message: "Unknown loading error.",
+                }),
+          );
         }
       } finally {
         if (!cancelled) setIsLoading(false);
@@ -210,10 +252,6 @@ export default function RailyardModsPage() {
       switch (sortBy) {
         case "name-desc":
           return compareValues(b.title, a.title);
-        case "population-desc":
-          return compareValues(b.population, a.population);
-        case "population-asc":
-          return compareValues(a.population, b.population);
         case "id-asc":
           return compareValues(a.id, b.id);
         case "id-desc":
@@ -248,14 +286,46 @@ export default function RailyardModsPage() {
   }
 
   return (
-    <Layout title="Railyard Mods" description="Browse community Subway Builder mods from Railyard.">
+    <Layout
+      title={translate({ id: "railyard.mods.layoutTitle", message: "Railyard Mods" })}
+      description={translate({
+        id: "railyard.mods.layoutDescription",
+        message: "Browse community Subway Builder mods from Railyard.",
+      })}
+    >
       <main className={styles.page}>
+        <Link to="/railyard" className={styles.back}>
+          &larr; {translate({ id: "railyard.mods.back", message: "Back" })}
+        </Link>
+
         <section className={styles.hero}>
-          <h1>Railyard Mods</h1>
-          <p>Search, sort, filter, and download community mods directly from the registry.</p>
+          <h1>{translate({ id: "railyard.mods.heading", message: "Railyard Mods" })}</h1>
+          <p>
+            {translate({
+              id: "railyard.mods.subtitle",
+              message:
+                "Search, sort, filter, and download community mods directly from the registry.",
+            })}
+          </p>
           <div className={styles.quickStats}>
-            <span>{items.length} mods loaded</span>
-            <span>{filtered.length} matching current filters</span>
+            <span>
+              {translate(
+                {
+                  id: "railyard.mods.loaded",
+                  message: "{count} mods loaded",
+                },
+                { count: items.length },
+              )}
+            </span>
+            <span>
+              {translate(
+                {
+                  id: "railyard.mods.matching",
+                  message: "{count} matching current filters",
+                },
+                { count: filtered.length },
+              )}
+            </span>
           </div>
         </section>
 
@@ -263,26 +333,35 @@ export default function RailyardModsPage() {
           <input
             type="search"
             className={styles.search}
-            placeholder="Search by name, author, tags, IDs, or any manifest field..."
+            placeholder={translate({
+              id: "railyard.mods.searchPlaceholder",
+              message: "Search by name, author, tags, IDs, or any manifest field...",
+            })}
             value={query}
             onChange={(event) => setQuery(event.target.value)}
           />
 
           <div className={styles.controlRow}>
             <label>
-              Sort by
+              {translate({ id: "railyard.mods.sortBy", message: "Sort by" })}
               <select value={sortBy} onChange={(event) => setSortBy(event.target.value)}>
-                <option value="name-asc">Name (A → Z)</option>
-                <option value="name-desc">Name (Z → A)</option>
-                <option value="population-desc">Population (high → low)</option>
-                <option value="population-asc">Population (low → high)</option>
-                <option value="id-asc">ID (A → Z)</option>
-                <option value="id-desc">ID (Z → A)</option>
+                <option value="name-asc">
+                  {translate({ id: "railyard.mods.sort.nameAsc", message: "Name (A → Z)" })}
+                </option>
+                <option value="name-desc">
+                  {translate({ id: "railyard.mods.sort.nameDesc", message: "Name (Z → A)" })}
+                </option>
+                <option value="id-asc">
+                  {translate({ id: "railyard.mods.sort.idAsc", message: "ID (A → Z)" })}
+                </option>
+                <option value="id-desc">
+                  {translate({ id: "railyard.mods.sort.idDesc", message: "ID (Z → A)" })}
+                </option>
               </select>
             </label>
 
             <label>
-              Cards per page
+              {translate({ id: "railyard.mods.cardsPerPage", message: "Cards per page" })}
               <select
                 value={pageSize}
                 onChange={(event) => setPageSize(Number(event.target.value))}
@@ -306,20 +385,24 @@ export default function RailyardModsPage() {
                   className={`${styles.tagButton} ${active ? styles.tagButtonActive : ""}`}
                   onClick={() => toggleTag(tag)}
                 >
-                  {tag}
+                  {toTitleCaseTag(tag)}
                 </button>
               );
             })}
           </div>
         </section>
 
-        {isLoading && <p className={styles.status}>Loading mod manifests…</p>}
+        {isLoading && (
+          <p className={styles.status}>
+            {translate({ id: "railyard.mods.loading", message: "Loading mod manifests…" })}
+          </p>
+        )}
         {error && <p className={styles.error}>{error}</p>}
 
         <section className={styles.grid}>
           {paginated.map((item) => {
             const imageIndex = imageIndexById[item.id] || 0;
-            const activeImage = item.images[imageIndex];
+            const activeImage = item.images[imageIndex] || PLACEHOLDER_IMAGE;
 
             return (
               <article
@@ -341,62 +424,75 @@ export default function RailyardModsPage() {
                   <span className={styles.cardId}>{item.id}</span>
                 </header>
 
-                {activeImage ? (
-                  <div className={styles.carousel}>
-                    <img
-                      src={activeImage}
-                      alt={`${item.title} preview`}
-                      className={styles.previewImage}
-                    />
-                    {item.images.length > 1 && (
-                      <>
-                        <button
-                          type="button"
-                          className={`${styles.carouselButton} ${styles.carouselPrev}`}
-                          onClick={(event) => {
-                            event.stopPropagation();
-                            cycleImage(item.id, -1, item.images.length);
-                          }}
-                        >
-                          ‹
-                        </button>
-                        <button
-                          type="button"
-                          className={`${styles.carouselButton} ${styles.carouselNext}`}
-                          onClick={(event) => {
-                            event.stopPropagation();
-                            cycleImage(item.id, 1, item.images.length);
-                          }}
-                        >
-                          ›
-                        </button>
-                      </>
-                    )}
-                  </div>
-                ) : (
-                  <div className={styles.noImage}>No gallery image available.</div>
-                )}
+                <div className={styles.carousel}>
+                  <img
+                    src={activeImage}
+                    alt={`${item.title} preview`}
+                    className={styles.previewImage}
+                  />
+                  {item.images.length > 1 && (
+                    <>
+                      <button
+                        type="button"
+                        aria-label={translate({
+                          id: "railyard.mods.prevImage",
+                          message: "Previous image",
+                        })}
+                        className={`${styles.carouselButton} ${styles.carouselPrev}`}
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          cycleImage(item.id, -1, item.images.length);
+                        }}
+                      >
+                        ‹
+                      </button>
+                      <button
+                        type="button"
+                        aria-label={translate({
+                          id: "railyard.mods.nextImage",
+                          message: "Next image",
+                        })}
+                        className={`${styles.carouselButton} ${styles.carouselNext}`}
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          cycleImage(item.id, 1, item.images.length);
+                        }}
+                      >
+                        ›
+                      </button>
+                    </>
+                  )}
+                </div>
 
                 <p className={styles.description}>{item.description}</p>
 
                 <div className={styles.metaRow}>
-                  <span>Author: {String(item.author)}</span>
                   <span>
-                    Population:{" "}
-                    {item.population == null ? "Unknown" : item.population.toLocaleString()}
+                    <strong>{translate({ id: "railyard.mods.author", message: "Author" })}:</strong>{" "}
+                    <span className={styles.metaValue}>{String(item.author)}</span>
                   </span>
                 </div>
 
                 <div className={styles.tagRow}>
                   {item.tags.map((tag) => (
-                    <span key={`${item.id}-${tag}`} className={styles.cardTag}>
-                      {tag}
-                    </span>
+                    <button
+                      type="button"
+                      key={`${item.id}-${tag}`}
+                      className={styles.cardTag}
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        toggleTag(tag);
+                      }}
+                    >
+                      {toTitleCaseTag(tag)}
+                    </button>
                   ))}
                 </div>
 
                 <details className={styles.details} onClick={(event) => event.stopPropagation()}>
-                  <summary>All manifest fields</summary>
+                  <summary>
+                    {translate({ id: "railyard.mods.allFields", message: "All manifest fields" })}
+                  </summary>
                   <dl>
                     {item.fields.map((field) => (
                       <div key={`${item.id}-${field.key}`} className={styles.fieldRow}>
@@ -417,26 +513,32 @@ export default function RailyardModsPage() {
             disabled={safePage <= 1}
             onClick={() => setPage((value) => Math.max(1, value - 1))}
           >
-            Previous
+            {translate({ id: "railyard.mods.previous", message: "Previous" })}
           </button>
           <span>
-            Page {safePage} of {totalPages}
+            {translate(
+              {
+                id: "railyard.mods.pageCounter",
+                message: "Page {page} of {totalPages}",
+              },
+              { page: safePage, totalPages },
+            )}
           </span>
           <button
             type="button"
             disabled={safePage >= totalPages}
             onClick={() => setPage((value) => Math.min(totalPages, value + 1))}
           >
-            Next
+            {translate({ id: "railyard.mods.next", message: "Next" })}
           </button>
         </footer>
 
         <footer className={styles.footerBars}>
-          <span style={{ background: "#0039A6" }} />
-          <span style={{ background: "#FF6319" }} />
-          <span style={{ background: "#00933C" }} />
-          <span style={{ background: "#FCCC0A" }} />
-          <span style={{ background: "#752F82" }} />
+          <span className={styles.bar} style={{ background: "#0039A6" }} />
+          <span className={styles.bar} style={{ background: "#FF6319" }} />
+          <span className={styles.bar} style={{ background: "#00933C" }} />
+          <span className={styles.bar} style={{ background: "#FCCC0A" }} />
+          <span className={styles.bar} style={{ background: "#752F82" }} />
         </footer>
       </main>
     </Layout>

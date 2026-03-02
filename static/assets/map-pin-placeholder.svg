@@ -1,0 +1,8 @@
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="640" height="360" rx="20" fill="#0f172a"/>
+    <rect x="1" y="1" width="638" height="358" rx="19" stroke="#1f2937" stroke-width="2"/>
+    <circle cx="320" cy="152" r="72" fill="#00933C"/>
+    <circle cx="320" cy="152" r="34" fill="#E5F7EE"/>
+    <path d="M320 298C320 298 262 227 262 171C262 138.967 287.967 113 320 113C352.033 113 378 138.967 378 171C378 227 320 298 320 298Z" stroke="#E5F7EE" stroke-width="10"/>
+    <text x="320" y="335" fill="#94a3b8" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">No Preview Available</text>
+</svg>
