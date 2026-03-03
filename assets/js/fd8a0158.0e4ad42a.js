@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunksubway_builder_modded_docs=self.webpackChunksubway_builder_modded_docs||[]).push([[2830],{2398(d){d.exports=JSON.parse('{"name":"docusaurus-plugin-content-docs","id":"modding-docs"}')}}]);
